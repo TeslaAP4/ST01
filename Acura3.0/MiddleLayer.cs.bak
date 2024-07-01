@@ -1,0 +1,1063 @@
+using Acura3._0.Classes;
+using Acura3._0.Forms;
+using Acura3._0.FunctionForms;
+using Acura3._0.MENUForms;
+using Acura3._0.ModuleForms;
+using Acura3._0.Vision;
+using AcuraLibrary;
+using AcuraLibrary.Forms;
+using Cognex.VisionPro;
+using JabilSDK;
+using JabilSDK.Controls;
+using JabilSDK.UserControlLib;
+using SASDK.Core;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Reflection;
+using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Xml;
+using static JabilSDK.MotorBaseInterface;
+
+namespace Acura3._0
+{
+    class MiddleLayer
+    {
+
+        //===================Module Form===================
+        public static SystemForm SystemF;
+        //public static VisionForm VisionF;
+        public static ConveyorForm CvyF;
+        public static ReturnConveyorForm ReturnCvyF;
+        public static ABBRobotForm AbbF;
+        public static Feeder1Form Feeder1F;
+        public static Feeder2Form Feeder2F;
+
+        //===================Function Form=================
+        public static LoadingMarqueeForm LoadingMarqueeF;
+        public static SignalTowerForm SignalTowerF;
+        public static MotorJogForm MotorJogF;
+        //public static MotorJogVisionForm MotorJogVF;
+        public static LogForm LogF;
+
+        //===================MENU Form==================
+        public static MainForm MainF;
+        public static MachineStatusForm MachineStatusF;
+        public static MachineSetupForm MachineSetupF;
+        public static RecipeEditorForm RecipeEditorF;
+        public static ProductionSettingForm ProductionSettingF;
+        public static MaintenanceForm MaintenanceF;
+        public static FlowChartForm FlowChartF;
+        public static UserSettingForm UserSettingF;
+        public static FingerprintCaptureForm FingerprintCaptureF;
+
+        //=================================================
+        public static List<dynamic> lstForm = new List<dynamic>();
+        public static FlowControl FlowCtrl;
+        public static CoreEngine coreEngine; //teong
+        public static CsvFile csvFile = new CsvFile();
+
+        //private static List<Task> RunTask = new List<Task>(); //Zax 9/1/21- Module Multi Thread
+
+        public static void InitialProject()
+        {
+            SysPara.CFX.OpenEndpoint();
+            SysPara.CFX.StationOnline();
+            SysPara.CFX.StationStateChanged(CFX.Structures.ResourceState.NST, DateTime.Now);
+
+            #region Load Ini File
+            LoadingMarqueeF.SetCaption("IniFile");
+            IniFile iniFile = new IniFile(".\\MachineSetup.ini");
+            SysPara.ProjectName = iniFile.ReadString("MachineSetup", "ProjectName", "Acura3.0");
+            SysPara.RecipeName = iniFile.ReadString("MachineSetup", "RecipeName", "Recipe");
+            SysPara.Simulation = iniFile.ReadBoolen("LogicSetup", "Simulation", false);
+            SysPara.EnableJAGConnectivity = iniFile.ReadBoolen("LogicSetup", "EnableJAGConnectivity", true);
+            SysPara.LogFilePath = iniFile.ReadString("PathSetup", "LogFileDirectory", ".\\LogFile");
+            SysPara.VisionFileDirectory = iniFile.ReadString("PathSetup", "VisionDataDirectory", ".\\VisionData");
+            SysPara.AlarmTableDirectory = iniFile.ReadString("PathSetup", "AlarmTableDirectory", ".\\AlarmTable");
+            SysPara.SettingDataDirectory = iniFile.ReadString("PathSetup", "SettingDataDirectory", ".\\ModuleData\\SettingData");
+            SysPara.RecipeDataDirectory = iniFile.ReadString("PathSetup", "RecipeDirectory", ".\\ModuleData\\RecipeData");
+            SysPara.MESDirectory = iniFile.ReadString("PathSetup", "MESDirectory", ".\\ModuleData\\MESData");
+            SysPara.IOPortDirectory = iniFile.ReadString("PathSetup", "IOPortDirectory", ".\\ModuleData");
+            SysPara.LanguageDataDirectory = iniFile.ReadString("PathSetup", "LanguageDirectory", ".\\LanguageData");
+            SysPara.DispenserDirectory = iniFile.ReadString("PathSetup", "DispenserDirectory", ".\\ModuleData\\DispenserData");
+            SysPara.WebService = iniFile.ReadString("WebService", "Address", "http://jpetewebapp/jtesw_ws/jtesw_webservice.asmx"); //Zax 7/27/21
+            //lstModule = ModuleBaseParameter.lstModule;
+            ModuleManager.SettingDataDirectory = SysPara.SettingDataDirectory;
+
+            LoadingMarqueeF.SetCaption("Dispenser Setting");
+
+            #endregion
+            #region Load Alarm Table
+            LoadingMarqueeF.SetCaption("AlarmTable");
+            if (!JSDK.Alarm.Initial(string.Format("{0}\\{1}.xml", SysPara.AlarmTableDirectory, SysPara.LanguageShow.ToString())))
+            {
+                MessageBox.Show("Error reading alarm list." + Environment.NewLine + "Application Will Close");
+                Environment.Exit(0);
+
+            }
+            #endregion
+
+            //=======================Module Create===========================
+            LoadingMarqueeF.SetCaption("Create Module");
+            SystemF = CreateForm(SystemF, "SystemForm");
+            AbbF = CreateForm(AbbF, "ABBRobotForm");
+            CvyF = CreateForm(CvyF, "ConveyorForm");
+            ReturnCvyF = CreateForm(ReturnCvyF, "ReturnConveyorForm");
+            Feeder1F = CreateForm(Feeder1F, "Feeder1Form");
+            Feeder2F = CreateForm(Feeder2F, "Feeder2Form");
+
+            //========================Form Create============================
+            MainF = CreateForm(MainF, "MainForm");
+            SignalTowerF = CreateForm(SignalTowerF, "SignalTowerForm");
+            MotorJogF = CreateForm(MotorJogF, "MotorJogForm");
+            LogF = CreateForm(LogF, "LogForm");
+            //MotorJogVF = CreateForm(MotorJogVF, "MotorJogVisionForm");
+
+            //=====================Complex Form Create=======================
+            MachineStatusF = CreateForm(MachineStatusF, "MachineStatusForm");
+            MachineSetupF = CreateForm(MachineSetupF, "MachineSetupForm");
+            RecipeEditorF = CreateForm(RecipeEditorF, "RecipeEditorForm");
+            ProductionSettingF = CreateForm(ProductionSettingF, "ProductionSettingForm");
+            MaintenanceF = CreateForm(MaintenanceF, "MaintenanceForm");
+            FlowChartF = CreateForm(FlowChartF, "FlowChartForm");
+            UserSettingF = CreateForm(UserSettingF, "UserSettingForm");
+
+
+            if (SysPara.UseFingerprint)
+                FingerprintCaptureF = new FingerprintCaptureForm();
+            //===============================================================
+            //InitialLanguageData();
+            //SwitchLanguage(SysPara.LanguageShow);
+            SwitchPermission(SysPara.UserPermission);
+            //InitialIOPortData();
+            JSDK.SetSimulation(SysPara.Simulation);
+            JSDK.InitialControls();
+
+            //Zax 9/1/21- Module Multi Thread
+            //for (int x = 0; x < ModuleManager.ModuleList.Count; x++)
+            //{
+            //    Task _Task = null;
+            //    RunTask.Add(_Task);
+            //}
+
+            FlowCtrl = new FlowControl();
+            FlowCtrl.StartThread();
+
+            LoadingMarqueeF.SetCaption("Recipe");
+            OpenRecipe(string.Format("{0}\\{1}.xml", SysPara.RecipeDataDirectory, SysPara.RecipeName));
+            ReadTeachPoint();
+            ServoOn();
+            StartUp();
+            SysPara.isBarcodeDoneToGet = true;
+            SystemF.OB_FluorescentLight.On();
+
+            //========================SASDK Create============================
+            coreEngine = new CoreEngine();
+            coreEngine.StartThread();
+            LoadingMarqueeF.SetCaption("Register User Input Tracker");
+            coreEngine.SubAllControl(MachineStatusF); 
+            coreEngine.SubAllControl(MachineSetupF); 
+            coreEngine.SubAllControl(RecipeEditorF); 
+            coreEngine.SubAllControl(ProductionSettingF); 
+            coreEngine.SubAllControl(MaintenanceF); 
+            coreEngine.SubAllControl(FlowChartF); 
+            coreEngine.SubAllControl(UserSettingF); 
+            coreEngine.SubAllControl(MotorJogF); //Teong CFX 
+            coreEngine.SubAllControl(SystemF.MesF);//Teong CFX 
+            coreEngine.SubAllControl(MainF);
+
+            foreach (ModuleBaseForm Module in ModuleManager.ModuleList)
+            {
+                coreEngine.SubAllControl(Module);
+            }
+            coreEngine.OperationLogRaise += CoreEngine_OperationLogRaise; //Teong CFX 
+            coreEngine.CFXStationOnlineEvent += CoreEngine_CFXStationOnlineEvent;//Teong CFX 
+
+        }
+
+        private static void CoreEngine_CFXStationOnlineEvent(object sender, EventArgs e)
+        {
+            SystemF.DBEngineCFX.StationOnline();//Teong CFX 
+            SystemF.DBEngineCFX.StationStateChanged(SASDK.DBEngine.ucDBEngineCFX.StateChange.Standby, DateTime.Now);
+            SystemF.DBEngineCFX.RecipeActivated(SysPara.RecipeName);
+         
+        }
+
+        private static void CoreEngine_OperationLogRaise(object sender, OperationLogArgs e)
+        {
+            //Teong CFX 
+            LogF.AddLog(LogForm.LogType.Operation, $"{e.Module},{e.Username},{e.Event}");
+        }
+
+        public static void DisposeProject()
+        {
+            SystemF.DBEngineCFX.StationOffline();//Teong CFX 
+            ServoOff();
+            FlowCtrl.StopThread();
+            FlowCtrl = null;
+
+            coreEngine.StopThread();
+            coreEngine.DisposeCtrl();
+            coreEngine = null;
+
+            LogF.DisposeLog();
+            foreach (ControlBaseInterface control in JSDK.ControlList)
+            {
+                if (control is Output)
+                {
+                    ((Output)control).Off();
+                }
+            }
+
+            JSDK.DisposeControls();
+            //CogFrameGrabbers CCD_Graber = new Cognex.VisionPro.CogFrameGrabbers();
+            //for (int i = 0; i < CCD_Graber.Count; i++)
+            //    CCD_Graber[i].Disconnect(false);
+
+        }
+
+        //private static void InitialLanguageData()
+        //{
+        //    string[] LanguageArray = Enum.GetNames(typeof(LanguageType));
+        //    SysPara.ComponentLangurageList = new List<ComponentTextInfo>[LanguageArray.Length];
+
+        //    for (int i = 0; i < LanguageArray.Length; i++)
+        //    {
+        //        SysPara.ComponentLangurageList[i] = new List<ComponentTextInfo>();
+        //        List<ComponentTextInfo> XmlDataList = new List<ComponentTextInfo>();
+        //        #region Load from xml file
+        //        string sFilePath = string.Format("{0}\\{1}.xml", SysPara.LanguageDataDirectory, LanguageArray[i]);
+        //        if (File.Exists(sFilePath))
+        //        {
+        //            XmlDocument ReadDoc = new XmlDocument();
+        //            ReadDoc.Load(sFilePath);
+        //            XmlElement Element = (XmlElement)ReadDoc.SelectSingleNode(LanguageArray[i]);
+        //            if (Element != null)
+        //            {
+        //                XmlNodeList FormData = Element.ChildNodes;
+        //                for (int j = 0; j < FormData.Count; j++)
+        //                {
+        //                    XmlNodeList ComponentData = FormData[j].ChildNodes;
+        //                    for (int k = 0; k < ComponentData.Count; k++)
+        //                    {
+        //                        ComponentTextInfo CmpTextInfo = new ComponentTextInfo();
+        //                        CmpTextInfo.FormName = FormData[j].Name;
+        //                        CmpTextInfo.ComponentName = ComponentData[k].Name;
+        //                        CmpTextInfo.ComponentText = ((XmlElement)ComponentData[k]).GetAttribute("ComponentText");
+        //                        XmlDataList.Add(CmpTextInfo);
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        #endregion
+        //        #region compare all component text data and write to list
+        //        //AllForm
+        //        foreach (Control Form in lstForm)
+        //            InitialLanguageCallback(Form, Form.Name, ref SysPara.ComponentLangurageList[i], ref XmlDataList);
+        //        //MainForm
+        //        TableLayoutPanel[] tlpArray = new TableLayoutPanel[] { MainF.tlMain_P2, MainF.tlMachineSetup_P1, MainF.tlProductionSetting_P1, MainF.tlMaintenance_P1 };
+        //        foreach (TableLayoutPanel tlp in tlpArray)
+        //            InitialLanguageCallback(tlp, MainF.Name, ref SysPara.ComponentLangurageList[i], ref XmlDataList);
+        //        #endregion
+        //        #region Write to xml file
+        //        XmlDocument WriteDoc = new XmlDocument();
+        //        XmlElement FirstElement = XMLExpand.GetElement(WriteDoc, LanguageArray[i]);
+        //        for (int j = 0; j < SysPara.ComponentLangurageList[i].Count; j++)
+        //        {
+        //            XmlElement eSetting = XMLExpand.GetElement(WriteDoc, LanguageArray[i] + "/" + SysPara.ComponentLangurageList[i][j].FormName + "/" + SysPara.ComponentLangurageList[i][j].ComponentName);
+        //            eSetting.SetAttribute("ComponentText", SysPara.ComponentLangurageList[i][j].ComponentText);
+        //        }
+        //        if (!Directory.Exists(SysPara.LanguageDataDirectory))
+        //            Directory.CreateDirectory(SysPara.LanguageDataDirectory);
+        //        XMLExpand.WriteUnicodeXML(WriteDoc, sFilePath);
+        //        #endregion
+        //    }
+        //}
+
+        private static void InitialLanguageCallback(Control cl, string FormName, ref List<ComponentTextInfo> ComponentLangurageList, ref List<ComponentTextInfo> XmlDataList)
+        {
+            foreach (Control control in cl.Controls)
+            {
+                Type ControlType = control.GetType();
+                bool bNeedAdded = false;
+                bNeedAdded |= (ControlType == typeof(Form));
+                bNeedAdded |= (ControlType == typeof(Label));
+                bNeedAdded |= (ControlType == typeof(Motor));
+                bNeedAdded |= (ControlType == typeof(Input));
+                bNeedAdded |= (ControlType == typeof(Output));
+                bNeedAdded |= (ControlType == typeof(FlowChart));
+                bNeedAdded |= (ControlType == typeof(GroupBox));
+                bNeedAdded |= (ControlType == typeof(CheckBox));
+                bNeedAdded |= (ControlType == typeof(CheckedListBox));
+                bNeedAdded |= (ControlType == typeof(Button));
+                if (control.Name != "" && bNeedAdded)
+                {
+                    ComponentTextInfo AddComLan = new ComponentTextInfo();
+                    int Index = XmlDataList.FindIndex(ComLan => (ComLan.FormName == FormName && ComLan.ComponentName == control.Name));
+                    if (Index >= 0)
+                    {
+                        AddComLan.FormName = FormName;
+                        AddComLan.ComponentName = XmlDataList[Index].ComponentName;
+                        AddComLan.ComponentText = XmlDataList[Index].ComponentText;
+                        AddComLan.Component = control;
+                    }
+                    else
+                    {
+                        AddComLan.FormName = FormName;
+                        AddComLan.ComponentName = control.Name;
+                        AddComLan.ComponentText = control.Text;
+                        AddComLan.Component = control;
+                    }
+                    ComponentLangurageList.Add(AddComLan);
+                }
+                if (control.HasChildren)
+                    InitialLanguageCallback(control, FormName, ref ComponentLangurageList, ref XmlDataList);
+            }
+        }
+
+        public static void SwitchLanguage(LanguageType LanType)
+        {
+            for (int i = 0; i < SysPara.ComponentLangurageList[(int)LanType].Count; i++)
+                SysPara.ComponentLangurageList[(int)LanType][i].Component.Text = SysPara.ComponentLangurageList[(int)LanType][i].ComponentText;
+            JSDK.Alarm.Initial(string.Format("{0}\\{1}.xml", SysPara.AlarmTableDirectory, SysPara.LanguageShow.ToString()));
+            JSDK.Alarm.Clear();
+            if (MainF != null)
+            {
+                //MainF.SwitchLanguage(LanType);
+                //MainF.cbLanguage.SelectedIndex = (int)LanType;
+            }
+        }
+
+        public static void SwitchPermission(PermissionType Permission)
+        {
+            SysPara.UserPermission = Permission;
+            MainF.SwitchPermission(Permission);
+
+            //MainF.SwitchLanguage(SysPara.LanguageShow);
+        }
+
+        private static void InitialIOPortData()
+        {
+            List<IOPortInfo> ComponentIOPortList = new List<IOPortInfo>();
+            List<IOPortInfo> XmlDataList = new List<IOPortInfo>();
+            #region Load from xml file
+            string sFilePath = string.Format("{0}\\IOPort.xml", SysPara.IOPortDirectory);
+            if (File.Exists(sFilePath))
+            {
+                XmlDocument ReadDoc = new XmlDocument();
+                ReadDoc.Load(sFilePath);
+                XmlElement Element = (XmlElement)ReadDoc.SelectSingleNode("PortData");
+                if (Element != null)
+                {
+                    XmlNodeList FormData = Element.ChildNodes;
+                    for (int j = 0; j < FormData.Count; j++)
+                    {
+                        XmlNodeList ComponentData = FormData[j].ChildNodes;
+                        for (int k = 0; k < ComponentData.Count; k++)
+                        {
+                            IOPortInfo PortInfo = new IOPortInfo();
+                            PortInfo.FormName = FormData[j].Name;
+                            PortInfo.ComponentName = ComponentData[k].Name;
+                            PortInfo.Port = ((XmlElement)ComponentData[k]).GetAttribute("Port");
+                            XmlDataList.Add(PortInfo);
+                        }
+                    }
+                }
+            }
+            #endregion
+            #region compare all component IOPort data and write to list
+            //AllForm
+            foreach (Control Form in lstForm)
+                InitialIOPortCallback(Form, Form.Name, ref ComponentIOPortList, ref XmlDataList);
+            #endregion
+            #region Write to xml file
+            XmlDocument WriteDoc = new XmlDocument();
+            XmlElement FirstElement = XMLExpand.GetElement(WriteDoc, "PortData");
+            for (int j = 0; j < ComponentIOPortList.Count; j++)
+            {
+                XmlElement eSetting = XMLExpand.GetElement(WriteDoc, "PortData/" + ComponentIOPortList[j].FormName + "/" + ComponentIOPortList[j].ComponentName);
+                eSetting.SetAttribute("Port", ComponentIOPortList[j].Port);
+            }
+            if (!Directory.Exists(SysPara.IOPortDirectory))
+                Directory.CreateDirectory(SysPara.IOPortDirectory);
+            XMLExpand.WriteUnicodeXML(WriteDoc, sFilePath);
+            #endregion
+        }
+
+        private static void InitialIOPortCallback(Control cl, string FormName, ref List<IOPortInfo> ComponentIOPortList, ref List<IOPortInfo> XmlDataList)
+        {
+            foreach (dynamic control in cl.Controls)
+            {
+                Type ControlType = control.GetType();
+                bool bNeedAdded = false;
+                bNeedAdded |= (ControlType == typeof(Motor));
+                bNeedAdded |= (ControlType == typeof(Input));
+                bNeedAdded |= (ControlType == typeof(Output));
+                if (control.Name != "" && bNeedAdded)
+                {
+                    IOPortInfo AddComLan = new IOPortInfo();
+                    int Index = XmlDataList.FindIndex(ComLan => (ComLan.FormName == FormName && ComLan.ComponentName == control.Name));
+                    if (Index >= 0)
+                    {
+                        AddComLan.FormName = FormName;
+                        AddComLan.ComponentName = XmlDataList[Index].ComponentName;
+                        AddComLan.Port = XmlDataList[Index].Port;
+                        control.Port = XmlDataList[Index].Port;
+                    }
+                    else
+                    {
+                        AddComLan.FormName = FormName;
+                        AddComLan.ComponentName = control.Name;
+                        AddComLan.Port = control.Port;
+                    }
+                    ComponentIOPortList.Add(AddComLan);
+                }
+                if (control.HasChildren)
+                    InitialIOPortCallback(control, FormName, ref ComponentIOPortList, ref XmlDataList);
+            }
+        }
+
+        private static dynamic CreateForm(dynamic FormAddress, string FormName)
+        {
+            LoadingMarqueeF.SetCaption(FormName);
+            dynamic dmic = (FormAddress == null) ? null : FormAddress;
+            Assembly Assembly = Assembly.GetExecutingAssembly();
+            foreach (Type ObjType in Assembly.GetTypes())
+                if (ObjType.Name == FormName)
+                {
+                    if (dmic == null)
+                        dmic = Activator.CreateInstance(ObjType, null);
+                    lstForm.Add(dmic);
+                    if (ObjType.IsSubclassOf(typeof(ModuleBaseForm)))
+                        dmic.ModuleInitialize(dmic.Text);
+                    break;
+                }
+            return dmic;
+        }
+
+        public static void StartRun()
+        {
+            if (!SysPara.SystemRun)
+                if ((SysPara.SystemMode == RunMode.RUN) || (SysPara.SystemMode == RunMode.INITIAL))
+                {
+                    JSDK.Alarm.Clear();
+                    MiddleLayer.MotorAlarmReset();
+
+                    if (SysPara.SystemMode != RunMode.INITIAL)
+                        MiddleLayer.SetSpeed(MiddleLayer.SystemF.GetSettingValue("PSet", "MachineSpeedRatio"));
+
+                    SysPara.IsDryRun = MiddleLayer.SystemF.GetSettingValue("PSet", "Dryrun");
+
+                    SysPara.CFX.FaultCleared(SysPara.UserName);
+
+                    if (SysPara.SystemMode == RunMode.RUN)
+                        SysPara.CFX.StationStateChanged(CFX.Structures.ResourceState.PRD, DateTime.Now); //Auto
+                    foreach (ModuleBaseForm Module in ModuleManager.ModuleList)
+                        Module.StartRun();
+                    SysPara.SystemRun = true;
+                }
+        }
+
+        public static void StopRun()
+        {
+            SysPara.SystemRun = false;
+            foreach (ModuleBaseForm Module in ModuleManager.ModuleList)
+                Module.StopRun();
+            StopAllMotor();
+            StopManualRun();
+        }
+
+        public static void StopAllMotor()
+        {
+            foreach (ControlBaseInterface control in JSDK.ControlList)
+                if (control is Motor)
+                    ((Motor)control).Stop();
+        }
+
+        public static void StopManualRun()
+        {
+            foreach (ModuleBaseForm Module in ModuleManager.ModuleList)
+                try
+                {
+                    Module.StopManualTask.Cancel();
+                    Module.StopAllTeachPointTask();
+
+                }
+                catch { }
+
+        }
+
+        public static bool IsManualRun()
+        {
+            bool IsManualRun = false;
+            foreach (ModuleBaseForm Module in ModuleManager.ModuleList)
+                IsManualRun |= Module.IsManualRun() || Module.IsTeachPointManualRun();
+            return IsManualRun;
+        }
+
+        public static void AlwaysRun()
+        {
+            if (JSDK.Alarm.DoStop)
+            {
+                if (SysPara.SystemRun || IsManualRun())
+                {
+                    MiddleLayer.LogF.AddMachineStatusEvent(LogForm.MachineStatusType.MachineDown);
+
+                    JSDK.Alarm.DoStop = false;
+                    StopRun();
+                }
+            }
+
+            foreach (ModuleBaseForm Module in ModuleManager.ModuleList)
+            {
+                try
+                {
+                    Module.AlwaysRun();
+                }
+                catch (Exception ex)
+                {
+                    JSDK.Alarm.Show("2010", "An unpredictable error occurred on AlwaysRun() ! ModuleName=\"" + Module.Name + "\"");
+                    MainF.AddAlarmToolTip("2010", ex.ToString());
+                    StopRun();
+                }
+            }
+        }
+
+        public static void CheckMotorProtected()
+        {
+            if (SysPara.Simulation)
+                return;
+
+            string sFeederType = "";
+            AxisIOStatus IOState;
+            foreach (ControlBaseInterface control in JSDK.ControlList)
+            {
+                if (control is Motor)
+                {
+                    
+                    IOState = ((Motor)control).GetAxisIOStatus();
+                    if (((Motor)control).IgnoreAlarm()) return;
+                    if (IOState.ALM)
+                    {
+                        if (control.Name == "MTR_Y_Feeder1")
+                        {
+                            sFeederType = "Feeder1";
+                            SysPara.isMotorAlarmFeeder1 = true;
+                        }
+                        else if (control.Name == "MTR_Y_Feeder2")
+                        {
+                            sFeederType = "Feeder2";
+                            SysPara.isMotorAlarmFeeder2 = true;
+                        }
+                        if (SysPara.SystemRun)
+                        {
+                            ((Motor)control).Stop();
+                            JSDK.Alarm.Show("3030", "Motor Y " + sFeederType + " alarm!");
+                        }
+                        else
+                            JSDK.Alarm.Show("3000", "Motor Y " + sFeederType + " alarm!");
+                    }
+                    if (IOState.SLN)
+                    {
+                        if (control.Name == "MTR_Y_Feeder1")
+                        {
+                            sFeederType = "Feeder1";
+                            SysPara.isMotorAlarmFeeder1 = true;
+                        }
+                        else if (control.Name == "MTR_Y_Feeder2")
+                        {
+                            sFeederType = "Feeder2";
+                            SysPara.isMotorAlarmFeeder2 = true;
+                        }
+                        if (SysPara.SystemRun)
+                        {
+                            ((Motor)control).Stop();
+                            JSDK.Alarm.Show("3031", "Motor Y " +
+                                sFeederType + " soft negative limit alarm!");
+                        }
+                        else
+                            JSDK.Alarm.Show("3023", "Motor Y " +
+                                 sFeederType + " soft negative limit alarm!");
+                    }
+                    if (IOState.SLP)
+                    {
+                        if (control.Name == "MTR_Y_Feeder1")
+                        {
+                            sFeederType = "Feeder1";
+                            SysPara.isMotorAlarmFeeder1 = true;
+                        }
+                        else if (control.Name == "MTR_Y_Feeder2")
+                        {
+                            sFeederType = "Feeder2";
+                            SysPara.isMotorAlarmFeeder2 = true;
+                        }
+                        if (SysPara.SystemRun)
+                        {
+                            ((Motor)control).Stop();
+                            JSDK.Alarm.Show("3032", "Motor Y " +
+                                sFeederType + " soft positive limit alarm!");
+                        }
+                        else
+                            JSDK.Alarm.Show("3002", "Motor Y " +
+                                sFeederType + " soft positive limit alarm!");
+                    }
+                    if (IOState.HLN && !((Motor)control).IsHoming())
+                    {
+                        if (control.Name == "MTR_Y_Feeder1")
+                        {
+                            sFeederType = "Feeder1";
+                            SysPara.isMotorAlarmFeeder1 = true;
+                        }
+                        else if (control.Name == "MTR_Y_Feeder2")
+                        {
+                            sFeederType = "Feeder2";
+                            SysPara.isMotorAlarmFeeder2 = true;
+                        }
+                        if (SysPara.SystemRun)
+                        {
+                            ((Motor)control).Stop();
+                            JSDK.Alarm.Show("3033", "Motor Y " +
+                              sFeederType + " Motor Y hardware negative limit alarm!");
+                        }
+                        else
+                            JSDK.Alarm.Show("3022", "Motor Y " +
+                               sFeederType + " Motor Y hardware negative limit alarm!");
+                    }
+                    if (IOState.HLP && !((Motor)control).IsHoming())
+                    {
+                        if (control.Name == "MTR_Y_Feeder1")
+                        {
+                            sFeederType = "Feeder1";
+                            SysPara.isMotorAlarmFeeder1 = true;
+                        }
+                        else if (control.Name == "MTR_Y_Feeder2")
+                        {
+                            sFeederType = "Feeder2";
+                            SysPara.isMotorAlarmFeeder2 = true;
+                        }
+                        if (SysPara.SystemRun)
+                        {
+                            ((Motor)control).Stop();
+                            JSDK.Alarm.Show("3034", "Motor Y " +
+                             sFeederType + " Motor Y hardware positive limit alarm!");
+                        }
+                        else
+                            JSDK.Alarm.Show("3001", "Motor Y " +
+                              sFeederType + " Motor Y hardware positive limit alarm!");
+
+                        //JSDK.Alarm.Show("3001", "Motor Y " +
+                        //   sFeederType + " Motor Y hardware positive limit alarm!");
+                    }
+                    //    JSDK.Alarm.Show("3000", "The axis alarm! Motor Name=\"" + control.Name + "\"");
+                    //if (IOState.SLN)
+                    //    JSDK.Alarm.Show("3023", "The axis software negative limit! Motor Name=\"" + control.Name + "\"");
+                    //if (IOState.SLP)
+                    //    JSDK.Alarm.Show("3002", "The axis software positive limit! Motor Name=\"" + control.Name + "\"");
+                    //if (IOState.HLN)
+                    //    if (!((Motor)control).IsHoming())
+                    //        JSDK.Alarm.Show("3022", "The axis hardware negative limit! Motor Name=\"" + control.Name + "\"");
+                    //if (IOState.HLP)
+                    //    if (!((Motor)control).IsHoming())
+                    //        JSDK.Alarm.Show("3001", "The axis hardware positive limit! Motor Name=\"" + control.Name + "\"");
+                }
+            }
+        }
+
+        public static void InitialParameterReset()
+        {
+            foreach (ModuleBaseForm Module in ModuleManager.ModuleList)
+            {
+                try
+                {
+                    Module.InitialParameterReset();
+                }
+                catch (Exception ex)
+                {
+                    JSDK.Alarm.Show("2013", "An unpredictable error occurred on ExecuteReset() ! ModuleName=\"" + Module.Name + "\"");
+                    MainF.AddAlarmToolTip("2013", ex.ToString());
+                    MiddleLayer.FlowCtrl.InitialReset();
+                    StopRun();
+                }
+            }
+        }
+
+        public static void InitialReset()
+        {
+            foreach (ModuleBaseForm Module in ModuleManager.ModuleList)
+            {
+                try
+                {
+                    Module.InitialReset();
+                }
+                catch (Exception ex)
+                {
+                    JSDK.Alarm.Show("2014", "An unpredictable error occurred on InitialReset() ! ModuleName=\"" + Module.Name + "\"");
+                    MainF.AddAlarmToolTip("2014", ex.ToString());
+                    MiddleLayer.FlowCtrl.InitialReset();
+                    StopRun();
+                }
+            }
+        }
+
+        public static void ServoOn()
+        {
+            foreach (ModuleBaseForm Module in ModuleManager.ModuleList)
+            {
+                try
+                {
+                    Module.ServoOn();
+                }
+                catch (Exception ex)
+                {
+                    JSDK.Alarm.Show("2011", "An unpredictable error occurred on ServoOn() ! ModuleName=\"" + Module.Name + "\"");
+                    MainF.AddAlarmToolTip("2011", ex.ToString());
+                    StopRun();
+                }
+            }
+        }
+
+        public static void StartUp()
+        {
+            foreach (ModuleBaseForm Module in ModuleManager.ModuleList)
+            {
+                try
+                {
+                    Module.AcuraStartUp();
+                }
+                catch (Exception ex)
+                {
+                    JSDK.Alarm.Show("2011", "An unpredictable error occurred on StartUp() ! ModuleName=\"" + Module.Name + "\"");
+                    MainF.AddAlarmToolTip("2011", ex.ToString());
+                    StopRun();
+                }
+            }
+        }
+
+        public static void ServoOff()
+        {
+            foreach (ModuleBaseForm Module in ModuleManager.ModuleList)
+            {
+                try
+                {
+                    Module.ServoOff();
+                }
+                catch (Exception ex)
+                {
+                    JSDK.Alarm.Show("2012", "An unpredictable error occurred on ServoOff() ! ModuleName=\"" + Module.Name + "\"");
+                    MainF.AddAlarmToolTip("2012", ex.ToString());
+                    StopRun();
+                }
+            }
+        }
+
+        public static void SetSpeed(int SpeedRate)
+        {
+            foreach (ModuleBaseForm Module in ModuleManager.ModuleList)
+            {
+                try
+                {
+                    Module.SetSpeed(SpeedRate);
+                }
+                catch (Exception ex)
+                {
+                    JSDK.Alarm.Show("2031", "An unpredictable error occurred on SetSpeed() ! ModuleName=\"" + Module.Name + "\"");
+                    MainF.AddAlarmToolTip("2031", ex.ToString());
+                    StopRun();
+                }
+            }
+        }
+
+        public static bool Initial()
+        {
+            bool bInitailOk = true;
+            foreach (ModuleBaseForm Module in ModuleManager.ModuleList)
+            {
+                try
+                {
+                    Module.Initial();
+                }
+                catch (Exception ex)
+                {
+                    JSDK.Alarm.Show("2015", "An unpredictable error occurred on Initial() ! ModuleName=\"" + Module.Name + "\"");
+                    MainF.AddAlarmToolTip("2015", ex.ToString());
+                    StopRun();
+                }
+            }
+            return bInitailOk;
+        }
+
+        public static bool GetInitialOk()
+        {
+            bool bInitialOk = true;
+            foreach (ModuleBaseForm Module in ModuleManager.ModuleList)
+                bInitialOk &= Module.GetInitialOk();
+            return bInitialOk;
+        }
+
+        public static void RunReset()
+        {
+            foreach (ModuleBaseForm Module in ModuleManager.ModuleList)
+            {
+                try
+                {
+                    Module.RunReset();
+                }
+                catch (Exception ex)
+                {
+                    JSDK.Alarm.Show("2016", "An unpredictable error occurred on RunReset() ! ModuleName=\"" + Module.Name + "\"");
+                    MainF.AddAlarmToolTip("2016", ex.ToString());
+                    StopRun();
+                }
+            }
+        }
+
+        public static void Run()
+        {
+            foreach (ModuleBaseForm Module in ModuleManager.ModuleList)
+            {
+                try
+                {
+                    Module.Run();
+                }
+                catch (Exception ex)
+                {
+                    string text = ex.ToString();
+                    JSDK.Alarm.Show("2017", "An unpredictable error occurred on Run() ! ModuleName=\"" + Module.Name + "\"");
+                    MainF.AddAlarmToolTip("2017", ex.ToString());
+                    StopRun();
+                }
+            }
+        }
+
+        //Zax 9/1/21- Module Multi Thread
+        //public static void Run()
+        //{
+        //    for (int x = 0; x < ModuleManager.ModuleList.Count; x++)
+        //    {
+        //        ModuleBaseForm Module = ModuleManager.ModuleList[x] as ModuleBaseForm;
+        //        try
+        //        {
+        //            if (RunTask[x] != null &&
+        //               (RunTask[x].Status == TaskStatus.RanToCompletion || RunTask[x].Status == TaskStatus.Faulted))
+        //            {
+        //                RunTask[x].Dispose();
+        //                RunTask[x] = null;
+        //            }
+        //            if (RunTask[x] == null)
+        //            {
+        //                RunTask[x] = Task.Factory.StartNew(() =>
+        //                {
+        //                    Module.Run();
+        //                });
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            string text = ex.ToString();
+        //            JSDK.Alarm.Show("2017", "An unpredictable error occurred on Run() ! ModuleName=\"" + Module.Name + "\"");
+        //            MainF.AddAlarmToolTip("2017", ex.ToString());
+        //            StopRun();
+        //        }
+        //    }
+        //}
+
+        public static void MotorAlarmReset()
+        {
+            foreach (ControlBaseInterface control in JSDK.ControlList)
+                if (control is Motor)
+                    if (((Motor)control).GetAxisIOStatus().ALM)
+                        ((Motor)control).AlarmReset();
+
+            //For ABB Robot control
+            //AbbF.ABB_Robot.EmoReset();
+            if(AbbF.ABB_Robot.ALM)
+            {
+                AbbF.ABB_Robot.ServoOn();
+                AbbF.ABB_Robot.ResetPointer();
+                AbbF.ABB_Robot.StartRapid();
+            }
+        }
+
+        public static bool OpenRecipe(string RecipePath)
+        {
+            SysPara.isRecipeRefresh = true;
+            bool bOpenSuccess = false;
+            try
+            {
+                foreach (var rbAbb in ABBRobot.Extern.GlobalVar.RBTeachPointList)
+                {
+                    rbAbb.Initialize(AbbF.ABB_Robot, AbbF.CylTurret_H1, AbbF.CylTurret_H2, AbbF.CylTurret_H3, AbbF.CylTurret_H4);
+                }
+                for (int i = 0; i < ModuleManager.ModuleList.Count; i++)
+                    ModuleManager.ModuleList[i].ReadRecipeData(RecipePath);
+                SysPara.RecipeDataDirectory = Path.GetDirectoryName(RecipePath);
+                SysPara.RecipeName = Path.GetFileNameWithoutExtension(RecipePath);
+                // VisionF.LoadConfig(string.Format("{0}\\{1}\\{2}.xml", SysPara.RecipeDataDirectory, "Vision", SysPara.RecipeName + "_Vision"));
+                SystemF.MesF.LoadMesConfig(SysPara.MESDirectory + "\\" + SysPara.RecipeName);
+                //  OpenVision();
+                //  coreEngine.OpenRVision();//teong
+                IniFile IniFile = new IniFile(".\\MachineSetup.ini");
+                IniFile.WriteString("MachineSetup", "RecipeName", SysPara.RecipeName);
+                IniFile.WriteString("PathSetup", "RecipeDirectory", SysPara.RecipeDataDirectory.Replace(System.IO.Directory.GetCurrentDirectory() + "\\", ".\\"));
+                bOpenSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                SysPara.RecipeDataDirectory = ".\\ModuleData\\RecipeData";
+                SysPara.RecipeName = "Recipe";
+                bOpenSuccess = false;
+            }
+
+            //if (!SystemF.MesF.LoadMesTisConfig(SysPara.MESDirectory + "\\" + SysPara.RecipeName))
+            //{
+            //    JSDK.Alarm.Show("3006");
+            //}
+
+
+            SysPara.isRecipeRefresh = false;
+            return bOpenSuccess;
+        }
+
+        public static bool OpenSmallRecipe(string RecipePath)
+        {
+            SysPara.isRecipeRefresh = true;
+            bool bOpenSuccess = false;
+            try
+            {
+                for (int i = 0; i < ModuleManager.ModuleList.Count; i++)
+                    ModuleManager.ModuleList[i].ReadRecipeData(RecipePath);
+                SysPara.RecipeDataDirectory = Path.GetDirectoryName(RecipePath);
+                SysPara.RecipeName = Path.GetFileNameWithoutExtension(RecipePath);
+
+                bOpenSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "System Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                SysPara.RecipeDataDirectory = ".\\ModuleData\\RecipeData";
+                SysPara.RecipeName = "Recipe";
+                bOpenSuccess = false;
+            }
+
+            //if (!SystemF.MesF.LoadMesTisConfig(SysPara.MESDirectory + "\\" + SysPara.RecipeName))
+            //{
+            //    JSDK.Alarm.Show("3006");
+            //}
+
+
+            SysPara.isRecipeRefresh = false;
+            return bOpenSuccess;
+        }
+
+        public static void OpenVision()
+        {
+            for (int i = 0; i < VisionproInterface.VList.Count; i++)
+                VisionproInterface.VList[i].LoadTB(string.Format(@"{0}\{1}\{2}.vpp", SysPara.VisionFileDirectory, VisionproInterface.VList[i].GetType().Name, SysPara.RecipeName));
+        }
+
+        public static void ReadTeachPoint()
+        {
+            foreach (ModuleBaseForm Module in ModuleManager.ModuleList)
+            {
+                try
+                {
+                    Module.ReadAllTeachPoint(SysPara.RecipeDataDirectory + "\\" + SysPara.RecipeName + "_TeachPoint.uc", Module.Name);
+
+                }
+                catch (Exception ex)
+                {
+                    string text = ex.ToString();
+                    JSDK.Alarm.Show("2017", "An unpredictable error occurred on ReadTeachPoint() ! ModuleName=\"" + Module.Name + "\"");
+                    MainF.AddAlarmToolTip("2017", ex.ToString());
+                    StopRun();
+                }
+            }
+        }
+
+        public static void SaveTeachPoint()
+        {
+            DataSet ds = new DataSet();
+            foreach (ModuleBaseForm Module in ModuleManager.ModuleList)
+            {
+                try
+                {
+                    var ret = Module.SaveAllTeachPoint(Module.Name);
+
+                    if (ret != null)
+                    {
+                        ds.Merge(ret);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string text = ex.ToString();
+                    JSDK.Alarm.Show("2017", "An unpredictable error occurred on SaveTeachPoint() ! ModuleName=\"" + Module.Name + "\"");
+                    MainF.AddAlarmToolTip("2017", ex.ToString());
+                    StopRun();
+                }
+            }
+            try
+            {
+                string path = SysPara.RecipeDataDirectory + "\\" + SysPara.RecipeName + "_TeachPoint.uc";
+                FileInfo fiTmp1 = new FileInfo(path);
+                if (fiTmp1.Directory.Exists == false)
+                    fiTmp1.Directory.Create();
+                ds.WriteXml(path);
+            }
+            catch (Exception ex)
+            {
+                string text = ex.ToString();
+                JSDK.Alarm.Show("2017", "An unpredictable error occurred on SaveTeachPoint() Path!");
+                MainF.AddAlarmToolTip("2017", ex.ToString());
+                StopRun();
+            }
+
+        }
+
+        public static void Add(string data, string data1)
+        {
+            DataSet ds = new DataSet();
+            foreach (ModuleBaseForm Module in ModuleManager.ModuleList)
+            {
+                try
+                {
+                    var ret = Module.SaveAllTeachPoint(Module.Name);
+                    if (ret != null)
+                    {
+                        ds.Merge(ret);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string text = ex.ToString();
+                    JSDK.Alarm.Show("2017", "An unpredictable error occurred on SaveTeachPoint() ! ModuleName=\"" + Module.Name + "\"");
+                    MainF.AddAlarmToolTip("2017", ex.ToString());
+                    StopRun();
+                }
+            }
+            try
+            {
+                string path = SysPara.RecipeDataDirectory + "\\" + SysPara.RecipeName + "_TeachPoint.uc";
+                FileInfo fiTmp1 = new FileInfo(path);
+                if (fiTmp1.Directory.Exists == false)
+                    fiTmp1.Directory.Create();
+                ds.WriteXml(path);
+            }
+            catch (Exception ex)
+            {
+                string text = ex.ToString();
+                JSDK.Alarm.Show("2017", "An unpredictable error occurred on SaveTeachPoint() Path!");
+                MainF.AddAlarmToolTip("2017", ex.ToString());
+                StopRun();
+            }
+        }
+
+
+    }
+}

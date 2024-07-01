@@ -1,0 +1,3414 @@
+﻿using AcuraLibrary;
+using AcuraLibrary.Forms;
+//using CFX.Structures.JAG;
+using JabilSDK;
+using JabilSDK.Controls;
+using JabilSDK.Enums;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Reflection;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using SystemCommon.Communication;
+using static Acura3._0.FunctionForms.LogForm;
+
+namespace Acura3._0.ModuleForms
+{
+    public partial class ConveyorForm : ModuleBaseForm
+    {
+        #region Forms & Init
+
+        private enum EquState //Teong CFX
+        {
+            Unknown = 0,
+            Production,
+            Starved,
+            Block
+        }
+
+        private enum ConveyorState
+        {
+            Stop = 0,
+            Forward,
+            FastForward
+        }
+
+        private enum WorkPost
+        {
+            WP1 = 0,
+            WP2,
+            WP3
+        }
+
+        private enum SlideDoor
+        {
+            LeftDoor = 0,
+            RightDoor
+        }
+
+        private bool isEndLotMode = false;
+        private bool BarcodeDisconnected = false;
+        private bool[] IsStartRecordCT = new bool[3] { false, false, false };
+        private JTimer[] RunTMCvy = new JTimer[3] { new JTimer(), new JTimer(), new JTimer() }; //Zax
+        private int StdTime = 100;
+        private bool[] bDoorInactive = new bool[2] { false, false };
+        private int M2MIndex = 0;
+        private bool? isM2MActivated = null;
+        private string crrBarcodeVal = null;
+        public TcpSyncServer M2M_Server = null; //If not using can ignore but dont remove unless required.
+        public TcpSyncClient M2M_Client = null; //If not using can ignore but dont remove unless required.
+        private EquState equbState = EquState.Unknown; // Teong CFX
+        private EquState equState = EquState.Unknown; // Teong CFX
+
+        public int rbWait = 0;
+
+        //M2M Monitoring
+        public string M2M_FolderPath = SysPara.IOPortDirectory + string.Format("\\M2M");
+        public string M2M_Backup_FolderPath = SysPara.IOPortDirectory + string.Format("\\M2M_Backup");
+        public string M2M_Sent_FolderPath = SysPara.IOPortDirectory + string.Format("\\M2M_Sent");
+        public string FileExtension_JSON = ".json";
+        public bool UpdateM2MListboxDisplay = true; //Update M2M listbox during startup
+
+        public string M2M_DataDisplay = "";
+
+        public bool Update_M2M_DataDisplay = false;
+
+        private bool CheckedSetting_Latch = false;
+        public JTimer MachineStateTimeout01 = new JTimer(); //STARVING
+        public JTimer MachineStateTimeout02 = new JTimer(); //BLOCKING
+        public ConveyorForm()
+        {
+            InitializeComponent();
+            FlowChartMessage.ResetTimerRaise += FlowChartMessage_ResetTimerRaise;
+            SetDoubleBuffer(plProductionSetting);
+        }
+
+        private void FlowChartMessage_ResetTimerRaise(object sender, EventArgs e)
+        {
+            for (int i = 0; i <= 2; i++)
+            {
+                RunTMCvy[i].Restart();
+                RunTM.Restart();
+            }
+        }
+        #endregion
+
+        #region Override Method     
+        public override void AfterProductionSetting()
+        {
+            checkDoorActive(SlideDoor.LeftDoor);
+            checkDoorActive(SlideDoor.RightDoor);
+        }
+
+        public override void IntoProductionSettingPage()
+        {
+            checkDoorActive(SlideDoor.LeftDoor);
+            checkDoorActive(SlideDoor.RightDoor);
+        }
+
+        public override void AlwaysRun()
+        {
+            if (!SysPara.Simulation)
+            {
+                if (IB_Error_WP1.IsOn())
+                {
+                    ExecuteConveyor(ConveyorState.Stop, OB_Cvy_ChgSpd_WP1, OB_Cvy_Forward_WP1);
+                    JSDK.Alarm.Show("5020");
+                }
+
+                if (IB_Error_WP2.IsOn())
+                {
+                    ExecuteConveyor(ConveyorState.Stop, OB_Cvy_ChgSpd_WP2, OB_Cvy_Forward_WP2);
+                    JSDK.Alarm.Show("5021");
+                }
+
+                if (IB_Error_WP3.IsOn())
+                {
+                    ExecuteConveyor(ConveyorState.Stop, OB_Cvy_ChgSpd_WP3, OB_Cvy_Forward_WP3);
+                    JSDK.Alarm.Show("5022");
+                }
+            }
+
+            if (SysPara.SystemMode == RunMode.IDLE)
+            {
+                //Teong CFX
+                MiddleLayer.SystemF.DBEngineCFX.StationStateChanged(SASDK.DBEngine.ucDBEngineCFX.StateChange.Standby, DateTime.Now);
+            }
+        }
+
+        public override void InitialReset()
+        {
+            #region Reset Handshake
+            for (int i = 0; i <= 2; i++)
+            {
+                Handshake.Conveyor[i].TaskLoad.Reset();
+                Handshake.Conveyor[i].TaskUnload.Reset();
+            }
+
+            Handshake.ConvToRobot.Reset();
+            Handshake.Conv2ToConv1.Reset();
+            Handshake.Conv3ToConv2.Reset();
+            #endregion
+
+            #region Reset Task
+            fc_Init_Flow.TaskReset();
+
+            fc_Main_Flow.TaskReset();
+            fc_Main_CheckState_WP1.TaskReset();
+            fc_Main_CheckState_WP2.TaskReset();
+            fc_Main_CheckState_WP3.TaskReset();
+            fc_Main_CheckState_WP1.BackColor = Color.White;
+            fc_Main_CheckState_WP2.BackColor = Color.White;
+            fc_Main_CheckState_WP3.BackColor = Color.White;
+
+            fc_Load_Flow_WP1.TaskReset();
+            fc_Unload_Flow_WP1.TaskReset();
+
+            fc_Load_Flow_WP2.TaskReset();
+            fc_Unload_Flow_WP2.TaskReset();
+
+            fc_Load_Flow_WP3.TaskReset();
+            fc_Unload_Flow_WP3.TaskReset();
+            #endregion
+
+            #region SMEMA + Conveyor Reverse Reset 
+            OB_SMEMA_UP_MachineRdy.Off();
+            OB_SMEMA_DW_Available.Off();
+            OB_SMEMA_DN_NG.Off();
+
+            OB_Cvy_Reverse_WP1.Off();
+            OB_Cvy_Reverse_WP2.Off();
+            OB_Cvy_Reverse_WP3.Off();
+            #endregion
+
+            #region Reset Pallet Entity
+            SysPara.PalletList[(int)WorkPost.WP1] = new Queue<PalletEntity>();
+            SysPara.PalletList[(int)WorkPost.WP2] = new Queue<PalletEntity>();
+            SysPara.PalletList[(int)WorkPost.WP3] = new Queue<PalletEntity>();
+            #endregion
+
+            isEndLotMode = false;
+            BarcodeDisconnected = false;
+            CheckedSetting_Latch = false;
+
+            checkDoorActive(SlideDoor.LeftDoor);
+            checkDoorActive(SlideDoor.RightDoor);
+            for (int i = 0; i <= 2; i++)
+                if (IsStartRecordCT[i])
+                {
+                    Handshake.Conveyor[i].CT_LastWorkFlow = 0;
+                    Handshake.Conveyor[i].CT_WorkFlow.Reset();
+                    IsStartRecordCT[i] = false;
+                }
+
+            RunTM.Restart();
+            SysPara.WIP1.Reset();
+            SysPara.WIP2.Reset();
+            SysPara.WIP3.Reset();
+            ExecuteConveyor(ConveyorState.Stop, OB_Cvy_ChgSpd_WP1, OB_Cvy_Forward_WP1);
+            ExecuteConveyor(ConveyorState.Stop, OB_Cvy_ChgSpd_WP2, OB_Cvy_Forward_WP2);
+            ExecuteConveyor(ConveyorState.Stop, OB_Cvy_ChgSpd_WP3, OB_Cvy_Forward_WP3);
+        }
+
+        public override void RunReset()
+        {
+
+        }
+
+        public override void Initial()
+        {
+            fc_Init_Flow.TaskRun();
+        }
+
+        public override void Run()
+        {
+            fc_Main_Flow.TaskRun();
+        }
+
+        public override void StartRun()
+        {
+            for (int i = 0; i <= 2; i++)
+            {
+                if (IsStartRecordCT[i])
+                    Handshake.Conveyor[i].CT_WorkFlow.Start();
+
+                RunTMCvy[i].Restart();
+            }
+
+            RunTM.Restart();
+
+            //Disable M2M manual buttons
+            btn_M2M_MoveToBackup.Enabled = false;
+            btn_M2M_CopyFromBackup.Enabled = false;
+
+            MachineStateTimeout01.Restart();
+            MachineStateTimeout02.Restart();
+        }
+
+        public override void StopRun()
+        {
+            if (OB_Cvy_Forward_WP1.IsOn())
+                ExecuteConveyor(ConveyorState.Stop, OB_Cvy_ChgSpd_WP1, OB_Cvy_Forward_WP1);
+
+            if (OB_Cvy_Forward_WP2.IsOn())
+                ExecuteConveyor(ConveyorState.Stop, OB_Cvy_ChgSpd_WP2, OB_Cvy_Forward_WP2);
+
+            if (OB_Cvy_Forward_WP3.IsOn())
+                ExecuteConveyor(ConveyorState.Stop, OB_Cvy_ChgSpd_WP3, OB_Cvy_Forward_WP3);
+
+            for (int i = 0; i <= 2; i++)
+                Handshake.Conveyor[i].CT_WorkFlow.Pause();
+
+            OB_SMEMA_UP_MachineRdy.Off();
+            OB_SMEMA_DW_Available.Off();
+            OB_SMEMA_DN_NG.Off();
+
+            MiddleLayer.SystemF.DBEngineCFX.StationStateChanged(SASDK.DBEngine.ucDBEngineCFX.StateChange.Standby, DateTime.Now); // Teong CFX
+
+            //Enable M2M manual buttons
+            btn_M2M_MoveToBackup.Enabled = true;
+            btn_M2M_CopyFromBackup.Enabled = true;
+            //refresh M2M listbox display
+            UpdateM2MListboxDisplay = true;
+
+            SysPara.IsMachineBlocked = false; /* Add 2023.02.21*/
+            SysPara.IsMachineStarving = false; /* Add 2023.02.21*/
+            SysPara.IsMachineLowMaterial = false; /* Add 2023.02.21*/
+            SysPara.IsMachineNoMaterial = false; /* Add 2023.02.22*/
+        }
+        #endregion
+
+        #region Functions
+        private void SetDoubleBuffer(Control cont)
+        {
+            typeof(Control).InvokeMember("DoubleBuffered", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetProperty, null, cont, new object[] { true });
+        }
+
+        private bool Delay(JTimer timer, int TimeOut)
+        {
+            bool ret = false;
+            if (timer.IsOn(TimeOut))
+            {
+                ret = true;
+            }
+            return ret;
+        }
+
+        private void ExecuteConveyor(ConveyorState RunState, Output ChgSpeed, Output Forward)
+        {
+            switch (RunState)
+            {
+                case ConveyorState.Stop:
+                    ChgSpeed.Off();
+                    Forward.Off();
+                    break;
+                case ConveyorState.FastForward:
+                    ChgSpeed.On();
+                    Forward.On();
+                    break;
+                case ConveyorState.Forward:
+                    ChgSpeed.Off();
+                    Forward.On();
+                    break;
+            }
+        }
+
+        //Only for JAG that has Slide Door IO
+        private void checkDoorActive(SlideDoor _door)
+        {
+            string IsLeftRight = _door == SlideDoor.LeftDoor ? "Left" : "Right";
+            GroupBox _gB = _door == SlideDoor.LeftDoor ? gBLeft : gBRight;
+            if (!GetSettingValue("PSet", $"Enable{IsLeftRight}SlideDoor"))
+            {
+                //gBLeft.Visible = false;
+                //gBRight.Visible = false;
+                _gB.Visible = false;
+                bDoorInactive[(int)_door] = true;
+            }
+            else
+            {
+                //gBLeft.Visible = true;
+                //gBRight.Visible = true;
+                _gB.Visible = true;
+                bDoorInactive[(int)_door] = false;
+            }
+        }
+
+        #region M2M
+        public void TriggerM2MServer(bool isConnectOnly = false, string msg = null)
+        {
+            int ManualGotoIndex = 0;
+            LblM2MStatus_Server.BackColor = Color.White;
+            LblM2MStatus_Server.Text = "Triggering";
+
+            string _ip = GetSettingValue("PSet", "M2MIPAddr_Server");
+            if (string.IsNullOrWhiteSpace(_ip))
+            {
+                _ip = "localhost";
+                txtBxM2MIPAddr_Server.Text = _ip;
+            }
+
+            int _port = GetSettingValue("PSet", "M2MPort_Server");
+            if (_port <= 0)
+            {
+                _port = 8080;
+                txtBxM2MPort_Server.Text = _port.ToString();
+            }
+
+            while (!StopManualTask.IsCancellationRequested)
+            {
+                switch (ManualGotoIndex)
+                {
+                    case 0:
+                        if (M2M_Server == null || !M2M_Server.IsRunning)
+                        {
+                            M2M_Server?.Stop();
+                            IPAddress iPAddress = IPAddress.Parse(_ip);
+                            M2M_Server = new TcpSyncServer(iPAddress, _port, 8192);
+                            M2M_Server.DataReceived += M2M_Server_DataReceived;
+                            M2M_Server.ClientConnected += M2M_Server_Connected;
+                            M2M_Server.ClientDisconnected += M2M_Server_Disconnected;
+                            M2M_Server.Start();
+                        }
+                        if (M2M_Server != null && M2M_Server.IsRunning)
+                        {
+                            LblM2MStatus_Server.BackColor = Color.LimeGreen;
+                            LblM2MStatus_Server.Text = "Server online";
+                            btnConnectM2M_Server.Text = "Disconnect";
+                            if (!isConnectOnly)
+                            {
+                                ManualGotoIndex++;
+                            }
+                            else
+                            {
+                                StopManualTask.Cancel();
+                                return;
+                            }
+                        }
+                        break;
+                    case 1:
+                        M2M_Server.Send(msg);
+                        StopManualTask.Cancel();
+                        return;
+                }
+                Thread.Sleep(10);
+            }
+        }
+
+        public bool AutoTriggerM2MServer(bool isConnectOnly = false, string msg = null)
+        {
+            LblM2MStatus_Server.BackColor = Color.White;
+            LblM2MStatus_Server.Text = "Triggering";
+
+            string _ip = GetSettingValue("PSet", "M2MIPAddr_Server");
+            if (string.IsNullOrWhiteSpace(_ip))
+            {
+                _ip = "127.0.0.1";
+                txtBxM2MIPAddr_Server.Text = _ip;
+            }
+
+            int _port = GetSettingValue("PSet", "M2MPort_Server");
+            if (_port <= 0)
+            {
+                _port = 8080;
+                txtBxM2MPort_Server.Text = _port.ToString();
+            }
+
+            try
+            {
+                switch (M2MIndex)
+                {
+                    case 0:
+                        if (isConnectOnly && M2M_Server != null && M2M_Server.IsRunning)
+                        {
+                            M2M_Server.CloseAllClient();
+                            M2M_Server.Stop();
+                            M2M_Server = null;
+                        }
+                        M2MIndex++;
+                        break;
+                    case 1:
+                        if (M2M_Server == null || !M2M_Server.IsRunning)
+                        {
+                            M2M_Server?.Stop();
+                            IPAddress iPAddress = IPAddress.Parse(_ip);
+                            M2M_Server = new TcpSyncServer(iPAddress, _port, 8192);
+                            M2M_Server.DataReceived += M2M_Server_DataReceived;
+                            M2M_Server.ClientConnected += M2M_Server_Connected;
+                            M2M_Server.ClientDisconnected += M2M_Server_Disconnected;
+                            M2M_Server.Start();
+                        }
+                        if (M2M_Server != null && M2M_Server.IsRunning)
+                        {
+                            LblM2MStatus_Server.BackColor = Color.LimeGreen;
+                            LblM2MStatus_Server.Text = "Server online";
+                            btnConnectM2M_Server.Text = "Disconnect";
+                            if (!isConnectOnly)
+                                M2MIndex++;
+                            else
+                                M2MIndex = 10;
+                        }
+                        break;
+                    case 2:
+                        M2M_Server.Send(msg);
+                        M2MIndex = 10;
+                        break;
+                    case 10:
+                        M2MIndex = 0;
+                        return M2M_Server.IsRunning;
+                }
+            }
+            catch
+            {
+                M2MIndex = 0;
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,M2M Communication Server failed to activate");
+                JSDK.Alarm.Show("6000");
+            }
+            return false;
+        }
+
+        public void TriggerM2MClient(bool isConnectOnly = false, string msg = null)
+        {
+            int ManualGotoIndex = 0;
+            LblM2MStatus_Client.BackColor = Color.White;
+            LblM2MStatus_Client.Text = "Triggering";
+
+            string _ip = GetSettingValue("PSet", "M2MIPAddr_Client");
+            int _port = GetSettingValue("PSet", "M2MPort_Client");
+
+            while (!StopManualTask.IsCancellationRequested)
+            {
+                switch (ManualGotoIndex)
+                {
+                    case 0:
+                        if (M2M_Client == null || !M2M_Client.IsRunning || !M2M_Client.Connected)
+                        {
+                            M2M_Client?.Stop();
+                            IPAddress iPAddress = IPAddress.Parse(_ip);
+                            M2M_Client = new TcpSyncClient(iPAddress, _port, 8192);
+                            M2M_Client.DataReceived += M2M_Client_DataReceived;
+                            M2M_Client.ServerConnected += M2M_Client_Connected;
+                            M2M_Client.ServerDisconnected += M2M_Client_Disconnected;
+                            M2M_Client.Start();
+                        }
+                        if (M2M_Client != null && M2M_Client.IsRunning && M2M_Client.Connected)
+                        {
+                            if (!isConnectOnly)
+                            {
+                                ManualGotoIndex++;
+                            }
+                            else
+                            {
+                                StopManualTask.Cancel();
+                                return;
+                            }
+                        }
+                        break;
+                    case 1:
+                        M2M_Client.Send(msg);
+                        StopManualTask.Cancel();
+                        return;
+
+                }
+                Thread.Sleep(10);
+            }
+        }
+
+        public bool AutoTriggerM2MClient(bool isConnectOnly = false, string msg = null)
+        {
+            LblM2MStatus_Client.BackColor = Color.White;
+            LblM2MStatus_Client.Text = "Triggering";
+
+            string _ip = GetSettingValue("PSet", "M2MIPAddr_Client");
+            int _port = GetSettingValue("PSet", "M2MPort_Client");
+
+            try
+            {
+
+                switch (M2MIndex)
+                {
+                    case 0:
+                        if (isConnectOnly && M2M_Client != null && M2M_Client.IsRunning && M2M_Client.Connected)
+                        {
+                            M2M_Client.Stop();
+                            M2M_Client = null;
+                        }
+                        M2MIndex++;
+                        break;
+                    case 1:
+                        if (M2M_Client == null || !M2M_Client.IsRunning || !M2M_Client.Connected)
+                        {
+                            M2M_Client?.Stop();
+                            IPAddress iPAddress = IPAddress.Parse(_ip);
+                            M2M_Client = new TcpSyncClient(iPAddress, _port, 8192);
+                            M2M_Client.DataReceived += M2M_Client_DataReceived;
+                            M2M_Client.ServerConnected += M2M_Client_Connected;
+                            M2M_Client.ServerDisconnected += M2M_Client_Disconnected;
+                            M2M_Client.Start();
+                        }
+                        if (M2M_Client != null && M2M_Client.IsRunning && M2M_Client.Connected)
+                        {
+                            if (!isConnectOnly)
+                                M2MIndex++;
+                            else
+                                M2MIndex = 10;
+                        }
+                        break;
+                    case 2:
+                        M2M_Client.Send(msg);
+                        M2MIndex = 10;
+                        break;
+                    case 10:
+                        M2MIndex = 0;
+                        return M2M_Client.Connected;
+                }
+            }
+            catch
+            {
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,M2M Communication Client failed to activate");
+                JSDK.Alarm.Show("6001");
+            }
+            return false;
+        }
+
+        private void Backup_M2MSentFile(string PalletID, string PalletInfo_JSON)
+        {
+            try
+            {
+                string M2M_Sent_Path = SysPara.IOPortDirectory + string.Format("\\M2M_Sent\\M2M_Sent_{0}_{1}.json", PalletID, DateTime.Now.ToString("MMddyyyy_HHmmss"));
+                if (!Directory.Exists(Path.GetDirectoryName(M2M_Sent_Path)))
+                    Directory.CreateDirectory(Path.GetDirectoryName(M2M_Sent_Path));
+                //bool bFileExists = File.Exists(LocalPath);
+                //if (!bFileExists)
+                //{
+                //    StreamWriter sw = new StreamWriter(LocalPath, false);
+                //    sw.Close();
+                //}
+                File.WriteAllText(M2M_Sent_Path, PalletInfo_JSON, Encoding.UTF8);
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, $"M2M_Sent,Backup succeed");
+            }
+            catch
+            {
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, $"M2M_Sent,Backup failed");
+            }
+        }
+
+        public void HouseKeeping()
+        {
+            //housekeeping M2M backup folder
+            try
+            {
+                var SortedFiles = new DirectoryInfo(M2M_Backup_FolderPath).GetFiles().OrderByDescending(f => f.CreationTime).ToList();
+
+                if (SortedFiles.Count > 200)
+                {
+                    SortedFiles.RemoveRange(0, 350);
+                    foreach (var FileToDelete in SortedFiles)
+                    {
+                        File.Delete(FileToDelete.FullName);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, $"HouseKeeping,HouseKeeping M2M backup folder error: {ex.Message}");
+            }
+
+            //housekeeping M2M sent folder
+            try
+            {
+                var SortedFiles = new DirectoryInfo(M2M_Sent_FolderPath).GetFiles().OrderByDescending(f => f.CreationTime).ToList();
+
+                if (SortedFiles.Count > 200)
+                {
+                    SortedFiles.RemoveRange(0, 350);
+                    foreach (var FileToDelete in SortedFiles)
+                    {
+                        File.Delete(FileToDelete.FullName);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, $"HouseKeeping,HouseKeeping M2M sent folder error: {ex.Message}");
+            }
+        }
+        #endregion
+
+        #region CFX
+        //Teong CFX
+        private void CFXProduction()
+        {
+            if (equbState != EquState.Block)
+            {
+                if (equState != EquState.Production)
+                {
+                    equState = EquState.Production;
+                    MiddleLayer.SystemF.DBEngineCFX.StationStateChanged(SASDK.DBEngine.ucDBEngineCFX.StateChange.Productive, DateTime.Now);
+                }
+
+            }
+            else
+            {
+                equState = EquState.Production;
+            }
+
+        }
+
+        private void CFXStarve()
+        {
+            if (equbState != EquState.Block)
+            {
+                if (equState != EquState.Starved)
+                {
+                    equState = EquState.Starved;
+                    MiddleLayer.SystemF.DBEngineCFX.StationStateChanged(SASDK.DBEngine.ucDBEngineCFX.StateChange.Standby_NoProductStarved, DateTime.Now);
+                }
+            }
+            else
+            {
+                equState = EquState.Starved;
+            }
+        }
+
+        private void CFXBlock()
+        {
+            if (equbState != EquState.Block)
+            {
+                equbState = EquState.Block;
+                MiddleLayer.SystemF.DBEngineCFX.StationStateChanged(SASDK.DBEngine.ucDBEngineCFX.StateChange.Standby_NoProductBlocked, DateTime.Now);
+
+            }
+        }
+
+        private void CFXUnblock()
+        {
+            if (equbState == EquState.Block)
+            {
+                equbState = EquState.Unknown;
+                if (equState == EquState.Starved)
+                {
+                    MiddleLayer.SystemF.DBEngineCFX.StationStateChanged(SASDK.DBEngine.ucDBEngineCFX.StateChange.Standby_NoProductStarved, DateTime.Now);
+                }
+                else
+                {
+                    MiddleLayer.SystemF.DBEngineCFX.StationStateChanged(SASDK.DBEngine.ucDBEngineCFX.StateChange.Productive, DateTime.Now);
+                }
+            }
+
+        }
+        #endregion
+
+        #region PalletList Display
+        string PalletListToStringConvertor(PalletEntity palletList)
+        {
+            string DisplayResult = "";
+            DisplayResult += palletList.PalletID + Environment.NewLine;
+            DisplayResult += Convert.ToString(palletList.Status) + Environment.NewLine;
+            for (int i = 0; i < 12; i++)
+            {
+                DisplayResult += palletList.Products[i].SerialNumber + Environment.NewLine;
+            }
+            return DisplayResult;
+        }
+        #endregion
+        #endregion
+
+        #region Button & Event
+        #region M2M
+        #region Server
+        private void btnConnectM2M_Server_Click(object sender, EventArgs e)
+        {
+            if (M2M_Server != null && M2M_Server.IsRunning)
+            {
+                M2M_Server.CloseAllClient();
+                M2M_Server.Stop();
+                M2M_Server = null;
+                LblM2MStatus_Server.BackColor = Color.White;
+                LblM2MStatus_Server.Text = "Server M2M Status";
+                btnConnectM2M_Server.Text = "Connect";
+            }
+            else
+            {
+                StopManualTask.Cancel();
+                ExecuteManual(() => TriggerM2MServer(true));
+            }
+        }
+
+        private void btnSendM2M_Server_Click(object sender, EventArgs e)
+        {
+            /*-------For debug purpose only-------------*/
+            //PalletEntity palletEntity = new PalletEntity()
+            //{
+            //    PalletID = "Pallet-TEST-123456",
+            //    Products = new List<ProductEntity>{
+            //        new ProductEntity() { SerialNumber = "Product-Test_1", StartTime = DateTime.Now, EndTime = DateTime.Now, Status = true },
+            //        new ProductEntity() { SerialNumber = "Product-Test_2", StartTime = DateTime.Now, EndTime = DateTime.Now, Status = true },
+            //        new ProductEntity() { SerialNumber = "Product-Test_3", StartTime = DateTime.Now, EndTime = DateTime.Now, Status = true },
+            //        new ProductEntity() { SerialNumber = "Product-Test_4", StartTime = DateTime.Now, EndTime = DateTime.Now, Status = true },
+            //        new ProductEntity() { SerialNumber = "Product-Test_5", StartTime = DateTime.Now, EndTime = DateTime.Now, Status = true },
+            //        new ProductEntity() { SerialNumber = "Product-Test_6", StartTime = DateTime.Now, EndTime = DateTime.Now, Status = true },
+            //        new ProductEntity() { SerialNumber = "Product-Test_7", StartTime = DateTime.Now, EndTime = DateTime.Now, Status = true },
+            //        new ProductEntity() { SerialNumber = "Product-Test_8", StartTime = DateTime.Now, EndTime = DateTime.Now, Status = true },
+            //        new ProductEntity() { SerialNumber = "Product-Test_9", StartTime = DateTime.Now, EndTime = DateTime.Now, Status = true },
+            //        new ProductEntity() { SerialNumber = "Product-Test_10", StartTime = DateTime.Now, EndTime = DateTime.Now, Status = true },
+            //        new ProductEntity() { SerialNumber = "Product-Test_11", StartTime = DateTime.Now, EndTime = DateTime.Now, Status = true },
+            //        new ProductEntity() { SerialNumber = "Product-Test_12", StartTime = DateTime.Now, EndTime = DateTime.Now, Status = true },
+            //    },
+            //    StartTime = DateTime.Now,
+            //    EndTime = DateTime.Now,
+            //    Status = true,
+            //    FailMsg = "test"
+            //};
+
+            //string _PalletInfo = JsonConvert.SerializeObject(palletEntity);
+            //PalletEntity1 _test = JsonConvert.DeserializeObject<PalletEntity1>(_PalletInfo);
+            //StopManualTask.Cancel();
+            //ExecuteManual(() => TriggerM2MServer(false, _PalletInfo));
+            /*------------------------------------*/
+
+            StopManualTask.Cancel();
+            ExecuteManual(() => TriggerM2MServer(false, txtMsgM2M_Server.Text));
+        }
+
+        private void M2M_Server_DataReceived(object sender, byte[] e)
+        {
+            string strPalletEntity = M2M_Server.Encoding.GetString(e).TrimEnd(' ').TrimEnd('\0');
+            LblM2MStatus_Server.BackColor = Color.LimeGreen;
+            LblM2MStatus_Server.Text = strPalletEntity;
+        }
+
+        private void M2M_Server_Connected(object sender, SocketEventArgs e)
+        {
+            LblM2MStatus_Server.BackColor = Color.LimeGreen;
+            LblM2MStatus_Server.Text = "Client Connected: " + M2M_Server.CurClientCount;
+        }
+
+        private void M2M_Server_Disconnected(object sender, SocketEventArgs e)
+        {
+            LblM2MStatus_Server.BackColor = Color.LimeGreen;
+            LblM2MStatus_Server.Text = "Client Connected: " + M2M_Server.CurClientCount;
+        }
+
+        private void btn_M2M_Server_SelectSentFilePath_Click(object sender, EventArgs e)
+        {
+            //get full path for M2M_Sent folder
+            string M2M_Sent_FolderFullPath = Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, M2M_Sent_FolderPath));
+
+            //Create M2M_Sent folder if not found
+            if (!Directory.Exists(M2M_Sent_FolderFullPath))
+            {
+                Directory.CreateDirectory(M2M_Sent_FolderFullPath);
+            }
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = M2M_Sent_FolderFullPath; //always find in M2M_Sent folder
+            openFileDialog.Filter = "JSON | *.json"; //only JSON file is visible
+
+            try
+            {
+                DialogResult dialog = openFileDialog.ShowDialog();
+                if (dialog == DialogResult.OK)
+                {
+                    tb_M2M_Server_FilePath.Text = openFileDialog.FileName;
+                    tb_M2M_Server_FilePath.Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"select path:{ex.ToString()}");
+            }
+        }
+
+        private void btn_M2M_Server_SendFile_Click(object sender, EventArgs e)
+        {
+            if (tb_M2M_Server_FilePath.Text != null && tb_M2M_Server_FilePath.Text != "")
+            {
+                if (File.Exists(tb_M2M_Server_FilePath.Text))
+                {
+                    try
+                    {
+                        string strPalletEntity = File.ReadAllText(tb_M2M_Server_FilePath.Text); //read file
+
+                        StopManualTask.Cancel();
+                        ExecuteManual(() => TriggerM2MServer(false, strPalletEntity));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Send failed = {ex.Message}");
+                    }
+
+                    tb_M2M_Server_FilePath.Text = "";
+                }
+            }
+        }
+        #endregion
+
+        #region Client
+        private void btnConnectM2M_Client_Click(object sender, EventArgs e)
+        {
+            if (M2M_Client != null && M2M_Client.IsRunning && M2M_Client.Connected)
+            {
+                M2M_Client.Stop();
+                M2M_Client = null;
+                LblM2MStatus_Client.BackColor = Color.White;
+                LblM2MStatus_Client.Text = "Client M2M Status";
+                btnConnectM2M_Client.Text = "Connect";
+            }
+            else
+            {
+                StopManualTask.Cancel();
+                ExecuteManual(() => TriggerM2MClient(true));
+            }
+        }
+
+        private void btnSendM2M_Client_Click(object sender, EventArgs e)
+        {
+            StopManualTask.Cancel();
+            ExecuteManual(() => TriggerM2MClient(false, txtMsgM2M_Client.Text));
+        }
+
+        private void M2M_Client_DataReceived(object sender, byte[] e)
+        {
+            string strPalletEntity = M2M_Client.Encoding.GetString(e).TrimEnd(' ').TrimEnd('\0');
+            LblM2MStatus_Client.BackColor = Color.LimeGreen;
+
+            try
+            {
+                PalletEntity pE = JsonConvert.DeserializeObject<PalletEntity>(strPalletEntity);
+                string LocalPath = SysPara.IOPortDirectory + string.Format("\\M2M\\M2M_{0}.json", pE.PalletID.ToString());
+                if (!Directory.Exists(Path.GetDirectoryName(LocalPath)))
+                    Directory.CreateDirectory(Path.GetDirectoryName(LocalPath));
+                bool bFileExists = File.Exists(LocalPath);
+                if (!bFileExists)
+                {
+                    StreamWriter sw = new StreamWriter(LocalPath, false);
+                    sw.Close();
+                }
+                File.WriteAllText(LocalPath, strPalletEntity, Encoding.UTF8);
+            }
+            catch
+            {
+                if (SysPara.SystemRun)
+                {
+                    JSDK.Alarm.Show("6012");
+                }
+                else
+                {
+                    //Pop out non blocking message box
+                    Task.Run(() =>
+                    {
+                        MessageBox.Show("JSON string is not in PalletEntity format");
+                    });
+                }
+                LblM2MStatus_Client.Text = strPalletEntity;
+            }
+
+            UpdateM2MListboxDisplay = true;
+        }
+
+        private bool readM2MData(string SN)
+        {
+            try
+            {
+                string LocalPath = SysPara.IOPortDirectory + string.Format("\\M2M\\M2M_{0}.json", SN);
+                string BackupPath = SysPara.IOPortDirectory + string.Format("\\M2M_Backup\\M2M_{0}_{1}.json", SN, DateTime.Now.ToString("MMddyyyy_HHmmss"));
+                bool bFileExists = File.Exists(LocalPath);
+                if (!bFileExists)
+                    return false;
+
+                string strPalletEntity = File.ReadAllText(LocalPath); //read file
+                SysPara.PalletList[(int)WorkPost.WP1].Clear(); //clear all in case of retry M2M
+                SysPara.PalletList[(int)WorkPost.WP1].Enqueue(JsonConvert.DeserializeObject<PalletEntity>(strPalletEntity));
+                SysPara.PalletList[(int)WorkPost.WP1].Peek().Products.RemoveRange(0, 12);
+
+                //Update M2M Data Display
+                //rtb_M2M_DataDisplay.Text = PalletListToStringConvertor(SysPara.PalletList[(int)WorkPost.WP1].Peek());
+                M2M_DataDisplay = PalletListToStringConvertor(SysPara.PalletList[(int)WorkPost.WP1].Peek());
+                Update_M2M_DataDisplay = true;
+
+                if (!Directory.Exists(Path.GetDirectoryName(BackupPath)))
+                    Directory.CreateDirectory(Path.GetDirectoryName(BackupPath));
+
+                File.Move(LocalPath, BackupPath); //move file to backup folder
+                UpdateM2MListboxDisplay = true;
+
+                return true;
+            }
+            catch (Exception) { return false; }
+        }
+
+        private void M2M_Client_Connected(object sender, SocketEventArgs e)
+        {
+            LblM2MStatus_Client.BackColor = Color.LimeGreen;
+            LblM2MStatus_Client.Text = "Connected";
+            btnConnectM2M_Client.Text = "Disconnect";
+        }
+
+        private void M2M_Client_Disconnected(object sender, SocketEventArgs e)
+        {
+            LblM2MStatus_Client.BackColor = Color.Red;
+            LblM2MStatus_Client.Text = "Disconnected";
+            btnConnectM2M_Client.Text = "Connect";
+        }
+        #endregion
+
+        #region M2M File
+        private void btn_M2M_MoveToBackup_Click(object sender, EventArgs e)
+        {
+            if (lb_M2M.SelectedItem != null)
+            {
+                string FileNameWithoutExtension = lb_M2M.SelectedItem.ToString();
+                string SourcePath = $"{M2M_FolderPath}\\{FileNameWithoutExtension}{FileExtension_JSON}";
+
+                if (File.Exists(SourcePath))
+                {
+                    string DestinationPath = $"{M2M_Backup_FolderPath}\\{FileNameWithoutExtension}_Manual_{DateTime.Now.ToString("MMddyyyy_HHmmss")}{FileExtension_JSON}";
+
+                    File.Move(SourcePath, DestinationPath);
+                }
+                else
+                {
+                    //Pop out non blocking message box
+                    Task.Run(() =>
+                    {
+                        MessageBox.Show("File doesn't exist");
+                    });
+                }
+
+                UpdateM2MListboxDisplay = true;
+            }
+        }
+
+        private void btn_M2M_CopyFromBackup_Click(object sender, EventArgs e)
+        {
+            if (lb_M2M_Backup.SelectedItem != null)
+            {
+                string FileNameWithoutExtension_M2M_Backup = lb_M2M_Backup.SelectedItem.ToString();
+                string SourcePath = $"{M2M_Backup_FolderPath}\\{FileNameWithoutExtension_M2M_Backup}{FileExtension_JSON}";
+
+                if (File.Exists(SourcePath))
+                {
+                    string newFileNameWithoutExtension = "";
+
+                    if (FileNameWithoutExtension_M2M_Backup.Contains("Manual"))
+                    {
+                        newFileNameWithoutExtension = FileNameWithoutExtension_M2M_Backup.Substring(0, FileNameWithoutExtension_M2M_Backup.LastIndexOf("Manual") - 1);
+                    }
+                    else
+                    {
+                        //Remove string after "_" for 2 times due to **DateTime.Now.ToString("MMddyyyy_HHmmss")**
+                        newFileNameWithoutExtension = FileNameWithoutExtension_M2M_Backup;
+                        newFileNameWithoutExtension = newFileNameWithoutExtension.Substring(0, newFileNameWithoutExtension.LastIndexOf("_"));
+                        newFileNameWithoutExtension = newFileNameWithoutExtension.Substring(0, newFileNameWithoutExtension.LastIndexOf("_"));
+                    }
+
+                    string DestinationPath = $"{M2M_FolderPath}\\{newFileNameWithoutExtension}{FileExtension_JSON}";
+
+                    File.Copy(SourcePath, DestinationPath, true);
+                }
+                else
+                {
+                    //Pop out non blocking message box
+                    Task.Run(() =>
+                    {
+                        MessageBox.Show("File doesn't exist");
+                    });
+                }
+
+                UpdateM2MListboxDisplay = true;
+            }
+        }
+
+        private void btn_OpenM2MFolder_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(M2M_FolderPath))
+                Process.Start(M2M_FolderPath);
+            else
+            {
+                //Pop out non blocking message box
+                Task.Run(() =>
+                {
+                    MessageBox.Show($"{M2M_FolderPath} - Folder doesn't exist");
+                });
+            }
+        }
+
+        private void btn_OpenM2MBackupFolder_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(M2M_Backup_FolderPath))
+                Process.Start(M2M_Backup_FolderPath);
+            else
+            {
+                //Pop out non blocking message box
+                Task.Run(() =>
+                {
+                    MessageBox.Show($"{M2M_FolderPath} - Folder doesn't exist");
+                });
+            }
+        }
+        #endregion
+        #endregion
+
+        private void btn_ResetCounter_PASS_FAIL_Click(object sender, EventArgs e)
+        {
+            string message = "Confirm to reset counter?";
+
+            var result = MessageBox.Show(message, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                lbl_LastFPY.Text = MiddleLayer.AbbF.lblFPY.Text;
+                lbl_LastPassCount.Text = SysPara.WorkOK_Count.ToString();
+                SysPara.WorkOK_Count = 0;
+                lbl_LastFailCount.Text = SysPara.WorkNG_Count.ToString();
+                SysPara.WorkNG_Count = 0;
+
+                lbl_LastResetDate.Text = DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss");
+
+                SettingData.Tables["PSet"].Rows[0]["LastPassCount"] = lbl_LastPassCount.Text;
+                SettingData.Tables["PSet"].Rows[0]["LastFailCount"] = lbl_LastFailCount.Text;
+                SettingData.Tables["PSet"].Rows[0]["LastFPY"] = lbl_LastFPY.Text;
+                SettingData.Tables["PSet"].Rows[0]["LastResetDate"] = lbl_LastResetDate.Text;
+                for (int i = 0; i < ModuleManager.ModuleList.Count; i++)
+                    ModuleManager.ModuleList[i].WriteSettingData();
+
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, $"Reset Counter,Pass Count = {lbl_LastPassCount.Text},Failed Count = {lbl_LastFailCount.Text},FPY = {lbl_LastFPY.Text}");
+            }
+        }
+
+        private void btn_ScanPallet_Click(object sender, EventArgs e)
+        {
+            string val = "";
+            tpBarcode.IsError = false;
+            rtb_BarcodeScanResult.Clear();
+
+            while (!tpBarcode.AutoTriggerNew(out val, false, true, TCPIPCtrl.CommProtocol.TwoWay, "LON\r") && !tpBarcode.IsError) ;
+            if (tpBarcode.IsError)
+            {
+                rtb_BarcodeScanResult.Text = "Scan Error!";
+                return;
+            }
+            else
+            {
+                rtb_BarcodeScanResult.Text = "Scan Result = " + val + "\n";
+            }
+        }
+        #endregion
+
+        #region UI Update
+        private void CvyTim_UpdateUI_Tick(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region Initialize Flow 
+        private FCResultType fc_Init_Flow_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTM, StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Initialize Flow Start");
+                    MiddleLayer.AbbF.resetPalletUI();
+                    RunTM.Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            if (GetSettingValue("PSet", "BypassConveyor"))
+            {
+                MiddleLayer.AbbF.resetPalletUI();
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,Initialize Flow Start");
+                RunTM.Restart();
+                return FCResultType.CASE1;
+            }
+
+            bool r1 = false;
+            bool r2 = false;
+            if (!bDoorInactive[(int)SlideDoor.LeftDoor] && IB_BoardIn_WP1.IsOff())
+            {
+                CylLeftDoor.Off(RunTM);
+                r1 = CylLeftDoor.CyOff_IB1.IsOn();
+            }
+            else
+                r1 = true;
+
+            if (!bDoorInactive[(int)SlideDoor.RightDoor] && IB_DecelSpd_WP3.IsOff() && IB_InPost_WP3.IsOff())
+            {
+                CylRightDoor.Off(RunTM);
+                r2 = CylRightDoor.CyOff_IB1.IsOn();
+            }
+            else
+                r2 = true;
+
+            if (r1 && r2)
+            {
+                MiddleLayer.AbbF.resetPalletUI();
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,Initialize Flow Start");
+                RunTM.Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+
+        }
+
+        private FCResultType fc_Init_RobotZSafeCheck_FlowRun(object sender, EventArgs e)
+        {
+            if (Handshake.RobotToCov_Init.Complete)
+            {
+                Handshake.RobotToCov_Init.Reset();
+                RunTM.Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Init_Bypass_FlowRun(object sender, EventArgs e)
+        {
+            return FCResultType.NEXT;
+        }
+
+        private FCResultType fc_Init_StopCvyr_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTM, StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Stop conveyor");
+                    RunTM.Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            bool r1 = IB_BoardIn_WP1.IsOn(10);
+            bool r2 = IB_DecelSpd_WP1.IsOn(10);
+            bool r3 = IB_InPost_WP1.IsOn(10);
+
+            bool r4 = IB_InPost_WP2.IsOn(10);
+            bool r5 = IB_DecelSpd_WP2.IsOn(10);
+
+            bool r6 = IB_DecelSpd_WP3.IsOn(10);
+            bool r7 = IB_BoardIn_WP3.IsOn(10);
+            bool r8 = IB_InPost_WP3.IsOn(10);
+
+            if (Delay(RunTM,100) || r1 || r2 || r3 || r4 || r5 || r6 || r7 || r8)
+            {
+                ExecuteConveyor(ConveyorState.Stop, OB_Cvy_ChgSpd_WP1, OB_Cvy_Forward_WP1);
+                ExecuteConveyor(ConveyorState.Stop, OB_Cvy_ChgSpd_WP2, OB_Cvy_Forward_WP3);
+                ExecuteConveyor(ConveyorState.Stop, OB_Cvy_ChgSpd_WP2, OB_Cvy_Forward_WP3);
+                RunTM.Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Init_DisconnectBarcode_FlowRun(object sender, EventArgs e)
+        {
+            bool passThru = GetSettingValue("Pset", "PassThroughMode");
+            isM2MActivated = null;
+            if (!tpBarcode.IsEnable || passThru)
+            {
+                RunTM.Restart();
+                return FCResultType.NEXT;
+            }
+
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTM, StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Disconnect Barcode");
+                    RunTM.Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+            tpBarcode.Disconnect();
+            RunTM.Restart();
+            return FCResultType.NEXT;
+        }
+
+        private FCResultType fc_Init_Barcode_FlowRun(object sender, EventArgs e)
+        {
+            bool passThru = GetSettingValue("Pset", "PassThroughMode");
+            isM2MActivated = null;
+            if (!tpBarcode.IsEnable || passThru)
+            {
+                RunTM.Restart();
+                return FCResultType.NEXT;
+            }
+
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTM, StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Connect Barcode");
+                    RunTM.Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            //if (tpBarcode.Send(@"LOFF\r"))
+            if (tpBarcode.AutoTriggerNew(out string temp, false, true, TCPIPCtrl.CommProtocol.OneWay, @"LOFF\r"))
+            {
+                RunTM.Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Init_M2M_FlowRun(object sender, EventArgs e)
+        {
+            bool _UseM2MServer = GetSettingValue("PSet", "UseM2M_Server");
+            bool _UseM2MClient = GetSettingValue("PSet", "UseM2M_Client");
+
+            if (!_UseM2MServer && !_UseM2MClient)
+            {
+                RunTM.Restart();
+                return FCResultType.NEXT;
+            }
+
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTM, StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Activate M2M Communication");
+                    RunTM.Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+            
+            if (_UseM2MServer && _UseM2MClient)
+            {
+                if (isM2MActivated == false)
+                    isM2MActivated = AutoTriggerM2MClient(true);
+                else if (isM2MActivated == null)
+                {
+                    if (AutoTriggerM2MServer(true))
+                        isM2MActivated = false;
+                }
+            } 
+            else if (_UseM2MServer)
+                isM2MActivated = AutoTriggerM2MServer(true);
+            else if (_UseM2MClient)
+                isM2MActivated = AutoTriggerM2MClient(true);
+
+            if (isM2MActivated == true)
+            {
+                RunTM.Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Init_HomeCyl_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTM, StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Homing on conveyor cylinder");
+                    RunTM.Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            CylStopper_WP1.Off(RunTM);
+            CylStopper_WP2.Off(RunTM);
+            CylLifter_WP2.Off(RunTM);
+            CylStopper_WP3.Off(RunTM);
+
+            bool r1 = CylStopper_WP1.CyOff_IB1.IsOn();
+            bool r2 = CylStopper_WP2.CyOff_IB1.IsOn() && CylLifter_WP2.CyOff_IB1.IsOn();
+            bool r3 = CylStopper_WP3.CyOff_IB1.IsOn();
+
+            if (r1 && r2 && r3)
+            {
+                RunTM.Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Init_ProdPresentCvy_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTM, StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Check Part Present");
+                    RunTM.Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            bool r1 = IB_BoardIn_WP1.IsOn(500);
+            bool r2 = IB_DecelSpd_WP1.IsOn(500);
+            bool r3 = IB_InPost_WP1.IsOn(500);
+
+            bool r4 = IB_InPost_WP2.IsOn(500);
+            bool r5 = IB_DecelSpd_WP2.IsOn(500);
+
+            bool r6 = IB_DecelSpd_WP3.IsOn(500);
+            bool r7 = IB_BoardIn_WP3.IsOn(500);
+            bool r8 = IB_InPost_WP3.IsOn(500);
+
+            if (r1 || r2 || r3 || r4 || r5 || r6 || r7 || r8)
+            {
+                RunTMCvy[(int)WorkPost.WP1].Restart();
+                RunTMCvy[(int)WorkPost.WP2].Restart();
+                RunTMCvy[(int)WorkPost.WP3].Restart();
+                fc_Main_Task_Flow.TaskReset();
+                RunTM.Restart();
+                return FCResultType.CASE1;
+            }
+            else
+            {
+                RunTM.Restart();
+                return FCResultType.NEXT;
+            }
+        }
+
+        private FCResultType fc_Init_TriggerUnload_FlowRun(object sender, EventArgs e)
+        {
+            fc_Main_Flow.TaskRun();
+            bool r1 = IB_BoardIn_WP1.IsOff(50);
+            bool r2 = IB_DecelSpd_WP1.IsOff(50);
+            bool r3 = IB_InPost_WP1.IsOff(50);
+
+            bool r4 = IB_InPost_WP2.IsOff(50);
+            bool r5 = IB_DecelSpd_WP2.IsOff(50);
+
+            bool r6 = IB_DecelSpd_WP3.IsOff(50);
+            bool r7 = IB_BoardIn_WP3.IsOff(50);
+            bool r8 = IB_InPost_WP3.IsOff(50);
+            if (r1 && r2 && r3 && r4 && r5 && r6 && r7 && r8)
+            {
+                OB_SMEMA_DN_NG.Off();
+                OB_SMEMA_DW_Available.Off();
+                OB_SMEMA_UP_MachineRdy.Off();
+
+                for (int i = 0; i <= 2; i++)
+                {
+                    Handshake.Conveyor[i].TaskLoad.Reset();
+                    Handshake.Conveyor[i].TaskUnload.Reset();
+                }
+                Handshake.RobotToConv.Reset();
+                Handshake.ConvToRobot.Reset();
+                Handshake.Conv2ToConv1.Reset();
+                Handshake.Conv3ToConv2.Reset();
+
+                fc_Main_Flow.TaskReset();
+                fc_Main_CheckState_WP1.TaskReset();
+                fc_Main_CheckState_WP2.TaskReset();
+                fc_Main_CheckState_WP3.TaskReset();
+                fc_Main_CheckState_WP1.BackColor = Color.White;
+                fc_Main_CheckState_WP2.BackColor = Color.White;
+                fc_Main_CheckState_WP3.BackColor = Color.White;
+
+                fc_Load_Flow_WP1.TaskReset();
+                fc_Unload_Flow_WP1.TaskReset();
+
+                fc_Load_Flow_WP2.TaskReset();
+                fc_Unload_Flow_WP2.TaskReset();
+
+                fc_Load_Flow_WP3.TaskReset();
+                fc_Unload_Flow_WP3.TaskReset();
+
+                RunTMCvy[(int)WorkPost.WP1].Restart();
+                RunTMCvy[(int)WorkPost.WP2].Restart();
+                RunTMCvy[(int)WorkPost.WP3].Restart();
+                RunTM.Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Init_CloseSlidingDoor_FlowRun(object sender, EventArgs e)
+        {
+            bool r1 = false;
+            bool r2 = false;
+            if (!bDoorInactive[(int)SlideDoor.LeftDoor])
+            {
+                CylLeftDoor.Off(RunTM);
+                r1 = CylLeftDoor.CyOff_IB1.IsOn();
+            }
+            else
+                r1 = true;
+
+            if (!bDoorInactive[(int)SlideDoor.RightDoor])
+            {
+                CylRightDoor.Off(RunTM);
+                r2 = CylRightDoor.CyOff_IB1.IsOn();
+            }
+            else
+                r2 = true;
+
+            if (r1 && r2)
+            {
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,Initialize sliding door closed");
+                RunTM.Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Init_EndFlow_FlowRun(object sender, EventArgs e)
+        {
+            if (!bInitialOk)
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,Initialize Flow Done");
+            bInitialOk = true;
+            return FCResultType.IDLE;
+        }
+        #endregion
+
+        #region Main Flow
+        private FCResultType fc_Main_Flow_FlowRun(object sender, EventArgs e)
+        {
+            if (GetSettingValue("PSet", "BypassConveyor"))
+            {
+                Handshake.ConvToRobot.Ready = true;
+                Handshake.RobotToConv.Busy = true;
+                return FCResultType.IDLE;
+            }
+
+            if(bInitialOk)
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,Main Flow Start");
+
+            for (int i = 0; i <= 2; i++)
+                RunTMCvy[i].Restart();
+
+            return FCResultType.NEXT;
+        }
+
+        private FCResultType fc_Main_Task_Flow_FlowRun(object sender, EventArgs e)
+        {
+            foreach (WorkPost i in Enum.GetValues(typeof(WorkPost)))
+            {
+                switch (i)
+                {
+                    case WorkPost.WP1:
+                        fc_Main_CheckState_WP1.TaskRun();
+                        break;
+                    case WorkPost.WP2:
+                        fc_Main_CheckState_WP2.TaskRun();
+                        break;
+                    case WorkPost.WP3:
+                        fc_Main_CheckState_WP3.TaskRun();
+                        break;
+                }
+            }
+            return FCResultType.IDLE;
+        }
+
+        #region Conveyor Work Post 1
+        private FCResultType fc_Main_CheckState_WP1_FlowRun(object sender, EventArgs e)
+        {
+            fc_Main_CheckState_WP1.BackColor = AcuraLibrary.AcuraColors.Background;
+
+            if (!bInitialOk)
+            {
+                #region Initial Flow
+                if (Handshake.Conv2ToConv1.Ready && ((Handshake.Conveyor[(int)WorkPost.WP1].TaskLoad.Complete && !Handshake.Conveyor[(int)WorkPost.WP1].TaskUnload.Busy) || IB_DecelSpd_WP1.IsOn() || IB_InPost_WP1.IsOn()))
+                {
+                    //Unload Board
+                    Handshake.Conv2ToConv1.Ready = false;
+                    Handshake.Conv2ToConv1.Busy = true;
+                    Handshake.Conveyor[(int)WorkPost.WP1].TaskLoad.Reset();
+                    RunTMCvy[(int)WorkPost.WP1].Restart();
+                    return FCResultType.CASE1;
+                }
+                else if (IB_BoardIn_WP1.IsOn())
+                {
+                    //Load Board
+                    Handshake.Conveyor[(int)WorkPost.WP1].TaskUnload.Reset();
+                    RunTMCvy[(int)WorkPost.WP1].Restart();
+                    return FCResultType.NEXT;
+                }
+                #endregion
+            }
+            else
+            {
+                #region Auto Flow
+                //Zax - 9/6/21
+                if (SysPara.EndLotMode)
+                {
+                    if (SysPara.PalletList[(int)WorkPost.WP1].Count <= 0)
+                    {
+                        if (!isEndLotMode)
+                            JSDK.Alarm.Show("2032");
+                        isEndLotMode = true;
+                        return FCResultType.IDLE;
+                    }
+                    else if (Handshake.Conv2ToConv1.Ready && Handshake.Conveyor[(int)WorkPost.WP1].TaskLoad.Complete && !Handshake.Conveyor[(int)WorkPost.WP1].TaskUnload.Busy && (SysPara.IsDryRun || IB_InPost_WP1.IsOn()))
+                    {
+                        //Unload Board
+                        Handshake.Conv2ToConv1.Ready = false;
+                        Handshake.Conv2ToConv1.Busy = true;
+                        Handshake.Conveyor[(int)WorkPost.WP1].TaskLoad.Reset();
+                        RunTMCvy[(int)WorkPost.WP1].Restart();
+                        return FCResultType.CASE1;
+                    }
+                }
+                else
+                {
+                    if (Handshake.Conv2ToConv1.Ready && Handshake.Conveyor[(int)WorkPost.WP1].TaskLoad.Complete && !Handshake.Conveyor[(int)WorkPost.WP1].TaskUnload.Busy && (SysPara.IsDryRun || IB_InPost_WP1.IsOn()))
+                    {
+                        //Unload Board
+                        Handshake.Conv2ToConv1.Ready = false;
+                        Handshake.Conv2ToConv1.Busy = true;
+                        Handshake.Conveyor[(int)WorkPost.WP1].TaskLoad.Reset();
+                        RunTMCvy[(int)WorkPost.WP1].Restart();
+                        return FCResultType.CASE1;
+                    }
+                    else if (!Handshake.Conveyor[(int)WorkPost.WP1].TaskLoad.Complete && !Handshake.Conveyor[(int)WorkPost.WP1].TaskLoad.Busy && (SysPara.IsDryRun || IB_InPost_WP1.IsOff()))
+                    {
+                        //Load Board
+                        Handshake.Conveyor[(int)WorkPost.WP1].TaskUnload.Reset();
+                        RunTMCvy[(int)WorkPost.WP1].Restart();
+                        return FCResultType.NEXT;
+                    }
+                }
+                #endregion
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Main_LoadBoardFlow_WP1_FlowRun(object sender, EventArgs e)
+        {
+            fc_Load_Flow_WP1.TaskRun();
+            if (Handshake.Conveyor[(int)WorkPost.WP1].TaskLoad.Complete)
+            {
+                fc_Load_Flow_WP1.TaskReset();
+                RunTMCvy[(int)WorkPost.WP1].Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Main_UnloadBoardFlow_WP1_FlowRun(object sender, EventArgs e)
+        {
+            fc_Unload_Flow_WP1.TaskRun();
+            if (Handshake.Conveyor[(int)WorkPost.WP1].TaskUnload.Complete)
+            {
+                fc_Unload_Flow_WP1.TaskReset();
+                RunTMCvy[(int)WorkPost.WP1].Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+        #endregion
+
+        #region Conveyor Work Post 2
+        private FCResultType fc_Main_CheckState_WP2_FlowRun(object sender, EventArgs e)
+        {
+            fc_Main_CheckState_WP2.BackColor = AcuraLibrary.AcuraColors.Background;
+            if (!bInitialOk)
+            {
+                #region Initial Flow
+                if (Handshake.Conv3ToConv2.Ready && ((Handshake.Conveyor[(int)WorkPost.WP2].TaskLoad.Complete && !Handshake.Conveyor[(int)WorkPost.WP2].TaskUnload.Busy) || IB_DecelSpd_WP2.IsOn() || IB_InPost_WP2.IsOn()))
+                {
+                    //Unload Board
+                    Handshake.Conv3ToConv2.Ready = false;
+                    Handshake.Conv3ToConv2.Busy = true;
+                    Handshake.Conveyor[(int)WorkPost.WP2].TaskLoad.Reset();
+                    RunTMCvy[(int)WorkPost.WP2].Restart();
+                    return FCResultType.CASE1;
+                }
+                else if (IB_DecelSpd_WP2.IsOff() && IB_InPost_WP2.IsOff() && (IB_DecelSpd_WP1.IsOn() || IB_InPost_WP1.IsOn()))
+                {
+                    //Load Board
+                    Handshake.Conveyor[(int)WorkPost.WP2].TaskUnload.Reset();
+                    RunTMCvy[(int)WorkPost.WP2].Restart();
+                    return FCResultType.NEXT;
+                }
+                #endregion
+            }
+            else
+            {
+                #region Auto Flow
+                if (Handshake.Conv3ToConv2.Ready && Handshake.Conveyor[(int)WorkPost.WP2].TaskLoad.Complete && !Handshake.Conveyor[(int)WorkPost.WP2].TaskUnload.Busy && !Handshake.ConvToRobot.Ready && Handshake.RobotToConv.Complete && !Handshake.RobotToConv.Busy && (SysPara.IsDryRun || IB_InPost_WP2.IsOn()))
+                {
+                    //Unload Board
+                    Handshake.RobotToConv.Reset();
+                    Handshake.Conv3ToConv2.Ready = false;
+                    Handshake.Conv3ToConv2.Busy = true;
+                    Handshake.Conveyor[(int)WorkPost.WP2].TaskLoad.Reset();
+                    RunTMCvy[(int)WorkPost.WP2].Restart();
+                    return FCResultType.CASE1;
+                }
+                else if (!Handshake.Conveyor[(int)WorkPost.WP2].TaskLoad.Complete && !Handshake.Conveyor[(int)WorkPost.WP2].TaskLoad.Busy && !Handshake.RobotToConv.Complete && !Handshake.RobotToConv.Busy && (SysPara.IsDryRun || IB_InPost_WP2.IsOff()))
+                {
+                    //Load Board
+                    Handshake.Conveyor[(int)WorkPost.WP2].TaskUnload.Reset();
+                    RunTMCvy[(int)WorkPost.WP2].Restart();
+                    return FCResultType.NEXT;
+                }
+                #endregion
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Main_LoadBoardFlow_WP2_FlowRun(object sender, EventArgs e)
+        {
+            fc_Load_Flow_WP2.TaskRun();
+            if (Handshake.Conveyor[(int)WorkPost.WP2].TaskLoad.Complete)
+            {
+                fc_Load_Flow_WP2.TaskReset();
+                RunTMCvy[(int)WorkPost.WP2].Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Main_UnloadBoardFlow_WP2_FlowRun(object sender, EventArgs e)
+        {
+            fc_Unload_Flow_WP2.TaskRun();
+            if (Handshake.Conveyor[(int)WorkPost.WP2].TaskUnload.Complete)
+            {
+                fc_Unload_Flow_WP2.TaskReset();
+                RunTMCvy[(int)WorkPost.WP2].Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+        #endregion
+
+        #region Conveyor Work Post 3
+        private FCResultType fc_Main_CheckState_WP3_FlowRun(object sender, EventArgs e)
+        {
+            fc_Main_CheckState_WP3.BackColor = AcuraLibrary.AcuraColors.Background;
+            if (!bInitialOk)
+            {
+                #region Initial Flow
+                if ((Handshake.Conveyor[(int)WorkPost.WP3].TaskLoad.Complete && !Handshake.Conveyor[(int)WorkPost.WP3].TaskLoad.Busy) || IB_DecelSpd_WP3.IsOn() || IB_InPost_WP3.IsOn())
+                {
+                    Handshake.Conveyor[(int)WorkPost.WP3].TaskLoad.Reset();
+                    RunTMCvy[(int)WorkPost.WP3].Restart();
+                    return FCResultType.CASE1;
+                }
+                else if (IB_DecelSpd_WP3.IsOff() && IB_InPost_WP3.IsOff() && (IB_DecelSpd_WP2.IsOn() || IB_InPost_WP2.IsOn()))
+                {
+                    Handshake.Conveyor[(int)WorkPost.WP3].TaskUnload.Reset();
+                    RunTMCvy[(int)WorkPost.WP3].Restart();
+                    return FCResultType.NEXT;
+                }
+                #endregion
+            }
+            else
+            {
+                #region Auto Flow
+                if (Handshake.Conveyor[(int)WorkPost.WP3].TaskLoad.Complete && !Handshake.Conveyor[(int)WorkPost.WP3].TaskLoad.Busy && (SysPara.IsDryRun || IB_InPost_WP3.IsOn()))
+                {
+                    //Unload Board
+                    Handshake.Conveyor[(int)WorkPost.WP3].TaskLoad.Reset();
+                    RunTMCvy[(int)WorkPost.WP3].Restart();
+                    return FCResultType.CASE1;
+                }
+                else if (!Handshake.Conveyor[(int)WorkPost.WP3].TaskLoad.Complete && !Handshake.Conveyor[(int)WorkPost.WP3].TaskLoad.Busy && (SysPara.IsDryRun || IB_InPost_WP3.IsOff()))
+                {
+                    //Load Board
+                    Handshake.Conveyor[(int)WorkPost.WP3].TaskUnload.Reset();
+                    RunTMCvy[(int)WorkPost.WP3].Restart();
+                    return FCResultType.NEXT;
+                }
+                #endregion
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Main_LoadBoardFlow_WP3_FlowRun(object sender, EventArgs e)
+        {
+            fc_Load_Flow_WP3.TaskRun();
+            if (Handshake.Conveyor[(int)WorkPost.WP3].TaskLoad.Complete)
+            {
+                fc_Load_Flow_WP3.TaskReset();
+                RunTMCvy[(int)WorkPost.WP3].Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Main_UnloadBoardFlow_WP3_FlowRun(object sender, EventArgs e)
+        {
+            fc_Unload_Flow_WP3.TaskRun();
+            if (Handshake.Conveyor[(int)WorkPost.WP3].TaskUnload.Complete)
+            {
+                fc_Unload_Flow_WP3.TaskReset();
+                RunTMCvy[(int)WorkPost.WP3].Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+        #endregion
+
+        #endregion
+
+        #region Load Board Flow
+
+        #region Conveyor Work Post 1
+        private FCResultType fc_Load_Flow_WP1_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP1], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 1 Load Product Flow Start");
+                    MiddleLayer.AbbF.setPalletUI(ABBRobotForm.ConveyorPost.WP1, false, "Awaiting Pallet");
+                    Handshake.Conveyor[(int)WorkPost.WP1].TaskLoad.Busy = true;
+                    Handshake.Conveyor[(int)WorkPost.WP1].TaskLoad.Complete = false;
+                    RunTMCvy[(int)WorkPost.WP1].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            bool passThru = GetSettingValue("Pset", "PassThroughMode");
+            if (passThru && !CheckedSetting_Latch)
+            {
+                CheckedSetting_Latch = true;
+                JSDK.Alarm.Show("5100");
+                RunTMCvy[(int)WorkPost.WP1].Restart();
+                return FCResultType.CASE1;
+            }
+
+            bool r1 = false;
+            if (!bDoorInactive[(int)SlideDoor.LeftDoor])
+            {
+                CylLeftDoor.On(RunTMCvy[(int)WorkPost.WP1]);
+                r1 = CylLeftDoor.CyOn_IB1.IsOn();
+            }
+            else
+                r1 = true;
+
+            if (r1)
+            {
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,Work Post 1 Load Product Flow Start");
+                MiddleLayer.AbbF.setPalletUI(ABBRobotForm.ConveyorPost.WP1, false, "Awaiting Pallet");
+                Handshake.Conveyor[(int)WorkPost.WP1].TaskLoad.Busy = true;
+                Handshake.Conveyor[(int)WorkPost.WP1].TaskLoad.Complete = false;
+                RunTMCvy[(int)WorkPost.WP1].Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Load_StopperExtern_WP1_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP1], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 1 Stopper Extend");
+                    RunTMCvy[(int)WorkPost.WP1].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            CylStopper_WP1.On(RunTMCvy[(int)WorkPost.WP1]);
+            bool r1 = CylStopper_WP1.CyOn_IB1.IsOn();
+            if (r1)
+            {                
+                RunTMCvy[(int)WorkPost.WP1].Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Load_TrigCvy_WP1_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP1], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 1 start fast forward mode");
+                    if (bInitialOk)
+                        SysPara.PalletList[(int)WorkPost.WP1].Enqueue(new PalletEntity() { Status = true });
+                    RunTMCvy[(int)WorkPost.WP1].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            //Bypass SMEMA during initialization and start conveyor
+            if (!bInitialOk)
+            {
+                RunTMCvy[(int)WorkPost.WP1].Restart();
+                return FCResultType.NEXT;
+            }
+
+            bool isSMEMA = GetSettingValue("PSet", "UseSMEMA_Up");
+            bool passThru = GetSettingValue("Pset", "PassThroughMode");
+            int LoadTime = GetSettingValue("PSet", "ProductLoadTimeOut_WP1");
+            bool _UseM2MClient = GetSettingValue("PSet", "UseM2M_Client");
+
+            if (isSMEMA)
+            {
+                OB_SMEMA_UP_MachineRdy.On();
+                if (IB_SMEMA_UP_Available.IsOn(50))
+                {
+                    if (bInitialOk && !passThru)
+                    {
+                        bool r1 = IB_SMEMA_UP_NG.IsOn();
+
+                        if (r1) //NG pallet, product all false=NG
+                        {
+                            SysPara.PalletList[(int)WorkPost.WP1].Enqueue(new PalletEntity()
+                            {
+                                Status = false,
+                                Products = new List<ProductEntity>()
+                                {
+                                    new ProductEntity(){Status = false},
+                                    new ProductEntity(){Status = false},
+                                    new ProductEntity(){Status = false},
+                                    new ProductEntity(){Status = false},
+                                    new ProductEntity(){Status = false},
+                                    new ProductEntity(){Status = false},
+                                    new ProductEntity(){Status = false},
+                                    new ProductEntity(){Status = false},
+                                    new ProductEntity(){Status = false},
+                                    new ProductEntity(){Status = false},
+                                    new ProductEntity(){Status = false},
+                                    new ProductEntity(){Status = false}
+                                }
+                            });
+                        }
+                        else
+                        {
+                            if (!_UseM2MClient)
+                            {
+                                //PASS pallet, pallet status and product all true=PASS (depends on default product entity)
+                                SysPara.PalletList[(int)WorkPost.WP1].Enqueue(new PalletEntity());
+                            }
+
+                            rbWait++;
+                        }
+
+                        CFXProduction(); //Teong CFX
+                    }
+
+                    SysPara.WIP1.Start(SysPara.RecipeName, MiddleLayer.SystemF.MesF.GetRecipeValue("Rset", "str_Customer"),
+                        MiddleLayer.SystemF.MesF.GetRecipeValue("RSet", "str_AssemblyPartNo")); //Teong
+                    ExecuteConveyor(ConveyorState.FastForward, OB_Cvy_ChgSpd_WP1, OB_Cvy_Forward_WP1);
+                    RunTMCvy[(int)WorkPost.WP1].Restart();
+                    return FCResultType.NEXT;
+                }
+                //else if (Delay(RunTMCvy[(int)WorkPost.WP1], LoadTime))
+                //{
+                //    RunTMCvy[(int)WorkPost.WP1].Restart();
+                //    JSDK.Alarm.Show("5016");
+                //}
+                //TODO Removed for quiet operation
+
+                if (Delay(RunTMCvy[(int)WorkPost.WP1], 15000))
+                {
+                    CFXStarve(); //Teong CFX
+                }
+            }
+            else
+            {
+                if (SysPara.IsDryRun || IB_BoardIn_WP1.IsOn(50))
+                {
+                    ExecuteConveyor(ConveyorState.FastForward, OB_Cvy_ChgSpd_WP1, OB_Cvy_Forward_WP1);
+
+                    SysPara.WIP1.Start(SysPara.RecipeName, MiddleLayer.SystemF.MesF.GetRecipeValue("Rset", "str_Customer"),
+                        MiddleLayer.SystemF.MesF.GetRecipeValue("Rset", "str_AssemblyPartNo")); //Teong
+                    if (bInitialOk && !passThru)
+                    {
+                        SysPara.PalletList[(int)WorkPost.WP1].Enqueue(new PalletEntity());
+                        if (SysPara.IsDryRun)
+                            SysPara.PalletList[(int)WorkPost.WP1].Peek().Status = true;
+                    }
+                    rbWait++;
+                    RunTMCvy[(int)WorkPost.WP1].Restart();
+                    return FCResultType.NEXT;
+                }
+            }
+
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Load_DecelCvy_WP1_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP1], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 1 changed to forward mode");
+                    RunTMCvy[(int)WorkPost.WP1].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            ExecuteConveyor(ConveyorState.FastForward, OB_Cvy_ChgSpd_WP1, OB_Cvy_Forward_WP1);
+            int LoadTime = GetSettingValue("PSet", "ProductLoadTimeOut_WP1");
+            bool isSMEMA = GetSettingValue("PSet", "UseSMEMA_Up");
+            if (isSMEMA && Delay(RunTMCvy[(int)WorkPost.WP1], 1000) && bInitialOk)//Do not ON SMEMA during initialization            
+                OB_SMEMA_UP_MachineRdy.On();            
+
+            bool r1 = SysPara.IsDryRun && Delay(RunTMCvy[(int)WorkPost.WP1],3000) ? true : IB_DecelSpd_WP1.IsOn();
+            if (r1)
+            {
+                if (isSMEMA)
+                    OB_SMEMA_UP_MachineRdy.Off();
+
+                ExecuteConveyor(ConveyorState.Forward, OB_Cvy_ChgSpd_WP1, OB_Cvy_Forward_WP1);
+                RunTMCvy[(int)WorkPost.WP1].Restart();
+                return FCResultType.NEXT;
+            }
+            else if (Delay(RunTMCvy[(int)WorkPost.WP1], LoadTime))
+            {
+                RunTMCvy[(int)WorkPost.WP1].Restart();
+                JSDK.Alarm.Show("5010");
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Load_BoardInPos_WP1_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP1], StdTime))
+                {
+                    IsStartRecordCT[(int)WorkPost.WP1] = true;
+                    Handshake.Conveyor[(int)WorkPost.WP1].CT_WorkFlow.Reset();
+                    Handshake.Conveyor[(int)WorkPost.WP1].CT_WorkFlow.Start();
+
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 1 - Product in position");
+                    MiddleLayer.AbbF.setPalletUI(ABBRobotForm.ConveyorPost.WP1, true, "In Position");
+                    RunTMCvy[(int)WorkPost.WP1].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            ExecuteConveyor(ConveyorState.Forward, OB_Cvy_ChgSpd_WP1, OB_Cvy_Forward_WP1);
+
+            int inPostDelay = GetSettingValue("PSet", "InPostDelay_WP1");
+            if ((SysPara.IsDryRun || IB_InPost_WP1.IsOn(inPostDelay)) && Delay(RunTMCvy[(int)WorkPost.WP1], inPostDelay))
+            {
+                bool r1 = false;
+                if (!bInitialOk && !bDoorInactive[(int)SlideDoor.LeftDoor])
+                {
+                    CylLeftDoor.On(RunTMCvy[(int)WorkPost.WP1]);
+                    r1 = CylLeftDoor.CyOn_IB1.IsOn();
+                }
+                else if (bInitialOk && !bDoorInactive[(int)SlideDoor.LeftDoor])
+                {
+                    CylLeftDoor.Off(RunTMCvy[(int)WorkPost.WP1]);
+                    r1 = CylLeftDoor.CyOff_IB1.IsOn();
+                }
+                else
+                    r1 = true;
+
+                if (r1)
+                {                   
+                    IsStartRecordCT[(int)WorkPost.WP1] = true;
+                    Handshake.Conveyor[(int)WorkPost.WP1].CT_WorkFlow.Reset();
+                    Handshake.Conveyor[(int)WorkPost.WP1].CT_WorkFlow.Start();
+
+                    ExecuteConveyor(ConveyorState.Stop, OB_Cvy_ChgSpd_WP1, OB_Cvy_Forward_WP1);
+                    MiddleLayer.AbbF.setPalletUI(ABBRobotForm.ConveyorPost.WP1, true, "In Position");
+                    RunTMCvy[(int)WorkPost.WP1].Restart();
+                    if (bInitialOk)
+                        SysPara.WIP1.Reach(); //Teong
+                    return FCResultType.NEXT;
+                }
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Load_TrigBarcode_FlowRun(object sender, EventArgs e)
+        {
+            bool passThru = GetSettingValue("Pset", "PassThroughMode");
+            bool _UseM2MClient = GetSettingValue("PSet", "UseM2M_Client");
+            bool PalletList_Status = false;
+
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP1], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 1 trigger barcode scanner");
+                    SysPara.PalletList[(int)WorkPost.WP1].Peek().PalletID = !tpBarcode.IsEnable ? "PALLET-BYPASS" : $"PALLET-SIMULATION-{SysPara.UPH_Count}";
+                    RunTMCvy[(int)WorkPost.WP1].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            if (SysPara.PalletList[(int)WorkPost.WP1].Count > 0)
+            {
+                PalletList_Status = SysPara.PalletList[(int)WorkPost.WP1].Peek().Status;
+            }
+            else
+            {
+                PalletList_Status = true;
+            }
+
+            if (!bInitialOk || passThru || !PalletList_Status)
+            {
+                RunTMCvy[(int)WorkPost.WP1].Restart();
+                return FCResultType.NEXT;
+            }
+
+            if (SysPara.IsDryRun || !tpBarcode.IsEnable)
+            {
+                SysPara.PalletList[(int)WorkPost.WP1].Peek().PalletID = !tpBarcode.IsEnable ? "PALLET-BYPASS" : $"PALLET-TESTONLY-{SysPara.UPH_Count}";
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, $"Conveyor,Work Post 1 - Pallet ID: {SysPara.PalletList[(int)WorkPost.WP1].Peek().PalletID}");
+                RunTMCvy[(int)WorkPost.WP1].Restart();
+                MiddleLayer.SystemF.DBEngineCFX.UnitsArrived("BypassBarcode-" + DateTime.Now.ToString("MMddyyyyHHmmss"));//Teong CFX
+                return FCResultType.NEXT;
+            }
+
+            if (tpBarcode.IsError)
+            {
+                tpBarcode.IsError = false;                
+                RunTMCvy[(int)WorkPost.WP1].Restart();
+                return FCResultType.CASE1;
+            }
+            //else if (tpBarcode.Send(out string _val, "LON\r", TCPIPCtrl.CommProtocol.TwoWay))
+            else if (tpBarcode.AutoTriggerNew(out string _val, false, true, TCPIPCtrl.CommProtocol.TwoWay, "LON\r"))
+            {
+                if (_UseM2MClient)
+                {
+                    if (!readM2MData(_val)) //return true if file is found, consider barcode validation
+                    {
+                        JSDK.Alarm.Show("6011");
+                        RunTMCvy[(int)WorkPost.WP1].Restart();
+                        return FCResultType.CASE2;
+                    }
+                }
+                else
+                {
+                    SysPara.PalletList[(int)WorkPost.WP1].Peek().PalletID = _val;
+                    SysPara.PalletList[(int)WorkPost.WP1].Peek().Status = true;
+                }
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, $"Conveyor,Work Post 1 - Pallet ID: {SysPara.PalletList[(int)WorkPost.WP1].Peek().PalletID}");
+                RunTMCvy[(int)WorkPost.WP1].Restart();
+                MiddleLayer.SystemF.DBEngineCFX.UnitsArrived(_val);//Teong CFX
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Load_BarcodeFail_WP1_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.PalletList[(int)WorkPost.WP1].Count > 0)
+                SysPara.PalletList[(int)WorkPost.WP1].Peek().Status = false;
+            else
+            {
+                SysPara.PalletList[(int)WorkPost.WP1].Enqueue(new PalletEntity()
+                {
+                    Status = false,
+                    Products = new List<ProductEntity>()
+                                {
+                                    new ProductEntity(){Status = false},
+                                    new ProductEntity(){Status = false},
+                                    new ProductEntity(){Status = false},
+                                    new ProductEntity(){Status = false},
+                                    new ProductEntity(){Status = false},
+                                    new ProductEntity(){Status = false},
+                                    new ProductEntity(){Status = false},
+                                    new ProductEntity(){Status = false},
+                                    new ProductEntity(){Status = false},
+                                    new ProductEntity(){Status = false},
+                                    new ProductEntity(){Status = false},
+                                    new ProductEntity(){Status = false}
+                                }
+                });
+            }
+
+            RunTMCvy[(int)WorkPost.WP1].Restart();
+            return FCResultType.NEXT;
+        }
+
+        private FCResultType fc_Load_End_WP1_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP1], StdTime))
+                {
+                    if (!Handshake.Conveyor[(int)WorkPost.WP3].TaskLoad.Complete)
+                    {
+                        MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 1 Load Product Flow end");
+                        Handshake.Conveyor[(int)WorkPost.WP1].CT_LastLoadWorkFlow = Handshake.Conveyor[(int)WorkPost.WP1].CT_WorkFlow.GetCurrentTime();
+                        MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 1 Load Product Flow Cycle Time: " + (Handshake.Conveyor[(int)WorkPost.WP1].CT_LastLoadWorkFlow / (double)1000).ToString("F1"));
+                    }
+                    Handshake.Conveyor[(int)WorkPost.WP1].TaskLoad.Complete = true;
+                    Handshake.Conveyor[(int)WorkPost.WP1].TaskLoad.Busy = false;
+                }
+                return FCResultType.IDLE;
+            }
+
+            //if (tpBarcode.Send(@"LOFF\r"))
+            if (tpBarcode.AutoTriggerNew(out string temp, false, true, TCPIPCtrl.CommProtocol.OneWay, @"LOFF\r"))
+            {
+                if (!Handshake.Conveyor[(int)WorkPost.WP1].TaskLoad.Complete)
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,Work Post 1 Load Product Flow end");
+                    Handshake.Conveyor[(int)WorkPost.WP1].CT_LastLoadWorkFlow = Handshake.Conveyor[(int)WorkPost.WP1].CT_WorkFlow.GetCurrentTime();
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,Work Post 1 Load Product Flow Cycle Time: " + (Handshake.Conveyor[(int)WorkPost.WP1].CT_LastLoadWorkFlow / (double)1000).ToString("F1"));
+                }
+                Handshake.Conveyor[(int)WorkPost.WP1].TaskLoad.Complete = true;
+                Handshake.Conveyor[(int)WorkPost.WP1].TaskLoad.Busy = false;
+            }
+            return FCResultType.IDLE;
+        }
+        #endregion
+
+        #region Conveyor Work Post 2
+        private FCResultType fc_Load_Flow_WP2_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP2], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 2 Load Product Flow Start");
+                    MiddleLayer.AbbF.setPalletUI(ABBRobotForm.ConveyorPost.WP2, false, "Awaiting Pallet");
+                    Handshake.Conveyor[(int)WorkPost.WP2].TaskLoad.Busy = true;
+                    Handshake.Conveyor[(int)WorkPost.WP2].TaskLoad.Complete = false;
+                    RunTMCvy[(int)WorkPost.WP2].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,Work Post 2 Load Product Flow Start");
+            MiddleLayer.AbbF.setPalletUI(ABBRobotForm.ConveyorPost.WP2, false, "Awaiting Pallet");
+            Handshake.Conveyor[(int)WorkPost.WP2].TaskLoad.Busy = true;
+            Handshake.Conveyor[(int)WorkPost.WP2].TaskLoad.Complete = false;
+            RunTMCvy[(int)WorkPost.WP2].Restart();
+            return FCResultType.NEXT;
+        }
+
+        private FCResultType fc_Load_StopperExtern_WP2_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP2], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 2 Stopper Extend");
+                    Handshake.Conv2ToConv1.Ready = true;
+                    RunTMCvy[(int)WorkPost.WP2].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            CylStopper_WP2.On(RunTMCvy[(int)WorkPost.WP2]);
+            bool r1 = CylStopper_WP2.CyOn_IB1.IsOn();
+            if (r1)
+            {
+                Handshake.Conv2ToConv1.Ready = true;
+                RunTMCvy[(int)WorkPost.WP2].Restart();
+                SysPara.IsMachineStarving = false;
+                MachineStateTimeout01.Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+        string PalletSN = "";
+        private FCResultType fc_Load_TrigCvy_WP2_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP2], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 2 start fast forward mode");
+                    //Zax 11/3/21 - Cycle time starts from board in and out
+                    IsStartRecordCT[(int)WorkPost.WP2] = true;
+                    Handshake.Conveyor[(int)WorkPost.WP2].CT_WorkFlow.Reset();
+                    Handshake.Conveyor[(int)WorkPost.WP2].CT_WorkFlow.Start();
+                    RunTMCvy[(int)WorkPost.WP2].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            if (MachineStateTimeout01.IsOn(5000) && !SysPara.IsMaintenanceMode && !SysPara.IsMachineBlocked) // Default 5sec
+            {
+                if (!SysPara.IsMachineStarving)
+                {
+                    SysPara.CFX.StationStateChanged(CFX.Structures.ResourceState.SBY_NoProductStarved, DateTime.Now);
+                    SysPara.IsMachineStarving = true;
+                }
+            }
+            //bool r1 = IB_BoardIn_WP2.IsOn(); //Try to reduce dependency on sensor
+            if (Handshake.Conv2ToConv1.Busy) // && r1)
+            {
+                Handshake.Conv2ToConv1.Reset();
+                ExecuteConveyor(ConveyorState.FastForward, OB_Cvy_ChgSpd_WP2, OB_Cvy_Forward_WP2);
+                if (bInitialOk)
+                {
+                    //Zax 11/3/21 - Cycle time starts from board in and out
+                    IsStartRecordCT[(int)WorkPost.WP2] = true;
+                    Handshake.Conveyor[(int)WorkPost.WP2].CT_WorkFlow.Reset();
+                    Handshake.Conveyor[(int)WorkPost.WP2].CT_WorkFlow.Start();
+                    SysPara.WIP2.Start(SysPara.WIP1.Reach()); //Teong
+                }
+                PalletSN = SysPara.PalletList[(int)WorkPost.WP1].Peek().PalletID;
+                for (int i = 0; i < 5; i++)
+                    SysPara.CFX.WorkCompleted("AbortAllProduct", null, new List<int>() { 12 });
+                SysPara.CFX.WorkStarted(PalletSN, 12);
+                RunTMCvy[(int)WorkPost.WP2].Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Load_DecelCvy_WP2_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP2], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 2 changed to forward mode");
+                    RunTMCvy[(int)WorkPost.WP2].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            ExecuteConveyor(ConveyorState.FastForward, OB_Cvy_ChgSpd_WP2, OB_Cvy_Forward_WP2);
+            int LoadTime = GetSettingValue("PSet", "ProductLoadTimeOut_WP2");
+            bool r1 = SysPara.IsDryRun && Delay(RunTMCvy[(int)WorkPost.WP2],3000) ? true : IB_DecelSpd_WP2.IsOn();
+            if (r1)
+            {
+                ExecuteConveyor(ConveyorState.Forward, OB_Cvy_ChgSpd_WP2, OB_Cvy_Forward_WP2);
+                RunTMCvy[(int)WorkPost.WP2].Restart();
+                return FCResultType.NEXT;
+            }
+            else if (Delay(RunTMCvy[(int)WorkPost.WP2], LoadTime))
+            {
+                RunTMCvy[(int)WorkPost.WP2].Restart();
+                JSDK.Alarm.Show("5012");
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Load_BoardInPos_WP2_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP2], StdTime))
+                {
+                    if (Handshake.Conveyor[(int)WorkPost.WP1].TaskUnload.Complete)
+                    {
+                        if (SysPara.PalletList[(int)WorkPost.WP1].Count > 0)
+                        {
+                            MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 2 - Product in position");
+                            SysPara.PalletList[(int)WorkPost.WP2].Enqueue(SysPara.PalletList[(int)WorkPost.WP1].Peek());
+                            SysPara.PalletList[(int)WorkPost.WP1].Dequeue();
+                            MiddleLayer.AbbF.setPalletUI(ABBRobotForm.ConveyorPost.WP2, true, "In Position");
+                            RunTMCvy[(int)WorkPost.WP2].Restart();
+                            return FCResultType.NEXT;
+                        }
+                    }
+                }
+                return FCResultType.IDLE;
+            }
+
+            ExecuteConveyor(ConveyorState.Forward, OB_Cvy_ChgSpd_WP2, OB_Cvy_Forward_WP2);
+            bool passThru = GetSettingValue("Pset", "PassThroughMode");
+            int inPostDelay = GetSettingValue("PSet", "InPostDelay_WP2");
+
+            if ((SysPara.IsDryRun || IB_InPost_WP2.IsOn(inPostDelay)) && Delay(RunTMCvy[(int)WorkPost.WP2], inPostDelay))
+            {
+                if (bInitialOk && !passThru)
+                {
+                    SysPara.PalletList[(int)WorkPost.WP2].Enqueue(SysPara.PalletList[(int)WorkPost.WP1].Peek());
+                    SysPara.PalletList[(int)WorkPost.WP1].Dequeue();
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, $"Conveyor,Work Post 2 - Pallet ID: {SysPara.PalletList[(int)WorkPost.WP2].Peek().PalletID}");
+                }
+                ExecuteConveyor(ConveyorState.Stop, OB_Cvy_ChgSpd_WP2, OB_Cvy_Forward_WP2);
+                MiddleLayer.AbbF.setPalletUI(ABBRobotForm.ConveyorPost.WP2, true, "In Position");
+                RunTMCvy[(int)WorkPost.WP2].Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Load_CylLifter_WP2_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP2], StdTime))
+                {
+                    //IsStartRecordCT[(int)WorkPost.WP2] = true;
+                    //Handshake.Conveyor[(int)WorkPost.WP2].CT_WorkFlow.Reset();
+                    //Handshake.Conveyor[(int)WorkPost.WP2].CT_WorkFlow.Start();
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 2 - Lifter Extent");
+                    RunTMCvy[(int)WorkPost.WP2].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            bool passThru = GetSettingValue("Pset", "PassThroughMode");
+            bool r1 = false;
+            bool status = true;
+            if (SysPara.PalletList[(int)WorkPost.WP2].Count > 0)
+                status = SysPara.PalletList[(int)WorkPost.WP2].Peek().Status;
+
+            if (bInitialOk && !passThru && status)
+            {
+                CylLifter_WP2.On(RunTMCvy[(int)WorkPost.WP2]);
+                r1 = CylLifter_WP2.CyOn_IB1.IsOn();
+            }
+            else
+                r1 = true;
+
+            if (r1)
+            {
+                //IsStartRecordCT[(int)WorkPost.WP2] = true;
+                //Handshake.Conveyor[(int)WorkPost.WP2].CT_WorkFlow.Reset();
+                //Handshake.Conveyor[(int)WorkPost.WP2].CT_WorkFlow.Start();
+                SysPara.WIP2.Reach(); //Teong
+
+                SysPara.CFX.FaultOccurred(new CFX.Structures.Fault { FaultCode = "0000", Description = GetBarcodeInfo(SysPara.PalletList[(int)WorkPost.WP2].Peek()), Severity = CFX.Structures.FaultSeverity.Information });
+                RunTMCvy[(int)WorkPost.WP2].Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+        private string GetBarcodeInfo(PalletEntity palletList)
+        {
+            string DisplayResult = "";
+            DisplayResult += $"PalletSN = {palletList.PalletID}, ";
+            for (int i = 0; i < 12; i++)
+            {
+                DisplayResult += $"SN{i + 1} = {palletList.Products[i].SerialNumber}, ";
+            }
+            return DisplayResult;
+        }
+        private FCResultType fc_Load_End_WP2_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP2], StdTime))
+                {
+                    if (!Handshake.Conveyor[(int)WorkPost.WP2].TaskLoad.Complete)
+                    {
+                        SysPara.PalletList[(int)WorkPost.WP2].Peek().StartTime = DateTime.Now;
+                        MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 2 Load Product Flow end");
+                        Handshake.Conveyor[(int)WorkPost.WP2].CT_LastLoadWorkFlow = Handshake.Conveyor[(int)WorkPost.WP2].CT_WorkFlow.GetCurrentTime();
+                        MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 2 Load Product Flow Cycle Time: " + (Handshake.Conveyor[(int)WorkPost.WP2].CT_LastLoadWorkFlow / (double)1000).ToString("F1"));
+                    }
+                    Handshake.ConvToRobot.Ready = true;
+                    Handshake.RobotToConv.Complete = true;
+                    Handshake.Conveyor[(int)WorkPost.WP2].TaskLoad.Complete = true;
+                    Handshake.Conveyor[(int)WorkPost.WP2].TaskLoad.Busy = false;
+                }
+                return FCResultType.IDLE;
+            }
+
+            bool passThru = GetSettingValue("Pset", "PassThroughMode");
+            bool status = true;
+            if (SysPara.PalletList[(int)WorkPost.WP2].Count > 0)
+                status = SysPara.PalletList[(int)WorkPost.WP2].Peek().Status;
+
+            if (passThru || !bInitialOk || !status)
+            {
+                Handshake.ConvToRobot.Ready = false;
+                Handshake.RobotToConv.Complete = true;
+            }
+            else
+            {
+                Handshake.ConvToRobot.Ready = true;
+                Handshake.RobotToConv.Busy = true;
+            }
+
+            if (!Handshake.Conveyor[(int)WorkPost.WP2].TaskLoad.Complete)
+            {
+                if (bInitialOk && !passThru)
+                {
+                    SysPara.PalletList[(int)WorkPost.WP2].Peek().StartTime = DateTime.Now;
+                    if (SysPara.IsDryRun || !tpBarcode.IsEnable)
+                        MiddleLayer.SystemF.DBEngineCFX.WorkStarted("BypassBarcode-" + DateTime.Now.ToString("MMddyyyyHHmmss"));//Teong CFX
+                    else
+                        MiddleLayer.SystemF.DBEngineCFX.WorkStarted(SysPara.PalletList[(int)WorkPost.WP2].Peek().PalletID);//Teong CFX
+                }
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,Work Post 2 Load Product Flow end");
+                Handshake.Conveyor[(int)WorkPost.WP2].CT_LastLoadWorkFlow = Handshake.Conveyor[(int)WorkPost.WP2].CT_WorkFlow.GetCurrentTime();
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,Work Post 2 Load Product Flow Cycle Time: " + (Handshake.Conveyor[(int)WorkPost.WP2].CT_LastLoadWorkFlow / (double)1000).ToString("F1"));
+            }
+            Handshake.Conveyor[(int)WorkPost.WP2].TaskLoad.Complete = true;
+            Handshake.Conveyor[(int)WorkPost.WP2].TaskLoad.Busy = false;
+            return FCResultType.IDLE;
+        }
+        #endregion
+
+        #region Conveyor Work Post 3
+        private FCResultType fc_Load_Flow_WP3_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP3], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 3 Load Product Flow Start");
+                    MiddleLayer.AbbF.setPalletUI(ABBRobotForm.ConveyorPost.WP3, false, "Awaiting Pallet");
+                    Handshake.Conveyor[(int)WorkPost.WP3].TaskLoad.Busy = true;
+                    Handshake.Conveyor[(int)WorkPost.WP3].TaskLoad.Complete = false;
+                    RunTMCvy[(int)WorkPost.WP3].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            bool r1 = false;
+            if (!bInitialOk && !bDoorInactive[(int)SlideDoor.RightDoor])
+            {
+                CylRightDoor.On(RunTMCvy[(int)WorkPost.WP3]);
+                r1 = CylRightDoor.CyOn_IB1.IsOn();
+            }
+            else if (bInitialOk && !bDoorInactive[(int)SlideDoor.RightDoor])
+            {
+                CylRightDoor.Off(RunTMCvy[(int)WorkPost.WP3]);
+                r1 = CylRightDoor.CyOff_IB1.IsOn();
+            }
+            else
+                r1 = true;
+
+            if (r1)
+            {
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,Work Post 3 Load Product Flow Start");
+                MiddleLayer.AbbF.setPalletUI(ABBRobotForm.ConveyorPost.WP3, false, "Awaiting Pallet");
+                Handshake.Conveyor[(int)WorkPost.WP3].TaskLoad.Busy = true;
+                Handshake.Conveyor[(int)WorkPost.WP3].TaskLoad.Complete = false;
+                RunTMCvy[(int)WorkPost.WP3].Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Load_StopperExtern_WP3_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP3], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 3 Stopper Extend");
+                    Handshake.Conv3ToConv2.Ready = true;
+                    RunTMCvy[(int)WorkPost.WP3].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            CylStopper_WP3.On(RunTMCvy[(int)WorkPost.WP3]);
+            bool r1 = CylStopper_WP3.CyOn_IB1.IsOn();
+            if (r1)
+            {
+                Handshake.Conv3ToConv2.Ready = true;
+                RunTMCvy[(int)WorkPost.WP3].Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Load_TrigCvy_WP3_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP3], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 3 start fast forward mode");
+                    RunTMCvy[(int)WorkPost.WP3].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            //bool r1 = IB_BoardIn_WP3.IsOn(); //Try to reduce dependency on sensor
+            if (Handshake.Conv3ToConv2.Busy) // && r1)
+            {
+                Handshake.Conv3ToConv2.Reset();
+                ExecuteConveyor(ConveyorState.FastForward, OB_Cvy_ChgSpd_WP3, OB_Cvy_Forward_WP3);
+                if(bInitialOk)
+                    SysPara.WIP3.Start(SysPara.WIP2.Reach()); //Teong
+                RunTMCvy[(int)WorkPost.WP3].Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Load_DecelCvy_WP3_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP3], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 3 changed to forward mode");
+                    RunTMCvy[(int)WorkPost.WP3].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            ExecuteConveyor(ConveyorState.FastForward, OB_Cvy_ChgSpd_WP3, OB_Cvy_Forward_WP3);
+            int LoadTime = GetSettingValue("PSet", "ProductLoadTimeOut_WP3");
+            bool r1 = SysPara.IsDryRun && Delay(RunTMCvy[(int)WorkPost.WP3], 3000) ? true : IB_DecelSpd_WP3.IsOn();
+            if (r1)
+            {
+                ExecuteConveyor(ConveyorState.Forward, OB_Cvy_ChgSpd_WP3, OB_Cvy_Forward_WP3);
+                RunTMCvy[(int)WorkPost.WP3].Restart();
+                return FCResultType.NEXT;
+            }
+            else if (Delay(RunTMCvy[(int)WorkPost.WP3], LoadTime))
+            {
+                RunTMCvy[(int)WorkPost.WP3].Restart();
+                JSDK.Alarm.Show("5014");
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Load_BoardInPos_WP3_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP3], StdTime))
+                {
+                    if (Handshake.Conveyor[(int)WorkPost.WP2].TaskUnload.Complete)
+                    {
+                        IsStartRecordCT[(int)WorkPost.WP3] = true;
+                        Handshake.Conveyor[(int)WorkPost.WP3].CT_WorkFlow.Reset();
+                        Handshake.Conveyor[(int)WorkPost.WP3].CT_WorkFlow.Start();
+                        if (SysPara.PalletList[(int)WorkPost.WP2].Count > 0)
+                        {
+                            MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 3 - Product in position");
+                            SysPara.PalletList[(int)WorkPost.WP3].Enqueue(SysPara.PalletList[(int)WorkPost.WP2].Peek());
+                            SysPara.PalletList[(int)WorkPost.WP2].Dequeue();
+
+                            MiddleLayer.AbbF.setPalletUI(ABBRobotForm.ConveyorPost.WP3, true, "In Position");
+                            RunTMCvy[(int)WorkPost.WP3].Restart();
+                            return FCResultType.NEXT;
+                        }
+                    }
+                }
+                return FCResultType.IDLE;
+            }
+
+            ExecuteConveyor(ConveyorState.Forward, OB_Cvy_ChgSpd_WP3, OB_Cvy_Forward_WP3);
+            bool passThru = GetSettingValue("Pset", "PassThroughMode");
+            int inPostDelay = GetSettingValue("PSet", "InPostDelay_WP3");
+            if ((SysPara.IsDryRun || IB_InPost_WP3.IsOn(inPostDelay)) && Delay(RunTMCvy[(int)WorkPost.WP3], inPostDelay))
+            {
+                IsStartRecordCT[(int)WorkPost.WP3] = true;
+                Handshake.Conveyor[(int)WorkPost.WP3].CT_WorkFlow.Reset();
+                Handshake.Conveyor[(int)WorkPost.WP3].CT_WorkFlow.Start();
+
+                if (bInitialOk && !passThru)
+                {
+                    SysPara.PalletList[(int)WorkPost.WP3].Enqueue(SysPara.PalletList[(int)WorkPost.WP2].Peek());
+                    SysPara.PalletList[(int)WorkPost.WP2].Dequeue();
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, $"Conveyor,Work Post 3 - Pallet ID: {SysPara.PalletList[(int)WorkPost.WP3].Peek().PalletID}");
+                }
+                ExecuteConveyor(ConveyorState.Stop, OB_Cvy_ChgSpd_WP3, OB_Cvy_Forward_WP3);
+                MiddleLayer.AbbF.setPalletUI(ABBRobotForm.ConveyorPost.WP3, true, "In Position");
+                RunTMCvy[(int)WorkPost.WP3].Restart();
+                SysPara.WIP3.Reach(); //Teong
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Load_End_WP3_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP3], StdTime))
+                {
+                    if (!Handshake.Conveyor[(int)WorkPost.WP3].TaskLoad.Complete)
+                    {
+                        MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 3 Load Product Flow end");
+                        Handshake.Conveyor[(int)WorkPost.WP3].CT_LastLoadWorkFlow = Handshake.Conveyor[(int)WorkPost.WP3].CT_WorkFlow.GetCurrentTime();
+                        MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 3 Load Product Flow Cycle Time: " + (Handshake.Conveyor[(int)WorkPost.WP3].CT_LastLoadWorkFlow / (double)1000).ToString("F1"));
+                    }
+                    Handshake.Conveyor[(int)WorkPost.WP3].TaskLoad.Complete = true;
+                    Handshake.Conveyor[(int)WorkPost.WP3].TaskLoad.Busy = false;
+                }
+                return FCResultType.IDLE;
+            }
+
+            if (!Handshake.Conveyor[(int)WorkPost.WP3].TaskLoad.Complete)
+            {
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,Work Post 3 Load Product Flow end");
+                Handshake.Conveyor[(int)WorkPost.WP3].CT_LastLoadWorkFlow = Handshake.Conveyor[(int)WorkPost.WP3].CT_WorkFlow.GetCurrentTime();
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,Work Post 3 Load Product Flow Cycle Time: " + (Handshake.Conveyor[(int)WorkPost.WP3].CT_LastLoadWorkFlow / (double)1000).ToString("F1"));
+            }
+            Handshake.Conveyor[(int)WorkPost.WP3].TaskLoad.Complete = true;
+            Handshake.Conveyor[(int)WorkPost.WP3].TaskLoad.Busy = false;
+            return FCResultType.IDLE;
+        }
+        #endregion
+
+        #endregion
+
+        #region Unload Board Flow
+
+        #region Conveyor Work Post 1
+        private FCResultType fc_Unload_Flow_WP1_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP1], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 1 Unload Product Flow Start");
+                    MiddleLayer.AbbF.setPalletUI(ABBRobotForm.ConveyorPost.WP1, false, "Converting");
+                    RunTMCvy[(int)WorkPost.WP1].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,Work Post 1 Unload Product Flow Start");
+            MiddleLayer.AbbF.setPalletUI(ABBRobotForm.ConveyorPost.WP1, false, "Converting");
+            Handshake.Conveyor[(int)WorkPost.WP1].TaskUnload.Busy = true;
+            Handshake.Conveyor[(int)WorkPost.WP1].TaskUnload.Complete = false;
+            RunTMCvy[(int)WorkPost.WP1].Restart();
+            return FCResultType.NEXT;
+        }
+
+        private FCResultType fc_Unload_CylRetract_WP1_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP1], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 1 Stopper Retract");
+                    RunTMCvy[(int)WorkPost.WP1].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            CylStopper_WP1.Off(RunTMCvy[(int)WorkPost.WP1]);
+            bool r1 = CylStopper_WP1.CyOff_IB1.IsOn();
+            if (r1)
+            {
+                RunTMCvy[(int)WorkPost.WP1].Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Unload_TurnOnConveyor_WP1_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP1], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 1 Turn On Conveyor");
+                    RunTMCvy[(int)WorkPost.WP1].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            ExecuteConveyor(ConveyorState.FastForward, OB_Cvy_ChgSpd_WP1, OB_Cvy_Forward_WP1);
+            RunTMCvy[(int)WorkPost.WP1].Restart();
+            SysPara.WIP1.Next();
+            return FCResultType.NEXT;
+        }
+
+        private FCResultType fc_Unload_TurnOffConveyor_WP1_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP1], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 1 Unload Product to Conveyor Work Post 2");
+                    RunTMCvy[(int)WorkPost.WP1].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            bool passThru = GetSettingValue("Pset", "PassThroughMode");
+            int UnloadTime = GetSettingValue("PSet", "ProductUnloadTimeOut_WP1");
+            if (Delay(RunTMCvy[(int)WorkPost.WP1], UnloadTime))
+            {
+                JSDK.Alarm.Show("5011");
+                RunTMCvy[(int)WorkPost.WP1].Restart();
+            }
+
+            ExecuteConveyor(ConveyorState.FastForward, OB_Cvy_ChgSpd_WP1, OB_Cvy_Forward_WP1);
+            bool r1 = SysPara.IsDryRun && Delay(RunTMCvy[(int)WorkPost.WP1], 3000) ? true : IB_InPost_WP1.IsOff(10);
+            bool r2 = SysPara.IsDryRun && Delay(RunTMCvy[(int)WorkPost.WP1], 3000) ? true : IB_DecelSpd_WP1.IsOff(10);
+            bool r3 = SysPara.IsDryRun && Delay(RunTMCvy[(int)WorkPost.WP1], 3000) ? true : IB_BoardIn_WP2.IsOff(150);
+            if (r1 && r2 && r3)
+            {
+                ExecuteConveyor(ConveyorState.Stop, OB_Cvy_ChgSpd_WP1, OB_Cvy_Forward_WP1);
+                if (bInitialOk)
+                {
+                    if (IsStartRecordCT[(int)WorkPost.WP1])
+                    {
+                        long _cur = Handshake.Conveyor[(int)WorkPost.WP1].CT_WorkFlow.GetCurrentTime();
+                        MiddleLayer.LogF.AddLog(LogType.EventFlow, $"Conveyor,Work Post 1 Total Cycle Time: {(_cur / (double)1000).ToString("F1")}");
+                    }
+                    //if (!passThru)
+                    //{
+                    //    if (!SysPara.PalletList[(int)WorkPost.WP1].Peek().Status)
+                    //        SysPara.WorkNG_Count++;
+                    //    else
+                    //        SysPara.WorkOK_Count++;
+                    //}
+                }
+                RunTMCvy[(int)WorkPost.WP1].Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Unload_End_WP1_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP1], StdTime))
+                {
+                    if (!Handshake.Conveyor[(int)WorkPost.WP1].TaskUnload.Complete)
+                    {
+                        MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 1 Unload Product Flow end");
+                        IsStartRecordCT[(int)WorkPost.WP1] = false;
+                        Handshake.Conveyor[(int)WorkPost.WP1].CT_LastWorkFlow = Handshake.Conveyor[(int)WorkPost.WP1].CT_WorkFlow.GetCurrentTime() - Handshake.Conveyor[(int)WorkPost.WP1].CT_LastLoadWorkFlow;
+                        MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 1 Unload Product Flow Cycle Time: " + (Handshake.Conveyor[(int)WorkPost.WP1].CT_LastWorkFlow / (double)1000).ToString("F1"));
+                        Handshake.Conveyor[(int)WorkPost.WP1].CT_WorkFlow.Reset();
+                        MiddleLayer.AbbF.setPalletUI(ABBRobotForm.ConveyorPost.WP1, false, "", false);
+                    }
+                    Handshake.Conveyor[(int)WorkPost.WP1].TaskUnload.Complete = true;
+                    Handshake.Conveyor[(int)WorkPost.WP1].TaskUnload.Busy = false;
+                }
+                return FCResultType.IDLE;
+            }
+
+            if (!Handshake.Conveyor[(int)WorkPost.WP1].TaskUnload.Complete)
+            {
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,Work Post 1 Unload Product Flow end");
+                IsStartRecordCT[(int)WorkPost.WP1] = false;
+                Handshake.Conveyor[(int)WorkPost.WP1].CT_LastWorkFlow = Handshake.Conveyor[(int)WorkPost.WP1].CT_WorkFlow.GetCurrentTime() - Handshake.Conveyor[(int)WorkPost.WP1].CT_LastLoadWorkFlow;
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,Work Post 1 Unload Product Flow Cycle Time: " + (Handshake.Conveyor[(int)WorkPost.WP1].CT_LastWorkFlow / (double)1000).ToString("F1"));
+                Handshake.Conveyor[(int)WorkPost.WP1].CT_WorkFlow.Reset();
+                MiddleLayer.AbbF.setPalletUI(ABBRobotForm.ConveyorPost.WP1, false, "", false);
+            }
+            Handshake.Conveyor[(int)WorkPost.WP1].TaskUnload.Complete = true;
+            Handshake.Conveyor[(int)WorkPost.WP1].TaskUnload.Busy = false;
+            return FCResultType.IDLE;
+        }
+        #endregion
+
+        #region Conveyor Work Post 2
+        private FCResultType fc_Unload_Flow_WP2_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP2], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 2 Unload Product Flow Start");
+                    MiddleLayer.AbbF.setPalletUI(ABBRobotForm.ConveyorPost.WP2, false, "Converting");
+                    RunTMCvy[(int)WorkPost.WP2].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            bool passThru = GetSettingValue("Pset", "PassThroughMode");
+            if (bInitialOk && !passThru)
+            {
+                //Teong CFX
+                CFX.Structures.WorkResult workResult = SysPara.PalletList[(int)WorkPost.WP2].Peek().Status ? CFX.Structures.WorkResult.Completed : CFX.Structures.WorkResult.Failed;
+                if (SysPara.IsDryRun || !tpBarcode.IsEnable)
+                {
+
+                    MiddleLayer.SystemF.DBEngineCFX.WorkCompleted("BypassBarcode-" + DateTime.Now.ToString("MMddyyyyHHmmss"), workResult);//Teong CFX
+                }
+                else
+                {
+                    MiddleLayer.SystemF.DBEngineCFX.WorkCompleted(SysPara.PalletList[(int)WorkPost.WP2].Peek().PalletID, workResult);//Teong CFX
+                }
+            }
+            MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,Work Post 2 Unload Product Flow Start");
+            MiddleLayer.AbbF.setPalletUI(ABBRobotForm.ConveyorPost.WP2, false, "Converting");
+            Handshake.Conveyor[(int)WorkPost.WP2].TaskUnload.Busy = true;
+            Handshake.Conveyor[(int)WorkPost.WP2].TaskUnload.Complete = false;
+            RunTMCvy[(int)WorkPost.WP2].Restart();
+            return FCResultType.NEXT;
+        }
+
+        private FCResultType fc_Unload_CylRetract_WP2_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP2], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 2 Lifter, Stopper Retract");
+                    RunTMCvy[(int)WorkPost.WP2].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            CylLifter_WP2.Off(RunTMCvy[(int)WorkPost.WP2]);
+            bool r1 = CylLifter_WP2.CyOff_IB1.IsOn();
+            if (r1)
+            {
+                CylStopper_WP2.Off(RunTMCvy[(int)WorkPost.WP2]);
+                r1 = CylStopper_WP2.CyOff_IB1.IsOn();
+                if (r1)
+                {
+                    RunTMCvy[(int)WorkPost.WP2].Restart();
+                    return FCResultType.NEXT;
+                }
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Unload_TurnOnConveyor_WP2_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP2], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 2 Turn On Conveyor");
+                    RunTMCvy[(int)WorkPost.WP2].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            ExecuteConveyor(ConveyorState.FastForward, OB_Cvy_ChgSpd_WP2, OB_Cvy_Forward_WP2);
+            RunTMCvy[(int)WorkPost.WP2].Restart();
+            SysPara.WIP2.Next();
+            return FCResultType.NEXT;
+        }
+
+        private FCResultType fc_Unload_TurnOffConveyor_WP2_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP2], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 2 Unload Product to Conveyor Work Post 3");
+                    if (bInitialOk)
+                        SysPara.WorkOK_Count++;
+                    RunTMCvy[(int)WorkPost.WP2].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            ExecuteConveyor(ConveyorState.FastForward, OB_Cvy_ChgSpd_WP2, OB_Cvy_Forward_WP2);
+            bool passThru = GetSettingValue("Pset", "PassThroughMode");
+            int UnloadTime = GetSettingValue("PSet", "ProductUnloadTimeOut_WP2");
+            if (Delay(RunTMCvy[(int)WorkPost.WP2], UnloadTime))
+            {
+                JSDK.Alarm.Show("5013");
+                RunTMCvy[(int)WorkPost.WP2].Restart();
+            }
+
+            bool r1 = SysPara.IsDryRun && Delay(RunTMCvy[(int)WorkPost.WP2], 3000) ? true : IB_DecelSpd_WP2.IsOff(10);
+            bool r2 = SysPara.IsDryRun && Delay(RunTMCvy[(int)WorkPost.WP2], 3000) ? true : IB_InPost_WP2.IsOff(10);
+            bool r3 = SysPara.IsDryRun && Delay(RunTMCvy[(int)WorkPost.WP1], 3000) ? true : IB_BoardIn_WP3.IsOff(150);
+            if (r1 && r2 && r3)
+            {
+                ExecuteConveyor(ConveyorState.Stop, OB_Cvy_ChgSpd_WP2, OB_Cvy_Forward_WP2);
+                //if (bInitialOk)
+                //{
+                //    if (IsStartRecordCT[(int)WorkPost.WP2])
+                //    {
+                //        long _cur = Handshake.Conveyor[(int)WorkPost.WP2].CT_WorkFlow.GetCurrentTime();
+                //        MiddleLayer.LogF.AddLog(LogType.EventFlow, $"Conveyor,Work Post 2 Total Cycle Time: {(_cur / (double)1000).ToString("F1")}");
+                //        //Zax 11/3/21 - Cycle time starts from board in and out
+                //        Handshake.Conveyor[(int)WorkPost.WP2].CT_LastWorkFlow = _cur;
+                //    }
+                //    //if (!passThru)
+                //    //{
+                //    //    if (!SysPara.PalletList[(int)WorkPost.WP2].Peek().Status)
+                //    //        SysPara.WorkNG_Count++;
+                //    //    else
+                //    //        SysPara.WorkOK_Count++;
+                //    //}
+                //}
+                SysPara.CFX.WorkCompleted(PalletSN);
+                RunTMCvy[(int)WorkPost.WP2].Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Unload_End_WP2_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP2], StdTime))
+                {
+                    if (!Handshake.Conveyor[(int)WorkPost.WP2].TaskUnload.Complete)
+                    {
+                        MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 2 Unload Product Flow end");
+                        IsStartRecordCT[(int)WorkPost.WP2] = false;
+                        //Handshake.Conveyor[(int)WorkPost.WP2].CT_LastWorkFlow = Handshake.Conveyor[(int)WorkPost.WP2].CT_WorkFlow.GetCurrentTime() - Handshake.Conveyor[(int)WorkPost.WP2].CT_LastLoadWorkFlow;
+                        //Zax 11/3/21 - Cycle time starts from board in and out
+                        long _cur = Handshake.Conveyor[(int)WorkPost.WP2].CT_WorkFlow.GetCurrentTime();
+                        MiddleLayer.LogF.AddLog(LogType.EventFlow, $"Conveyor,Work Post 2 Total Cycle Time: {(_cur / (double)1000).ToString("F1")}");
+                        Handshake.Conveyor[(int)WorkPost.WP2].CT_LastWorkFlow = _cur;
+
+                        double _UnloadCycleTime = Handshake.Conveyor[(int)WorkPost.WP2].CT_LastWorkFlow - Handshake.Conveyor[(int)WorkPost.WP2].CT_LastLoadWorkFlow;
+                        MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 2 Unload Product Flow Cycle Time: " + (_UnloadCycleTime / (double)1000).ToString("F1"));
+                        Handshake.Conveyor[(int)WorkPost.WP2].CT_WorkFlow.Reset();
+                        MiddleLayer.AbbF.setPalletUI(ABBRobotForm.ConveyorPost.WP2, false, "", false);
+                    }
+                    Handshake.Conveyor[(int)WorkPost.WP2].TaskUnload.Complete = true;
+                    Handshake.Conveyor[(int)WorkPost.WP2].TaskUnload.Busy = false;
+                }
+                return FCResultType.IDLE;
+            }
+
+            if (!Handshake.Conveyor[(int)WorkPost.WP2].TaskUnload.Complete)
+            {
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,Work Post 2 Unload Product Flow end");
+                IsStartRecordCT[(int)WorkPost.WP2] = false;
+                //Handshake.Conveyor[(int)WorkPost.WP2].CT_LastWorkFlow = Handshake.Conveyor[(int)WorkPost.WP2].CT_WorkFlow.GetCurrentTime() - Handshake.Conveyor[(int)WorkPost.WP2].CT_LastLoadWorkFlow;
+                //Zax 11/3/21 - Cycle time starts from board in and out
+                long _cur = Handshake.Conveyor[(int)WorkPost.WP2].CT_WorkFlow.GetCurrentTime();
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, $"Conveyor,Work Post 2 Total Cycle Time: {(_cur / (double)1000).ToString("F1")}");
+                Handshake.Conveyor[(int)WorkPost.WP2].CT_LastWorkFlow = _cur;
+                
+                //TODO for debug purpose only
+                MiddleLayer.LogF.AddLog(LogType.Production, $"CycleTime,{(_cur / (double)1000).ToString("F2")}");
+
+                double _UnloadCycleTime = Handshake.Conveyor[(int)WorkPost.WP2].CT_LastWorkFlow - Handshake.Conveyor[(int)WorkPost.WP2].CT_LastLoadWorkFlow;
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 2 Unload Product Flow Cycle Time: " + (_UnloadCycleTime / (double)1000).ToString("F1"));
+
+                Handshake.Conveyor[(int)WorkPost.WP2].CT_WorkFlow.Reset();
+                MiddleLayer.AbbF.setPalletUI(ABBRobotForm.ConveyorPost.WP2, false, "", false);
+            }
+            Handshake.Conveyor[(int)WorkPost.WP2].TaskUnload.Complete = true;
+            Handshake.Conveyor[(int)WorkPost.WP2].TaskUnload.Busy = false;
+            return FCResultType.IDLE;
+        }
+        #endregion
+
+        #region Conveyor Work Post 3
+        private FCResultType fc_Unload_Flow_WP3_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP3], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,Work Post 3 Unload Product Flow Start");
+                    MiddleLayer.AbbF.setPalletUI(ABBRobotForm.ConveyorPost.WP3, false, "Converting");
+                    RunTMCvy[(int)WorkPost.WP3].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,Work Post 3 Unload Product Flow Start");
+            MiddleLayer.AbbF.setPalletUI(ABBRobotForm.ConveyorPost.WP3, false, "Converting");
+            Handshake.Conveyor[(int)WorkPost.WP3].TaskUnload.Busy = true;
+            Handshake.Conveyor[(int)WorkPost.WP3].TaskUnload.Complete = false;
+            RunTMCvy[(int)WorkPost.WP3].Restart();
+            return FCResultType.NEXT;
+        }
+
+        private FCResultType fc_Unload_CylRetract_WP3_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP3], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 3 Stopper Retract");
+                    RunTMCvy[(int)WorkPost.WP3].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            CylStopper_WP3.Off(RunTMCvy[(int)WorkPost.WP3]);
+            bool r1 = CylStopper_WP3.CyOff_IB1.IsOn();
+            if (r1)
+            {
+                RunTMCvy[(int)WorkPost.WP3].Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Unload_WriteTar_WP3_FlowRun(object sender, EventArgs e)
+        {
+            bool passThru = GetSettingValue("Pset", "PassThroughMode");
+            if (SysPara.IsDryRun || !bInitialOk || passThru)
+            {
+                RunTMCvy[(int)WorkPost.WP3].Restart();
+                return FCResultType.NEXT;
+            }
+
+            SysPara.PalletList[(int)WorkPost.WP3].Peek().EndTime = DateTime.Now;
+            bool isEnableTAR = MiddleLayer.SystemF.MesF.GetRecipeValue("RSet", "b_EnableTarGenerate");
+            bool IsWriteTARSuccess = false;
+            if (isEnableTAR)
+            {
+                //If based on product inside pallet, need to loop SysPara.PalletList.Peek().Products to get each info.
+                if (!SysPara.PalletList[(int)WorkPost.WP3].Peek().Status)
+                {
+                    IsWriteTARSuccess = MiddleLayer.SystemF.MesF.WriteTAR(SysPara.PalletList[(int)WorkPost.WP3].Peek().PalletID,
+                        SysPara.PalletList[(int)WorkPost.WP3].Peek().StartTime,
+                        SysPara.PalletList[(int)WorkPost.WP3].Peek().EndTime,
+                        false,
+                        SysPara.PalletList[(int)WorkPost.WP3].Peek().Products);
+                }
+                else
+                {
+                    IsWriteTARSuccess = MiddleLayer.SystemF.MesF.WriteTAR(SysPara.PalletList[(int)WorkPost.WP3].Peek().PalletID,
+                        SysPara.PalletList[(int)WorkPost.WP3].Peek().StartTime,
+                        SysPara.PalletList[(int)WorkPost.WP3].Peek().EndTime,
+                        true,
+                        SysPara.PalletList[(int)WorkPost.WP3].Peek().Products);
+                }
+                if (!IsWriteTARSuccess)
+                {
+                    JSDK.Alarm.Show("3014");
+                    RunTMCvy[(int)WorkPost.WP3].Restart();
+                    return FCResultType.CASE1;
+                }
+            }
+
+            RunTMCvy[(int)WorkPost.WP3].Restart();
+            return FCResultType.NEXT;
+        }
+
+        private FCResultType fc_Unload_WaitSMEMA_WP3_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP3], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 3 Get SMEMA handshake from downstream");
+                    RunTMCvy[(int)WorkPost.WP3].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            bool passThru = GetSettingValue("Pset", "PassThroughMode");
+            bool r1 = false;
+            if (!bDoorInactive[(int)SlideDoor.RightDoor])
+            {
+                CylRightDoor.On(RunTMCvy[(int)WorkPost.WP3]);
+                r1 = CylRightDoor.CyOn_IB1.IsOn();
+            }
+            else
+                r1 = true;
+
+            bool isSMEMA = GetSettingValue("PSet", "UseSMEMA_Down");
+            int UnloadTime = GetSettingValue("PSet", "ProductUnloadTimeOut_WP3");
+            if (isSMEMA)
+            {
+                OB_SMEMA_DW_Available.On();
+                if (bInitialOk)
+                {
+                    if (!passThru)
+                    {
+                        if(!SysPara.PalletList[(int)WorkPost.WP3].Peek().Status)
+                            OB_SMEMA_DN_NG.On();
+                        else
+                            OB_SMEMA_DN_NG.Off();
+                    }
+                    else
+                        OB_SMEMA_DN_NG.Off();
+                }
+                else
+                {
+                    OB_SMEMA_DN_NG.On();
+                }
+                if (r1 && IB_SMEMA_TOP_DN_MachineRdy.IsOn(100))
+                {
+                    CFXUnblock(); //Teong CFX
+                    RunTMCvy[(int)WorkPost.WP3].Restart();
+                    return FCResultType.NEXT;
+                }
+                //else if (Delay(RunTMCvy[(int)WorkPost.WP3], UnloadTime))
+                //{
+                //    RunTMCvy[(int)WorkPost.WP3].Restart();
+                //    JSDK.Alarm.Show("5017");
+                //}
+                //TODO Removed for quiet operation
+
+                if (Delay(RunTMCvy[(int)WorkPost.WP3], 15000))
+                {
+                    CFXBlock();//Teong CFX
+                }
+            }
+            else
+            {
+                if (r1)
+                {
+                    RunTMCvy[(int)WorkPost.WP3].Restart();
+                    return FCResultType.NEXT;
+                }
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Unload_SendDataM2M_WP3_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP3], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 3 Broadcast Pallet data to clients");
+                    RunTMCvy[(int)WorkPost.WP3].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            bool passThru = GetSettingValue("Pset", "PassThroughMode");
+            if (SysPara.IsDryRun || !bInitialOk || passThru)
+            {
+                RunTMCvy[(int)WorkPost.WP3].Restart();
+                return FCResultType.NEXT;
+            }
+
+            bool _UseM2MServer = GetSettingValue("PSet", "UseM2M_Server");
+            if (!_UseM2MServer)
+            {
+                RunTMCvy[(int)WorkPost.WP3].Restart();
+                return FCResultType.NEXT;
+            }
+
+            string _PalletInfo = JsonConvert.SerializeObject(SysPara.PalletList[(int)WorkPost.WP3].Peek());
+           
+            if (AutoTriggerM2MServer(false, _PalletInfo))
+            {
+                //store sent M2M into JSON file
+                Task.Run(() =>
+                {
+                    Backup_M2MSentFile(SysPara.PalletList[(int)WorkPost.WP3].Peek().PalletID, _PalletInfo);
+                });
+
+                RunTMCvy[(int)WorkPost.WP3].Restart();
+                return FCResultType.NEXT;
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Unload_TurnOnConveyor_WP3_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP3], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 3 Turn On Conveyor");
+                    RunTMCvy[(int)WorkPost.WP3].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            bool passThru = GetSettingValue("Pset", "PassThroughMode");
+            if (bInitialOk && !passThru)
+            {
+                //Teong CFX
+                var lProcessData = new List<JAGUnitsData>();
+                for (int x = 1; x < 13; x++)
+                {
+                    MiddleLayer.SystemF.DBConnectivity.InjectMachineOutput
+                        (SysPara.PalletList[(int)WorkPost.WP3].Peek().Products[x - 1].SerialNumber == "NULL" ? "Unknown_Product" : SysPara.PalletList[(int)WorkPost.WP3].Peek().Products[x - 1].SerialNumber
+                        , SysPara.PalletList[(int)WorkPost.WP3].Peek().PalletID
+                        , "null"
+                        , x.ToString()
+                        , SysPara.PalletList[(int)WorkPost.WP3].Peek().StartTime
+                        , SysPara.PalletList[(int)WorkPost.WP3].Peek().EndTime
+                        , 0
+                        , SysPara.PalletList[(int)WorkPost.WP3].Peek().Products[x - 1].Status); //teong
+
+                    lProcessData.Add(new JAGUnitsData
+                    {
+                        UnitIdentifier = "null",
+                        UnitPositionNumber = x,
+                        UnitResult = SysPara.PalletList[(int)WorkPost.WP3].Peek().Status ? CFX.Structures.ProcessingResult.Succeeded : CFX.Structures.ProcessingResult.Failed
+                    });
+
+                }
+                string _palletID = (SysPara.IsDryRun || !tpBarcode.IsEnable) ? "BypassBarcode-" + DateTime.Now.ToString("MMddyyyyHHmmss") : SysPara.PalletList[(int)WorkPost.WP3].Peek().PalletID;
+                int OutData = 0;
+                int? LineName = null;
+                if (!int.TryParse(MiddleLayer.SystemF.MesF.GetRecipeValue("RSet", "str_LineName"), out OutData))
+                {
+                    LineName = null;
+                }
+                else
+                {
+                    LineName = OutData;
+                }
+                JAGProcessData JagData = new JAGProcessData
+                {
+                    PrimaryIdentifier = _palletID,
+                    Customer = MiddleLayer.SystemF.MesF.GetRecipeValue("RSet", "str_Customer"),
+                    MachineName = MiddleLayer.SystemF.MesF.GetRecipeValue("RSet", "str_MachineName"),
+                    MachineProcess = MiddleLayer.SystemF.MesF.GetRecipeValue("RSet", "str_ProcessStep"),
+                    Line = LineName,
+                    SoftwareVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString(),
+                    RecipeName = SysPara.RecipeName,
+                    DateTimeUnitIn = SysPara.PalletList[(int)WorkPost.WP3].Peek().StartTime,
+                    DateTimeUnitOut = SysPara.PalletList[(int)WorkPost.WP3].Peek().EndTime,
+                    JAGUnitsProcessData = lProcessData,
+                };
+
+                MiddleLayer.SystemF.DBEngineCFX.UnitProcessed(JagData, CFX.Structures.ProcessingResult.Succeeded);
+            }
+
+            ExecuteConveyor(ConveyorState.FastForward, OB_Cvy_ChgSpd_WP3, OB_Cvy_Forward_WP3);
+            RunTMCvy[(int)WorkPost.WP3].Restart();
+            return FCResultType.NEXT;
+        }
+
+        private FCResultType fc_Unload_TurnOffConveyor_WP3_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP3], StdTime))
+                {
+                    MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 3 Unload Product to downstream");
+                    RunTMCvy[(int)WorkPost.WP3].Restart();
+                    return FCResultType.NEXT;
+                }
+                return FCResultType.IDLE;
+            }
+
+            ExecuteConveyor(ConveyorState.FastForward, OB_Cvy_ChgSpd_WP3, OB_Cvy_Forward_WP3);
+            bool passThru = GetSettingValue("Pset", "PassThroughMode");
+            int UnloadTime = GetSettingValue("PSet", "ProductUnloadTimeOut_WP3");
+            if (Delay(RunTMCvy[(int)WorkPost.WP3], UnloadTime))
+            {
+                JSDK.Alarm.Show("5015");
+                RunTMCvy[(int)WorkPost.WP3].Restart();
+            }
+
+            bool bUseSMEMA = GetSettingValue("PSet", "UseSMEMA_Down");
+            if (!bUseSMEMA)
+            {
+                bool r1 = SysPara.IsDryRun && Delay(RunTMCvy[(int)WorkPost.WP3], 3000) ? true : IB_InPost_WP3.IsOff(1000);
+                bool r2 = SysPara.IsDryRun && Delay(RunTMCvy[(int)WorkPost.WP3], 3000) ? true : IB_DecelSpd_WP3.IsOff(10);
+                if (r1 && r2)
+                {
+                    ExecuteConveyor(ConveyorState.Stop, OB_Cvy_ChgSpd_WP3, OB_Cvy_Forward_WP3);
+
+                    if (bInitialOk)
+                    {
+                        if (IsStartRecordCT[(int)WorkPost.WP3])
+                        {
+                            long _cur = Handshake.Conveyor[(int)WorkPost.WP3].CT_WorkFlow.GetCurrentTime();
+                            MiddleLayer.LogF.AddLog(LogType.EventFlow, $"Conveyor,Work Post 3 Total Cycle Time: {(_cur / (double)1000).ToString("F1")}");
+                        }
+                        if (!passThru)
+                        {
+                            MiddleLayer.LogF.AddLog(LogType.Production, $"UPH, {SysPara.UPH_Count.ToString()}"); //Log UPH, removable
+                            if (!SysPara.PalletList[(int)WorkPost.WP3].Peek().Status)
+                                SysPara.WorkNG_Count++;
+                            else
+                                SysPara.WorkOK_Count++;
+                            MiddleLayer.SystemF.DBEngineCFX.UnitsDeparted((SysPara.IsDryRun || !tpBarcode.IsEnable) ? "BypassBarcode-" + DateTime.Now.ToString("MMddyyyyHHmmss") : SysPara.PalletList[(int)WorkPost.WP3].Peek().PalletID);//Teong CFX
+                            SysPara.PalletList[(int)WorkPost.WP3].Dequeue();
+                        }
+                        SysPara.WIP3.End(); //Teong
+                    }
+                    SysPara.TaktTime.Trigger();
+                    RunTMCvy[(int)WorkPost.WP3].Restart();
+                    return FCResultType.NEXT;
+                }
+            }
+            else if (RunTMCvy[(int)WorkPost.WP3].IsOn(100) && bUseSMEMA)
+            {
+                bool r1 = IB_InPost_WP3.IsOff(1000);
+                bool r2 = IB_DecelSpd_WP3.IsOff(10);
+                if (r1 && r2)
+                {
+                    OB_SMEMA_DW_Available.Off();
+                    OB_SMEMA_DN_NG.Off();
+                    ExecuteConveyor(ConveyorState.Stop, OB_Cvy_ChgSpd_WP3, OB_Cvy_Forward_WP3);
+
+                    if (bInitialOk)
+                    {
+                        if (IsStartRecordCT[(int)WorkPost.WP3])
+                        {
+                            long _cur = Handshake.Conveyor[(int)WorkPost.WP3].CT_WorkFlow.GetCurrentTime();
+                            MiddleLayer.LogF.AddLog(LogType.EventFlow, $"Conveyor,Work Post 3 Total Cycle Time: {(_cur / (double)1000).ToString("F1")}");
+                        }
+                        if (!passThru)
+                        {
+                            MiddleLayer.LogF.AddLog(LogType.Production, $"UPH, {SysPara.UPH_Count.ToString()}"); //Log UPH, removable
+                            if (!SysPara.PalletList[(int)WorkPost.WP3].Peek().Status)
+                                SysPara.WorkNG_Count++;
+                            else
+                                SysPara.WorkOK_Count++;
+                            MiddleLayer.SystemF.DBEngineCFX.UnitsDeparted(SysPara.PalletList[(int)WorkPost.WP3].Peek().PalletID);//Teong CFX
+                            SysPara.PalletList[(int)WorkPost.WP3].Dequeue();
+                        }
+                        SysPara.WIP3.End(); //Teong
+                    }
+                    SysPara.TaktTime.Trigger();
+                    RunTMCvy[(int)WorkPost.WP3].Restart();
+                    return FCResultType.NEXT;
+                }
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType fc_Unload_End_WP3_FlowRun(object sender, EventArgs e)
+        {
+            if (SysPara.Simulation)
+            {
+                if (Delay(RunTMCvy[(int)WorkPost.WP3], StdTime))
+                {
+                    if (!Handshake.Conveyor[(int)WorkPost.WP3].TaskUnload.Complete)
+                    {
+                        MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 3 Unload Product Flow end");
+                        IsStartRecordCT[(int)WorkPost.WP3] = false;
+                        Handshake.Conveyor[(int)WorkPost.WP3].CT_LastWorkFlow = Handshake.Conveyor[(int)WorkPost.WP3].CT_WorkFlow.GetCurrentTime() - Handshake.Conveyor[(int)WorkPost.WP3].CT_LastLoadWorkFlow;
+                        MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,[Simulation] Work Post 3 Unload Product Flow Cycle Time: " + (Handshake.Conveyor[(int)WorkPost.WP3].CT_LastWorkFlow / (double)1000).ToString("F1"));
+                        Handshake.Conveyor[(int)WorkPost.WP3].CT_WorkFlow.Reset();
+                        MiddleLayer.AbbF.setPalletUI(ABBRobotForm.ConveyorPost.WP3, false, "", false);
+                    }
+                    Handshake.Conveyor[(int)WorkPost.WP3].TaskUnload.Complete = true;
+                    Handshake.Conveyor[(int)WorkPost.WP3].TaskUnload.Busy = false;
+                }
+                return FCResultType.IDLE;
+            }
+
+            if (!Handshake.Conveyor[(int)WorkPost.WP3].TaskUnload.Complete)
+            {
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,Work Post 3 Unload Product Flow end");
+                IsStartRecordCT[(int)WorkPost.WP3] = false;
+                Handshake.Conveyor[(int)WorkPost.WP3].CT_LastWorkFlow = Handshake.Conveyor[(int)WorkPost.WP3].CT_WorkFlow.GetCurrentTime() - Handshake.Conveyor[(int)WorkPost.WP3].CT_LastLoadWorkFlow;
+                MiddleLayer.LogF.AddLog(LogType.EventFlow, "Conveyor,Work Post 3 Unload Product Flow Cycle Time: " + (Handshake.Conveyor[(int)WorkPost.WP3].CT_LastWorkFlow / (double)1000).ToString("F1"));
+                Handshake.Conveyor[(int)WorkPost.WP3].CT_WorkFlow.Reset();
+                MiddleLayer.AbbF.setPalletUI(ABBRobotForm.ConveyorPost.WP3, false, "", false);
+            }
+            Handshake.Conveyor[(int)WorkPost.WP3].TaskUnload.Complete = true;
+            Handshake.Conveyor[(int)WorkPost.WP3].TaskUnload.Busy = false;
+            return FCResultType.IDLE;
+        }
+
+        #endregion
+
+        #endregion
+    }
+}

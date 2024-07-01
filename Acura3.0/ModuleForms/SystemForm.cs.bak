@@ -1,0 +1,512 @@
+﻿using Acura3._0.Forms;
+using Acura3._0.FunctionForms;
+using AcuraLibrary.Forms;
+using JabilSDK;
+using JabilSDK.Controls;
+using SASDK;
+using System;
+using System.Reflection;
+using System.Collections.Generic;
+using System.Windows.Forms;
+using static Acura3._0.Forms.SignalTowerForm;
+
+namespace Acura3._0.ModuleForms
+{
+    public partial class SystemForm : ModuleBaseForm
+    {
+        public MESForm MesF = new MESForm();
+
+        private bool StatusChange_Start = false;
+        private bool StatusChange_Stop = false;
+        private bool StatusChange_AlarmReset = false;
+        private bool StatusChange_ModeSwitch = false;
+        private bool StatusChange_SafetyDoor = false;
+        private bool StatusChange_Emergency = false;
+        private bool StatusChange_AirPressure = false;
+        public bool isEMO = false;
+        private JTimer BlinkTM = new JTimer();
+        private JTimer BuzzerTM = new JTimer();
+        private bool BlinkIsOn = false;
+        private const int BlinkTime = 500;
+        public bool BuzzerNeedWork = false;
+
+        private string CurrentRecipe = null;//Teong CFX 
+
+        public List<MotorParameter> MotorMaximumParameter = new List<MotorParameter>();
+        public struct MotorParameter
+        {
+            public string Port;
+            public double MaximumSpeed;
+        }
+
+
+        public SystemForm()
+        {
+            InitializeComponent();
+            MesF.TopLevel = false;
+            //groupBox1.Height = panel1.Height = MesF.Height;
+            // groupBox1.Width = panel1.Width = MesF.Width;
+            this.panel1.Controls.Add(MesF);
+            MesF.Show();
+            FlowChartMessage.MessageFormRaise += FlowChartMessage_MessageFormRaise;
+            MessageForm.MuteRaise += MessageForm_MuteRaise;
+            SetDoubleBuffer(panel1);
+            SetDoubleBuffer(panel2);
+            SetDoubleBuffer(ucDBConfigurator1);
+            SetDoubleBuffer(ucDBConfigurator2);
+        }
+
+        private void MessageForm_MuteRaise(object sender, EventArgs e)
+        {
+            BuzzOff();
+            //MiddleLayer.SystemF.BuzzOff();
+        }
+
+        private void FlowChartMessage_MessageFormRaise(object sender, EventArgs e)
+        {
+            BuzzerNeedWork = true;            
+        }
+
+        private void SetDoubleBuffer(Control cont)
+        {
+            typeof(Control).InvokeMember("DoubleBuffered", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetProperty, null, cont, new object[] { true });
+        }
+
+        public override void AfterRecipeEditor()
+        {
+            //MesF.WriteMesTisConfig(SysPara.MESDirectory + "\\" + SysPara.RecipeName);
+        }
+
+        public override void AfterProductionSetting()
+        {
+            MesF.WriteMesTisConfig(SysPara.MESDirectory + "\\" + SysPara.RecipeName);
+        }
+        public override void InitialReset()
+        {
+           
+        }
+        public override void AlwaysRun()
+        {
+            if (CurrentRecipe != SysPara.RecipeName)
+            {
+                //Teong CFX
+                CurrentRecipe = SysPara.RecipeName;
+                DBEngineCFX.RecipeActivated(SysPara.RecipeName);
+            }
+
+            if (SysPara.Simulation)
+                return;
+
+            #region BlinkTimer
+            if (BlinkTM.IsOn(BlinkTime))
+            {
+                BlinkIsOn = !BlinkIsOn;
+                BlinkTM.Restart();
+            }
+            #endregion
+
+            #region MaintainMode Scan
+            if (IB_ModeSwitch.IsOn() || IB_ModeSwitchRear.IsOn())
+            {
+                if (!StatusChange_ModeSwitch)
+                {
+                    MiddleLayer.StopRun();
+                    BackupMotorMaximumSpeed();
+                    SwitchMotorToMaintenanceSpeed();
+                    OB_FluorescentLight.On();
+
+                    SysPara.CFX.StationStateChanged(CFX.Structures.ResourceState.SDT, DateTime.Now);
+                    SysPara.IsMachineBlocked = false;
+                    SysPara.IsMachineStarving = false;
+                    SysPara.IsMachineLowMaterial = false;
+                    SysPara.IsMachineNoMaterial = false;
+                    //OB_DoorInterlock.On();
+                    StatusChange_ModeSwitch = true;
+                }
+                SysPara.IsMaintenanceMode = true;
+            }
+            else
+            {
+                if (StatusChange_ModeSwitch)
+                {
+                    MiddleLayer.StopRun();
+                    RestoreMotorMaximumSpeed();
+                    if (JSDK.Alarm.IsError)   //kaiyen 06052023 VV
+                    {
+
+                        SysPara.CFX.StationStateChanged(CFX.Structures.ResourceState.USD, System.DateTime.Now); //Maintenance Resume Alarm
+                    }
+                    else
+                        SysPara.CFX.StationStateChanged(CFX.Structures.ResourceState.NST, System.DateTime.Now);//Maintenance Resume IDLE
+                    //OB_DoorInterlock.Off();
+                    StatusChange_ModeSwitch = false;
+                }
+                SysPara.IsMaintenanceMode = false;
+            }
+            #endregion
+
+            #region Emergency Stop Scan
+            if (IB_SafetyReady.IsOff())
+            {
+                if (StatusChange_Emergency)
+                {
+                    SysPara.SystemRun = false;
+                    SysPara.SystemMode = RunMode.IDLE;
+                    SysPara.SystemInitialOk = false;
+                    StatusChange_Emergency = false;
+
+                }
+                JSDK.Alarm.Show("1020");
+                isEMO = true;
+            }
+            else
+            {
+                if (!StatusChange_Emergency)
+                    StatusChange_Emergency = true;
+                isEMO = false;
+            }
+            #endregion
+
+            #region Safety door Scan
+            if (IB_SafetyDoor.IsOff())
+            {
+                if (!StatusChange_SafetyDoor)
+                {
+                    OB_FluorescentLight.Off();
+                    StatusChange_SafetyDoor = true;
+                }
+                //if (IB_SafetyDoor.IsOff() && IB_ModeSwitch.IsOff())
+                //    if (!GetSettingValue("PSet", "DisableSafetyDoor"))
+                //        JSDK.Alarm.Show("1021");
+            }
+            else
+            {
+                if (StatusChange_SafetyDoor)
+                {
+                    //JSDK.Alarm.Clear();
+                    OB_FluorescentLight.On();
+                    StatusChange_SafetyDoor = false;
+                }
+            }
+            #endregion
+
+            #region Air Pressure Scan
+            if (!IB_AirPressure.IsOn())
+            {
+                if (StatusChange_AirPressure)
+                    StatusChange_AirPressure = false;
+
+                SysPara.SystemMode = RunMode.IDLE; //Zax
+                SysPara.SystemInitialOk = false;
+                JSDK.Alarm.Show("1022");
+            }
+            else
+            {
+                if (!StatusChange_AirPressure)
+                {
+                    JSDK.Alarm.Clear();
+                    StatusChange_AirPressure = true;
+                }
+            }
+            #endregion
+
+            #region Start Button Scan
+
+            if (IB_BtnStart.IsOn() && !SysPara.IsMaintenanceMode)
+            {
+                if (StatusChange_Start)
+                {
+                    StatusChange_Start = false;
+                    RefreshDifferentThreadUI(MiddleLayer.MainF.btnStart, () =>
+                    {
+                        if (MiddleLayer.MainF.btnStart.Enabled)
+                            MiddleLayer.MainF.btnStart.PerformClick();
+
+                    });
+                }
+            }
+            else
+            {
+                if (!StatusChange_Start)
+                    StatusChange_Start = true;
+            }
+            #endregion
+
+            #region Stop Button Scan
+            if (IB_BtnStop.IsOn())
+            {
+                if (StatusChange_Stop)
+                {
+                    StatusChange_Stop = false;
+                    RefreshDifferentThreadUI(MiddleLayer.MainF.btnPause, () =>
+                    {
+                        if (MiddleLayer.MainF.btnPause.Enabled)
+                            MiddleLayer.MainF.btnPause.PerformClick();
+                    });
+                }
+                BuzzOff();
+            }
+            else
+            {
+                if (!StatusChange_Stop)
+                    StatusChange_Stop = true;
+            }
+            #endregion
+
+            #region Alarm Reset Button Scan
+            if (IB_BtnAlarmReset.IsOn())
+            {
+                if (StatusChange_AlarmReset)
+                {
+                    StatusChange_AlarmReset = false;
+                    RefreshDifferentThreadUI(MiddleLayer.MainF.btnAlarmReset, () =>
+                    {
+                        MiddleLayer.MainF.btnAlarmReset.PerformClick();
+                    });
+
+                }
+                BuzzOff();
+                BuzzerTM.Restart();
+            }
+            else
+            {
+                if (!StatusChange_AlarmReset)
+                    StatusChange_AlarmReset = true;
+            }
+            #endregion
+
+            #region Button Light
+            if (SysPara.SystemInitialOk)
+            {
+                if (SysPara.IsMaintenanceMode)
+                {
+                    if (BlinkIsOn)
+                        OB_BtnLight.On();
+                    else
+                        OB_BtnLight.Off();
+                }
+                else
+                    OB_BtnLight.On();
+            }
+            else
+                OB_BtnLight.Off();
+            #endregion
+
+#region Signal Tower Control 
+            //Refresh Light State
+            //-------------------------Hungyu 2023.03.24----------------------------//
+            if (JSDK.Alarm.IsError/*SDKPara.Arm._ErrorNow*/)
+                MiddleLayer.SignalTowerF.SwitchSignalTowerStatus(SignalTowerStatusType.MessageError);
+            else if (JSDK.Alarm.IsError/*SDKPara.Arm._WarningNow*/)
+            {
+                MiddleLayer.SignalTowerF.SwitchSignalTowerStatus(SignalTowerStatusType.MessageWarning);
+            }
+            else if (SysPara.SystemRun)//Running
+            {
+                if (SysPara.SystemMode == RunMode.RUN)
+                {
+                    if (SysPara.IsMachineBlocked) MiddleLayer.SignalTowerF.SwitchSignalTowerStatus(SignalTowerStatusType.MachineBlocked);
+                    else if (SysPara.IsMachineStarving) MiddleLayer.SignalTowerF.SwitchSignalTowerStatus(SignalTowerStatusType.MachineStarving);
+                    else if (SysPara.IsMachineLowMaterial) MiddleLayer.SignalTowerF.SwitchSignalTowerStatus(SignalTowerStatusType.MachineLowMaterial);
+                    else MiddleLayer.SignalTowerF.SwitchSignalTowerStatus(SignalTowerStatusType.MachineRunning);
+                }
+                else if (SysPara.SystemMode == RunMode.INITIAL)
+                    MiddleLayer.SignalTowerF.SwitchSignalTowerStatus(SignalTowerStatusType.MachineInitialize);
+            }
+            else//Stop
+                MiddleLayer.SignalTowerF.SwitchSignalTowerStatus(SignalTowerStatusType.MachineIdle);
+
+            //Add State Refresh
+            SysPara.CFX.MachineStatesAllUpdate();
+            //-------------------------Hungyu 2023.03.24----------------------------//
+
+            //Control Signal Tower
+            Control_SignalTower(MiddleLayer.SignalTowerF.GreenLightStatus, OB_GreenLight);
+            Control_SignalTower(MiddleLayer.SignalTowerF.YellowLightStatus, OB_YellowLight);
+            Control_SignalTower(MiddleLayer.SignalTowerF.RedLightStatus, OB_RedLight);
+
+            if (MiddleLayer.SignalTowerF.bHaveChangeStatus)
+            {
+                BuzzerNeedWork = true;
+                MiddleLayer.SignalTowerF.bHaveChangeStatus = false;
+            }
+            if (BuzzerNeedWork && !SysPara.isSettingRefresh && !GetSettingValue("PSet", "DisableSafetyBuzzer") && BuzzerTM.IsOn(1000))
+                Control_SignalTower(MiddleLayer.SignalTowerF.BuzzerStatus, OB_Buzzer);
+            else
+                BuzzerNeedWork = false;
+            #endregion
+            /*
+            #region Signal Tower Control
+            if (SysPara.SystemRun)
+            {
+                if (JSDK.Alarm.IsError)
+                    MiddleLayer.SignalTowerF.SwitchSignalTowerStatus(SignalTowerForm.SignalTowerStatusType.MessageError);
+                else if (JSDK.Alarm.IsWarning)
+                    MiddleLayer.SignalTowerF.SwitchSignalTowerStatus(SignalTowerForm.SignalTowerStatusType.MessageWarning);
+                else if (JSDK.Alarm.IsInformation)
+                    MiddleLayer.SignalTowerF.SwitchSignalTowerStatus(SignalTowerForm.SignalTowerStatusType.MessageInformation);
+                else
+                {
+                    if (SysPara.SystemMode == RunMode.RUN)
+                        MiddleLayer.SignalTowerF.SwitchSignalTowerStatus(SignalTowerForm.SignalTowerStatusType.MachineRunning);
+                    if (SysPara.SystemMode == RunMode.INITIAL)
+                        MiddleLayer.SignalTowerF.SwitchSignalTowerStatus(SignalTowerForm.SignalTowerStatusType.MachineInitialize);
+                }
+            }
+            else
+            {
+                if (JSDK.Alarm.IsError)
+                    MiddleLayer.SignalTowerF.SwitchSignalTowerStatus(SignalTowerForm.SignalTowerStatusType.MessageError);
+                else
+                    MiddleLayer.SignalTowerF.SwitchSignalTowerStatus(SignalTowerForm.SignalTowerStatusType.MachineIdle);
+            }
+            //Refresh Output Status
+            Control_SignalTower(MiddleLayer.SignalTowerF.GreenLightStatus, OB_GreenLight);
+            Control_SignalTower(MiddleLayer.SignalTowerF.YellowLightStatus, OB_YellowLight);
+            Control_SignalTower(MiddleLayer.SignalTowerF.RedLightStatus, OB_RedLight);
+            if (MiddleLayer.SignalTowerF.bHaveChangeStatus)
+            {
+                BuzzerNeedWork = true;
+                MiddleLayer.SignalTowerF.bHaveChangeStatus = false;
+            }
+            if (BuzzerNeedWork && !SysPara.isSettingRefresh && !GetSettingValue("PSet", "DisableSafetyBuzzer") && BuzzerTM.IsOn(1000))
+                Control_SignalTower(MiddleLayer.SignalTowerF.BuzzerStatus, OB_Buzzer);
+            else
+                BuzzerNeedWork = false;
+            #endregion*/
+        }
+
+        public override void StartRun()
+        {
+            if (bInitialOk)
+            {
+                MiddleLayer.LogF.AddMachineStatusEvent(LogForm.MachineStatusType.MachineRun);
+                DBEngineCFX.StationStateChanged(SASDK.DBEngine.ucDBEngineCFX.StateChange.Productive, DateTime.Now); //Teong CFX
+                //if (SysPara.EnableJAGConnectivity)
+                //{
+                //    MiddleLayer.SystemF.MesF.SendMachineStatus(LogForm.MachineStatusType.MachineRun);
+                //}
+            }
+        }
+
+        public override void StopRun()
+        {
+            MiddleLayer.LogF.AddMachineStatusEvent(LogForm.MachineStatusType.MachineIdle);
+            if (SysPara.EnableJAGConnectivity)
+            {
+                MiddleLayer.SystemF.MesF.SendMachineStatus(MachineStatusType.MachineIdle);
+            }
+        }
+
+        public static void RefreshDifferentThreadUI(Control control, Action action)
+        {
+            if (control.InvokeRequired)
+            {
+                Action refreshUI = new Action(action);
+                control.Invoke(refreshUI);
+            }
+            else
+            {
+                action.Invoke();
+            }
+        }
+
+        public void BackupMotorMaximumSpeed()
+        {
+            MotorMaximumParameter.Clear();
+            foreach (ControlBaseInterface control in JSDK.ControlList)
+                if (control is Motor)
+                {
+                    MotorParameter d = new MotorParameter();
+                    d.Port = ((Motor)control).Port;
+                    d.MaximumSpeed = ((Motor)control).MaximumSpeed;
+                    MotorMaximumParameter.Add(d);
+                }
+            //MotorParameter robotSpeed = new MotorParameter();
+            //robotSpeed.Port = "1";
+            //robotSpeed.MaximumSpeed = MiddleLayer.AbbF.ABB_Robot.WorkSpeed;
+            MotorMaximumParameter.Add(new MotorParameter { Port = "1", MaximumSpeed = MiddleLayer.AbbF.ABB_Robot.WorkSpeed });
+            MotorMaximumParameter.Add(new MotorParameter { Port = "2", MaximumSpeed = MiddleLayer.AbbF.ABB_Robot.WorkRSpeed });
+        }
+
+        public void RestoreMotorMaximumSpeed()
+        {
+            foreach (ControlBaseInterface control in JSDK.ControlList)
+                if (control is Motor)
+                {
+                    foreach (MotorParameter d in MotorMaximumParameter)
+                    {
+                        string port = ((Motor)control).Port;
+                        if (port == d.Port)
+                            ((Motor)control).MaximumSpeed = d.MaximumSpeed;
+
+                        //if(d.Port == "1")
+                        //{
+                        //    MiddleLayer.AbbF.ABB_Robot.WorkSpeed = d.MaximumSpeed;
+                        //}
+                    }
+                }
+
+            foreach (MotorParameter d in MotorMaximumParameter)
+            {
+                if (d.Port == "1")
+                    MiddleLayer.AbbF.ABB_Robot.WorkSpeed = d.MaximumSpeed;
+                else if (d.Port == "2")
+                    MiddleLayer.AbbF.ABB_Robot.WorkRSpeed = d.MaximumSpeed;
+            }
+        }
+
+        private void SwitchMotorToMaintenanceSpeed()
+        {
+            foreach (ControlBaseInterface control in JSDK.ControlList)
+                if (control is Motor)
+                    if (((Motor)control).MaximumSpeed > 33)
+                    {
+                        ((Motor)control).MaximumSpeed = 33;
+                    }
+
+            MiddleLayer.AbbF.ABB_Robot.WorkSpeed = 33;
+            MiddleLayer.AbbF.ABB_Robot.WorkRSpeed = 33;
+        }
+
+        private void Control_SignalTower(Status status, Output OB)
+        {
+            switch (status)
+            {
+                case Status.Off:
+                    OB.Off();
+                    break;
+                case Status.On:
+                    OB.On();
+                    break;
+                case Status.Blink:
+                    if (BlinkIsOn)
+                        OB.On();
+                    else
+                        OB.Off();
+                    break;
+            }
+
+
+        }
+
+        public void BuzzOff()
+        {
+            BuzzerNeedWork = false;
+            MiddleLayer.SystemF.DBEngineCFX.FaultAcknowledged(SysPara.UserName);
+            SysPara.CFX.StationStateChanged(CFX.Structures.ResourceState.USD_Repair, DateTime.Now);
+            OB_Buzzer.Off();
+        }
+
+        public void BuzzOn()
+        {
+            BuzzerNeedWork = true;
+            OB_Buzzer.On();
+        }
+
+        private void trackBar1_ValueChanged(object sender, EventArgs e)
+        {
+            lbSpeedRatio.Text = trackBar1.Value.ToString();
+        }
+    }
+}
