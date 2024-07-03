@@ -80,12 +80,8 @@ namespace Acura3._0.ModuleForms
         Fanuc_RobotControl fanuc_RobotControl = new Fanuc_RobotControl();
         JTimer J_AxisAutoTm = new JTimer();
         public JTimer Conveyor1Timeout = new JTimer();
+
         public JTimer Conveyor2Timeout = new JTimer();
-        public JTimer Conveyor3Timeout = new JTimer();
-        public JTimer Conveyor4Timeout = new JTimer();
-        public JTimer Conveyor5Timeout = new JTimer();
-        public JTimer Conveyor6Timeout = new JTimer();
-        public JTimer Conveyor7Timeout = new JTimer();
         int Inindex = 0;
         #endregion
 
@@ -154,13 +150,6 @@ namespace Acura3._0.ModuleForms
 
         public override void RunReset()
         {
-            flowChart1.TaskReset();
-            flowChart106.TaskReset();
-            flowChart8.TaskReset();
-            flowChart107.TaskReset();
-            flowChart18.TaskReset();
-            flowChart115.TaskReset();
-            flowChart25.TaskReset();
             flowChart117.TaskReset();
             flowChart32.TaskReset();
         }
@@ -172,13 +161,6 @@ namespace Acura3._0.ModuleForms
 
         public override void Run()
         {
-            flowChart1.TaskRun();
-            flowChart106.TaskRun();
-            flowChart8.TaskRun();
-            flowChart107.TaskRun();
-            flowChart18.TaskRun();
-            flowChart115.TaskRun();
-            flowChart25.TaskRun();
             flowChart117.TaskRun();
             flowChart32.TaskRun();
         }
@@ -818,11 +800,7 @@ namespace Acura3._0.ModuleForms
             OB_LocalMachineAvailable_SMEMA.Off();
             Conveyor1Timeout.Restart();
             Conveyor2Timeout.Restart();
-            Conveyor3Timeout.Restart();
-            Conveyor4Timeout.Restart();
-            Conveyor5Timeout.Restart();
-            Conveyor6Timeout.Restart();
-            Conveyor7Timeout.Restart();
+
             return FCResultType.IDLE;
         }
 
@@ -860,542 +838,10 @@ namespace Acura3._0.ModuleForms
 
 
         #region autoflow
-        private FCResultType flowChart1_FlowRun_2(object sender, EventArgs e)
-        {
-            OB_Conveyor1_MotorForward.On();
-            Conveyor1Timeout.Restart();
-            MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart1.Text} finish", true);
-            return FCResultType.NEXT;
-        }
 
-
-        private FCResultType flowChart38_FlowRun(object sender, EventArgs e)
-        {
-            if (Dryrun)
-            {
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + "Dryrun Mode : " + $"{this.Text} Module {flowChart38.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            OB_LocalMachineReady_SMEMA.On();
-            if (IB_UpMachineAvailable_SMEMA.IsOn() || UpMachineAvailable_SMEMA)
-            {
-                Conveyor1Timeout.Restart();
-                StationMachineIn1 = true;
-                UpMachineAvailable_SMEMA = false;
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart38.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
-
-
-        private FCResultType flowChart2_FlowRun_1(object sender, EventArgs e)
-        {
-            if (Dryrun)
-            {
-                if (C_DelayMs(1000))
-                {
-                    if (Inindex == 2)
-                    {
-                        Inindex = 0;
-                    }
-                    Inindex++;
-                    if (Inindex == 1 && !Dryrun1)
-                    {
-                        Conveyor1Timeout.Restart();
-                        Dryrun1 = true;
-                        return FCResultType.NEXT;
-                    }
-                    if (Inindex == 2 && !Dryrun2)
-                    {
-                        Conveyor1Timeout.Restart();
-                        Dryrun2 = true;
-                        return FCResultType.CASE1;
-                    }
-                }
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + "Dryrun Mode : " + $"{this.Text} Module {flowChart2.Text} finish", true);
-                return FCResultType.IDLE;
-            }
-
-
-            if (/*IB_BoardStop.IsOff() && IB_Conveyor1_Staiton1_BoardStop.IsOff() &&*/ !Stationwork1 && !StationMachineIn1 && !StationMachineIn2 && !ConveyorStation1NoEmpty || ByPass)
-            {
-
-                //OB_Conveyor1_Station1_StopCylinder.Off();
-                Conveyor1Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart2.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            if (/*input1.IsOff() && IB_Conveyor1_Staiton1_BoardStop.IsOff() && IB_Conveyor1_Staiton2_BoardStop.IsOff() &&*/ !Stationwork2 && !StationMachineIn2 && !StationMachineIn1 && !Stationwork1Comp && !ConveyorStation2NoEmpty)
-            {
-
-                //OB_Conveyor1_Station1_StopCylinder.On();
-                //OB_Conveyor1_Station2_StopCylinder.Off();
-                Conveyor1Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart2.Text} finish", true);
-                return FCResultType.CASE1;
-            }
-            return FCResultType.IDLE;
-        }
-
-
-
-        private FCResultType flowChart3_FlowRun_1(object sender, EventArgs e)
-        {
-            if (Conveyor1Timeout.IsOn(InTimeOut))
-            {
-                Conveyor1Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart2.Text} overtime", false);
-                JSDK.Alarm.Show("5101");
-            }
-
-            if (IB_Conveyor1_Staiton1_BoardStop.IsOn() || (Dryrun && C_DelayMs(500)))
-            {
-                OB_LocalMachineReady_SMEMA.Off();
-                Conveyor1Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart3.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
-
-
-        private FCResultType flowChart60_FlowRun(object sender, EventArgs e)
-        {
-            if (Dryrun||DisableRFID)
-            {
-                Conveyor1Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart59.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            //string guid = SysPara.CFX.WorkStarted();
-            if (ReadRFID(12,A_syGoleRFID)==RFIDResult.OK)
-            {
-                Conveyor1Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart60.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            Conveyor1Timeout.Restart();
-            MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart60.Text} finish", true);
-            return FCResultType.CASE1;
-        }
-
-
-        private FCResultType flowChart39_FlowRun(object sender, EventArgs e)
-        {
-            if (ByPass)
-            {
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + "ByPass Mode : " + $"{this.Text} Module {flowChart39.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            if (Conveyor1Timeout.IsOn(500))
-            {
-                CYL_Conveyor1_Station1_Jacking.On();
-                if (IB_Conveyor1_Station1_JackingCylinderUp.IsOn() && IB_Conveyor1_Station1_StopCylinderDown.IsOff())
-                {
-                    Conveyor1Timeout.Restart();
-                    MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart39.Text} finish", true);
-                    return FCResultType.NEXT;
-                }
-                if (Conveyor1Timeout.IsOn(CylinderTimeOut))
-                {
-                    JSDK.Alarm.Show("5105");
-                    Conveyor1Timeout.Restart();
-                }
-            }
-            return FCResultType.IDLE;
-        }
-
-
-        private FCResultType flowChart4_FlowRun_1(object sender, EventArgs e)
-        {
-            if (Conveyor1Timeout.IsOn(InTimeOut))
-            {
-                Conveyor1Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart4.Text} overtime", false);
-                JSDK.Alarm.Show("5102");
-            }
-
-            if (IB_Conveyor1_Staiton2_BoardStop.IsOn() || (Dryrun && C_DelayMs(500)))
-            {
-                OB_LocalMachineReady_SMEMA.Off();
-                Conveyor1Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart4.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
-
-        private FCResultType flowChart59_FlowRun(object sender, EventArgs e)
-        {
-            StationMachineIn2 = false;
-            ConveyorStation2NoEmpty = true;
-            if (Dryrun||DisableRFID)
-            {
-                Conveyor1Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart59.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            if (ReadRFID(12, A_syGoleRFID) == RFIDResult.OK)
-            {
-                Conveyor1Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart59.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            Conveyor1Timeout.Restart();
-            MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart59.Text} finish", true);
-            return FCResultType.CASE1;
-        }
-
-        private FCResultType flowChart42_FlowRun(object sender, EventArgs e)
-        {
-            if (ByPass)
-            {
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + "ByPass Mode : " + $"{this.Text} Module {flowChart39.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            if (Conveyor1Timeout.IsOn(500))
-            {
-                CYL_Conveyor1_Station2_Jacking.On();
-                if (IB_Conveyor1_Station2_JackingCylinderUp.IsOn())
-                {
-                    Conveyor1Timeout.Restart();
-                    MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart42.Text} finish", true);
-                    return FCResultType.NEXT;
-                }
-                if (Conveyor1Timeout.IsOn(CylinderTimeOut))
-                {
-                    JSDK.Alarm.Show("5106");
-                    Conveyor1Timeout.Restart();
-                }
-            }
-            return FCResultType.IDLE;
-        }
-
-
-        private FCResultType flowChart40_FlowRun(object sender, EventArgs e)
-        {
-            if (ByPass)
-            {
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + "ByPass Mode : " + $"{this.Text} Module {flowChart40.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            OB_Station1_MotorForward.On();
-            OB_MotorForward.On();
-            Conveyor1Timeout.Restart();
-            MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart40.Text} finish", true);
-            return FCResultType.NEXT;
-        }
-
-
-        private FCResultType flowChart41_FlowRun(object sender, EventArgs e)
-        {
-            if (ByPass)
-            {
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + "ByPass Mode : " + $"{this.Text} Module {flowChart41.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-
-            if (Conveyor1Timeout.IsOn(InTimeOut))
-            {
-                Conveyor1Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart41.Text} overtime", false);
-                JSDK.Alarm.Show("5101");
-            }
-
-            if (IB_BoardStop.IsOn() || Dryrun)
-            {
-                Conveyor1Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart41.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
-
-
-        private FCResultType flowChart5_FlowRun_1(object sender, EventArgs e)
-        {
-            if (ByPass)
-            {
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + "ByPass Mode : " + $"{this.Text} Module {flowChart5.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            if (Conveyor1Timeout.IsOn(500))
-            {
-                Conveyor1Timeout.Restart();
-                Station1Start = true;
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart5.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
-
-
-        private FCResultType flowChart43_FlowRun(object sender, EventArgs e)
-        {
-            OB_Station2_MotorForward.On();
-            output2.On();
-            Conveyor1Timeout.Restart();
-            MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart43.Text} finish", true);
-            return FCResultType.NEXT;
-        }
-
-
-        private FCResultType flowChart44_FlowRun(object sender, EventArgs e)
-        {
-            if (ByPass)
-            {
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + "ByPass Mode : " + $"{this.Text} Module {flowChart41.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            if (Conveyor1Timeout.IsOn(InTimeOut))
-            {
-                Conveyor1Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart44.Text} overtime", false);
-                JSDK.Alarm.Show("5102");
-            }
-
-            if (input1.IsOn() || Dryrun)
-            {
-                Conveyor1Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart44.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
-
-
-        private FCResultType flowChart6_FlowRun_1(object sender, EventArgs e)
-        {
-            if (Conveyor1Timeout.IsOn(500))
-            {
-                Conveyor1Timeout.Restart();
-                Station2Start = true;
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart6.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
-
-        private FCResultType flowChart8_FlowRun_1(object sender, EventArgs e)
-        {
-            if (Dryrun)
-            {
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + "Dryrun Mode : " + $"{this.Text} Module {flowChart8.Text} finish", true);
-                myRFID1 = new MyRFIDDataStruct(A_syGoleRFID, true, "OK");
-            }
-            Conveyor2Timeout.Restart();
-            MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart8.Text} finish", true);
-            return FCResultType.NEXT;
-        }
-
-        private FCResultType flowChart18_FlowRun(object sender, EventArgs e)
-        {
-            if (Dryrun)
-            {
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + "Dryrun Mode : " + $"{this.Text} Module {flowChart18.Text} finish", true);
-                myRFID2 = new MyRFIDDataStruct(B_syGoleRFID, true, "OK");
-            }
-            Conveyor3Timeout.Restart();
-            MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart18.Text} finish", true);
-            return FCResultType.NEXT;
-        }
 
 
         int Outindex = 0;
-        private FCResultType flowChart9_FlowRun_1(object sender, EventArgs e)
-        {
-            //if (MachineAvailable1 && IB_Conveyor1_Staiton1_BoardStop.IsOn())
-            //{
-            //    MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart9.Text} overtime", false);
-            //    JSDK.Alarm.Show("5100");
-            //}
-            if (Gantry1NGProduct)
-            {
-                Gantry1NGProduct = false;
-                Conveyor2Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart9.Text} finish", true);
-                return FCResultType.CASE1;
-            }
-
-            if ((MachineAvailable1 /*&& IB_Conveyor1_Staiton1_BoardStop.IsOff() && IB_Conveyor1_Staiton2_BoardStop.IsOff()*/ && !StationMachineIn1 && !Stationwork2Comp && !StationMachineIn2)
-                || (Dryrun && MachineAvailable1) || ByPass)
-            {
-                ConveyorStation1NoEmpty = false;
-                Stationwork1 = true;
-                Stationwork1Comp = true;
-                Conveyor2Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart9.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-
-            return FCResultType.IDLE;
-        }
-
-
-        private FCResultType flowChart11_FlowRun_1(object sender, EventArgs e)
-        {
-            if (ByPass)
-            {
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + "ByPass Mode : " + $"{this.Text} Module {flowChart11.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            OB_Conveyor1_Station1_StopCylinder.On();
-            CYL_Conveyor1_Station1_Jacking.On();
-            if (IB_Conveyor1_Station1_JackingCylinderUp.IsOn() && IB_Conveyor1_Station1_StopCylinderDown.IsOn())
-            {
-                Conveyor2Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart11.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-
-            if (Conveyor2Timeout.IsOn(CylinderTimeOut))
-            {
-                if (IB_Conveyor1_Station1_JackingCylinderUp.IsOff())
-                {
-                    JSDK.Alarm.Show("5105");
-                }
-                if (IB_Conveyor1_Station1_StopCylinderDown.IsOff())
-                {
-                    JSDK.Alarm.Show("5109");
-                }
-                Conveyor2Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart11.Text} overtime", false);
-
-            }
-            return FCResultType.IDLE;
-        }
-
-
-        private FCResultType flowChart45_FlowRun(object sender, EventArgs e)
-        {
-            if (ByPass)
-            {
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + "ByPass Mode : " + $"{this.Text} Module {flowChart45.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            OB_Station1_MotorReverse.On();
-            OB_MotorReverse.On();
-            Conveyor2Timeout.Restart();
-            MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart45.Text} finish", true);
-            return FCResultType.NEXT;
-        }
-
-
-        private FCResultType flowChart12_FlowRun_1(object sender, EventArgs e)
-        {
-            if (Conveyor2Timeout.IsOn(InTimeOut))
-            {
-                Conveyor2Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart12.Text} overtime", false);
-                JSDK.Alarm.Show("5103");
-
-            }
-
-            if (IB_Conveyor1_Staiton1_BoardStop.IsOn() || (Dryrun && C_DelayMs(500)) || (ByPass && IB_Conveyor1_Staiton1_BoardStop.IsOn()))
-            {
-                Conveyor2Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart12.Text} finish", true);
-                return FCResultType.NEXT;
-
-            }
-            return FCResultType.IDLE;
-        }
-
-
-        private FCResultType flowChart46_FlowRun(object sender, EventArgs e)
-        {
-            if (ByPass)
-            {
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + "ByPass Mode : " + $"{this.Text} Module {flowChart46.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            if (Conveyor2Timeout.IsOn(500))
-            {
-                OB_Station1_MotorReverse.Off();
-                OB_MotorReverse.Off();
-                CYL_Conveyor1_Station1_Jacking.Off();
-                if (IB_Conveyor1_Station1_JackingCylinderDown.IsOn())
-                {
-                    MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart46.Text} finish", true);
-                    Conveyor2Timeout.Restart();
-                    return FCResultType.NEXT;
-                }
-            }
-
-            if (Conveyor2Timeout.IsOn(CylinderTimeOut))
-            {
-                Conveyor2Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart46.Text} overtime", false);
-                JSDK.Alarm.Show("5107");
-            }
-            return FCResultType.IDLE;
-        }
-
-
-        private FCResultType flowChart13_FlowRun_1(object sender, EventArgs e)
-        {
-            OB_Conveyor1_Station1_StopCylinder.On();
-            if (IB_Conveyor1_Station1_StopCylinderDown.IsOn())
-            {
-                Conveyor2Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart13.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-
-            if (Conveyor2Timeout.IsOn(CylinderTimeOut))
-            {
-                Conveyor2Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart13.Text} overtime", false);
-                JSDK.Alarm.Show("5109");
-            }
-            return FCResultType.IDLE;
-        }
-
-
-        private FCResultType flowChart47_FlowRun(object sender, EventArgs e)
-        {
-            if (Conveyor2Timeout.IsOn(500))
-            {
-                OB_Conveyor1_Station1_StopCylinder.Off();
-                if (IB_Conveyor1_Station1_StopCylinderUp.IsOn())
-                {
-                    Conveyor2Timeout.Restart();
-                    //Stationwork1 = false;
-                    MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart47.Text} finish", true);
-                    return FCResultType.NEXT;
-                }
-
-                if (Conveyor2Timeout.IsOn(CylinderTimeOut))
-                {
-                    Conveyor2Timeout.Restart();
-                    MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart13.Text} overtime", false);
-                    JSDK.Alarm.Show("5111");
-                }
-
-            }
-            return FCResultType.IDLE;
-        }
-
-        private FCResultType flowChart103_FlowRun(object sender, EventArgs e)
-        {
-
-            if (IB_Conveyor1_Staiton1_BoardStop.IsOff())
-            {
-                Conveyor2Timeout.Restart();
-                Stationwork1 = false;
-                return FCResultType.NEXT;
-            }
-            if (Conveyor2Timeout.IsOn(InTimeOut))
-            {
-                Conveyor2Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart13.Text} overtime", false);
-                JSDK.Alarm.Show("5103");
-            }
-
-
-            return FCResultType.IDLE;
-        }
 
         private FCResultType flowChart104_FlowRun(object sender, EventArgs e)
         {
@@ -1408,335 +854,17 @@ namespace Acura3._0.ModuleForms
         }
 
 
-        private FCResultType flowChart14_FlowRun_1(object sender, EventArgs e)
-        {
-            OB_Conveyor1_Station2_StopCylinder.On();
-            if (Dryrun && C_DelayMs(500))
-            {
-                Dryrun1 = false;
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + "Dryrun Mode : " + $"{this.Text} Module {flowChart14.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-
-            if (IB_Conveyor1_Station2_StopCylinderDown.IsOn())
-            {
-                Conveyor2Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart14.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            if (Conveyor2Timeout.IsOn(CylinderTimeOut))
-            {
-                JSDK.Alarm.Show("5110");
-                Conveyor2Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart13.Text} overtime", false);
-
-            }
-            return FCResultType.IDLE;
-        }
-
-
-        private FCResultType flowChart48_FlowRun(object sender, EventArgs e)
-        {
-            if (Conveyor2Timeout.IsOn(500))
-            {
-                OB_Conveyor1_Station2_StopCylinder.Off();
-                if (IB_Conveyor1_Station2_StopCylinderUp.IsOn())
-                {
-                    Conveyor2Timeout.Restart();
-                    return FCResultType.NEXT;
-                }
-                if (Conveyor2Timeout.IsOn(CylinderTimeOut))
-                {
-                    Conveyor2Timeout.Restart();
-                    JSDK.Alarm.Show("5112");
-                }
-            }
-            return FCResultType.IDLE;
-        }
-
-        private FCResultType flowChart15_FlowRun(object sender, EventArgs e)
-        {
-            return FCResultType.NEXT;
-        }
-
-        private FCResultType flowChart16_FlowRun(object sender, EventArgs e)
-        {
-            return FCResultType.NEXT;
-        }
-
-        private FCResultType flowChart17_FlowRun(object sender, EventArgs e)
-        {
-            return FCResultType.NEXT;
-        }
-
-        private FCResultType flowChart24_FlowRun(object sender, EventArgs e)
-        {
-            return FCResultType.NEXT;
-        }
-
-        private FCResultType flowChart19_FlowRun(object sender, EventArgs e)
-        {
-            if (Gantry2NGProduct)
-            {
-                Gantry2NGProduct = false;
-                Conveyor3Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart9.Text} finish", true);
-                return FCResultType.CASE1;
-            }
-            if ((MachineAvailable2 /*&& IB_Conveyor1_Staiton2_BoardStop.IsOff()*/ && !Stationwork1Comp && !StationMachineIn2)
-                || (Dryrun && MachineAvailable2))
-            {
-                Stationwork2 = true;
-                Stationwork2Comp = true;
-                ConveyorStation2NoEmpty = false;
-                Conveyor3Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-
-            return FCResultType.IDLE;
-        }
-
-
-        private FCResultType flowChart20_FlowRun(object sender, EventArgs e)
-        {
-            OB_Conveyor1_Station2_StopCylinder.On();
-            CYL_Conveyor1_Station2_Jacking.On();
-            if (IB_Conveyor1_Station2_JackingCylinderUp.IsOn() && IB_Conveyor1_Station2_StopCylinderDown.IsOn())
-            {
-                Conveyor3Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-
-            if (Conveyor3Timeout.IsOn(CylinderTimeOut))
-            {
-                if (IB_Conveyor1_Station2_JackingCylinderUp.IsOff())
-                {
-                    JSDK.Alarm.Show("5106");
-                }
-                if (IB_Conveyor1_Station2_StopCylinderDown.IsOff())
-                {
-                    JSDK.Alarm.Show("5110");
-                }
-                Conveyor3Timeout.Restart();
-
-            }
-            return FCResultType.IDLE;
-        }
-
-
-        private FCResultType flowChart49_FlowRun(object sender, EventArgs e)
-        {
-            OB_Station2_MotorReverse.On();
-            output1.On();
-            Conveyor3Timeout.Restart();
-            return FCResultType.NEXT;
-        }
-
-
-        private FCResultType flowChart21_FlowRun(object sender, EventArgs e)
-        {
-            if (Conveyor3Timeout.IsOn(InTimeOut))
-            {
-                Conveyor3Timeout.Restart();
-                JSDK.Alarm.Show("5104");
-            }
-
-            if (IB_Conveyor1_Staiton2_BoardStop.IsOn() || (Dryrun && C_DelayMs(500)))
-            {
-                Conveyor3Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
-
-
-        private FCResultType flowChart50_FlowRun(object sender, EventArgs e)
-        {
-            if (Conveyor3Timeout.IsOn(500))
-            {
-                OB_Station2_MotorReverse.Off();
-                output1.Off();
-                CYL_Conveyor1_Station2_Jacking.Off();
-                if (IB_Conveyor1_Station2_JackingCylinderDown.IsOn())
-                {
-                    Conveyor3Timeout.Restart();
-                    return FCResultType.NEXT;
-                }
-            }
-
-            if (Conveyor3Timeout.IsOn(CylinderTimeOut))
-            {
-                Conveyor3Timeout.Restart();
-                JSDK.Alarm.Show("5108");
-            }
-            return FCResultType.IDLE;
-        }
-
-        private FCResultType flowChart105_FlowRun(object sender, EventArgs e)
-        {
-            if (IB_Conveyor2_Station_BoardStop.IsOff())
-            {
-                Conveyor3Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
-
-        private FCResultType flowChart22_FlowRun(object sender, EventArgs e)
-        {
-            OB_Conveyor1_Station2_StopCylinder.On();
-            if (IB_Conveyor1_Station2_StopCylinderDown.IsOn())
-            {
-                Conveyor3Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-
-            if (Conveyor3Timeout.IsOn(CylinderTimeOut))
-            {
-                Conveyor3Timeout.Restart();
-                JSDK.Alarm.Show("5110");
-            }
-            return FCResultType.IDLE;
-        }
-
-        private FCResultType flowChart23_FlowRun(object sender, EventArgs e)
-        {
-            if (Conveyor3Timeout.IsOn(500))
-            {
-
-                OB_Conveyor1_Station2_StopCylinder.Off();
-                if (IB_Conveyor1_Station2_StopCylinderUp.IsOn())
-                {
-                    Dryrun2 = false;
-                    Conveyor3Timeout.Restart();
-                    return FCResultType.NEXT;
-                }
-                if (Conveyor3Timeout.IsOn(CylinderTimeOut))
-                {
-                    Conveyor3Timeout.Restart();
-                    JSDK.Alarm.Show("5112");
-                }
-            }
-            return FCResultType.IDLE;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            UpMachineAvailable_SMEMA = true;
-        }
-
-        private FCResultType flowChart7_FlowRun(object sender, EventArgs e)
-        {
-            if (Conveyor2Timeout.IsOn(1000))
-            {
-                Conveyor2Timeout.Restart();
-                ConveyorBStart1 = true;
-                Stationwork1Comp = false;
-                MachineAvailable1 = false;
-                RFIDDataStructList1.Add(myRFID1);
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
-
-        private FCResultType flowChart70_FlowRun(object sender, EventArgs e)
-        {
-            if (IB_Conveyor1_Staiton2_BoardStop.IsOff() || (Dryrun && C_DelayMs(500)))
-            {
-                Conveyor3Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-
-            if (Conveyor3Timeout.IsOn(InTimeOut))
-            {
-                Conveyor3Timeout.Restart();
-                JSDK.Alarm.Show("5104");
-            }
-            return FCResultType.IDLE;
-        }
-
-        private FCResultType flowChart10_FlowRun(object sender, EventArgs e)
-        {
-            if (Conveyor3Timeout.IsOn(1000))
-            {
-                ConveyorBStart1 = true;
-                Stationwork2 = false;
-                Stationwork2Comp = false;
-                MachineAvailable2 = false;
-                Conveyor3Timeout.Restart();
-                RFIDDataStructList1.Add(myRFID2);
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
-
-        private FCResultType flowChart25_FlowRun(object sender, EventArgs e)
-        {
-            OB_Conveyor2_MotorForward.On();
-            OB_Conveyor2_Station1_StopCylinder.Off();
-            if (IB_Conveyor2_Station1_StopCylinderUp.IsOn())
-            {
-                Conveyor4Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-            if (Conveyor4Timeout.IsOn(CylinderTimeOut))
-            {
-                Conveyor4Timeout.Restart();
-                JSDK.Alarm.Show("5158");
-            }
-            return FCResultType.IDLE;
-        }
-
-        private FCResultType flowChart26_FlowRun(object sender, EventArgs e)
-        {
-            //if (RFIDDataStructList1.Count > 0)
-            //{
-            //    if (IB_Conveyor2_Station1_BoardStop.IsOff()&&IB_Conveyor2_Station_BoardStop.IsOn())
-            //    {
-            //        Conveyor4Timeout.Restart();
-            //        return FCResultType.CASE1;
-            //    }
-            //    if (IB_Conveyor2_Station1_BoardStop.IsOn(200) || (Dryrun && C_DelayMs(500)))
-            //    {
-            //        ConveyorBStart1 = false;
-            //        Conveyor4Timeout.Restart();
-            //        return FCResultType.NEXT;
-            //    }
-
-            //    if (Conveyor4Timeout.IsOn(InTimeOut))
-            //    {
-            //        Conveyor4Timeout.Restart();
-            //        JSDK.Alarm.Show("5150");
-            //    }
-            //}
-            //else
-            //    Conveyor4Timeout.Restart();
-            //return FCResultType.IDLE;
-            if (IB_Conveyor2_Station1_BoardStop.IsOn(200) || (Dryrun && C_DelayMs(500)))
-            {
-                ConveyorBStart1 = false;
-                Conveyor4Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-
-            if (Conveyor4Timeout.IsOn(InTimeOut))
-            {
-                Conveyor4Timeout.Restart();
-                JSDK.Alarm.Show("5150");
-            }
-            return FCResultType.IDLE;
-        }
 
         private FCResultType flowChart91_FlowRun(object sender, EventArgs e)
         {
             if (IB_Conveyor2_Station1_BoardStop.IsOn())
             {
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
                 return FCResultType.NEXT;
             }
-            if (Conveyor5Timeout.IsOn(InTimeOut))
+            if (Conveyor1Timeout.IsOn(InTimeOut))
             {
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
                 JSDK.Alarm.Show("5150");
             }
             return FCResultType.IDLE;
@@ -1747,168 +875,17 @@ namespace Acura3._0.ModuleForms
             OB_Conveyor2_Station_StopCylinder.Off();
             if (IB_Conveyor2_Station_StopCylinderUp.IsOn())
             {
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
                 return FCResultType.NEXT;
             }
-            if (Conveyor5Timeout.IsOn(CylinderTimeOut))
+            if (Conveyor1Timeout.IsOn(CylinderTimeOut))
             {
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
                 JSDK.Alarm.Show("5163");
             }
             return FCResultType.IDLE;
         }
 
-
-        private FCResultType flowChart61_FlowRun(object sender, EventArgs e)
-        {
-            if (ByPass)
-            {
-                return FCResultType.CASE1;
-            }
-            if (!DisableRFID || Dryrun)
-            {
-                if (RFIDDataStructList1[0].ResultBool)
-                {
-                    myRFID3 = new MyRFIDDataStruct(C_syGoleRFID, true, "OK");
-                    RFIDDataStructList1.RemoveAt(0);
-                    Conveyor4Timeout.Restart();
-                    return FCResultType.NEXT;
-                }
-                else
-                {
-                    MiddleLayer.SystemF.ShowStatus(3, SystemForm.WorkStatus.Fail);
-                    myRFID3 = new MyRFIDDataStruct(C_syGoleRFID, false, "NG");
-                    RFIDDataStructList1.RemoveAt(0);
-                    Conveyor4Timeout.Restart();
-                    return FCResultType.CASE1;
-                }
-            }
-            if (ReadRFID(13,C_syGoleRFID)==RFIDResult.NA && ReadRFID(14, C_syGoleRFID) == RFIDResult.NA)
-            {
-                RFIDDataStructList1.RemoveAt(0);
-                Conveyor4Timeout.Restart();
-                return FCResultType.CASE1;
-            }
-            else if (ReadRFID(13, C_syGoleRFID) == RFIDResult.NG|| ReadRFID(14, C_syGoleRFID) == RFIDResult.NG)
-            {
-                RFIDDataStructList1.RemoveAt(0);
-                Conveyor4Timeout.Restart();
-                return FCResultType.CASE1;
-            }
-            else if (ReadRFID(13, C_syGoleRFID) == RFIDResult.OK || ReadRFID(14, C_syGoleRFID) == RFIDResult.OK)
-            {
-                RFIDDataStructList1.RemoveAt(0);
-                Conveyor4Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
-
-
-        private FCResultType flowChart51_FlowRun(object sender, EventArgs e)
-        {
-            CYL_Conveyor2_Station1_Jacking.On();
-            if (IB_Conveyor2_Station1_JackingCylinderUp.IsOn(500))
-            {
-                ConveyorBStation1RobotStart1 = true;
-                Conveyor4Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-
-            if (Conveyor4Timeout.IsOn(CylinderTimeOut))
-            {
-                Conveyor4Timeout.Restart();
-                JSDK.Alarm.Show("5154");
-            }
-            return FCResultType.IDLE;
-        }
-
-
-        private FCResultType flowChart27_FlowRun(object sender, EventArgs e)
-        {
-            if (ConveyorBStation1RobotComp1)
-            {
-                CYL_Conveyor2_Station1_Jacking.Off();
-                if (IB_Conveyor2_Station1_JackingCylinderDown.IsOn())
-                {
-                    Conveyor4Timeout.Restart();
-                    ConveyorBStation1RobotComp1 = false;
-                    return FCResultType.NEXT;
-                }
-                if (Conveyor4Timeout.IsOn(CylinderTimeOut))
-                {
-                    Conveyor4Timeout.Restart();
-                    JSDK.Alarm.Show("5156");
-                }
-            }
-            else
-                Conveyor4Timeout.Restart();
-            return FCResultType.IDLE;
-        }
-
-
-        private FCResultType flowChart28_FlowRun(object sender, EventArgs e)
-        {
-            Conveyor4Timeout.Restart();
-            return FCResultType.NEXT;
-            if (Dryrun || ByPass)
-            {
-                myRFID3.ResultBool = true;
-            }
-            if (IB_Conveyor2_Station2_BoardStop.IsOff())
-            {
-                //OB_Conveyor2_Station2_StopCylinder.Off();
-                //OB_Conveyor2_Station1_StopCylinder.On();
-                //ConveyorBStart2 = true;
-                //RFIDDataStructList2.Add(myRFID3);
-                Conveyor4Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-            if (Conveyor4Timeout.IsOn(InTimeOut))
-            {
-                Conveyor4Timeout.Restart();
-                JSDK.Alarm.Show("5152");
-            }
-            return FCResultType.IDLE;
-        }
-
-
-        private FCResultType flowChart29_FlowRun(object sender, EventArgs e)
-        {
-            if (Conveyor4Timeout.IsOn(500))
-            {
-                OB_Conveyor2_Station1_StopCylinder.Off();
-                //OB_Conveyor2_Station_StopCylinder.Off();
-                if (IB_Conveyor2_Station1_StopCylinderUp.IsOn() /*&& IB_Conveyor2_Station_StopCylinderUp.IsOn()*/)
-                {
-
-                    Conveyor4Timeout.Restart();
-                    return FCResultType.NEXT;
-                }
-            }
-
-            if (Conveyor4Timeout.IsOn(CylinderTimeOut))
-            {
-                if (IB_Conveyor2_Station1_StopCylinderUp.IsOff())
-                {
-                    JSDK.Alarm.Show("5160");
-                }
-                //if (IB_Conveyor2_Station_StopCylinderUp.IsOff())
-                //{
-                //    JSDK.Alarm.Show("5163");
-                //}
-                Conveyor4Timeout.Restart();
-
-            }
-            return FCResultType.IDLE;
-        }
-
-
-        private FCResultType flowChart30_FlowRun(object sender, EventArgs e)
-        {
-            myRFID3.ResultBool = false;
-            return FCResultType.NEXT;
-        }
 
 
         private FCResultType flowChart32_FlowRun(object sender, EventArgs e)
@@ -1916,14 +893,14 @@ namespace Acura3._0.ModuleForms
             OB_Conveyor2_Station3_StopCylinder.Off();
             if (IB_Conveyor2_Station3_StopCylinderUp.IsOn())
             {
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
                 return FCResultType.NEXT;
             }
-            if (Conveyor5Timeout.IsOn(CylinderTimeOut))
+            if (Conveyor1Timeout.IsOn(CylinderTimeOut))
             {
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
                 JSDK.Alarm.Show("5161");
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
             }
             return FCResultType.IDLE;
         }
@@ -1933,7 +910,7 @@ namespace Acura3._0.ModuleForms
         {
             if (IB_Conveyor2_Station3_BoardStop.IsOn(200) || (Dryrun && C_DelayMs(500)))
             {
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
                 ConveyorBStart2 = false;
                 return FCResultType.NEXT;
             }
@@ -1942,13 +919,13 @@ namespace Acura3._0.ModuleForms
             {
                 if (IB_Conveyor2_Station2_BoardStop.IsOn() && IB_Conveyor2_Station3_BoardStop.IsOff())
                 {
-                    Conveyor5Timeout.Restart();
+                    Conveyor1Timeout.Restart();
                     return FCResultType.CASE1;
                 }
 
                 if (IB_Conveyor2_Station3_BoardStop.IsOn(200) || (Dryrun && C_DelayMs(500)))
                 {
-                    Conveyor5Timeout.Restart();
+                    Conveyor1Timeout.Restart();
                     ConveyorBStart2 = false;
                     return FCResultType.NEXT;
                 }
@@ -1971,7 +948,7 @@ namespace Acura3._0.ModuleForms
             {
                 if (RFIDDataStructList2[0].ResultBool)
                 {
-                    Conveyor5Timeout.Restart();
+                    Conveyor1Timeout.Restart();
                     myRFID4 = new MyRFIDDataStruct(D_syGoleRFID, true, "OK");
                     RFIDDataStructList2.RemoveAt(0);
                     return FCResultType.NEXT;
@@ -1979,7 +956,7 @@ namespace Acura3._0.ModuleForms
                 else
                 {
                     MiddleLayer.SystemF.ShowStatus(4, SystemForm.WorkStatus.Fail);
-                    Conveyor5Timeout.Restart();
+                    Conveyor1Timeout.Restart();
                     myRFID4 = new MyRFIDDataStruct(D_syGoleRFID, false, "NG");
                     RFIDDataStructList2.RemoveAt(0);
                     return FCResultType.CASE1;
@@ -1989,19 +966,19 @@ namespace Acura3._0.ModuleForms
             if (ReadRFID(15, D_syGoleRFID) == RFIDResult.NA)
             {
                 RFIDDataStructList2.RemoveAt(0);
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
                 return FCResultType.CASE1;
             }
             else if (ReadRFID(15, D_syGoleRFID) == RFIDResult.NG)
             {
                 RFIDDataStructList2.RemoveAt(0);
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
                 return FCResultType.CASE1;
             }
             else if (ReadRFID(15, D_syGoleRFID) == RFIDResult.OK)
             {
                 RFIDDataStructList2.RemoveAt(0);
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
                 return FCResultType.NEXT;
             }
             return FCResultType.IDLE;
@@ -2013,13 +990,13 @@ namespace Acura3._0.ModuleForms
             CYL_Conveyor2_Station3_Jacking.On();
             if (IB_Conveyor2_Station3_JackingCylinderUp.IsOn())
             {
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
                 ConveyorBStation2RobotStart2 = true;
                 return FCResultType.NEXT;
             }
-            if (Conveyor5Timeout.IsOn(CylinderTimeOut))
+            if (Conveyor1Timeout.IsOn(CylinderTimeOut))
             {
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
                 JSDK.Alarm.Show("5155");
             }
             return FCResultType.IDLE;
@@ -2031,12 +1008,12 @@ namespace Acura3._0.ModuleForms
             OB_Conveyor2_Station2_StopCylinder.On();
             if (IB_Conveyor2_Station2_StopCylinderDown.IsOn())
             {
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
                 return FCResultType.NEXT;
             }
-            if (Conveyor5Timeout.IsOn(CylinderTimeOut))
+            if (Conveyor1Timeout.IsOn(CylinderTimeOut))
             {
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
                 JSDK.Alarm.Show("5164");
             }
             return FCResultType.IDLE;
@@ -2045,12 +1022,12 @@ namespace Acura3._0.ModuleForms
         {
             if (IB_Conveyor2_Station3_BoardStop.IsOn())
             {
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
                 return FCResultType.NEXT;
             }
-            if (Conveyor5Timeout.IsOn(InTimeOut))
+            if (Conveyor1Timeout.IsOn(InTimeOut))
             {
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
                 JSDK.Alarm.Show("5151");
             }
             return FCResultType.IDLE;
@@ -2061,12 +1038,12 @@ namespace Acura3._0.ModuleForms
             OB_Conveyor2_Station2_StopCylinder.Off();
             if (IB_Conveyor2_Station2_StopCylinderUp.IsOn())
             {
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
                 return FCResultType.NEXT;
             }
-            if (Conveyor5Timeout.IsOn(CylinderTimeOut))
+            if (Conveyor1Timeout.IsOn(CylinderTimeOut))
             {
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
                 JSDK.Alarm.Show("5165");
             }
             return FCResultType.IDLE;
@@ -2079,13 +1056,13 @@ namespace Acura3._0.ModuleForms
                 CYL_Conveyor2_Station3_Jacking.Off();
                 if (IB_Conveyor2_Station3_JackingCylinderDown.IsOn())
                 {
-                    Conveyor5Timeout.Restart();
+                    Conveyor1Timeout.Restart();
                     ConveyorBStation2RobotComp2 = false;
                     return FCResultType.NEXT;
                 }
-                if (Conveyor5Timeout.IsOn(CylinderTimeOut))
+                if (Conveyor1Timeout.IsOn(CylinderTimeOut))
                 {
-                    Conveyor5Timeout.Restart();
+                    Conveyor1Timeout.Restart();
                     JSDK.Alarm.Show("5157");
                 }
             }
@@ -2102,7 +1079,7 @@ namespace Acura3._0.ModuleForms
             if (IB_DownMachineReady_SMEMA.IsOn() || DownMachineReady_SMEMA)  //按钮模拟下机要料
             {
                 DownMachineReady_SMEMA = false;
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
                 return FCResultType.NEXT;
             }
             return FCResultType.IDLE;
@@ -2116,11 +1093,11 @@ namespace Acura3._0.ModuleForms
             //OB_Conveyor2_Station2_StopCylinder.On();
             if (/*IB_Conveyor2_Station2_StopCylinderDown.IsOn() &&*/ IB_Conveyor2_Station3_StopCylinderDown.IsOn())
             {
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
                 return FCResultType.NEXT;
             }
 
-            if (Conveyor5Timeout.IsOn(CylinderTimeOut))
+            if (Conveyor1Timeout.IsOn(CylinderTimeOut))
             {
                 //if (IB_Conveyor2_Station2_StopCylinderDown.IsOff())
                 //{
@@ -2130,7 +1107,7 @@ namespace Acura3._0.ModuleForms
                 {
                     JSDK.Alarm.Show("5159");
                 }
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
             }
             return FCResultType.IDLE;
         }
@@ -2138,17 +1115,17 @@ namespace Acura3._0.ModuleForms
 
         private FCResultType flowChart36_FlowRun(object sender, EventArgs e)
         {
-            if (Conveyor5Timeout.IsOn(500))
+            if (Conveyor1Timeout.IsOn(500))
             {
                 OB_Conveyor2_Station3_StopCylinder.Off();
                 //OB_Conveyor2_Station2_StopCylinder.Off();
                 if (IB_Conveyor2_Station3_StopCylinderUp.IsOn()/* && IB_Conveyor2_Station2_StopCylinderUp.IsOn()*/)
                 {
-                    Conveyor5Timeout.Restart();
+                    Conveyor1Timeout.Restart();
                     return FCResultType.NEXT;
                 }
 
-                if (Conveyor5Timeout.IsOn(CylinderTimeOut))
+                if (Conveyor1Timeout.IsOn(CylinderTimeOut))
                 {
                     if (IB_Conveyor2_Station3_StopCylinderUp.IsOff())
                     {
@@ -2158,7 +1135,7 @@ namespace Acura3._0.ModuleForms
                     //{
                     //    JSDK.Alarm.Show("5165");
                     //}
-                    Conveyor5Timeout.Restart();
+                    Conveyor1Timeout.Restart();
 
                 }
             }
@@ -2171,13 +1148,13 @@ namespace Acura3._0.ModuleForms
             if (IB_Conveyor2_Boardout.IsOn() || Conveyor2Boardout || (Dryrun && C_DelayMs(1000)))
             {
                 Conveyor2Boardout = false;
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
                 return FCResultType.NEXT;
             }
-            if (Conveyor5Timeout.IsOn(InTimeOut))
+            if (Conveyor1Timeout.IsOn(InTimeOut))
             {
                 JSDK.Alarm.Show("5166");
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
             }
             return FCResultType.IDLE;
         }
@@ -2189,13 +1166,13 @@ namespace Acura3._0.ModuleForms
             {
                 OB_LocalMachineAvailable_SMEMA.Off();
                 OB_LocalMachineWorkNG_SMEMA.Off();
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
                 return FCResultType.NEXT;
             }
 
-            if (Conveyor5Timeout.IsOn(InTimeOut))
+            if (Conveyor1Timeout.IsOn(InTimeOut))
             {
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
                 JSDK.Alarm.Show("5166");
             }
             return FCResultType.IDLE;
@@ -2223,21 +1200,7 @@ namespace Acura3._0.ModuleForms
             return FCResultType.NEXT;
         }
 
-        private FCResultType flowChart69_FlowRun(object sender, EventArgs e)
-        {
-            if (IB_Conveyor1_Staiton2_BoardStop.IsOff() || (Dryrun && C_DelayMs(1000)))
-            {
-                Conveyor2Timeout.Restart();
-                return FCResultType.NEXT;
-            }
 
-            if (Conveyor2Timeout.IsOn(InTimeOut))
-            {
-                Conveyor2Timeout.Restart();
-                JSDK.Alarm.Show("5103");
-            }
-            return FCResultType.IDLE;
-        }
 
         private FCResultType flowChart72_FlowRun(object sender, EventArgs e)
         {
@@ -2271,159 +1234,17 @@ namespace Acura3._0.ModuleForms
             return FCResultType.IDLE;
         }
 
-        private FCResultType flowChart80_FlowRun(object sender, EventArgs e)
-        {
-            OB_Conveyor1_Station1_StopCylinder.Off();
-            if (IB_Conveyor1_Station1_StopCylinderUp.IsOn())
-            {
-                Conveyor1Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-            if (Conveyor1Timeout.IsOn(CylinderTimeOut))
-            {
-                JSDK.Alarm.Show("5111");
-                Conveyor1Timeout.Restart();
-            }
-            return FCResultType.IDLE;
-        }
 
-        private FCResultType flowChart82_FlowRun(object sender, EventArgs e)
-        {
-            if (ByPass)
-            {
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + "ByPass Mode : " + $"{this.Text} Module {flowChart39.Text} finish", true);
-                return FCResultType.NEXT;
-            }
 
-            CYL_Conveyor1_Station1_Jacking.Off();
-            if (IB_Conveyor1_Station1_JackingCylinderUp.IsOff() && IB_Conveyor1_Station1_JackingCylinderDown.IsOn())
-            {
-                Conveyor1Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart39.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            if (Conveyor1Timeout.IsOn(CylinderTimeOut))
-            {
-                JSDK.Alarm.Show("5107");
-                Conveyor1Timeout.Restart();
-            }
 
-            return FCResultType.IDLE;
-        }
 
-        private FCResultType flowChart81_FlowRun(object sender, EventArgs e)
-        {
-            OB_Conveyor1_Station1_StopCylinder.On();
-            OB_Conveyor1_Station2_StopCylinder.Off();
-            if (IB_Conveyor1_Station1_StopCylinderDown.IsOn() && IB_Conveyor1_Station2_StopCylinderUp.IsOn())
-            {
-                Conveyor1Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart39.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            if (Conveyor1Timeout.IsOn(CylinderTimeOut))
-            {
-                if (IB_Conveyor1_Station1_StopCylinderDown.IsOff())
-                {
-                    JSDK.Alarm.Show("5109");
-                }
-                if (IB_Conveyor1_Station2_StopCylinderUp.IsOff())
-                {
-                    JSDK.Alarm.Show("5112");
-                }
-                Conveyor1Timeout.Restart();
-            }
 
-            return FCResultType.IDLE;
-        }
 
-        private FCResultType flowChart83_FlowRun(object sender, EventArgs e)
-        {
-            if (ByPass)
-            {
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + "ByPass Mode : " + $"{this.Text} Module {flowChart39.Text} finish", true);
-                return FCResultType.NEXT;
-            }
 
-            CYL_Conveyor1_Station2_Jacking.Off();
-            if (IB_Conveyor1_Station2_JackingCylinderUp.IsOff() && IB_Conveyor1_Station2_JackingCylinderDown.IsOn())
-            {
-                Conveyor1Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart39.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            if (Conveyor1Timeout.IsOn(CylinderTimeOut))
-            {
-                JSDK.Alarm.Show("5108");
-                Conveyor1Timeout.Restart();
-            }
 
-            return FCResultType.IDLE;
-        }
 
-        private FCResultType flowChart84_FlowRun(object sender, EventArgs e)
-        {
-            //OB_Conveyor2_Station2_StopCylinder.Off();
-            OB_Conveyor2_Station1_StopCylinder.On();
-            //OB_Conveyor2_Station_StopCylinder.On();
-            if (/*IB_Conveyor2_Station2_StopCylinderUp.IsOn() &&*/ IB_Conveyor2_Station1_StopCylinderDown.IsOn() /*&& IB_Conveyor2_Station_StopCylinderDown.IsOn()*/)
-            {
-                ConveyorBStart2 = true;
-                RFIDDataStructList2.Add(myRFID3);
-                Conveyor4Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-            if (Conveyor4Timeout.IsOn(CylinderTimeOut))
-            {
-                //if (IB_Conveyor2_Station_StopCylinderDown.IsOff())
-                //{
-                //    JSDK.Alarm.Show("5162");
-                //}
-                //if (IB_Conveyor2_Station2_StopCylinderUp.IsOff())
-                //{
-                //    JSDK.Alarm.Show("5165");
-                //}
-                if (IB_Conveyor2_Station1_StopCylinderDown.IsOff())
-                {
-                    JSDK.Alarm.Show("5158");
-                }
-                Conveyor4Timeout.Restart();
-            }
-            return FCResultType.IDLE;
-        }
 
-        private FCResultType flowChart85_FlowRun(object sender, EventArgs e)
-        {
-            if (IB_Conveyor2_Station2_BoardStop.IsOn() || Dryrun)
-            {
-                ConveyorBStart2 = true;
-                Conveyor4Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-            if (Conveyor4Timeout.IsOn(InTimeOut))
-            {
-                Conveyor4Timeout.Restart();
-                JSDK.Alarm.Show("5152");
-            }
-            return FCResultType.IDLE;
-        }
 
-        private FCResultType flowChart86_FlowRun(object sender, EventArgs e)
-        {
-            if (IB_Conveyor1_Staiton2_BoardStop.IsOn() || Dryrun)
-            {
-                Conveyor2Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-            if (Conveyor2Timeout.IsOn(InTimeOut))
-            {
-                JSDK.Alarm.Show("5103");
-                Conveyor2Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart13.Text} overtime", false);
-
-            }
-            return FCResultType.IDLE;
-        }
 
         private FCResultType flowChart74_FlowRun(object sender, EventArgs e)
         {
@@ -2536,24 +1357,6 @@ namespace Acura3._0.ModuleForms
             return FCResultType.NEXT;
         }
 
-        private FCResultType flowChart87_FlowRun(object sender, EventArgs e)
-        {
-            if (Dryrun)
-            {
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + "Dryrun Mode : " + $"{this.Text} Module {flowChart38.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            OB_LocalMachineReady_SMEMA.On();
-            if (IB_UpMachineAvailable_SMEMA.IsOn() || UpMachineAvailable_SMEMA)
-            {
-                Conveyor1Timeout.Restart();
-                StationMachineIn2 = true;
-                UpMachineAvailable_SMEMA = false;
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart38.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
 
         private FCResultType flowChart98_FlowRun(object sender, EventArgs e)
         {
@@ -2667,216 +1470,49 @@ namespace Acura3._0.ModuleForms
             return FCResultType.IDLE;
         }
 
-        private FCResultType flowChart101_FlowRun(object sender, EventArgs e)
-        {
-            if (!Stationwork1 && !StationMachineIn2 && !ConveyorStation1NoEmpty || ByPass)
-            {
-                Conveyor1Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart2.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
 
-        private FCResultType flowChart102_FlowRun(object sender, EventArgs e)
-        {
-            if (!Stationwork2 && !StationMachineIn1 && !Stationwork1Comp && !ConveyorStation2NoEmpty)
-            {
-                Conveyor1Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart2.Text} finish", true);
-                return FCResultType.NEXT;
-            }
 
-            return FCResultType.IDLE;
-        }
 
-        private FCResultType flowChart132_FlowRun(object sender, EventArgs e)
-        {
-            B_Gantry1LoadingFlow = true;
-            Conveyor1Timeout.Restart();
-            MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart2.Text} finish", true);
-            return FCResultType.NEXT;
-        }
 
-        private FCResultType flowChart133_FlowRun(object sender, EventArgs e)
-        {
-            if (!B_Gantry1LoadingFlow)
-            {
-                Conveyor1Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart2.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
 
-        private FCResultType flowChart135_FlowRun(object sender, EventArgs e)
-        {
-            B_Gantry2LoadingFlow = true;
-            Conveyor1Timeout.Restart();
-            MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart2.Text} finish", true);
-            return FCResultType.NEXT;
-        }
 
-        private FCResultType flowChart134_FlowRun(object sender, EventArgs e)
-        {
-            if (!B_Gantry2LoadingFlow)
-            {
-                Conveyor1Timeout.Restart();
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart2.Text} finish", true);
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
 
-        private FCResultType flowChart136_FlowRun(object sender, EventArgs e)
-        {
-            Conveyor1Timeout.Restart();
-            MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart2.Text} finish", true);
-            return FCResultType.NEXT;
-        }
+      
 
-        private FCResultType flowChart106_FlowRun(object sender, EventArgs e)
-        {
-            if (B_Gantry1LoadingFlow)
-            {
-                Conveyor1Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
 
-        private FCResultType flowChart107_FlowRun(object sender, EventArgs e)
-        {
-            if (B_Gantry2LoadingFlow)
-            {
-                Conveyor1Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
 
-        private FCResultType flowChart104_FlowRun_1(object sender, EventArgs e)
-        {
-            if (B_Cash1In)
-            {
-                B_Cash1In = false;
-                Conveyor2Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
+
+
+
+
+
+
 
         #region Cash1
-        private FCResultType flowChart115_FlowRun(object sender, EventArgs e)
-        {
-            Conveyor6Timeout.Restart();
-            MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {(flowChart115.Text)} finish", true);
-            return FCResultType.NEXT;
-        }
+ 
 
-        private FCResultType flowChart127_FlowRun(object sender, EventArgs e)
-        {
-            OB_Conveyor2_Station_StopCylinder.Off();
-            if (IB_Conveyor2_Station_StopCylinderUp.IsOn())
-            {
-                Conveyor6Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-            if (Conveyor6Timeout.IsOn(CylinderTimeOut))
-            {
-                Conveyor6Timeout.Restart();
-                JSDK.Alarm.Show("5163");
-            }
-            return FCResultType.IDLE;
-        }
 
-        private FCResultType flowChart113_FlowRun(object sender, EventArgs e)
-        {
-            B_Cash1In = true;
-            Conveyor6Timeout.Restart();
-            return FCResultType.NEXT;
-        }
 
-        private FCResultType flowChart112_FlowRun(object sender, EventArgs e)
-        {
-            if (B_Gantry1Out || B_Gantry2Out)
-            {
-                if (B_Gantry1Out)
-                    B_Gantry1Out = false;
-                if (B_Gantry2Out)
-                    B_Gantry2Out = false;
-                Conveyor6Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
 
-        private FCResultType flowChart111_FlowRun(object sender, EventArgs e)
-        {
-            if (IB_Conveyor2_Station_BoardStop.IsOn())
-            {
-                Conveyor6Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
 
-        private FCResultType flowChart108_FlowRun(object sender, EventArgs e)
-        {
-            B_Cash1Out = true;
-            Conveyor6Timeout.Restart();
-            return FCResultType.NEXT;
-        }
 
-        private FCResultType flowChart109_FlowRun(object sender, EventArgs e)
-        {
-            if (B_3DIn)
-            {
-                B_3DIn = false;
-                Conveyor6Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
 
-        private FCResultType flowChart128_FlowRun(object sender, EventArgs e)
-        {
-            OB_Conveyor2_Station_StopCylinder.On();
-            if (IB_Conveyor2_Station_StopCylinderDown.IsOn())
-            {
-                Conveyor6Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-            if (Conveyor6Timeout.IsOn(CylinderTimeOut))
-            {
-                Conveyor6Timeout.Restart();
-                JSDK.Alarm.Show("5162");
-            }
-            return FCResultType.IDLE;
-        }
 
-        private FCResultType flowChart114_FlowRun(object sender, EventArgs e)
-        {
-            if (Conveyor6Timeout.IsOn(500))
-            {
-                Conveyor6Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
 
-        private FCResultType flowChart110_FlowRun(object sender, EventArgs e)
-        {
-            Conveyor6Timeout.Restart();
-            return FCResultType.NEXT;
-        }
+
+
+
+
+
+
+
         #endregion
 
         #region Cash2
         private FCResultType flowChart117_FlowRun(object sender, EventArgs e)
         {
-            Conveyor7Timeout.Restart();
-            MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {(flowChart115.Text)} finish", true);
+            Conveyor2Timeout.Restart();
+            MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {(flowChart117.Text)} finish", true);
             return FCResultType.NEXT;
         }
 
@@ -2885,12 +1521,12 @@ namespace Acura3._0.ModuleForms
             OB_Conveyor2_Station2_StopCylinder.Off();
             if (IB_Conveyor2_Station2_StopCylinderUp.IsOn())
             {
-                Conveyor7Timeout.Restart();
+                Conveyor2Timeout.Restart();
                 return FCResultType.NEXT;
             }
-            if (Conveyor7Timeout.IsOn(CylinderTimeOut))
+            if (Conveyor2Timeout.IsOn(CylinderTimeOut))
             {
-                Conveyor7Timeout.Restart();
+                Conveyor2Timeout.Restart();
                 JSDK.Alarm.Show("5165");
             }
             return FCResultType.IDLE;
@@ -2899,7 +1535,7 @@ namespace Acura3._0.ModuleForms
         private FCResultType flowChart119_FlowRun(object sender, EventArgs e)
         {
             B_Cash2In = true;
-            Conveyor7Timeout.Restart();
+            Conveyor2Timeout.Restart();
             return FCResultType.NEXT;
         }
 
@@ -2908,7 +1544,7 @@ namespace Acura3._0.ModuleForms
             if (B_3DOut )
             {
                 B_3DOut = false;
-                Conveyor7Timeout.Restart();
+                Conveyor2Timeout.Restart();
                 return FCResultType.NEXT;
             }
             return FCResultType.IDLE;
@@ -2918,7 +1554,7 @@ namespace Acura3._0.ModuleForms
         {
             if (IB_Conveyor2_Station2_BoardStop.IsOn())
             {
-                Conveyor7Timeout.Restart();
+                Conveyor2Timeout.Restart();
                 return FCResultType.NEXT;
             }
             return FCResultType.IDLE;
@@ -2927,7 +1563,7 @@ namespace Acura3._0.ModuleForms
         private FCResultType flowChart122_FlowRun(object sender, EventArgs e)
         {
             B_Cash2Out = true;
-            Conveyor7Timeout.Restart();
+            Conveyor2Timeout.Restart();
             return FCResultType.NEXT;
         }
 
@@ -2936,7 +1572,7 @@ namespace Acura3._0.ModuleForms
             if (B_PnPIn)
             {
                 B_PnPIn = false;
-                Conveyor7Timeout.Restart();
+                Conveyor2Timeout.Restart();
                 return FCResultType.NEXT;
             }
             return FCResultType.IDLE;
@@ -2947,12 +1583,12 @@ namespace Acura3._0.ModuleForms
             OB_Conveyor2_Station2_StopCylinder.On();
             if (IB_Conveyor2_Station2_StopCylinderDown.IsOn())
             {
-                Conveyor7Timeout.Restart();
+                Conveyor2Timeout.Restart();
                 return FCResultType.NEXT;
             }
-            if (Conveyor7Timeout.IsOn(CylinderTimeOut))
+            if (Conveyor2Timeout.IsOn(CylinderTimeOut))
             {
-                Conveyor7Timeout.Restart();
+                Conveyor2Timeout.Restart();
                 JSDK.Alarm.Show("5164");
             }
             return FCResultType.IDLE;
@@ -2960,9 +1596,9 @@ namespace Acura3._0.ModuleForms
 
         private FCResultType flowChart130_FlowRun(object sender, EventArgs e)
         {
-            if (Conveyor7Timeout.IsOn(500))
+            if (Conveyor2Timeout.IsOn(500))
             {
-                Conveyor7Timeout.Restart();
+                Conveyor2Timeout.Restart();
                 return FCResultType.NEXT;
             }
             return FCResultType.IDLE;
@@ -2970,51 +1606,22 @@ namespace Acura3._0.ModuleForms
 
         private FCResultType flowChart131_FlowRun(object sender, EventArgs e)
         {
-            Conveyor7Timeout.Restart();
+            Conveyor2Timeout.Restart();
             return FCResultType.NEXT;
         }
         #endregion
 
-        private FCResultType flowChart37_FlowRun_1(object sender, EventArgs e)
-        {
-            Conveyor4Timeout.Restart();
-            return FCResultType.NEXT;
-        }
+    
 
-        private FCResultType flowChart88_FlowRun_1(object sender, EventArgs e)
-        {
-            if (B_Cash1Out)
-            {
-                B_Cash1Out = false;
-                Conveyor4Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
 
-        private FCResultType flowChart92_FlowRun_1(object sender, EventArgs e)
-        {
-            B_3DOut = true;
-            Conveyor4Timeout.Restart();
-            return FCResultType.NEXT;
-        }
 
-        private FCResultType flowChart91_FlowRun_1(object sender, EventArgs e)
-        {
-            if (B_Cash2In)
-            {
-                B_Cash2In = false;
-                B_3DIn = true;
-                Conveyor4Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
+
+
 
         private FCResultType flowChart89_FlowRun_1(object sender, EventArgs e)
         {
             //B_PnPIn = true;
-            Conveyor5Timeout.Restart();
+            Conveyor1Timeout.Restart();
             return FCResultType.NEXT;
         }
 
@@ -3023,99 +1630,29 @@ namespace Acura3._0.ModuleForms
             if (B_Cash2Out)
             {
                 B_Cash2Out = false;
-                Conveyor5Timeout.Restart();
+                Conveyor1Timeout.Restart();
                 return FCResultType.NEXT;
             }
             return FCResultType.IDLE;
         }
 
-        private FCResultType flowChart125_FlowRun(object sender, EventArgs e)
-        {
-            B_Gantry1Out = true;
-            Conveyor2Timeout.Restart();
-            return FCResultType.NEXT;
-        }
+    
 
-        private FCResultType flowChart124_FlowRun(object sender, EventArgs e)
-        {
-            B_Gantry2Out = true;
-            Conveyor3Timeout.Restart();
-            return FCResultType.NEXT;
-        }
+  
 
-        private FCResultType flowChart105_FlowRun_1(object sender, EventArgs e)
-        {
-            if (B_Cash1In)
-            {
-                B_Cash1In = false;
-                Conveyor3Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-            return FCResultType.IDLE;
-        }
 
-        private FCResultType flowChart141_FlowRun(object sender, EventArgs e)
-        {
-            if (DisableRFID)
-            {
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart46.Text} finish", true);
-                Conveyor2Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-            if (myRFID1.ResultBool)
-            {
-                WriteToRFID(13, true,A_syGoleRFID);
-            }
-            else
-                WriteToRFID(13, false, A_syGoleRFID);
-            MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart46.Text} finish", true);
-            Conveyor2Timeout.Restart();
-            return FCResultType.NEXT;
-        }
+ 
 
-        private FCResultType flowChart143_FlowRun(object sender, EventArgs e)
-        {
-            if (DisableRFID)
-            {
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart46.Text} finish", true);
-                Conveyor3Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-            if (myRFID2.ResultBool)
-            {
-                WriteToRFID(14, true,B_syGoleRFID);
-            }
-            else
-                WriteToRFID(14, false, B_syGoleRFID);
-            MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart46.Text} finish", true);
-            Conveyor3Timeout.Restart();
-            return FCResultType.NEXT;
-        }
 
-        private FCResultType flowChart144_FlowRun(object sender, EventArgs e)
-        {
-            if (DisableRFID)
-            {
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart46.Text} finish", true);
-                Conveyor4Timeout.Restart();
-                return FCResultType.NEXT;
-            }
-            if (myRFID3.ResultBool)
-            {
-                WriteToRFID(15, true,C_syGoleRFID);
-            }
-            else
-                WriteToRFID(15, false,C_syGoleRFID);
-            Conveyor4Timeout.Restart();
-            return FCResultType.NEXT;
-        }
+
+
 
         private FCResultType flowChart145_FlowRun(object sender, EventArgs e)
         {
             if (DisableRFID)
             {
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart46.Text} finish", true);
-                Conveyor5Timeout.Restart();
+                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart145.Text} finish", true);
+                Conveyor1Timeout.Restart();
                 return FCResultType.NEXT;
             }
             if (myRFID4.ResultBool)
@@ -3124,41 +1661,28 @@ namespace Acura3._0.ModuleForms
             }
             else
                 WriteToRFID(16, false,D_syGoleRFID);
-            Conveyor5Timeout.Restart();
-            return FCResultType.NEXT;
-        }
-
-        private FCResultType flowChart139_FlowRun(object sender, EventArgs e)
-        {
-            B_Gantry1LoadingFlow = false;
-            StationMachineIn1 = false;
-            ConveyorStation1NoEmpty = true;
-            OB_Station1_MotorForward.Off();
-            OB_MotorForward.Off();
             Conveyor1Timeout.Restart();
-            MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart39.Text} finish", true);
             return FCResultType.NEXT;
         }
 
-        private FCResultType flowChart146_FlowRun(object sender, EventArgs e)
+
+
+
+ 
+
+
+        private void tabPage15_Click(object sender, EventArgs e)
         {
-            Conveyor1Timeout.Restart();
-            B_Gantry2LoadingFlow = false;
-            OB_Station2_MotorForward.Off();
-            output2.Off();
-            MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart6.Text} finish", true);
-            return FCResultType.NEXT;
+
         }
 
-        private FCResultType flowChart140_FlowRun(object sender, EventArgs e)
+        private void tabPage3_Click(object sender, EventArgs e)
         {
-            Gantry1NGProduct = false;
-            return FCResultType.NEXT;
+
         }
 
-        private FCResultType flowChart142_FlowRun(object sender, EventArgs e)
+        private FCResultType flowChart116_FlowRun(object sender, EventArgs e)
         {
-            Gantry2NGProduct = false;
             return FCResultType.NEXT;
         }
     }

@@ -598,20 +598,20 @@
             // plMaintenance
             // 
             this.plMaintenance.Controls.Add(this.tabControl2);
-            this.plMaintenance.Margin = new System.Windows.Forms.Padding(2);
-            this.plMaintenance.Size = new System.Drawing.Size(1127, 565);
+            this.plMaintenance.Margin = new System.Windows.Forms.Padding(3);
+            this.plMaintenance.Size = new System.Drawing.Size(1696, 878);
             // 
             // plProductionSetting
             // 
             this.plProductionSetting.Controls.Add(this.tabControl8);
-            this.plProductionSetting.Margin = new System.Windows.Forms.Padding(2);
-            this.plProductionSetting.Size = new System.Drawing.Size(799, 627);
+            this.plProductionSetting.Margin = new System.Windows.Forms.Padding(3);
+            this.plProductionSetting.Size = new System.Drawing.Size(1204, 971);
             // 
             // plRecipeEditor
             // 
             this.plRecipeEditor.Controls.Add(this.tabControl3);
-            this.plRecipeEditor.Margin = new System.Windows.Forms.Padding(2);
-            this.plRecipeEditor.Size = new System.Drawing.Size(799, 627);
+            this.plRecipeEditor.Margin = new System.Windows.Forms.Padding(3);
+            this.plRecipeEditor.Size = new System.Drawing.Size(1204, 971);
             // 
             // plFlowInitial
             // 
@@ -636,14 +636,14 @@
             this.plFlowInitial.Controls.Add(this.flowChart0_3);
             this.plFlowInitial.Controls.Add(this.flowChart0_2);
             this.plFlowInitial.Controls.Add(this.flowChart0_1);
-            this.plFlowInitial.Margin = new System.Windows.Forms.Padding(2);
-            this.plFlowInitial.Size = new System.Drawing.Size(799, 627);
+            this.plFlowInitial.Margin = new System.Windows.Forms.Padding(3);
+            this.plFlowInitial.Size = new System.Drawing.Size(1204, 971);
             // 
             // plFlowAuto
             // 
             this.plFlowAuto.Controls.Add(this.tabControl7);
-            this.plFlowAuto.Margin = new System.Windows.Forms.Padding(2);
-            this.plFlowAuto.Size = new System.Drawing.Size(799, 627);
+            this.plFlowAuto.Margin = new System.Windows.Forms.Padding(3);
+            this.plFlowAuto.Size = new System.Drawing.Size(1204, 971);
             // 
             // plMachineStatus
             // 
@@ -652,8 +652,8 @@
             this.plMachineStatus.Controls.Add(this.D_ScrewResultsShow);
             this.plMachineStatus.Controls.Add(this.pictureBox2);
             this.plMachineStatus.Controls.Add(this.pictureBox1);
-            this.plMachineStatus.Margin = new System.Windows.Forms.Padding(2);
-            this.plMachineStatus.Size = new System.Drawing.Size(799, 627);
+            this.plMachineStatus.Margin = new System.Windows.Forms.Padding(3);
+            this.plMachineStatus.Size = new System.Drawing.Size(1204, 971);
             // 
             // plMotionSetup
             // 
@@ -689,8 +689,8 @@
             this.plMotionSetup.Controls.Add(this.textBox21);
             this.plMotionSetup.Controls.Add(this.label9);
             this.plMotionSetup.Controls.Add(this.textBox22);
-            this.plMotionSetup.Margin = new System.Windows.Forms.Padding(2);
-            this.plMotionSetup.Size = new System.Drawing.Size(799, 627);
+            this.plMotionSetup.Margin = new System.Windows.Forms.Padding(3);
+            this.plMotionSetup.Size = new System.Drawing.Size(1204, 971);
             // 
             // plMotorControl
             // 
@@ -710,8 +710,8 @@
             this.plMotorControl.Controls.Add(this.M_McJogForward);
             this.plMotorControl.Controls.Add(this.M_McJogRight);
             this.plMotorControl.Controls.Add(this.M_McJogLeft);
-            this.plMotorControl.Margin = new System.Windows.Forms.Padding(2);
-            this.plMotorControl.Size = new System.Drawing.Size(799, 627);
+            this.plMotorControl.Margin = new System.Windows.Forms.Padding(3);
+            this.plMotorControl.Size = new System.Drawing.Size(1204, 971);
             // 
             // MSet
             // 
@@ -836,9 +836,10 @@
             this.tabControl3.Controls.Add(this.tabPage28);
             this.tabControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl3.Location = new System.Drawing.Point(0, 0);
+            this.tabControl3.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl3.Name = "tabControl3";
             this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(799, 627);
+            this.tabControl3.Size = new System.Drawing.Size(1204, 971);
             this.tabControl3.TabIndex = 0;
             // 
             // tabPage4
@@ -849,18 +850,20 @@
             this.tabPage4.Controls.Add(this.btnInsertScrewPos);
             this.tabPage4.Controls.Add(this.btnAddScrewPos);
             this.tabPage4.Controls.Add(this.groupBox2);
-            this.tabPage4.Location = new System.Drawing.Point(4, 32);
+            this.tabPage4.Location = new System.Drawing.Point(4, 42);
+            this.tabPage4.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(791, 591);
+            this.tabPage4.Size = new System.Drawing.Size(1196, 925);
             this.tabPage4.TabIndex = 6;
             this.tabPage4.Text = "ScrewPos";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // btnGotoScrewPos
             // 
-            this.btnGotoScrewPos.Location = new System.Drawing.Point(670, 358);
+            this.btnGotoScrewPos.Location = new System.Drawing.Point(1005, 537);
+            this.btnGotoScrewPos.Margin = new System.Windows.Forms.Padding(4);
             this.btnGotoScrewPos.Name = "btnGotoScrewPos";
-            this.btnGotoScrewPos.Size = new System.Drawing.Size(114, 37);
+            this.btnGotoScrewPos.Size = new System.Drawing.Size(171, 56);
             this.btnGotoScrewPos.TabIndex = 11;
             this.btnGotoScrewPos.Text = "Goto";
             this.btnGotoScrewPos.UseVisualStyleBackColor = true;
@@ -868,9 +871,10 @@
             // 
             // btnReplaceScrewPos
             // 
-            this.btnReplaceScrewPos.Location = new System.Drawing.Point(504, 358);
+            this.btnReplaceScrewPos.Location = new System.Drawing.Point(756, 537);
+            this.btnReplaceScrewPos.Margin = new System.Windows.Forms.Padding(4);
             this.btnReplaceScrewPos.Name = "btnReplaceScrewPos";
-            this.btnReplaceScrewPos.Size = new System.Drawing.Size(114, 37);
+            this.btnReplaceScrewPos.Size = new System.Drawing.Size(171, 56);
             this.btnReplaceScrewPos.TabIndex = 10;
             this.btnReplaceScrewPos.Text = "Repalce";
             this.btnReplaceScrewPos.UseVisualStyleBackColor = true;
@@ -878,9 +882,10 @@
             // 
             // btnDeleteScrewPos
             // 
-            this.btnDeleteScrewPos.Location = new System.Drawing.Point(338, 358);
+            this.btnDeleteScrewPos.Location = new System.Drawing.Point(507, 537);
+            this.btnDeleteScrewPos.Margin = new System.Windows.Forms.Padding(4);
             this.btnDeleteScrewPos.Name = "btnDeleteScrewPos";
-            this.btnDeleteScrewPos.Size = new System.Drawing.Size(114, 37);
+            this.btnDeleteScrewPos.Size = new System.Drawing.Size(171, 56);
             this.btnDeleteScrewPos.TabIndex = 9;
             this.btnDeleteScrewPos.Text = "Delete";
             this.btnDeleteScrewPos.UseVisualStyleBackColor = true;
@@ -888,9 +893,10 @@
             // 
             // btnInsertScrewPos
             // 
-            this.btnInsertScrewPos.Location = new System.Drawing.Point(172, 358);
+            this.btnInsertScrewPos.Location = new System.Drawing.Point(258, 537);
+            this.btnInsertScrewPos.Margin = new System.Windows.Forms.Padding(4);
             this.btnInsertScrewPos.Name = "btnInsertScrewPos";
-            this.btnInsertScrewPos.Size = new System.Drawing.Size(114, 37);
+            this.btnInsertScrewPos.Size = new System.Drawing.Size(171, 56);
             this.btnInsertScrewPos.TabIndex = 8;
             this.btnInsertScrewPos.Text = "Insert";
             this.btnInsertScrewPos.UseVisualStyleBackColor = true;
@@ -898,9 +904,10 @@
             // 
             // btnAddScrewPos
             // 
-            this.btnAddScrewPos.Location = new System.Drawing.Point(6, 358);
+            this.btnAddScrewPos.Location = new System.Drawing.Point(9, 537);
+            this.btnAddScrewPos.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddScrewPos.Name = "btnAddScrewPos";
-            this.btnAddScrewPos.Size = new System.Drawing.Size(114, 37);
+            this.btnAddScrewPos.Size = new System.Drawing.Size(171, 56);
             this.btnAddScrewPos.TabIndex = 7;
             this.btnAddScrewPos.Text = "Add";
             this.btnAddScrewPos.UseVisualStyleBackColor = true;
@@ -909,9 +916,11 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.D_StressScrewPos);
-            this.groupBox2.Location = new System.Drawing.Point(3, 3);
+            this.groupBox2.Location = new System.Drawing.Point(4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(786, 349);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Size = new System.Drawing.Size(1179, 524);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Screw Points";
@@ -932,12 +941,12 @@
             this.D_StressScrewPos.DataMember = "T_ScrewPos";
             this.D_StressScrewPos.DataSource = this.RecipeData;
             this.D_StressScrewPos.Dock = System.Windows.Forms.DockStyle.Top;
-            this.D_StressScrewPos.Location = new System.Drawing.Point(3, 25);
-            this.D_StressScrewPos.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.D_StressScrewPos.Location = new System.Drawing.Point(4, 37);
+            this.D_StressScrewPos.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.D_StressScrewPos.Name = "D_StressScrewPos";
             this.D_StressScrewPos.RowHeadersVisible = false;
             this.D_StressScrewPos.RowHeadersWidth = 72;
-            this.D_StressScrewPos.Size = new System.Drawing.Size(780, 319);
+            this.D_StressScrewPos.Size = new System.Drawing.Size(1171, 478);
             this.D_StressScrewPos.TabIndex = 82;
             // 
             // indexDataGridViewTextBoxColumn1
@@ -982,19 +991,21 @@
             this.tabPage11.Controls.Add(this.btnDelete);
             this.tabPage11.Controls.Add(this.btnAdd);
             this.tabPage11.Controls.Add(this.D_PcbPoint);
-            this.tabPage11.Location = new System.Drawing.Point(4, 32);
+            this.tabPage11.Location = new System.Drawing.Point(4, 42);
+            this.tabPage11.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage11.Name = "tabPage11";
-            this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage11.Size = new System.Drawing.Size(791, 543);
+            this.tabPage11.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage11.Size = new System.Drawing.Size(1196, 925);
             this.tabPage11.TabIndex = 5;
             this.tabPage11.Text = "JackingShaft";
             this.tabPage11.UseVisualStyleBackColor = true;
             // 
             // btnGoto
             // 
-            this.btnGoto.Location = new System.Drawing.Point(549, 333);
+            this.btnGoto.Location = new System.Drawing.Point(824, 500);
+            this.btnGoto.Margin = new System.Windows.Forms.Padding(4);
             this.btnGoto.Name = "btnGoto";
-            this.btnGoto.Size = new System.Drawing.Size(114, 37);
+            this.btnGoto.Size = new System.Drawing.Size(171, 56);
             this.btnGoto.TabIndex = 20;
             this.btnGoto.Text = "Goto";
             this.btnGoto.UseVisualStyleBackColor = true;
@@ -1002,9 +1013,10 @@
             // 
             // btnRepalce
             // 
-            this.btnRepalce.Location = new System.Drawing.Point(383, 333);
+            this.btnRepalce.Location = new System.Drawing.Point(574, 500);
+            this.btnRepalce.Margin = new System.Windows.Forms.Padding(4);
             this.btnRepalce.Name = "btnRepalce";
-            this.btnRepalce.Size = new System.Drawing.Size(114, 37);
+            this.btnRepalce.Size = new System.Drawing.Size(171, 56);
             this.btnRepalce.TabIndex = 19;
             this.btnRepalce.Text = "Repalce";
             this.btnRepalce.UseVisualStyleBackColor = true;
@@ -1012,9 +1024,10 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(217, 333);
+            this.btnDelete.Location = new System.Drawing.Point(326, 500);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(114, 37);
+            this.btnDelete.Size = new System.Drawing.Size(171, 56);
             this.btnDelete.TabIndex = 18;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -1022,9 +1035,10 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(59, 333);
+            this.btnAdd.Location = new System.Drawing.Point(88, 500);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(114, 37);
+            this.btnAdd.Size = new System.Drawing.Size(171, 56);
             this.btnAdd.TabIndex = 17;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -1044,12 +1058,13 @@
             this.annotationDataGridViewTextBoxColumn1});
             this.D_PcbPoint.DataMember = "T_JackingShaft";
             this.D_PcbPoint.DataSource = this.RecipeData;
-            this.D_PcbPoint.Location = new System.Drawing.Point(6, 7);
+            this.D_PcbPoint.Location = new System.Drawing.Point(9, 10);
+            this.D_PcbPoint.Margin = new System.Windows.Forms.Padding(4);
             this.D_PcbPoint.Name = "D_PcbPoint";
             this.D_PcbPoint.RowHeadersVisible = false;
             this.D_PcbPoint.RowHeadersWidth = 48;
             this.D_PcbPoint.RowTemplate.Height = 23;
-            this.D_PcbPoint.Size = new System.Drawing.Size(735, 312);
+            this.D_PcbPoint.Size = new System.Drawing.Size(1102, 468);
             this.D_PcbPoint.TabIndex = 16;
             // 
             // indexDataGridViewTextBoxColumn
@@ -1077,10 +1092,11 @@
             // 
             this.tabPage5.Controls.Add(this.label5);
             this.tabPage5.Controls.Add(this.T_CCDIP);
-            this.tabPage5.Location = new System.Drawing.Point(4, 32);
+            this.tabPage5.Location = new System.Drawing.Point(4, 42);
+            this.tabPage5.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(791, 543);
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage5.Size = new System.Drawing.Size(1196, 925);
             this.tabPage5.TabIndex = 1;
             this.tabPage5.Text = "CCD";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1088,20 +1104,18 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(240, 79);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Location = new System.Drawing.Point(360, 118);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(62, 23);
+            this.label5.Size = new System.Drawing.Size(97, 33);
             this.label5.TabIndex = 8;
             this.label5.Text = "CCDIP:";
             // 
             // T_CCDIP
             // 
             this.T_CCDIP.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.RecipeData, "RSet.CCDIP", true));
-            this.T_CCDIP.Location = new System.Drawing.Point(325, 77);
-            this.T_CCDIP.Margin = new System.Windows.Forms.Padding(2);
+            this.T_CCDIP.Location = new System.Drawing.Point(488, 116);
             this.T_CCDIP.Name = "T_CCDIP";
-            this.T_CCDIP.Size = new System.Drawing.Size(180, 29);
+            this.T_CCDIP.Size = new System.Drawing.Size(268, 40);
             this.T_CCDIP.TabIndex = 9;
             this.T_CCDIP.Text = "192.168.1.1";
             // 
@@ -1115,28 +1129,31 @@
             this.tabPage6.Controls.Add(this.btnDisScrew);
             this.tabPage6.Controls.Add(this.btnConnectScrew);
             this.tabPage6.Controls.Add(this.textBox1);
-            this.tabPage6.Location = new System.Drawing.Point(4, 32);
+            this.tabPage6.Location = new System.Drawing.Point(4, 42);
+            this.tabPage6.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(791, 543);
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage6.Size = new System.Drawing.Size(1196, 925);
             this.tabPage6.TabIndex = 2;
             this.tabPage6.Text = "ElectricScrewDriver";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
             // T_ScrewData
             // 
-            this.T_ScrewData.Location = new System.Drawing.Point(359, 223);
+            this.T_ScrewData.Location = new System.Drawing.Point(538, 334);
+            this.T_ScrewData.Margin = new System.Windows.Forms.Padding(4);
             this.T_ScrewData.Multiline = true;
             this.T_ScrewData.Name = "T_ScrewData";
-            this.T_ScrewData.Size = new System.Drawing.Size(503, 179);
+            this.T_ScrewData.Size = new System.Drawing.Size(752, 266);
             this.T_ScrewData.TabIndex = 112;
             // 
             // btn_ReadScrewData
             // 
             this.btn_ReadScrewData.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_ReadScrewData.Location = new System.Drawing.Point(913, 293);
+            this.btn_ReadScrewData.Location = new System.Drawing.Point(1370, 440);
+            this.btn_ReadScrewData.Margin = new System.Windows.Forms.Padding(4);
             this.btn_ReadScrewData.Name = "btn_ReadScrewData";
-            this.btn_ReadScrewData.Size = new System.Drawing.Size(109, 38);
+            this.btn_ReadScrewData.Size = new System.Drawing.Size(164, 57);
             this.btn_ReadScrewData.TabIndex = 111;
             this.btn_ReadScrewData.Text = "Read";
             this.btn_ReadScrewData.UseVisualStyleBackColor = true;
@@ -1146,18 +1163,20 @@
             // 
             this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.RecipeData, "RSet.ScrewPort", true));
             this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(509, 89);
+            this.textBox2.Location = new System.Drawing.Point(764, 134);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(145, 26);
+            this.textBox2.Size = new System.Drawing.Size(216, 35);
             this.textBox2.TabIndex = 110;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(470, 43);
+            this.label2.Location = new System.Drawing.Point(705, 64);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 24);
+            this.label2.Size = new System.Drawing.Size(62, 33);
             this.label2.TabIndex = 108;
             this.label2.Text = "IP :";
             // 
@@ -1165,18 +1184,20 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(453, 91);
+            this.label1.Location = new System.Drawing.Point(680, 136);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 24);
+            this.label1.Size = new System.Drawing.Size(90, 33);
             this.label1.TabIndex = 109;
             this.label1.Text = "Port :";
             // 
             // btnDisScrew
             // 
             this.btnDisScrew.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDisScrew.Location = new System.Drawing.Point(583, 143);
+            this.btnDisScrew.Location = new System.Drawing.Point(874, 214);
+            this.btnDisScrew.Margin = new System.Windows.Forms.Padding(4);
             this.btnDisScrew.Name = "btnDisScrew";
-            this.btnDisScrew.Size = new System.Drawing.Size(109, 38);
+            this.btnDisScrew.Size = new System.Drawing.Size(164, 57);
             this.btnDisScrew.TabIndex = 107;
             this.btnDisScrew.Text = "DisConnect";
             this.btnDisScrew.UseVisualStyleBackColor = true;
@@ -1185,9 +1206,10 @@
             // btnConnectScrew
             // 
             this.btnConnectScrew.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConnectScrew.Location = new System.Drawing.Point(433, 143);
+            this.btnConnectScrew.Location = new System.Drawing.Point(650, 214);
+            this.btnConnectScrew.Margin = new System.Windows.Forms.Padding(4);
             this.btnConnectScrew.Name = "btnConnectScrew";
-            this.btnConnectScrew.Size = new System.Drawing.Size(109, 38);
+            this.btnConnectScrew.Size = new System.Drawing.Size(164, 57);
             this.btnConnectScrew.TabIndex = 106;
             this.btnConnectScrew.Text = "Connect";
             this.btnConnectScrew.UseVisualStyleBackColor = true;
@@ -1197,18 +1219,20 @@
             // 
             this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.RecipeData, "RSet.ScrewIP", true));
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(509, 41);
+            this.textBox1.Location = new System.Drawing.Point(764, 62);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(145, 26);
+            this.textBox1.Size = new System.Drawing.Size(216, 35);
             this.textBox1.TabIndex = 105;
             // 
             // tabPage7
             // 
             this.tabPage7.Controls.Add(this.tabControl4);
-            this.tabPage7.Location = new System.Drawing.Point(4, 32);
+            this.tabPage7.Location = new System.Drawing.Point(4, 42);
+            this.tabPage7.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(791, 543);
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage7.Size = new System.Drawing.Size(1196, 925);
             this.tabPage7.TabIndex = 3;
             this.tabPage7.Text = "PressureSensor";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -1217,20 +1241,22 @@
             // 
             this.tabControl4.Controls.Add(this.tabPage9);
             this.tabControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl4.Location = new System.Drawing.Point(3, 3);
+            this.tabControl4.Location = new System.Drawing.Point(4, 4);
+            this.tabControl4.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl4.Name = "tabControl4";
             this.tabControl4.SelectedIndex = 0;
-            this.tabControl4.Size = new System.Drawing.Size(785, 537);
+            this.tabControl4.Size = new System.Drawing.Size(1188, 917);
             this.tabControl4.TabIndex = 44;
             // 
             // tabPage9
             // 
             this.tabPage9.AutoScroll = true;
             this.tabPage9.Controls.Add(this.panel3);
-            this.tabPage9.Location = new System.Drawing.Point(4, 32);
+            this.tabPage9.Location = new System.Drawing.Point(4, 42);
+            this.tabPage9.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(777, 501);
+            this.tabPage9.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage9.Size = new System.Drawing.Size(1180, 871);
             this.tabPage9.TabIndex = 0;
             this.tabPage9.Text = "Connect";
             this.tabPage9.UseVisualStyleBackColor = true;
@@ -1248,16 +1274,18 @@
             this.panel3.Controls.Add(this.B_Refresh);
             this.panel3.Controls.Add(this.B_PSRead);
             this.panel3.Controls.Add(this.B_PsConnect);
-            this.panel3.Location = new System.Drawing.Point(6, 7);
+            this.panel3.Location = new System.Drawing.Point(9, 10);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(553, 651);
+            this.panel3.Size = new System.Drawing.Size(830, 976);
             this.panel3.TabIndex = 40;
             // 
             // R_PsText
             // 
-            this.R_PsText.Location = new System.Drawing.Point(3, 321);
+            this.R_PsText.Location = new System.Drawing.Point(4, 482);
+            this.R_PsText.Margin = new System.Windows.Forms.Padding(4);
             this.R_PsText.Name = "R_PsText";
-            this.R_PsText.Size = new System.Drawing.Size(547, 189);
+            this.R_PsText.Size = new System.Drawing.Size(818, 282);
             this.R_PsText.TabIndex = 40;
             this.R_PsText.Text = "";
             // 
@@ -1275,11 +1303,12 @@
             this.D_Ps.DataSource = this.RecipeData;
             this.D_Ps.Dock = System.Windows.Forms.DockStyle.Top;
             this.D_Ps.Location = new System.Drawing.Point(0, 0);
+            this.D_Ps.Margin = new System.Windows.Forms.Padding(4);
             this.D_Ps.Name = "D_Ps";
             this.D_Ps.RowHeadersVisible = false;
             this.D_Ps.RowHeadersWidth = 48;
             this.D_Ps.RowTemplate.Height = 23;
-            this.D_Ps.Size = new System.Drawing.Size(553, 191);
+            this.D_Ps.Size = new System.Drawing.Size(830, 286);
             this.D_Ps.TabIndex = 39;
             // 
             // nameDataGridViewTextBoxColumn
@@ -1301,9 +1330,10 @@
             // B_PsClear
             // 
             this.B_PsClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.B_PsClear.Location = new System.Drawing.Point(268, 583);
+            this.B_PsClear.Location = new System.Drawing.Point(402, 874);
+            this.B_PsClear.Margin = new System.Windows.Forms.Padding(4);
             this.B_PsClear.Name = "B_PsClear";
-            this.B_PsClear.Size = new System.Drawing.Size(144, 37);
+            this.B_PsClear.Size = new System.Drawing.Size(216, 56);
             this.B_PsClear.TabIndex = 32;
             this.B_PsClear.Text = "Clear";
             this.B_PsClear.UseVisualStyleBackColor = true;
@@ -1313,18 +1343,18 @@
             // 
             this.C_Com.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.RecipeData, "RSet.Com", true));
             this.C_Com.FormattingEnabled = true;
-            this.C_Com.Location = new System.Drawing.Point(184, 276);
-            this.C_Com.Margin = new System.Windows.Forms.Padding(2);
+            this.C_Com.Location = new System.Drawing.Point(276, 414);
             this.C_Com.Name = "C_Com";
-            this.C_Com.Size = new System.Drawing.Size(118, 31);
+            this.C_Com.Size = new System.Drawing.Size(175, 41);
             this.C_Com.TabIndex = 35;
             // 
             // B_PsDisConnect
             // 
             this.B_PsDisConnect.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.B_PsDisConnect.Location = new System.Drawing.Point(268, 540);
+            this.B_PsDisConnect.Location = new System.Drawing.Point(402, 810);
+            this.B_PsDisConnect.Margin = new System.Windows.Forms.Padding(4);
             this.B_PsDisConnect.Name = "B_PsDisConnect";
-            this.B_PsDisConnect.Size = new System.Drawing.Size(144, 37);
+            this.B_PsDisConnect.Size = new System.Drawing.Size(216, 56);
             this.B_PsDisConnect.TabIndex = 25;
             this.B_PsDisConnect.Text = "DisConnect";
             this.B_PsDisConnect.UseVisualStyleBackColor = true;
@@ -1333,20 +1363,18 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(125, 283);
-            this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label20.Location = new System.Drawing.Point(188, 424);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(46, 23);
+            this.label20.Size = new System.Drawing.Size(71, 33);
             this.label20.TabIndex = 34;
             this.label20.Text = "COM";
             // 
             // B_PsDelete
             // 
             this.B_PsDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.B_PsDelete.Location = new System.Drawing.Point(290, 206);
-            this.B_PsDelete.Margin = new System.Windows.Forms.Padding(2);
+            this.B_PsDelete.Location = new System.Drawing.Point(435, 309);
             this.B_PsDelete.Name = "B_PsDelete";
-            this.B_PsDelete.Size = new System.Drawing.Size(74, 31);
+            this.B_PsDelete.Size = new System.Drawing.Size(111, 46);
             this.B_PsDelete.TabIndex = 38;
             this.B_PsDelete.Text = "Delete";
             this.B_PsDelete.UseVisualStyleBackColor = true;
@@ -1355,10 +1383,9 @@
             // B_PsAdd
             // 
             this.B_PsAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.B_PsAdd.Location = new System.Drawing.Point(154, 206);
-            this.B_PsAdd.Margin = new System.Windows.Forms.Padding(2);
+            this.B_PsAdd.Location = new System.Drawing.Point(231, 309);
             this.B_PsAdd.Name = "B_PsAdd";
-            this.B_PsAdd.Size = new System.Drawing.Size(74, 31);
+            this.B_PsAdd.Size = new System.Drawing.Size(111, 46);
             this.B_PsAdd.TabIndex = 38;
             this.B_PsAdd.Text = "Add";
             this.B_PsAdd.UseVisualStyleBackColor = true;
@@ -1367,10 +1394,9 @@
             // B_Refresh
             // 
             this.B_Refresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.B_Refresh.Location = new System.Drawing.Point(306, 275);
-            this.B_Refresh.Margin = new System.Windows.Forms.Padding(2);
+            this.B_Refresh.Location = new System.Drawing.Point(459, 412);
             this.B_Refresh.Name = "B_Refresh";
-            this.B_Refresh.Size = new System.Drawing.Size(86, 31);
+            this.B_Refresh.Size = new System.Drawing.Size(129, 46);
             this.B_Refresh.TabIndex = 38;
             this.B_Refresh.Text = "Refresh";
             this.B_Refresh.UseVisualStyleBackColor = true;
@@ -1379,9 +1405,10 @@
             // B_PSRead
             // 
             this.B_PSRead.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.B_PSRead.Location = new System.Drawing.Point(110, 583);
+            this.B_PSRead.Location = new System.Drawing.Point(165, 874);
+            this.B_PSRead.Margin = new System.Windows.Forms.Padding(4);
             this.B_PSRead.Name = "B_PSRead";
-            this.B_PSRead.Size = new System.Drawing.Size(144, 37);
+            this.B_PSRead.Size = new System.Drawing.Size(216, 56);
             this.B_PSRead.TabIndex = 26;
             this.B_PSRead.Text = "Read";
             this.B_PSRead.UseVisualStyleBackColor = true;
@@ -1389,9 +1416,10 @@
             // 
             // B_PsConnect
             // 
-            this.B_PsConnect.Location = new System.Drawing.Point(110, 540);
+            this.B_PsConnect.Location = new System.Drawing.Point(165, 810);
+            this.B_PsConnect.Margin = new System.Windows.Forms.Padding(4);
             this.B_PsConnect.Name = "B_PsConnect";
-            this.B_PsConnect.Size = new System.Drawing.Size(144, 37);
+            this.B_PsConnect.Size = new System.Drawing.Size(216, 56);
             this.B_PsConnect.TabIndex = 24;
             this.B_PsConnect.Text = "Connect";
             this.B_PsConnect.UseVisualStyleBackColor = true;
@@ -1400,10 +1428,11 @@
             // tabPage8
             // 
             this.tabPage8.Controls.Add(this.OPT_LightSourceController);
-            this.tabPage8.Location = new System.Drawing.Point(4, 32);
+            this.tabPage8.Location = new System.Drawing.Point(4, 42);
+            this.tabPage8.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(791, 543);
+            this.tabPage8.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage8.Size = new System.Drawing.Size(1196, 925);
             this.tabPage8.TabIndex = 4;
             this.tabPage8.Text = "LightSourceController";
             this.tabPage8.UseVisualStyleBackColor = true;
@@ -1412,18 +1441,20 @@
             // 
             this.OPT_LightSourceController.BackColor = System.Drawing.Color.White;
             this.OPT_LightSourceController.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.OPT_LightSourceController.Location = new System.Drawing.Point(6, 7);
+            this.OPT_LightSourceController.Location = new System.Drawing.Point(9, 10);
+            this.OPT_LightSourceController.Margin = new System.Windows.Forms.Padding(4);
             this.OPT_LightSourceController.Name = "OPT_LightSourceController";
-            this.OPT_LightSourceController.Size = new System.Drawing.Size(384, 449);
+            this.OPT_LightSourceController.Size = new System.Drawing.Size(576, 674);
             this.OPT_LightSourceController.TabIndex = 59;
             // 
             // tabPage21
             // 
             this.tabPage21.Controls.Add(this.groupBox37);
-            this.tabPage21.Location = new System.Drawing.Point(4, 32);
+            this.tabPage21.Location = new System.Drawing.Point(4, 42);
+            this.tabPage21.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage21.Name = "tabPage21";
-            this.tabPage21.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage21.Size = new System.Drawing.Size(791, 543);
+            this.tabPage21.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage21.Size = new System.Drawing.Size(1196, 925);
             this.tabPage21.TabIndex = 7;
             this.tabPage21.Text = "DisplacementSensor";
             this.tabPage21.UseVisualStyleBackColor = true;
@@ -1443,9 +1474,11 @@
             this.groupBox37.Controls.Add(this.btnConnectDisplacement);
             this.groupBox37.Controls.Add(this.btnDisConnectDisplacement);
             this.groupBox37.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox37.Location = new System.Drawing.Point(3, 3);
+            this.groupBox37.Location = new System.Drawing.Point(4, 4);
+            this.groupBox37.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox37.Name = "groupBox37";
-            this.groupBox37.Size = new System.Drawing.Size(785, 305);
+            this.groupBox37.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox37.Size = new System.Drawing.Size(1188, 458);
             this.groupBox37.TabIndex = 1;
             this.groupBox37.TabStop = false;
             this.groupBox37.Text = "Displacement Sensor";
@@ -1453,18 +1486,20 @@
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(595, 45);
+            this.label32.Location = new System.Drawing.Point(892, 68);
+            this.label32.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(100, 23);
+            this.label32.Size = new System.Drawing.Size(150, 33);
             this.label32.TabIndex = 39;
             this.label32.Text = "Standard：";
             // 
             // textBox6
             // 
             this.textBox6.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.RecipeData, "RSet.DisplacementStandard", true));
-            this.textBox6.Location = new System.Drawing.Point(701, 45);
+            this.textBox6.Location = new System.Drawing.Point(1052, 68);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(4);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 29);
+            this.textBox6.Size = new System.Drawing.Size(148, 40);
             this.textBox6.TabIndex = 38;
             // 
             // comboBox1
@@ -1481,69 +1516,73 @@
             "COM7",
             "COM8",
             "COM9"});
-            this.comboBox1.Location = new System.Drawing.Point(118, 55);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox1.Location = new System.Drawing.Point(177, 82);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(118, 31);
+            this.comboBox1.Size = new System.Drawing.Size(175, 41);
             this.comboBox1.TabIndex = 37;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(57, 58);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Location = new System.Drawing.Point(86, 87);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(46, 23);
+            this.label8.Size = new System.Drawing.Size(71, 33);
             this.label8.TabIndex = 36;
             this.label8.Text = "COM";
             // 
             // label97
             // 
             this.label97.AutoSize = true;
-            this.label97.Location = new System.Drawing.Point(636, 115);
+            this.label97.Location = new System.Drawing.Point(954, 172);
+            this.label97.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label97.Name = "label97";
-            this.label97.Size = new System.Drawing.Size(59, 23);
+            this.label97.Size = new System.Drawing.Size(90, 33);
             this.label97.TabIndex = 14;
             this.label97.Text = "MIN：";
             // 
             // textBox41
             // 
             this.textBox41.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.RecipeData, "RSet.DisplacementMin", true));
-            this.textBox41.Location = new System.Drawing.Point(701, 112);
+            this.textBox41.Location = new System.Drawing.Point(1052, 168);
+            this.textBox41.Margin = new System.Windows.Forms.Padding(4);
             this.textBox41.Name = "textBox41";
-            this.textBox41.Size = new System.Drawing.Size(100, 29);
+            this.textBox41.Size = new System.Drawing.Size(148, 40);
             this.textBox41.TabIndex = 13;
             // 
             // label96
             // 
             this.label96.AutoSize = true;
-            this.label96.Location = new System.Drawing.Point(630, 83);
+            this.label96.Location = new System.Drawing.Point(945, 124);
+            this.label96.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label96.Name = "label96";
-            this.label96.Size = new System.Drawing.Size(65, 23);
+            this.label96.Size = new System.Drawing.Size(99, 33);
             this.label96.TabIndex = 12;
             this.label96.Text = "MAX：";
             // 
             // textBox39
             // 
             this.textBox39.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.RecipeData, "RSet.DisplacementMax", true));
-            this.textBox39.Location = new System.Drawing.Point(701, 80);
+            this.textBox39.Location = new System.Drawing.Point(1052, 120);
+            this.textBox39.Margin = new System.Windows.Forms.Padding(4);
             this.textBox39.Name = "textBox39";
-            this.textBox39.Size = new System.Drawing.Size(100, 29);
+            this.textBox39.Size = new System.Drawing.Size(148, 40);
             this.textBox39.TabIndex = 11;
             // 
             // textBox37
             // 
-            this.textBox37.Location = new System.Drawing.Point(24, 156);
+            this.textBox37.Location = new System.Drawing.Point(36, 234);
+            this.textBox37.Margin = new System.Windows.Forms.Padding(4);
             this.textBox37.Multiline = true;
             this.textBox37.Name = "textBox37";
-            this.textBox37.Size = new System.Drawing.Size(716, 143);
+            this.textBox37.Size = new System.Drawing.Size(1072, 212);
             this.textBox37.TabIndex = 10;
             // 
             // btnReadData
             // 
-            this.btnReadData.Location = new System.Drawing.Point(442, 50);
+            this.btnReadData.Location = new System.Drawing.Point(663, 75);
+            this.btnReadData.Margin = new System.Windows.Forms.Padding(4);
             this.btnReadData.Name = "btnReadData";
-            this.btnReadData.Size = new System.Drawing.Size(144, 34);
+            this.btnReadData.Size = new System.Drawing.Size(216, 51);
             this.btnReadData.TabIndex = 9;
             this.btnReadData.Text = "Read Data";
             this.btnReadData.UseVisualStyleBackColor = true;
@@ -1551,9 +1590,10 @@
             // 
             // btnConnectDisplacement
             // 
-            this.btnConnectDisplacement.Location = new System.Drawing.Point(293, 48);
+            this.btnConnectDisplacement.Location = new System.Drawing.Point(440, 72);
+            this.btnConnectDisplacement.Margin = new System.Windows.Forms.Padding(4);
             this.btnConnectDisplacement.Name = "btnConnectDisplacement";
-            this.btnConnectDisplacement.Size = new System.Drawing.Size(144, 34);
+            this.btnConnectDisplacement.Size = new System.Drawing.Size(216, 51);
             this.btnConnectDisplacement.TabIndex = 6;
             this.btnConnectDisplacement.Text = "Connect";
             this.btnConnectDisplacement.UseVisualStyleBackColor = true;
@@ -1561,9 +1601,10 @@
             // 
             // btnDisConnectDisplacement
             // 
-            this.btnDisConnectDisplacement.Location = new System.Drawing.Point(293, 99);
+            this.btnDisConnectDisplacement.Location = new System.Drawing.Point(440, 148);
+            this.btnDisConnectDisplacement.Margin = new System.Windows.Forms.Padding(4);
             this.btnDisConnectDisplacement.Name = "btnDisConnectDisplacement";
-            this.btnDisConnectDisplacement.Size = new System.Drawing.Size(144, 34);
+            this.btnDisConnectDisplacement.Size = new System.Drawing.Size(216, 51);
             this.btnDisConnectDisplacement.TabIndex = 7;
             this.btnDisConnectDisplacement.Text = "DisConnect";
             this.btnDisConnectDisplacement.UseVisualStyleBackColor = true;
@@ -1572,9 +1613,10 @@
             // tabPage22
             // 
             this.tabPage22.Controls.Add(this.tabControl9);
-            this.tabPage22.Location = new System.Drawing.Point(4, 32);
+            this.tabPage22.Location = new System.Drawing.Point(4, 42);
+            this.tabPage22.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage22.Name = "tabPage22";
-            this.tabPage22.Size = new System.Drawing.Size(791, 543);
+            this.tabPage22.Size = new System.Drawing.Size(1196, 925);
             this.tabPage22.TabIndex = 8;
             this.tabPage22.Text = "Vision";
             this.tabPage22.UseVisualStyleBackColor = true;
@@ -1588,18 +1630,20 @@
             this.tabControl9.Controls.Add(this.tabPage30);
             this.tabControl9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl9.Location = new System.Drawing.Point(0, 0);
+            this.tabControl9.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl9.Name = "tabControl9";
             this.tabControl9.SelectedIndex = 0;
-            this.tabControl9.Size = new System.Drawing.Size(791, 543);
+            this.tabControl9.Size = new System.Drawing.Size(1196, 925);
             this.tabControl9.TabIndex = 0;
             // 
             // tabPage23
             // 
             this.tabPage23.Controls.Add(this.panel2);
-            this.tabPage23.Location = new System.Drawing.Point(4, 32);
+            this.tabPage23.Location = new System.Drawing.Point(4, 42);
+            this.tabPage23.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage23.Name = "tabPage23";
-            this.tabPage23.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage23.Size = new System.Drawing.Size(783, 507);
+            this.tabPage23.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage23.Size = new System.Drawing.Size(1188, 879);
             this.tabPage23.TabIndex = 0;
             this.tabPage23.Text = "Screw Vision1";
             this.tabPage23.UseVisualStyleBackColor = true;
@@ -1608,9 +1652,10 @@
             // 
             this.panel2.Controls.Add(this.V_ScrewControl1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Location = new System.Drawing.Point(4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(777, 501);
+            this.panel2.Size = new System.Drawing.Size(1180, 871);
             this.panel2.TabIndex = 0;
             // 
             // V_ScrewControl1
@@ -1620,9 +1665,9 @@
             this.V_ScrewControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.V_ScrewControl1.IsMONO = true;
             this.V_ScrewControl1.Location = new System.Drawing.Point(0, 0);
-            this.V_ScrewControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.V_ScrewControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.V_ScrewControl1.Name = "V_ScrewControl1";
-            this.V_ScrewControl1.Size = new System.Drawing.Size(777, 501);
+            this.V_ScrewControl1.Size = new System.Drawing.Size(1180, 871);
             this.V_ScrewControl1.TabIndex = 0;
             this.V_ScrewControl1.VppPath = "";
             this.V_ScrewControl1.WokId = 1;
@@ -1631,9 +1676,10 @@
             // tabPage25
             // 
             this.tabPage25.Controls.Add(this.panel4);
-            this.tabPage25.Location = new System.Drawing.Point(4, 32);
+            this.tabPage25.Location = new System.Drawing.Point(4, 42);
+            this.tabPage25.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage25.Name = "tabPage25";
-            this.tabPage25.Size = new System.Drawing.Size(184, 32);
+            this.tabPage25.Size = new System.Drawing.Size(184, 22);
             this.tabPage25.TabIndex = 2;
             this.tabPage25.Text = "Screw Vision2";
             this.tabPage25.UseVisualStyleBackColor = true;
@@ -1643,8 +1689,9 @@
             this.panel4.Controls.Add(this.V_ScrewControl2);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Margin = new System.Windows.Forms.Padding(4);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(184, 32);
+            this.panel4.Size = new System.Drawing.Size(184, 22);
             this.panel4.TabIndex = 1;
             // 
             // V_ScrewControl2
@@ -1654,9 +1701,9 @@
             this.V_ScrewControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.V_ScrewControl2.IsMONO = true;
             this.V_ScrewControl2.Location = new System.Drawing.Point(0, 0);
-            this.V_ScrewControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.V_ScrewControl2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.V_ScrewControl2.Name = "V_ScrewControl2";
-            this.V_ScrewControl2.Size = new System.Drawing.Size(184, 32);
+            this.V_ScrewControl2.Size = new System.Drawing.Size(184, 22);
             this.V_ScrewControl2.TabIndex = 0;
             this.V_ScrewControl2.VppPath = "";
             this.V_ScrewControl2.WokId = 2;
@@ -1665,10 +1712,11 @@
             // tabPage24
             // 
             this.tabPage24.Controls.Add(this.panel5);
-            this.tabPage24.Location = new System.Drawing.Point(4, 32);
+            this.tabPage24.Location = new System.Drawing.Point(4, 42);
+            this.tabPage24.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage24.Name = "tabPage24";
-            this.tabPage24.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage24.Size = new System.Drawing.Size(184, 32);
+            this.tabPage24.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage24.Size = new System.Drawing.Size(184, 22);
             this.tabPage24.TabIndex = 1;
             this.tabPage24.Text = "Screw Calibration";
             this.tabPage24.UseVisualStyleBackColor = true;
@@ -1677,9 +1725,10 @@
             // 
             this.panel5.Controls.Add(this.H1_9Pos);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(3, 3);
+            this.panel5.Location = new System.Drawing.Point(4, 4);
+            this.panel5.Margin = new System.Windows.Forms.Padding(4);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(178, 26);
+            this.panel5.Size = new System.Drawing.Size(176, 14);
             this.panel5.TabIndex = 0;
             // 
             // H1_9Pos
@@ -1692,9 +1741,9 @@
             this.H1_9Pos.InvertX = false;
             this.H1_9Pos.InvertY = false;
             this.H1_9Pos.Location = new System.Drawing.Point(0, 0);
-            this.H1_9Pos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.H1_9Pos.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.H1_9Pos.Name = "H1_9Pos";
-            this.H1_9Pos.Size = new System.Drawing.Size(178, 26);
+            this.H1_9Pos.Size = new System.Drawing.Size(176, 14);
             this.H1_9Pos.TabIndex = 0;
             this.H1_9Pos.WorkID = -1;
             // 
@@ -1702,9 +1751,10 @@
             // 
             this.tabPage26.Controls.Add(this.panel88);
             this.tabPage26.Controls.Add(this.panel6);
-            this.tabPage26.Location = new System.Drawing.Point(4, 32);
+            this.tabPage26.Location = new System.Drawing.Point(4, 42);
+            this.tabPage26.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage26.Name = "tabPage26";
-            this.tabPage26.Size = new System.Drawing.Size(184, 32);
+            this.tabPage26.Size = new System.Drawing.Size(184, 22);
             this.tabPage26.TabIndex = 3;
             this.tabPage26.Text = "Auto 9Point Flow";
             this.tabPage26.UseVisualStyleBackColor = true;
@@ -1728,9 +1778,10 @@
             this.panel88.Controls.Add(this.flowChart100_6);
             this.panel88.Controls.Add(this.flowChart100_1);
             this.panel88.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel88.Location = new System.Drawing.Point(670, 0);
+            this.panel88.Location = new System.Drawing.Point(1005, 0);
+            this.panel88.Margin = new System.Windows.Forms.Padding(4);
             this.panel88.Name = "panel88";
-            this.panel88.Size = new System.Drawing.Size(709, 32);
+            this.panel88.Size = new System.Drawing.Size(1064, 22);
             this.panel88.TabIndex = 1;
             // 
             // flowChart23
@@ -1740,11 +1791,11 @@
             this.flowChart23.CASE1 = null;
             this.flowChart23.CASE2 = null;
             this.flowChart23.CASE3 = null;
-            this.flowChart23.Location = new System.Drawing.Point(82, 451);
-            this.flowChart23.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart23.Location = new System.Drawing.Point(123, 676);
+            this.flowChart23.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart23.Name = "flowChart23";
             this.flowChart23.NEXT = this.flowChart100_8;
-            this.flowChart23.Size = new System.Drawing.Size(86, 27);
+            this.flowChart23.Size = new System.Drawing.Size(128, 40);
             this.flowChart23.TabIndex = 249;
             this.flowChart23.Text = "Loop";
             this.flowChart23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1757,11 +1808,11 @@
             this.flowChart100_8.CASE1 = null;
             this.flowChart100_8.CASE2 = null;
             this.flowChart100_8.CASE3 = null;
-            this.flowChart100_8.Location = new System.Drawing.Point(211, 333);
-            this.flowChart100_8.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart100_8.Location = new System.Drawing.Point(316, 500);
+            this.flowChart100_8.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart100_8.Name = "flowChart100_8";
             this.flowChart100_8.NEXT = this.flowChart100_9;
-            this.flowChart100_8.Size = new System.Drawing.Size(303, 27);
+            this.flowChart100_8.Size = new System.Drawing.Size(454, 40);
             this.flowChart100_8.TabIndex = 242;
             this.flowChart100_8.Text = "Goto CalibrationVisionPos100.8";
             this.flowChart100_8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1774,11 +1825,11 @@
             this.flowChart100_9.CASE1 = null;
             this.flowChart100_9.CASE2 = null;
             this.flowChart100_9.CASE3 = null;
-            this.flowChart100_9.Location = new System.Drawing.Point(211, 372);
-            this.flowChart100_9.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart100_9.Location = new System.Drawing.Point(316, 558);
+            this.flowChart100_9.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart100_9.Name = "flowChart100_9";
             this.flowChart100_9.NEXT = this.flowChart100_10;
-            this.flowChart100_9.Size = new System.Drawing.Size(303, 27);
+            this.flowChart100_9.Size = new System.Drawing.Size(454, 40);
             this.flowChart100_9.TabIndex = 243;
             this.flowChart100_9.Text = "Take Photo100.9";
             this.flowChart100_9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1791,11 +1842,11 @@
             this.flowChart100_10.CASE1 = null;
             this.flowChart100_10.CASE2 = null;
             this.flowChart100_10.CASE3 = null;
-            this.flowChart100_10.Location = new System.Drawing.Point(211, 411);
-            this.flowChart100_10.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart100_10.Location = new System.Drawing.Point(316, 616);
+            this.flowChart100_10.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart100_10.Name = "flowChart100_10";
             this.flowChart100_10.NEXT = this.flowChart100_11;
-            this.flowChart100_10.Size = new System.Drawing.Size(303, 27);
+            this.flowChart100_10.Size = new System.Drawing.Size(454, 40);
             this.flowChart100_10.TabIndex = 244;
             this.flowChart100_10.Text = "Get Data100.10";
             this.flowChart100_10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1808,11 +1859,11 @@
             this.flowChart100_11.CASE1 = this.flowChart23;
             this.flowChart100_11.CASE2 = null;
             this.flowChart100_11.CASE3 = null;
-            this.flowChart100_11.Location = new System.Drawing.Point(211, 451);
-            this.flowChart100_11.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart100_11.Location = new System.Drawing.Point(316, 676);
+            this.flowChart100_11.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart100_11.Name = "flowChart100_11";
             this.flowChart100_11.NEXT = this.flowChart100_12;
-            this.flowChart100_11.Size = new System.Drawing.Size(303, 27);
+            this.flowChart100_11.Size = new System.Drawing.Size(454, 40);
             this.flowChart100_11.TabIndex = 245;
             this.flowChart100_11.Text = "Is All Finsh?100.11";
             this.flowChart100_11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1825,11 +1876,11 @@
             this.flowChart100_12.CASE1 = null;
             this.flowChart100_12.CASE2 = null;
             this.flowChart100_12.CASE3 = null;
-            this.flowChart100_12.Location = new System.Drawing.Point(211, 489);
-            this.flowChart100_12.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart100_12.Location = new System.Drawing.Point(316, 734);
+            this.flowChart100_12.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart100_12.Name = "flowChart100_12";
             this.flowChart100_12.NEXT = this.flowChart0_4;
-            this.flowChart100_12.Size = new System.Drawing.Size(303, 27);
+            this.flowChart100_12.Size = new System.Drawing.Size(454, 40);
             this.flowChart100_12.TabIndex = 246;
             this.flowChart100_12.Text = "End100.12";
             this.flowChart100_12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1842,11 +1893,11 @@
             this.flowChart0_4.CASE1 = null;
             this.flowChart0_4.CASE2 = null;
             this.flowChart0_4.CASE3 = null;
-            this.flowChart0_4.Location = new System.Drawing.Point(467, 408);
-            this.flowChart0_4.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart0_4.Location = new System.Drawing.Point(700, 612);
+            this.flowChart0_4.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart0_4.Name = "flowChart0_4";
             this.flowChart0_4.NEXT = this.flowChart0_5;
-            this.flowChart0_4.Size = new System.Drawing.Size(332, 27);
+            this.flowChart0_4.Size = new System.Drawing.Size(497, 40);
             this.flowChart0_4.TabIndex = 205;
             this.flowChart0_4.Text = "Goto ThrowScrew Pos0.04";
             this.flowChart0_4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1859,11 +1910,11 @@
             this.flowChart0_5.CASE1 = null;
             this.flowChart0_5.CASE2 = null;
             this.flowChart0_5.CASE3 = null;
-            this.flowChart0_5.Location = new System.Drawing.Point(467, 447);
-            this.flowChart0_5.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart0_5.Location = new System.Drawing.Point(700, 670);
+            this.flowChart0_5.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart0_5.Name = "flowChart0_5";
             this.flowChart0_5.NEXT = this.flowChart0_6;
-            this.flowChart0_5.Size = new System.Drawing.Size(332, 27);
+            this.flowChart0_5.Size = new System.Drawing.Size(497, 40);
             this.flowChart0_5.TabIndex = 206;
             this.flowChart0_5.Text = "Close Screw Vacuum 0.05";
             this.flowChart0_5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1876,11 +1927,11 @@
             this.flowChart0_6.CASE1 = null;
             this.flowChart0_6.CASE2 = null;
             this.flowChart0_6.CASE3 = null;
-            this.flowChart0_6.Location = new System.Drawing.Point(467, 485);
-            this.flowChart0_6.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart0_6.Location = new System.Drawing.Point(700, 728);
+            this.flowChart0_6.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart0_6.Name = "flowChart0_6";
             this.flowChart0_6.NEXT = this.flowChart0_16;
-            this.flowChart0_6.Size = new System.Drawing.Size(332, 27);
+            this.flowChart0_6.Size = new System.Drawing.Size(497, 40);
             this.flowChart0_6.TabIndex = 207;
             this.flowChart0_6.Text = "SF 1 Lock Cyl retract0.06";
             this.flowChart0_6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1893,11 +1944,11 @@
             this.flowChart0_16.CASE1 = null;
             this.flowChart0_16.CASE2 = null;
             this.flowChart0_16.CASE3 = null;
-            this.flowChart0_16.Location = new System.Drawing.Point(467, 523);
-            this.flowChart0_16.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart0_16.Location = new System.Drawing.Point(700, 784);
+            this.flowChart0_16.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart0_16.Name = "flowChart0_16";
             this.flowChart0_16.NEXT = this.flowChart0_8;
-            this.flowChart0_16.Size = new System.Drawing.Size(332, 27);
+            this.flowChart0_16.Size = new System.Drawing.Size(497, 40);
             this.flowChart0_16.TabIndex = 232;
             this.flowChart0_16.Text = "SF 1 Z CYL extend0.16";
             this.flowChart0_16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1910,11 +1961,11 @@
             this.flowChart0_8.CASE1 = null;
             this.flowChart0_8.CASE2 = null;
             this.flowChart0_8.CASE3 = null;
-            this.flowChart0_8.Location = new System.Drawing.Point(467, 559);
-            this.flowChart0_8.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart0_8.Location = new System.Drawing.Point(700, 838);
+            this.flowChart0_8.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart0_8.Name = "flowChart0_8";
             this.flowChart0_8.NEXT = this.flowChart0_17;
-            this.flowChart0_8.Size = new System.Drawing.Size(332, 27);
+            this.flowChart0_8.Size = new System.Drawing.Size(497, 40);
             this.flowChart0_8.TabIndex = 208;
             this.flowChart0_8.Text = "SF 1 Z CYL retract0.08";
             this.flowChart0_8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1927,11 +1978,11 @@
             this.flowChart0_17.CASE1 = null;
             this.flowChart0_17.CASE2 = null;
             this.flowChart0_17.CASE3 = null;
-            this.flowChart0_17.Location = new System.Drawing.Point(468, 601);
-            this.flowChart0_17.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart0_17.Location = new System.Drawing.Point(702, 902);
+            this.flowChart0_17.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart0_17.Name = "flowChart0_17";
             this.flowChart0_17.NEXT = this.flowChart0_9;
-            this.flowChart0_17.Size = new System.Drawing.Size(332, 27);
+            this.flowChart0_17.Size = new System.Drawing.Size(497, 40);
             this.flowChart0_17.TabIndex = 233;
             this.flowChart0_17.Text = "SF 1 Lock Cyl extend0.17";
             this.flowChart0_17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1944,11 +1995,11 @@
             this.flowChart0_9.CASE1 = null;
             this.flowChart0_9.CASE2 = null;
             this.flowChart0_9.CASE3 = null;
-            this.flowChart0_9.Location = new System.Drawing.Point(467, 639);
-            this.flowChart0_9.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart0_9.Location = new System.Drawing.Point(700, 958);
+            this.flowChart0_9.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart0_9.Name = "flowChart0_9";
             this.flowChart0_9.NEXT = this.flowChart0_14;
-            this.flowChart0_9.Size = new System.Drawing.Size(332, 27);
+            this.flowChart0_9.Size = new System.Drawing.Size(497, 40);
             this.flowChart0_9.TabIndex = 209;
             this.flowChart0_9.Text = "Goto VisionPos10.09";
             this.flowChart0_9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1961,11 +2012,11 @@
             this.flowChart0_14.CASE1 = null;
             this.flowChart0_14.CASE2 = null;
             this.flowChart0_14.CASE3 = null;
-            this.flowChart0_14.Location = new System.Drawing.Point(467, 677);
-            this.flowChart0_14.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart0_14.Location = new System.Drawing.Point(700, 1016);
+            this.flowChart0_14.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart0_14.Name = "flowChart0_14";
             this.flowChart0_14.NEXT = this.flowChart0_15;
-            this.flowChart0_14.Size = new System.Drawing.Size(332, 27);
+            this.flowChart0_14.Size = new System.Drawing.Size(497, 40);
             this.flowChart0_14.TabIndex = 230;
             this.flowChart0_14.Text = "Jacking Homing0.14";
             this.flowChart0_14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1978,11 +2029,11 @@
             this.flowChart0_15.CASE1 = null;
             this.flowChart0_15.CASE2 = null;
             this.flowChart0_15.CASE3 = null;
-            this.flowChart0_15.Location = new System.Drawing.Point(467, 717);
-            this.flowChart0_15.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart0_15.Location = new System.Drawing.Point(700, 1076);
+            this.flowChart0_15.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart0_15.Name = "flowChart0_15";
             this.flowChart0_15.NEXT = this.flowChart0_10;
-            this.flowChart0_15.Size = new System.Drawing.Size(332, 27);
+            this.flowChart0_15.Size = new System.Drawing.Size(497, 40);
             this.flowChart0_15.TabIndex = 231;
             this.flowChart0_15.Text = "Jacking Goto SafePos0.15";
             this.flowChart0_15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1995,11 +2046,11 @@
             this.flowChart0_10.CASE1 = null;
             this.flowChart0_10.CASE2 = null;
             this.flowChart0_10.CASE3 = null;
-            this.flowChart0_10.Location = new System.Drawing.Point(467, 755);
-            this.flowChart0_10.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart0_10.Location = new System.Drawing.Point(700, 1132);
+            this.flowChart0_10.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart0_10.Name = "flowChart0_10";
             this.flowChart0_10.NEXT = this.flowChart0_11;
-            this.flowChart0_10.Size = new System.Drawing.Size(332, 27);
+            this.flowChart0_10.Size = new System.Drawing.Size(497, 40);
             this.flowChart0_10.TabIndex = 210;
             this.flowChart0_10.Text = "Reset0.10";
             this.flowChart0_10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2012,11 +2063,11 @@
             this.flowChart0_11.CASE1 = null;
             this.flowChart0_11.CASE2 = null;
             this.flowChart0_11.CASE3 = null;
-            this.flowChart0_11.Location = new System.Drawing.Point(467, 794);
-            this.flowChart0_11.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart0_11.Location = new System.Drawing.Point(700, 1191);
+            this.flowChart0_11.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart0_11.Name = "flowChart0_11";
             this.flowChart0_11.NEXT = null;
-            this.flowChart0_11.Size = new System.Drawing.Size(332, 27);
+            this.flowChart0_11.Size = new System.Drawing.Size(497, 40);
             this.flowChart0_11.TabIndex = 211;
             this.flowChart0_11.Text = "Initial Finsh0.11";
             this.flowChart0_11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2024,9 +2075,10 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(386, 19);
+            this.button7.Location = new System.Drawing.Point(579, 28);
+            this.button7.Margin = new System.Windows.Forms.Padding(4);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(114, 37);
+            this.button7.Size = new System.Drawing.Size(171, 56);
             this.button7.TabIndex = 248;
             this.button7.Text = "Stop";
             this.button7.UseVisualStyleBackColor = true;
@@ -2034,9 +2086,10 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(211, 19);
+            this.button6.Location = new System.Drawing.Point(316, 28);
+            this.button6.Margin = new System.Windows.Forms.Padding(4);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(114, 37);
+            this.button6.Size = new System.Drawing.Size(171, 56);
             this.button6.TabIndex = 247;
             this.button6.Text = "Start";
             this.button6.UseVisualStyleBackColor = true;
@@ -2049,11 +2102,11 @@
             this.flowChart100_3.CASE1 = null;
             this.flowChart100_3.CASE2 = null;
             this.flowChart100_3.CASE3 = null;
-            this.flowChart100_3.Location = new System.Drawing.Point(211, 143);
-            this.flowChart100_3.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart100_3.Location = new System.Drawing.Point(316, 214);
+            this.flowChart100_3.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart100_3.Name = "flowChart100_3";
             this.flowChart100_3.NEXT = this.flowChart100_4;
-            this.flowChart100_3.Size = new System.Drawing.Size(303, 27);
+            this.flowChart100_3.Size = new System.Drawing.Size(454, 40);
             this.flowChart100_3.TabIndex = 241;
             this.flowChart100_3.Text = "SF 1 Lock Cyl retract100.3";
             this.flowChart100_3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2066,11 +2119,11 @@
             this.flowChart100_4.CASE1 = null;
             this.flowChart100_4.CASE2 = null;
             this.flowChart100_4.CASE3 = null;
-            this.flowChart100_4.Location = new System.Drawing.Point(211, 181);
-            this.flowChart100_4.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart100_4.Location = new System.Drawing.Point(316, 272);
+            this.flowChart100_4.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart100_4.Name = "flowChart100_4";
             this.flowChart100_4.NEXT = this.flowChart100_5;
-            this.flowChart100_4.Size = new System.Drawing.Size(303, 27);
+            this.flowChart100_4.Size = new System.Drawing.Size(454, 40);
             this.flowChart100_4.TabIndex = 239;
             this.flowChart100_4.Text = "SF 1 Z CYL retract100.4";
             this.flowChart100_4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2083,11 +2136,11 @@
             this.flowChart100_5.CASE1 = null;
             this.flowChart100_5.CASE2 = null;
             this.flowChart100_5.CASE3 = null;
-            this.flowChart100_5.Location = new System.Drawing.Point(211, 218);
-            this.flowChart100_5.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart100_5.Location = new System.Drawing.Point(316, 327);
+            this.flowChart100_5.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart100_5.Name = "flowChart100_5";
             this.flowChart100_5.NEXT = this.flowChart100_6;
-            this.flowChart100_5.Size = new System.Drawing.Size(303, 27);
+            this.flowChart100_5.Size = new System.Drawing.Size(454, 40);
             this.flowChart100_5.TabIndex = 240;
             this.flowChart100_5.Text = "SF 1 Lock Cyl extend100.5";
             this.flowChart100_5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2100,11 +2153,11 @@
             this.flowChart100_6.CASE1 = null;
             this.flowChart100_6.CASE2 = null;
             this.flowChart100_6.CASE3 = null;
-            this.flowChart100_6.Location = new System.Drawing.Point(211, 255);
-            this.flowChart100_6.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart100_6.Location = new System.Drawing.Point(316, 382);
+            this.flowChart100_6.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart100_6.Name = "flowChart100_6";
             this.flowChart100_6.NEXT = this.flowChart100_7;
-            this.flowChart100_6.Size = new System.Drawing.Size(303, 27);
+            this.flowChart100_6.Size = new System.Drawing.Size(454, 40);
             this.flowChart100_6.TabIndex = 236;
             this.flowChart100_6.Text = "Z Homing100.6";
             this.flowChart100_6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2117,11 +2170,11 @@
             this.flowChart100_7.CASE1 = null;
             this.flowChart100_7.CASE2 = null;
             this.flowChart100_7.CASE3 = null;
-            this.flowChart100_7.Location = new System.Drawing.Point(211, 295);
-            this.flowChart100_7.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart100_7.Location = new System.Drawing.Point(316, 442);
+            this.flowChart100_7.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart100_7.Name = "flowChart100_7";
             this.flowChart100_7.NEXT = this.flowChart100_8;
-            this.flowChart100_7.Size = new System.Drawing.Size(303, 27);
+            this.flowChart100_7.Size = new System.Drawing.Size(454, 40);
             this.flowChart100_7.TabIndex = 237;
             this.flowChart100_7.Text = "XY Homing100.7";
             this.flowChart100_7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2134,11 +2187,11 @@
             this.flowChart100_2.CASE1 = null;
             this.flowChart100_2.CASE2 = null;
             this.flowChart100_2.CASE3 = null;
-            this.flowChart100_2.Location = new System.Drawing.Point(211, 105);
-            this.flowChart100_2.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart100_2.Location = new System.Drawing.Point(316, 158);
+            this.flowChart100_2.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart100_2.Name = "flowChart100_2";
             this.flowChart100_2.NEXT = this.flowChart100_3;
-            this.flowChart100_2.Size = new System.Drawing.Size(303, 27);
+            this.flowChart100_2.Size = new System.Drawing.Size(454, 40);
             this.flowChart100_2.TabIndex = 238;
             this.flowChart100_2.Text = "SF 1 Screw Feed retract100.2";
             this.flowChart100_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2151,11 +2204,11 @@
             this.flowChart100_1.CASE1 = null;
             this.flowChart100_1.CASE2 = null;
             this.flowChart100_1.CASE3 = null;
-            this.flowChart100_1.Location = new System.Drawing.Point(211, 67);
-            this.flowChart100_1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart100_1.Location = new System.Drawing.Point(316, 100);
+            this.flowChart100_1.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart100_1.Name = "flowChart100_1";
             this.flowChart100_1.NEXT = this.flowChart100_2;
-            this.flowChart100_1.Size = new System.Drawing.Size(303, 27);
+            this.flowChart100_1.Size = new System.Drawing.Size(454, 40);
             this.flowChart100_1.TabIndex = 197;
             this.flowChart100_1.Text = "Start Calibration100.1";
             this.flowChart100_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2172,16 +2225,18 @@
             this.panel6.Controls.Add(this.btn_Replace9Point);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel6.Location = new System.Drawing.Point(0, 0);
+            this.panel6.Margin = new System.Windows.Forms.Padding(4);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(670, 32);
+            this.panel6.Size = new System.Drawing.Size(1005, 22);
             this.panel6.TabIndex = 0;
             // 
             // panel7
             // 
             this.panel7.Controls.Add(this.C_9PosCcd1Show);
-            this.panel7.Location = new System.Drawing.Point(4, 305);
+            this.panel7.Location = new System.Drawing.Point(6, 458);
+            this.panel7.Margin = new System.Windows.Forms.Padding(4);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(660, 249);
+            this.panel7.Size = new System.Drawing.Size(990, 374);
             this.panel7.TabIndex = 89;
             // 
             // C_9PosCcd1Show
@@ -2195,11 +2250,12 @@
             this.C_9PosCcd1Show.DoubleTapZoomCycleLength = 2;
             this.C_9PosCcd1Show.DoubleTapZoomSensitivity = 2.5D;
             this.C_9PosCcd1Show.Location = new System.Drawing.Point(0, 0);
+            this.C_9PosCcd1Show.Margin = new System.Windows.Forms.Padding(4);
             this.C_9PosCcd1Show.MouseWheelMode = Cognex.VisionPro.Display.CogDisplayMouseWheelModeConstants.Zoom1;
             this.C_9PosCcd1Show.MouseWheelSensitivity = 1D;
             this.C_9PosCcd1Show.Name = "C_9PosCcd1Show";
             this.C_9PosCcd1Show.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("C_9PosCcd1Show.OcxState")));
-            this.C_9PosCcd1Show.Size = new System.Drawing.Size(660, 249);
+            this.C_9PosCcd1Show.Size = new System.Drawing.Size(990, 374);
             this.C_9PosCcd1Show.TabIndex = 1;
             // 
             // D_9PointPos
@@ -2217,12 +2273,12 @@
             this.dataGridViewTextBoxColumn9});
             this.D_9PointPos.DataMember = "T_AutoCalibration";
             this.D_9PointPos.DataSource = this.RecipeData;
-            this.D_9PointPos.Location = new System.Drawing.Point(4, 2);
-            this.D_9PointPos.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.D_9PointPos.Location = new System.Drawing.Point(6, 3);
+            this.D_9PointPos.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.D_9PointPos.Name = "D_9PointPos";
             this.D_9PointPos.RowHeadersVisible = false;
             this.D_9PointPos.RowHeadersWidth = 72;
-            this.D_9PointPos.Size = new System.Drawing.Size(662, 237);
+            this.D_9PointPos.Size = new System.Drawing.Size(993, 356);
             this.D_9PointPos.TabIndex = 88;
             // 
             // dataGridViewTextBoxColumn5
@@ -2262,9 +2318,10 @@
             // 
             // btn_Goto9Point
             // 
-            this.btn_Goto9Point.Location = new System.Drawing.Point(552, 242);
+            this.btn_Goto9Point.Location = new System.Drawing.Point(828, 363);
+            this.btn_Goto9Point.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Goto9Point.Name = "btn_Goto9Point";
-            this.btn_Goto9Point.Size = new System.Drawing.Size(114, 37);
+            this.btn_Goto9Point.Size = new System.Drawing.Size(171, 56);
             this.btn_Goto9Point.TabIndex = 87;
             this.btn_Goto9Point.Text = "Goto";
             this.btn_Goto9Point.UseVisualStyleBackColor = true;
@@ -2272,9 +2329,10 @@
             // 
             // btn_Add9Point
             // 
-            this.btn_Add9Point.Location = new System.Drawing.Point(0, 242);
+            this.btn_Add9Point.Location = new System.Drawing.Point(0, 363);
+            this.btn_Add9Point.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Add9Point.Name = "btn_Add9Point";
-            this.btn_Add9Point.Size = new System.Drawing.Size(114, 37);
+            this.btn_Add9Point.Size = new System.Drawing.Size(171, 56);
             this.btn_Add9Point.TabIndex = 83;
             this.btn_Add9Point.Text = "Add";
             this.btn_Add9Point.UseVisualStyleBackColor = true;
@@ -2282,9 +2340,10 @@
             // 
             // btn_Insert9Point
             // 
-            this.btn_Insert9Point.Location = new System.Drawing.Point(129, 242);
+            this.btn_Insert9Point.Location = new System.Drawing.Point(194, 363);
+            this.btn_Insert9Point.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Insert9Point.Name = "btn_Insert9Point";
-            this.btn_Insert9Point.Size = new System.Drawing.Size(114, 37);
+            this.btn_Insert9Point.Size = new System.Drawing.Size(171, 56);
             this.btn_Insert9Point.TabIndex = 84;
             this.btn_Insert9Point.Text = "Insert";
             this.btn_Insert9Point.UseVisualStyleBackColor = true;
@@ -2292,9 +2351,10 @@
             // 
             // btn_Delete9Point
             // 
-            this.btn_Delete9Point.Location = new System.Drawing.Point(261, 242);
+            this.btn_Delete9Point.Location = new System.Drawing.Point(392, 363);
+            this.btn_Delete9Point.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Delete9Point.Name = "btn_Delete9Point";
-            this.btn_Delete9Point.Size = new System.Drawing.Size(114, 37);
+            this.btn_Delete9Point.Size = new System.Drawing.Size(171, 56);
             this.btn_Delete9Point.TabIndex = 85;
             this.btn_Delete9Point.Text = "Delete";
             this.btn_Delete9Point.UseVisualStyleBackColor = true;
@@ -2302,9 +2362,10 @@
             // 
             // btn_Replace9Point
             // 
-            this.btn_Replace9Point.Location = new System.Drawing.Point(402, 242);
+            this.btn_Replace9Point.Location = new System.Drawing.Point(603, 363);
+            this.btn_Replace9Point.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Replace9Point.Name = "btn_Replace9Point";
-            this.btn_Replace9Point.Size = new System.Drawing.Size(114, 37);
+            this.btn_Replace9Point.Size = new System.Drawing.Size(171, 56);
             this.btn_Replace9Point.TabIndex = 86;
             this.btn_Replace9Point.Text = "Repalce";
             this.btn_Replace9Point.UseVisualStyleBackColor = true;
@@ -2313,9 +2374,10 @@
             // tabPage30
             // 
             this.tabPage30.Controls.Add(this.groupBox1);
-            this.tabPage30.Location = new System.Drawing.Point(4, 32);
+            this.tabPage30.Location = new System.Drawing.Point(4, 42);
+            this.tabPage30.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage30.Name = "tabPage30";
-            this.tabPage30.Size = new System.Drawing.Size(184, 32);
+            this.tabPage30.Size = new System.Drawing.Size(184, 22);
             this.tabPage30.TabIndex = 4;
             this.tabPage30.Text = "Parameter";
             this.tabPage30.UseVisualStyleBackColor = true;
@@ -2326,9 +2388,11 @@
             this.groupBox1.Controls.Add(this.textBox4);
             this.groupBox1.Controls.Add(this.label31);
             this.groupBox1.Controls.Add(this.label30);
-            this.groupBox1.Location = new System.Drawing.Point(4, 4);
+            this.groupBox1.Location = new System.Drawing.Point(6, 6);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1104, 163);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(1656, 244);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Vision Limit";
@@ -2336,43 +2400,48 @@
             // textBox5
             // 
             this.textBox5.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.RecipeData, "RSet.VisionMin", true));
-            this.textBox5.Location = new System.Drawing.Point(488, 81);
+            this.textBox5.Location = new System.Drawing.Point(732, 122);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(4);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 29);
+            this.textBox5.Size = new System.Drawing.Size(148, 40);
             this.textBox5.TabIndex = 3;
             // 
             // textBox4
             // 
             this.textBox4.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.RecipeData, "RSet.VisionMax", true));
-            this.textBox4.Location = new System.Drawing.Point(488, 36);
+            this.textBox4.Location = new System.Drawing.Point(732, 54);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(4);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 29);
+            this.textBox4.Size = new System.Drawing.Size(148, 40);
             this.textBox4.TabIndex = 2;
             // 
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(422, 81);
+            this.label31.Location = new System.Drawing.Point(633, 122);
+            this.label31.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(58, 23);
+            this.label31.Size = new System.Drawing.Size(88, 33);
             this.label31.TabIndex = 1;
             this.label31.Text = "Min：";
             // 
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(422, 39);
+            this.label30.Location = new System.Drawing.Point(633, 58);
+            this.label30.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(62, 23);
+            this.label30.Size = new System.Drawing.Size(92, 33);
             this.label30.TabIndex = 0;
             this.label30.Text = "Max：";
             // 
             // tabPage28
             // 
             this.tabPage28.Controls.Add(this.tabControl10);
-            this.tabPage28.Location = new System.Drawing.Point(4, 32);
+            this.tabPage28.Location = new System.Drawing.Point(4, 42);
+            this.tabPage28.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage28.Name = "tabPage28";
-            this.tabPage28.Size = new System.Drawing.Size(791, 543);
+            this.tabPage28.Size = new System.Drawing.Size(1196, 925);
             this.tabPage28.TabIndex = 9;
             this.tabPage28.Text = "SmallProgram";
             this.tabPage28.UseVisualStyleBackColor = true;
@@ -2382,9 +2451,10 @@
             this.tabControl10.Controls.Add(this.tabPage29);
             this.tabControl10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl10.Location = new System.Drawing.Point(0, 0);
+            this.tabControl10.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl10.Name = "tabControl10";
             this.tabControl10.SelectedIndex = 0;
-            this.tabControl10.Size = new System.Drawing.Size(791, 543);
+            this.tabControl10.Size = new System.Drawing.Size(1196, 925);
             this.tabControl10.TabIndex = 0;
             // 
             // tabPage29
@@ -2416,10 +2486,11 @@
             this.tabPage29.Controls.Add(this.flowChart110_7);
             this.tabPage29.Controls.Add(this.flowChart110_6);
             this.tabPage29.Controls.Add(this.flowChart110_1);
-            this.tabPage29.Location = new System.Drawing.Point(4, 32);
+            this.tabPage29.Location = new System.Drawing.Point(4, 42);
+            this.tabPage29.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage29.Name = "tabPage29";
-            this.tabPage29.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage29.Size = new System.Drawing.Size(783, 507);
+            this.tabPage29.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage29.Size = new System.Drawing.Size(1188, 879);
             this.tabPage29.TabIndex = 0;
             this.tabPage29.Text = "ThrowScrewtest";
             this.tabPage29.UseVisualStyleBackColor = true;
@@ -2431,11 +2502,11 @@
             this.flowChart10.CASE1 = this.flowChart31;
             this.flowChart10.CASE2 = null;
             this.flowChart10.CASE3 = null;
-            this.flowChart10.Location = new System.Drawing.Point(851, 363);
-            this.flowChart10.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart10.Location = new System.Drawing.Point(1276, 544);
+            this.flowChart10.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart10.Name = "flowChart10";
             this.flowChart10.NEXT = this.flowChart110_12;
-            this.flowChart10.Size = new System.Drawing.Size(72, 27);
+            this.flowChart10.Size = new System.Drawing.Size(107, 40);
             this.flowChart10.TabIndex = 268;
             this.flowChart10.Text = "NG";
             this.flowChart10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2448,11 +2519,11 @@
             this.flowChart31.CASE1 = null;
             this.flowChart31.CASE2 = null;
             this.flowChart31.CASE3 = null;
-            this.flowChart31.Location = new System.Drawing.Point(816, 197);
-            this.flowChart31.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart31.Location = new System.Drawing.Point(1224, 296);
+            this.flowChart31.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart31.Name = "flowChart31";
             this.flowChart31.NEXT = this.flowChart5_7;
-            this.flowChart31.Size = new System.Drawing.Size(219, 27);
+            this.flowChart31.Size = new System.Drawing.Size(328, 40);
             this.flowChart31.TabIndex = 197;
             this.flowChart31.Text = "RequestScrew Fail";
             this.flowChart31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2465,11 +2536,11 @@
             this.flowChart5_7.CASE1 = null;
             this.flowChart5_7.CASE2 = null;
             this.flowChart5_7.CASE3 = null;
-            this.flowChart5_7.Location = new System.Drawing.Point(497, 271);
-            this.flowChart5_7.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart5_7.Location = new System.Drawing.Point(746, 406);
+            this.flowChart5_7.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart5_7.Name = "flowChart5_7";
             this.flowChart5_7.NEXT = this.flowChart55;
-            this.flowChart5_7.Size = new System.Drawing.Size(282, 27);
+            this.flowChart5_7.Size = new System.Drawing.Size(422, 40);
             this.flowChart5_7.TabIndex = 198;
             this.flowChart5_7.Text = "End5.07";
             this.flowChart5_7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2482,11 +2553,11 @@
             this.flowChart55.CASE1 = this.flowChart3_1;
             this.flowChart55.CASE2 = null;
             this.flowChart55.CASE3 = null;
-            this.flowChart55.Location = new System.Drawing.Point(350, 271);
-            this.flowChart55.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart55.Location = new System.Drawing.Point(525, 406);
+            this.flowChart55.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart55.Name = "flowChart55";
             this.flowChart55.NEXT = this.flowChart5_1;
-            this.flowChart55.Size = new System.Drawing.Size(94, 27);
+            this.flowChart55.Size = new System.Drawing.Size(140, 40);
             this.flowChart55.TabIndex = 210;
             this.flowChart55.Text = "Loop";
             this.flowChart55.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2499,11 +2570,11 @@
             this.flowChart3_1.CASE1 = null;
             this.flowChart3_1.CASE2 = null;
             this.flowChart3_1.CASE3 = null;
-            this.flowChart3_1.Location = new System.Drawing.Point(486, 67);
-            this.flowChart3_1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart3_1.Location = new System.Drawing.Point(729, 100);
+            this.flowChart3_1.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart3_1.Name = "flowChart3_1";
             this.flowChart3_1.NEXT = this.flowChart3_2;
-            this.flowChart3_1.Size = new System.Drawing.Size(326, 27);
+            this.flowChart3_1.Size = new System.Drawing.Size(488, 40);
             this.flowChart3_1.TabIndex = 208;
             this.flowChart3_1.Text = "Waiting Start3.01";
             this.flowChart3_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2516,11 +2587,11 @@
             this.flowChart3_2.CASE1 = null;
             this.flowChart3_2.CASE2 = this.flowChartMessage8;
             this.flowChart3_2.CASE3 = null;
-            this.flowChart3_2.Location = new System.Drawing.Point(486, 107);
-            this.flowChart3_2.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart3_2.Location = new System.Drawing.Point(729, 160);
+            this.flowChart3_2.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart3_2.Name = "flowChart3_2";
             this.flowChart3_2.NEXT = this.flowChart3_3;
-            this.flowChart3_2.Size = new System.Drawing.Size(326, 27);
+            this.flowChart3_2.Size = new System.Drawing.Size(488, 40);
             this.flowChart3_2.TabIndex = 207;
             this.flowChart3_2.Text = "Jacking Goto PrePressPos3.02";
             this.flowChart3_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2540,11 +2611,11 @@
             this.flowChartMessage8.HideButtonPause = false;
             this.flowChartMessage8.HideButtonRetry = false;
             this.flowChartMessage8.HideButtonSkip = false;
-            this.flowChartMessage8.Location = new System.Drawing.Point(293, 107);
-            this.flowChartMessage8.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.flowChartMessage8.Location = new System.Drawing.Point(440, 160);
+            this.flowChartMessage8.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
             this.flowChartMessage8.Name = "flowChartMessage8";
             this.flowChartMessage8.NEXT = null;
-            this.flowChartMessage8.Size = new System.Drawing.Size(127, 27);
+            this.flowChartMessage8.Size = new System.Drawing.Size(190, 40);
             this.flowChartMessage8.TabIndex = 211;
             this.flowChartMessage8.Text = "Move TimeOut";
             this.flowChartMessage8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2557,11 +2628,11 @@
             this.flowChart3_3.CASE1 = null;
             this.flowChart3_3.CASE2 = null;
             this.flowChart3_3.CASE3 = null;
-            this.flowChart3_3.Location = new System.Drawing.Point(486, 146);
-            this.flowChart3_3.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart3_3.Location = new System.Drawing.Point(729, 219);
+            this.flowChart3_3.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart3_3.Name = "flowChart3_3";
             this.flowChart3_3.NEXT = this.flowChart3_5;
-            this.flowChart3_3.Size = new System.Drawing.Size(326, 27);
+            this.flowChart3_3.Size = new System.Drawing.Size(488, 40);
             this.flowChart3_3.TabIndex = 206;
             this.flowChart3_3.Text = "Start Read Pressdata3.03";
             this.flowChart3_3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2574,11 +2645,11 @@
             this.flowChart3_5.CASE1 = this.flowChartMessage19;
             this.flowChart3_5.CASE2 = this.flowChartMessage15;
             this.flowChart3_5.CASE3 = null;
-            this.flowChart3_5.Location = new System.Drawing.Point(486, 185);
-            this.flowChart3_5.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart3_5.Location = new System.Drawing.Point(729, 278);
+            this.flowChart3_5.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart3_5.Name = "flowChart3_5";
             this.flowChart3_5.NEXT = this.flowChart3_6;
-            this.flowChart3_5.Size = new System.Drawing.Size(326, 27);
+            this.flowChart3_5.Size = new System.Drawing.Size(488, 40);
             this.flowChart3_5.TabIndex = 210;
             this.flowChart3_5.Text = "Jacking Goto PressLimitPos Waiting Stop3.05";
             this.flowChart3_5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2598,11 +2669,11 @@
             this.flowChartMessage19.HideButtonPause = false;
             this.flowChartMessage19.HideButtonRetry = false;
             this.flowChartMessage19.HideButtonSkip = false;
-            this.flowChartMessage19.Location = new System.Drawing.Point(293, 185);
-            this.flowChartMessage19.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.flowChartMessage19.Location = new System.Drawing.Point(440, 278);
+            this.flowChartMessage19.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
             this.flowChartMessage19.Name = "flowChartMessage19";
             this.flowChartMessage19.NEXT = null;
-            this.flowChartMessage19.Size = new System.Drawing.Size(127, 27);
+            this.flowChartMessage19.Size = new System.Drawing.Size(190, 40);
             this.flowChartMessage19.TabIndex = 218;
             this.flowChartMessage19.Text = "TimeOut";
             this.flowChartMessage19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2622,11 +2693,11 @@
             this.flowChartMessage15.HideButtonPause = false;
             this.flowChartMessage15.HideButtonRetry = false;
             this.flowChartMessage15.HideButtonSkip = false;
-            this.flowChartMessage15.Location = new System.Drawing.Point(845, 185);
-            this.flowChartMessage15.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.flowChartMessage15.Location = new System.Drawing.Point(1268, 278);
+            this.flowChartMessage15.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
             this.flowChartMessage15.Name = "flowChartMessage15";
             this.flowChartMessage15.NEXT = this.flowChart5;
-            this.flowChartMessage15.Size = new System.Drawing.Size(119, 27);
+            this.flowChartMessage15.Size = new System.Drawing.Size(178, 40);
             this.flowChartMessage15.TabIndex = 214;
             this.flowChartMessage15.Text = "Pressure NG";
             this.flowChartMessage15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2639,11 +2710,11 @@
             this.flowChart5.CASE1 = null;
             this.flowChart5.CASE2 = null;
             this.flowChart5.CASE3 = null;
-            this.flowChart5.Location = new System.Drawing.Point(845, 223);
-            this.flowChart5.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart5.Location = new System.Drawing.Point(1268, 334);
+            this.flowChart5.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart5.Name = "flowChart5";
             this.flowChart5.NEXT = this.flowChart3_6;
-            this.flowChart5.Size = new System.Drawing.Size(119, 27);
+            this.flowChart5.Size = new System.Drawing.Size(178, 40);
             this.flowChart5.TabIndex = 215;
             this.flowChart5.Text = "NG";
             this.flowChart5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2656,11 +2727,11 @@
             this.flowChart3_6.CASE1 = null;
             this.flowChart3_6.CASE2 = this.flowChartMessage9;
             this.flowChart3_6.CASE3 = null;
-            this.flowChart3_6.Location = new System.Drawing.Point(486, 223);
-            this.flowChart3_6.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart3_6.Location = new System.Drawing.Point(729, 334);
+            this.flowChart3_6.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart3_6.Name = "flowChart3_6";
             this.flowChart3_6.NEXT = this.flowChart3_4;
-            this.flowChart3_6.Size = new System.Drawing.Size(326, 27);
+            this.flowChart3_6.Size = new System.Drawing.Size(488, 40);
             this.flowChart3_6.TabIndex = 216;
             this.flowChart3_6.Text = "Get PressureValue3.06";
             this.flowChart3_6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2680,11 +2751,11 @@
             this.flowChartMessage9.HideButtonPause = false;
             this.flowChartMessage9.HideButtonRetry = false;
             this.flowChartMessage9.HideButtonSkip = false;
-            this.flowChartMessage9.Location = new System.Drawing.Point(293, 223);
-            this.flowChartMessage9.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.flowChartMessage9.Location = new System.Drawing.Point(440, 334);
+            this.flowChartMessage9.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
             this.flowChartMessage9.Name = "flowChartMessage9";
             this.flowChartMessage9.NEXT = null;
-            this.flowChartMessage9.Size = new System.Drawing.Size(127, 27);
+            this.flowChartMessage9.Size = new System.Drawing.Size(190, 40);
             this.flowChartMessage9.TabIndex = 217;
             this.flowChartMessage9.Text = "TimeOut";
             this.flowChartMessage9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2697,11 +2768,11 @@
             this.flowChart3_4.CASE1 = null;
             this.flowChart3_4.CASE2 = null;
             this.flowChart3_4.CASE3 = null;
-            this.flowChart3_4.Location = new System.Drawing.Point(486, 262);
-            this.flowChart3_4.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart3_4.Location = new System.Drawing.Point(729, 393);
+            this.flowChart3_4.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart3_4.Name = "flowChart3_4";
             this.flowChart3_4.NEXT = this.flowChart21;
-            this.flowChart3_4.Size = new System.Drawing.Size(326, 27);
+            this.flowChart3_4.Size = new System.Drawing.Size(488, 40);
             this.flowChart3_4.TabIndex = 205;
             this.flowChart3_4.Text = "End3.04";
             this.flowChart3_4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2714,11 +2785,11 @@
             this.flowChart21.CASE1 = null;
             this.flowChart21.CASE2 = null;
             this.flowChart21.CASE3 = null;
-            this.flowChart21.Location = new System.Drawing.Point(164, 262);
-            this.flowChart21.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart21.Location = new System.Drawing.Point(246, 393);
+            this.flowChart21.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart21.Name = "flowChart21";
             this.flowChart21.NEXT = this.flowChart4;
-            this.flowChart21.Size = new System.Drawing.Size(94, 27);
+            this.flowChart21.Size = new System.Drawing.Size(140, 40);
             this.flowChart21.TabIndex = 209;
             this.flowChart21.Text = "Loop";
             this.flowChart21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2731,11 +2802,11 @@
             this.flowChart4.CASE1 = this.flowChart3_1;
             this.flowChart4.CASE2 = null;
             this.flowChart4.CASE3 = null;
-            this.flowChart4.Location = new System.Drawing.Point(164, 67);
-            this.flowChart4.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart4.Location = new System.Drawing.Point(246, 100);
+            this.flowChart4.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart4.Name = "flowChart4";
             this.flowChart4.NEXT = null;
-            this.flowChart4.Size = new System.Drawing.Size(94, 27);
+            this.flowChart4.Size = new System.Drawing.Size(140, 40);
             this.flowChart4.TabIndex = 213;
             this.flowChart4.Text = "Loop";
             this.flowChart4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2748,11 +2819,11 @@
             this.flowChart5_1.CASE1 = null;
             this.flowChart5_1.CASE2 = null;
             this.flowChart5_1.CASE3 = null;
-            this.flowChart5_1.Location = new System.Drawing.Point(497, 46);
-            this.flowChart5_1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart5_1.Location = new System.Drawing.Point(746, 69);
+            this.flowChart5_1.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart5_1.Name = "flowChart5_1";
             this.flowChart5_1.NEXT = this.flowChart5_2;
-            this.flowChart5_1.Size = new System.Drawing.Size(282, 27);
+            this.flowChart5_1.Size = new System.Drawing.Size(422, 40);
             this.flowChart5_1.TabIndex = 196;
             this.flowChart5_1.Text = "Waiting Start5.01";
             this.flowChart5_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2765,11 +2836,11 @@
             this.flowChart5_2.CASE1 = null;
             this.flowChart5_2.CASE2 = this.flowChartMessage3;
             this.flowChart5_2.CASE3 = null;
-            this.flowChart5_2.Location = new System.Drawing.Point(497, 84);
-            this.flowChart5_2.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart5_2.Location = new System.Drawing.Point(746, 126);
+            this.flowChart5_2.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart5_2.Name = "flowChart5_2";
             this.flowChart5_2.NEXT = this.flowChart5_3;
-            this.flowChart5_2.Size = new System.Drawing.Size(282, 27);
+            this.flowChart5_2.Size = new System.Drawing.Size(422, 40);
             this.flowChart5_2.TabIndex = 200;
             this.flowChart5_2.Text = "Request Screw5.02";
             this.flowChart5_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2789,11 +2860,11 @@
             this.flowChartMessage3.HideButtonPause = false;
             this.flowChartMessage3.HideButtonRetry = false;
             this.flowChartMessage3.HideButtonSkip = false;
-            this.flowChartMessage3.Location = new System.Drawing.Point(816, 84);
-            this.flowChartMessage3.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.flowChartMessage3.Location = new System.Drawing.Point(1224, 126);
+            this.flowChartMessage3.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
             this.flowChartMessage3.Name = "flowChartMessage3";
             this.flowChartMessage3.NEXT = null;
-            this.flowChartMessage3.Size = new System.Drawing.Size(127, 27);
+            this.flowChartMessage3.Size = new System.Drawing.Size(190, 40);
             this.flowChartMessage3.TabIndex = 213;
             this.flowChartMessage3.Text = "TimeOut";
             this.flowChartMessage3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2806,11 +2877,11 @@
             this.flowChart5_3.CASE1 = this.flowChart31;
             this.flowChart5_3.CASE2 = null;
             this.flowChart5_3.CASE3 = null;
-            this.flowChart5_3.Location = new System.Drawing.Point(497, 121);
-            this.flowChart5_3.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart5_3.Location = new System.Drawing.Point(746, 182);
+            this.flowChart5_3.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart5_3.Name = "flowChart5_3";
             this.flowChart5_3.NEXT = this.flowChart5_4;
-            this.flowChart5_3.Size = new System.Drawing.Size(282, 27);
+            this.flowChart5_3.Size = new System.Drawing.Size(422, 40);
             this.flowChart5_3.TabIndex = 199;
             this.flowChart5_3.Text = "Waiting Request Screw Finsh5.03";
             this.flowChart5_3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2823,11 +2894,11 @@
             this.flowChart5_4.CASE1 = null;
             this.flowChart5_4.CASE2 = null;
             this.flowChart5_4.CASE3 = null;
-            this.flowChart5_4.Location = new System.Drawing.Point(497, 159);
-            this.flowChart5_4.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart5_4.Location = new System.Drawing.Point(746, 238);
+            this.flowChart5_4.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart5_4.Name = "flowChart5_4";
             this.flowChart5_4.NEXT = this.flowChart5_5;
-            this.flowChart5_4.Size = new System.Drawing.Size(282, 27);
+            this.flowChart5_4.Size = new System.Drawing.Size(422, 40);
             this.flowChart5_4.TabIndex = 202;
             this.flowChart5_4.Text = "SF 1 Screw Feed extend5.04";
             this.flowChart5_4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2840,11 +2911,11 @@
             this.flowChart5_5.CASE1 = this.flowChart31;
             this.flowChart5_5.CASE2 = null;
             this.flowChart5_5.CASE3 = null;
-            this.flowChart5_5.Location = new System.Drawing.Point(497, 197);
-            this.flowChart5_5.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart5_5.Location = new System.Drawing.Point(746, 296);
+            this.flowChart5_5.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart5_5.Name = "flowChart5_5";
             this.flowChart5_5.NEXT = this.flowChart5_6;
-            this.flowChart5_5.Size = new System.Drawing.Size(282, 27);
+            this.flowChart5_5.Size = new System.Drawing.Size(422, 40);
             this.flowChart5_5.TabIndex = 201;
             this.flowChart5_5.Text = "Vacuum to determine if there are nails5.05";
             this.flowChart5_5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2857,11 +2928,11 @@
             this.flowChart5_6.CASE1 = null;
             this.flowChart5_6.CASE2 = null;
             this.flowChart5_6.CASE3 = null;
-            this.flowChart5_6.Location = new System.Drawing.Point(497, 235);
-            this.flowChart5_6.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart5_6.Location = new System.Drawing.Point(746, 352);
+            this.flowChart5_6.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart5_6.Name = "flowChart5_6";
             this.flowChart5_6.NEXT = this.flowChart5_7;
-            this.flowChart5_6.Size = new System.Drawing.Size(282, 27);
+            this.flowChart5_6.Size = new System.Drawing.Size(422, 40);
             this.flowChart5_6.TabIndex = 198;
             this.flowChart5_6.Text = "Have Screws5.06";
             this.flowChart5_6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2874,11 +2945,11 @@
             this.flowChart110_12.CASE1 = null;
             this.flowChart110_12.CASE2 = null;
             this.flowChart110_12.CASE3 = null;
-            this.flowChart110_12.Location = new System.Drawing.Point(496, 439);
-            this.flowChart110_12.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart110_12.Location = new System.Drawing.Point(744, 658);
+            this.flowChart110_12.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart110_12.Name = "flowChart110_12";
             this.flowChart110_12.NEXT = this.flowChart110_13;
-            this.flowChart110_12.Size = new System.Drawing.Size(303, 27);
+            this.flowChart110_12.Size = new System.Drawing.Size(454, 40);
             this.flowChart110_12.TabIndex = 257;
             this.flowChart110_12.Text = "Goto ThrosScrewPos110.12";
             this.flowChart110_12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2891,11 +2962,11 @@
             this.flowChart110_13.CASE1 = null;
             this.flowChart110_13.CASE2 = null;
             this.flowChart110_13.CASE3 = null;
-            this.flowChart110_13.Location = new System.Drawing.Point(496, 479);
-            this.flowChart110_13.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart110_13.Location = new System.Drawing.Point(744, 718);
+            this.flowChart110_13.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart110_13.Name = "flowChart110_13";
             this.flowChart110_13.NEXT = this.flowChart110_14;
-            this.flowChart110_13.Size = new System.Drawing.Size(303, 27);
+            this.flowChart110_13.Size = new System.Drawing.Size(454, 40);
             this.flowChart110_13.TabIndex = 256;
             this.flowChart110_13.Text = "Close Screw Vacuum110.13";
             this.flowChart110_13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2908,11 +2979,11 @@
             this.flowChart110_14.CASE1 = null;
             this.flowChart110_14.CASE2 = null;
             this.flowChart110_14.CASE3 = null;
-            this.flowChart110_14.Location = new System.Drawing.Point(496, 518);
-            this.flowChart110_14.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart110_14.Location = new System.Drawing.Point(744, 777);
+            this.flowChart110_14.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart110_14.Name = "flowChart110_14";
             this.flowChart110_14.NEXT = this.flowChart110_15;
-            this.flowChart110_14.Size = new System.Drawing.Size(303, 27);
+            this.flowChart110_14.Size = new System.Drawing.Size(454, 40);
             this.flowChart110_14.TabIndex = 255;
             this.flowChart110_14.Text = "SF 1 Z CYL extend110.14";
             this.flowChart110_14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2925,11 +2996,11 @@
             this.flowChart110_15.CASE1 = null;
             this.flowChart110_15.CASE2 = null;
             this.flowChart110_15.CASE3 = null;
-            this.flowChart110_15.Location = new System.Drawing.Point(496, 557);
-            this.flowChart110_15.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart110_15.Location = new System.Drawing.Point(744, 836);
+            this.flowChart110_15.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart110_15.Name = "flowChart110_15";
             this.flowChart110_15.NEXT = this.flowChart110_16;
-            this.flowChart110_15.Size = new System.Drawing.Size(303, 27);
+            this.flowChart110_15.Size = new System.Drawing.Size(454, 40);
             this.flowChart110_15.TabIndex = 259;
             this.flowChart110_15.Text = "SF 1 Lock Cyl retract110.15";
             this.flowChart110_15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2942,11 +3013,11 @@
             this.flowChart110_16.CASE1 = null;
             this.flowChart110_16.CASE2 = null;
             this.flowChart110_16.CASE3 = null;
-            this.flowChart110_16.Location = new System.Drawing.Point(496, 593);
-            this.flowChart110_16.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart110_16.Location = new System.Drawing.Point(744, 890);
+            this.flowChart110_16.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart110_16.Name = "flowChart110_16";
             this.flowChart110_16.NEXT = this.flowChart110_17;
-            this.flowChart110_16.Size = new System.Drawing.Size(303, 27);
+            this.flowChart110_16.Size = new System.Drawing.Size(454, 40);
             this.flowChart110_16.TabIndex = 258;
             this.flowChart110_16.Text = "SF 1 Z CYL retract110.16";
             this.flowChart110_16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2959,11 +3030,11 @@
             this.flowChart110_17.CASE1 = null;
             this.flowChart110_17.CASE2 = null;
             this.flowChart110_17.CASE3 = null;
-            this.flowChart110_17.Location = new System.Drawing.Point(496, 631);
-            this.flowChart110_17.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart110_17.Location = new System.Drawing.Point(744, 946);
+            this.flowChart110_17.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart110_17.Name = "flowChart110_17";
             this.flowChart110_17.NEXT = this.flowChart110_18;
-            this.flowChart110_17.Size = new System.Drawing.Size(303, 27);
+            this.flowChart110_17.Size = new System.Drawing.Size(454, 40);
             this.flowChart110_17.TabIndex = 260;
             this.flowChart110_17.Text = "SF 1 Lock Cyl extend110.17";
             this.flowChart110_17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2976,11 +3047,11 @@
             this.flowChart110_18.CASE1 = null;
             this.flowChart110_18.CASE2 = null;
             this.flowChart110_18.CASE3 = null;
-            this.flowChart110_18.Location = new System.Drawing.Point(496, 670);
-            this.flowChart110_18.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart110_18.Location = new System.Drawing.Point(744, 1005);
+            this.flowChart110_18.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart110_18.Name = "flowChart110_18";
             this.flowChart110_18.NEXT = this.flowChart110_19;
-            this.flowChart110_18.Size = new System.Drawing.Size(303, 27);
+            this.flowChart110_18.Size = new System.Drawing.Size(454, 40);
             this.flowChart110_18.TabIndex = 261;
             this.flowChart110_18.Text = "SF 1 Screw Feed retract110.18";
             this.flowChart110_18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2993,11 +3064,11 @@
             this.flowChart110_19.CASE1 = this.flowChart9;
             this.flowChart110_19.CASE2 = null;
             this.flowChart110_19.CASE3 = null;
-            this.flowChart110_19.Location = new System.Drawing.Point(496, 710);
-            this.flowChart110_19.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart110_19.Location = new System.Drawing.Point(744, 1065);
+            this.flowChart110_19.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart110_19.Name = "flowChart110_19";
             this.flowChart110_19.NEXT = this.flowChart110_20;
-            this.flowChart110_19.Size = new System.Drawing.Size(303, 27);
+            this.flowChart110_19.Size = new System.Drawing.Size(454, 40);
             this.flowChart110_19.TabIndex = 254;
             this.flowChart110_19.Text = "Is All Finsh110.19";
             this.flowChart110_19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3010,11 +3081,11 @@
             this.flowChart9.CASE1 = this.flowChart31;
             this.flowChart9.CASE2 = null;
             this.flowChart9.CASE3 = null;
-            this.flowChart9.Location = new System.Drawing.Point(269, 543);
-            this.flowChart9.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart9.Location = new System.Drawing.Point(404, 814);
+            this.flowChart9.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart9.Name = "flowChart9";
             this.flowChart9.NEXT = this.flowChart110_8;
-            this.flowChart9.Size = new System.Drawing.Size(72, 27);
+            this.flowChart9.Size = new System.Drawing.Size(107, 40);
             this.flowChart9.TabIndex = 266;
             this.flowChart9.Text = "loop";
             this.flowChart9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3027,11 +3098,11 @@
             this.flowChart110_8.CASE1 = this.flowChart10;
             this.flowChart110_8.CASE2 = null;
             this.flowChart110_8.CASE3 = null;
-            this.flowChart110_8.Location = new System.Drawing.Point(496, 288);
-            this.flowChart110_8.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart110_8.Location = new System.Drawing.Point(744, 432);
+            this.flowChart110_8.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart110_8.Name = "flowChart110_8";
             this.flowChart110_8.NEXT = this.flowChart110_9;
-            this.flowChart110_8.Size = new System.Drawing.Size(303, 27);
+            this.flowChart110_8.Size = new System.Drawing.Size(454, 40);
             this.flowChart110_8.TabIndex = 251;
             this.flowChart110_8.Text = "Request Screw110.8";
             this.flowChart110_8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3044,11 +3115,11 @@
             this.flowChart110_9.CASE1 = this.flowChart10;
             this.flowChart110_9.CASE2 = null;
             this.flowChart110_9.CASE3 = null;
-            this.flowChart110_9.Location = new System.Drawing.Point(496, 325);
-            this.flowChart110_9.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart110_9.Location = new System.Drawing.Point(744, 488);
+            this.flowChart110_9.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart110_9.Name = "flowChart110_9";
             this.flowChart110_9.NEXT = this.flowChart110_10;
-            this.flowChart110_9.Size = new System.Drawing.Size(303, 27);
+            this.flowChart110_9.Size = new System.Drawing.Size(454, 40);
             this.flowChart110_9.TabIndex = 250;
             this.flowChart110_9.Text = "Waiting Request Screw Finsh110.9";
             this.flowChart110_9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3061,11 +3132,11 @@
             this.flowChart110_10.CASE1 = null;
             this.flowChart110_10.CASE2 = null;
             this.flowChart110_10.CASE3 = null;
-            this.flowChart110_10.Location = new System.Drawing.Point(496, 363);
-            this.flowChart110_10.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart110_10.Location = new System.Drawing.Point(744, 544);
+            this.flowChart110_10.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart110_10.Name = "flowChart110_10";
             this.flowChart110_10.NEXT = this.flowChart110_11;
-            this.flowChart110_10.Size = new System.Drawing.Size(303, 27);
+            this.flowChart110_10.Size = new System.Drawing.Size(454, 40);
             this.flowChart110_10.TabIndex = 253;
             this.flowChart110_10.Text = "SF 1 Screw Feed extend110.10";
             this.flowChart110_10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3078,11 +3149,11 @@
             this.flowChart110_11.CASE1 = this.flowChart10;
             this.flowChart110_11.CASE2 = null;
             this.flowChart110_11.CASE3 = null;
-            this.flowChart110_11.Location = new System.Drawing.Point(496, 401);
-            this.flowChart110_11.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart110_11.Location = new System.Drawing.Point(744, 602);
+            this.flowChart110_11.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart110_11.Name = "flowChart110_11";
             this.flowChart110_11.NEXT = this.flowChart110_12;
-            this.flowChart110_11.Size = new System.Drawing.Size(303, 27);
+            this.flowChart110_11.Size = new System.Drawing.Size(454, 40);
             this.flowChart110_11.TabIndex = 252;
             this.flowChart110_11.Text = "Vacuum to determine if there are nails110.11";
             this.flowChart110_11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3095,11 +3166,11 @@
             this.flowChart110_20.CASE1 = null;
             this.flowChart110_20.CASE2 = null;
             this.flowChart110_20.CASE3 = null;
-            this.flowChart110_20.Location = new System.Drawing.Point(496, 749);
-            this.flowChart110_20.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart110_20.Location = new System.Drawing.Point(744, 1124);
+            this.flowChart110_20.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart110_20.Name = "flowChart110_20";
             this.flowChart110_20.NEXT = this.flowChart56;
-            this.flowChart110_20.Size = new System.Drawing.Size(303, 27);
+            this.flowChart110_20.Size = new System.Drawing.Size(454, 40);
             this.flowChart110_20.TabIndex = 267;
             this.flowChart110_20.Text = "End110.20";
             this.flowChart110_20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3112,11 +3183,11 @@
             this.flowChart56.CASE1 = this.flowChart3_1;
             this.flowChart56.CASE2 = null;
             this.flowChart56.CASE3 = null;
-            this.flowChart56.Location = new System.Drawing.Point(194, 401);
-            this.flowChart56.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart56.Location = new System.Drawing.Point(291, 602);
+            this.flowChart56.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart56.Name = "flowChart56";
             this.flowChart56.NEXT = this.flowChart6_1;
-            this.flowChart56.Size = new System.Drawing.Size(94, 27);
+            this.flowChart56.Size = new System.Drawing.Size(140, 40);
             this.flowChart56.TabIndex = 210;
             this.flowChart56.Text = "Loop";
             this.flowChart56.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3129,11 +3200,11 @@
             this.flowChart6_1.CASE1 = null;
             this.flowChart6_1.CASE2 = null;
             this.flowChart6_1.CASE3 = null;
-            this.flowChart6_1.Location = new System.Drawing.Point(338, 51);
-            this.flowChart6_1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart6_1.Location = new System.Drawing.Point(507, 76);
+            this.flowChart6_1.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart6_1.Name = "flowChart6_1";
             this.flowChart6_1.NEXT = this.flowChart6_2;
-            this.flowChart6_1.Size = new System.Drawing.Size(281, 27);
+            this.flowChart6_1.Size = new System.Drawing.Size(420, 40);
             this.flowChart6_1.TabIndex = 202;
             this.flowChart6_1.Text = "Waiting Start6.01";
             this.flowChart6_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3146,11 +3217,11 @@
             this.flowChart6_2.CASE1 = null;
             this.flowChart6_2.CASE2 = this.flowChartMessage12;
             this.flowChart6_2.CASE3 = null;
-            this.flowChart6_2.Location = new System.Drawing.Point(338, 91);
-            this.flowChart6_2.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart6_2.Location = new System.Drawing.Point(507, 136);
+            this.flowChart6_2.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart6_2.Name = "flowChart6_2";
             this.flowChart6_2.NEXT = this.flowChart6_3;
-            this.flowChart6_2.Size = new System.Drawing.Size(281, 27);
+            this.flowChart6_2.Size = new System.Drawing.Size(420, 40);
             this.flowChart6_2.TabIndex = 201;
             this.flowChart6_2.Text = "Z Axis Goto SafePos6.02";
             this.flowChart6_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3170,11 +3241,11 @@
             this.flowChartMessage12.HideButtonPause = false;
             this.flowChartMessage12.HideButtonRetry = false;
             this.flowChartMessage12.HideButtonSkip = false;
-            this.flowChartMessage12.Location = new System.Drawing.Point(662, 91);
-            this.flowChartMessage12.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.flowChartMessage12.Location = new System.Drawing.Point(993, 136);
+            this.flowChartMessage12.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
             this.flowChartMessage12.Name = "flowChartMessage12";
             this.flowChartMessage12.NEXT = null;
-            this.flowChartMessage12.Size = new System.Drawing.Size(127, 27);
+            this.flowChartMessage12.Size = new System.Drawing.Size(190, 40);
             this.flowChartMessage12.TabIndex = 214;
             this.flowChartMessage12.Text = "Move TimeOut";
             this.flowChartMessage12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3187,11 +3258,11 @@
             this.flowChart6_3.CASE1 = null;
             this.flowChart6_3.CASE2 = this.flowChartMessage13;
             this.flowChart6_3.CASE3 = null;
-            this.flowChart6_3.Location = new System.Drawing.Point(338, 129);
-            this.flowChart6_3.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart6_3.Location = new System.Drawing.Point(507, 194);
+            this.flowChart6_3.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart6_3.Name = "flowChart6_3";
             this.flowChart6_3.NEXT = this.flowChart6_4;
-            this.flowChart6_3.Size = new System.Drawing.Size(281, 27);
+            this.flowChart6_3.Size = new System.Drawing.Size(420, 40);
             this.flowChart6_3.TabIndex = 200;
             this.flowChart6_3.Text = "XY Axis Goto ThrosScrewPos6.03";
             this.flowChart6_3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3211,11 +3282,11 @@
             this.flowChartMessage13.HideButtonPause = false;
             this.flowChartMessage13.HideButtonRetry = false;
             this.flowChartMessage13.HideButtonSkip = false;
-            this.flowChartMessage13.Location = new System.Drawing.Point(662, 129);
-            this.flowChartMessage13.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.flowChartMessage13.Location = new System.Drawing.Point(993, 194);
+            this.flowChartMessage13.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
             this.flowChartMessage13.Name = "flowChartMessage13";
             this.flowChartMessage13.NEXT = null;
-            this.flowChartMessage13.Size = new System.Drawing.Size(127, 27);
+            this.flowChartMessage13.Size = new System.Drawing.Size(190, 40);
             this.flowChartMessage13.TabIndex = 215;
             this.flowChartMessage13.Text = "Move TimeOut";
             this.flowChartMessage13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3228,11 +3299,11 @@
             this.flowChart6_4.CASE1 = null;
             this.flowChart6_4.CASE2 = null;
             this.flowChart6_4.CASE3 = null;
-            this.flowChart6_4.Location = new System.Drawing.Point(338, 168);
-            this.flowChart6_4.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart6_4.Location = new System.Drawing.Point(507, 252);
+            this.flowChart6_4.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart6_4.Name = "flowChart6_4";
             this.flowChart6_4.NEXT = this.flowChart6_5;
-            this.flowChart6_4.Size = new System.Drawing.Size(281, 27);
+            this.flowChart6_4.Size = new System.Drawing.Size(420, 40);
             this.flowChart6_4.TabIndex = 200;
             this.flowChart6_4.Text = "Close Screw Vacuum6.04";
             this.flowChart6_4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3245,11 +3316,11 @@
             this.flowChart6_5.CASE1 = null;
             this.flowChart6_5.CASE2 = null;
             this.flowChart6_5.CASE3 = null;
-            this.flowChart6_5.Location = new System.Drawing.Point(338, 207);
-            this.flowChart6_5.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart6_5.Location = new System.Drawing.Point(507, 310);
+            this.flowChart6_5.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart6_5.Name = "flowChart6_5";
             this.flowChart6_5.NEXT = this.flowChart6_8;
-            this.flowChart6_5.Size = new System.Drawing.Size(281, 27);
+            this.flowChart6_5.Size = new System.Drawing.Size(420, 40);
             this.flowChart6_5.TabIndex = 200;
             this.flowChart6_5.Text = "SF 1 Z CYL extend6.05";
             this.flowChart6_5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3262,11 +3333,11 @@
             this.flowChart6_8.CASE1 = null;
             this.flowChart6_8.CASE2 = null;
             this.flowChart6_8.CASE3 = null;
-            this.flowChart6_8.Location = new System.Drawing.Point(338, 245);
-            this.flowChart6_8.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart6_8.Location = new System.Drawing.Point(507, 368);
+            this.flowChart6_8.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart6_8.Name = "flowChart6_8";
             this.flowChart6_8.NEXT = this.flowChart6_6;
-            this.flowChart6_8.Size = new System.Drawing.Size(281, 27);
+            this.flowChart6_8.Size = new System.Drawing.Size(420, 40);
             this.flowChart6_8.TabIndex = 211;
             this.flowChart6_8.Text = "SF 1 Lock Cyl retract6.08";
             this.flowChart6_8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3279,11 +3350,11 @@
             this.flowChart6_6.CASE1 = null;
             this.flowChart6_6.CASE2 = null;
             this.flowChart6_6.CASE3 = null;
-            this.flowChart6_6.Location = new System.Drawing.Point(338, 283);
-            this.flowChart6_6.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart6_6.Location = new System.Drawing.Point(507, 424);
+            this.flowChart6_6.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart6_6.Name = "flowChart6_6";
             this.flowChart6_6.NEXT = this.flowChart6_9;
-            this.flowChart6_6.Size = new System.Drawing.Size(281, 27);
+            this.flowChart6_6.Size = new System.Drawing.Size(420, 40);
             this.flowChart6_6.TabIndex = 203;
             this.flowChart6_6.Text = "SF 1 Z CYL retract6.06";
             this.flowChart6_6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3296,11 +3367,11 @@
             this.flowChart6_9.CASE1 = null;
             this.flowChart6_9.CASE2 = null;
             this.flowChart6_9.CASE3 = null;
-            this.flowChart6_9.Location = new System.Drawing.Point(338, 319);
-            this.flowChart6_9.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart6_9.Location = new System.Drawing.Point(507, 478);
+            this.flowChart6_9.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart6_9.Name = "flowChart6_9";
             this.flowChart6_9.NEXT = this.flowChart6_10;
-            this.flowChart6_9.Size = new System.Drawing.Size(281, 27);
+            this.flowChart6_9.Size = new System.Drawing.Size(420, 40);
             this.flowChart6_9.TabIndex = 212;
             this.flowChart6_9.Text = "SF 1 Lock Cyl extend6.09";
             this.flowChart6_9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3313,11 +3384,11 @@
             this.flowChart6_10.CASE1 = null;
             this.flowChart6_10.CASE2 = null;
             this.flowChart6_10.CASE3 = null;
-            this.flowChart6_10.Location = new System.Drawing.Point(338, 359);
-            this.flowChart6_10.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart6_10.Location = new System.Drawing.Point(507, 538);
+            this.flowChart6_10.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart6_10.Name = "flowChart6_10";
             this.flowChart6_10.NEXT = this.flowChart6_7;
-            this.flowChart6_10.Size = new System.Drawing.Size(281, 27);
+            this.flowChart6_10.Size = new System.Drawing.Size(420, 40);
             this.flowChart6_10.TabIndex = 213;
             this.flowChart6_10.Text = "SF 1 Screw Feed retract6.10";
             this.flowChart6_10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3330,11 +3401,11 @@
             this.flowChart6_7.CASE1 = null;
             this.flowChart6_7.CASE2 = null;
             this.flowChart6_7.CASE3 = null;
-            this.flowChart6_7.Location = new System.Drawing.Point(338, 401);
-            this.flowChart6_7.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart6_7.Location = new System.Drawing.Point(507, 602);
+            this.flowChart6_7.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart6_7.Name = "flowChart6_7";
             this.flowChart6_7.NEXT = this.flowChart56;
-            this.flowChart6_7.Size = new System.Drawing.Size(281, 27);
+            this.flowChart6_7.Size = new System.Drawing.Size(420, 40);
             this.flowChart6_7.TabIndex = 200;
             this.flowChart6_7.Text = "End6.07";
             this.flowChart6_7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3343,24 +3414,27 @@
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(939, 59);
+            this.label29.Location = new System.Drawing.Point(1408, 88);
+            this.label29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(94, 23);
+            this.label29.Size = new System.Drawing.Size(139, 33);
             this.label29.TabIndex = 265;
             this.label29.Text = "循环次数";
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(1045, 59);
+            this.textBox3.Location = new System.Drawing.Point(1568, 88);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 29);
+            this.textBox3.Size = new System.Drawing.Size(148, 40);
             this.textBox3.TabIndex = 264;
             // 
             // btn_StopThrowScrewtest
             // 
-            this.btn_StopThrowScrewtest.Location = new System.Drawing.Point(1000, 175);
+            this.btn_StopThrowScrewtest.Location = new System.Drawing.Point(1500, 262);
+            this.btn_StopThrowScrewtest.Margin = new System.Windows.Forms.Padding(4);
             this.btn_StopThrowScrewtest.Name = "btn_StopThrowScrewtest";
-            this.btn_StopThrowScrewtest.Size = new System.Drawing.Size(114, 37);
+            this.btn_StopThrowScrewtest.Size = new System.Drawing.Size(171, 56);
             this.btn_StopThrowScrewtest.TabIndex = 263;
             this.btn_StopThrowScrewtest.Text = "Stop";
             this.btn_StopThrowScrewtest.UseVisualStyleBackColor = true;
@@ -3368,9 +3442,10 @@
             // 
             // btn_StartThrowScrewtest
             // 
-            this.btn_StartThrowScrewtest.Location = new System.Drawing.Point(1000, 113);
+            this.btn_StartThrowScrewtest.Location = new System.Drawing.Point(1500, 170);
+            this.btn_StartThrowScrewtest.Margin = new System.Windows.Forms.Padding(4);
             this.btn_StartThrowScrewtest.Name = "btn_StartThrowScrewtest";
-            this.btn_StartThrowScrewtest.Size = new System.Drawing.Size(114, 37);
+            this.btn_StartThrowScrewtest.Size = new System.Drawing.Size(171, 56);
             this.btn_StartThrowScrewtest.TabIndex = 262;
             this.btn_StartThrowScrewtest.Text = "Start";
             this.btn_StartThrowScrewtest.UseVisualStyleBackColor = true;
@@ -3383,11 +3458,11 @@
             this.flowChart110_3.CASE1 = null;
             this.flowChart110_3.CASE2 = null;
             this.flowChart110_3.CASE3 = null;
-            this.flowChart110_3.Location = new System.Drawing.Point(496, 97);
-            this.flowChart110_3.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart110_3.Location = new System.Drawing.Point(744, 146);
+            this.flowChart110_3.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart110_3.Name = "flowChart110_3";
             this.flowChart110_3.NEXT = this.flowChart110_4;
-            this.flowChart110_3.Size = new System.Drawing.Size(303, 27);
+            this.flowChart110_3.Size = new System.Drawing.Size(454, 40);
             this.flowChart110_3.TabIndex = 248;
             this.flowChart110_3.Text = "SF 1 Lock Cyl retract110.3";
             this.flowChart110_3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3400,11 +3475,11 @@
             this.flowChart110_4.CASE1 = null;
             this.flowChart110_4.CASE2 = null;
             this.flowChart110_4.CASE3 = null;
-            this.flowChart110_4.Location = new System.Drawing.Point(496, 135);
-            this.flowChart110_4.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart110_4.Location = new System.Drawing.Point(744, 202);
+            this.flowChart110_4.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart110_4.Name = "flowChart110_4";
             this.flowChart110_4.NEXT = this.flowChart110_5;
-            this.flowChart110_4.Size = new System.Drawing.Size(303, 27);
+            this.flowChart110_4.Size = new System.Drawing.Size(454, 40);
             this.flowChart110_4.TabIndex = 246;
             this.flowChart110_4.Text = "SF 1 Z CYL retract110.4";
             this.flowChart110_4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3417,11 +3492,11 @@
             this.flowChart110_5.CASE1 = null;
             this.flowChart110_5.CASE2 = null;
             this.flowChart110_5.CASE3 = null;
-            this.flowChart110_5.Location = new System.Drawing.Point(496, 173);
-            this.flowChart110_5.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart110_5.Location = new System.Drawing.Point(744, 260);
+            this.flowChart110_5.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart110_5.Name = "flowChart110_5";
             this.flowChart110_5.NEXT = this.flowChart110_6;
-            this.flowChart110_5.Size = new System.Drawing.Size(303, 27);
+            this.flowChart110_5.Size = new System.Drawing.Size(454, 40);
             this.flowChart110_5.TabIndex = 247;
             this.flowChart110_5.Text = "SF 1 Lock Cyl extend110.5";
             this.flowChart110_5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3434,11 +3509,11 @@
             this.flowChart110_6.CASE1 = null;
             this.flowChart110_6.CASE2 = null;
             this.flowChart110_6.CASE3 = null;
-            this.flowChart110_6.Location = new System.Drawing.Point(496, 209);
-            this.flowChart110_6.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart110_6.Location = new System.Drawing.Point(744, 314);
+            this.flowChart110_6.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart110_6.Name = "flowChart110_6";
             this.flowChart110_6.NEXT = this.flowChart110_7;
-            this.flowChart110_6.Size = new System.Drawing.Size(303, 27);
+            this.flowChart110_6.Size = new System.Drawing.Size(454, 40);
             this.flowChart110_6.TabIndex = 243;
             this.flowChart110_6.Text = "Z Homing110.6";
             this.flowChart110_6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3451,11 +3526,11 @@
             this.flowChart110_7.CASE1 = null;
             this.flowChart110_7.CASE2 = null;
             this.flowChart110_7.CASE3 = null;
-            this.flowChart110_7.Location = new System.Drawing.Point(496, 247);
-            this.flowChart110_7.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart110_7.Location = new System.Drawing.Point(744, 370);
+            this.flowChart110_7.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart110_7.Name = "flowChart110_7";
             this.flowChart110_7.NEXT = this.flowChart110_8;
-            this.flowChart110_7.Size = new System.Drawing.Size(303, 27);
+            this.flowChart110_7.Size = new System.Drawing.Size(454, 40);
             this.flowChart110_7.TabIndex = 244;
             this.flowChart110_7.Text = "XY Homing110.7";
             this.flowChart110_7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3468,11 +3543,11 @@
             this.flowChart110_2.CASE1 = null;
             this.flowChart110_2.CASE2 = null;
             this.flowChart110_2.CASE3 = null;
-            this.flowChart110_2.Location = new System.Drawing.Point(496, 59);
-            this.flowChart110_2.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart110_2.Location = new System.Drawing.Point(744, 88);
+            this.flowChart110_2.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart110_2.Name = "flowChart110_2";
             this.flowChart110_2.NEXT = this.flowChart110_3;
-            this.flowChart110_2.Size = new System.Drawing.Size(303, 27);
+            this.flowChart110_2.Size = new System.Drawing.Size(454, 40);
             this.flowChart110_2.TabIndex = 245;
             this.flowChart110_2.Text = "SF 1 Screw Feed retract110.2";
             this.flowChart110_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3485,11 +3560,11 @@
             this.flowChart110_1.CASE1 = null;
             this.flowChart110_1.CASE2 = null;
             this.flowChart110_1.CASE3 = null;
-            this.flowChart110_1.Location = new System.Drawing.Point(496, 19);
-            this.flowChart110_1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart110_1.Location = new System.Drawing.Point(744, 28);
+            this.flowChart110_1.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart110_1.Name = "flowChart110_1";
             this.flowChart110_1.NEXT = this.flowChart110_2;
-            this.flowChart110_1.Size = new System.Drawing.Size(303, 27);
+            this.flowChart110_1.Size = new System.Drawing.Size(454, 40);
             this.flowChart110_1.TabIndex = 242;
             this.flowChart110_1.Text = "Start 110.1";
             this.flowChart110_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3509,8 +3584,7 @@
             this.Numberturns,
             this.DisplacementValue,
             this.State});
-            this.D_ScrewResultsShow.Location = new System.Drawing.Point(0, 373);
-            this.D_ScrewResultsShow.Margin = new System.Windows.Forms.Padding(2);
+            this.D_ScrewResultsShow.Location = new System.Drawing.Point(0, 560);
             this.D_ScrewResultsShow.Name = "D_ScrewResultsShow";
             this.D_ScrewResultsShow.ReadOnly = true;
             this.D_ScrewResultsShow.RowHeadersVisible = false;
@@ -3518,7 +3592,7 @@
             this.D_ScrewResultsShow.RowTemplate.Height = 46;
             this.D_ScrewResultsShow.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.D_ScrewResultsShow.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.D_ScrewResultsShow.Size = new System.Drawing.Size(681, 365);
+            this.D_ScrewResultsShow.Size = new System.Drawing.Size(1022, 548);
             this.D_ScrewResultsShow.TabIndex = 4;
             // 
             // Column1
@@ -3568,6 +3642,7 @@
             // DisplacementValue
             // 
             this.DisplacementValue.HeaderText = "DisplacementValue";
+            this.DisplacementValue.MinimumWidth = 8;
             this.DisplacementValue.Name = "DisplacementValue";
             this.DisplacementValue.ReadOnly = true;
             this.DisplacementValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -3587,18 +3662,20 @@
             this.tabControl2.Controls.Add(this.tabPage10);
             this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl2.Location = new System.Drawing.Point(0, 0);
+            this.tabControl2.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(1127, 565);
+            this.tabControl2.Size = new System.Drawing.Size(1696, 878);
             this.tabControl2.TabIndex = 1;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.tabControl5);
-            this.tabPage1.Location = new System.Drawing.Point(4, 32);
+            this.tabPage1.Location = new System.Drawing.Point(4, 42);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1119, 529);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage1.Size = new System.Drawing.Size(1688, 832);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "IO";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -3609,11 +3686,10 @@
             this.tabControl5.Controls.Add(this.tabPage3);
             this.tabControl5.Controls.Add(this.tabPage12);
             this.tabControl5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl5.Location = new System.Drawing.Point(3, 3);
-            this.tabControl5.Margin = new System.Windows.Forms.Padding(2);
+            this.tabControl5.Location = new System.Drawing.Point(4, 4);
             this.tabControl5.Name = "tabControl5";
             this.tabControl5.SelectedIndex = 0;
-            this.tabControl5.Size = new System.Drawing.Size(1113, 523);
+            this.tabControl5.Size = new System.Drawing.Size(1680, 824);
             this.tabControl5.TabIndex = 2;
             // 
             // tabPage2
@@ -3648,11 +3724,10 @@
             this.tabPage2.Controls.Add(this.IB_Screw_OK);
             this.tabPage2.Controls.Add(this.IB_Screw_Running);
             this.tabPage2.Controls.Add(this.IB_Screw_Ready);
-            this.tabPage2.Location = new System.Drawing.Point(4, 32);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
+            this.tabPage2.Location = new System.Drawing.Point(4, 42);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage2.Size = new System.Drawing.Size(1105, 487);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1672, 778);
             this.tabPage2.TabIndex = 0;
             this.tabPage2.Text = "Screw Driver";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -3661,11 +3736,11 @@
             // 
             this.OB_ScrewArrived1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.OB_ScrewArrived1.CardType = JabilSDK.Enums.OutputCardType.BECKHOFF;
-            this.OB_ScrewArrived1.Location = new System.Drawing.Point(5, 323);
-            this.OB_ScrewArrived1.Margin = new System.Windows.Forms.Padding(5);
+            this.OB_ScrewArrived1.Location = new System.Drawing.Point(8, 484);
+            this.OB_ScrewArrived1.Margin = new System.Windows.Forms.Padding(8);
             this.OB_ScrewArrived1.Name = "OB_ScrewArrived1";
             this.OB_ScrewArrived1.Port = "20100";
-            this.OB_ScrewArrived1.Size = new System.Drawing.Size(310, 35);
+            this.OB_ScrewArrived1.Size = new System.Drawing.Size(464, 52);
             this.OB_ScrewArrived1.TabIndex = 122;
             this.OB_ScrewArrived1.Text = "Reset Screw in position 1";
             this.OB_ScrewArrived1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3674,11 +3749,11 @@
             // 
             this.IB_ScrewArrived1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IB_ScrewArrived1.CardType = JabilSDK.Enums.InputCardType.BECKHOFF;
-            this.IB_ScrewArrived1.Location = new System.Drawing.Point(7, 279);
-            this.IB_ScrewArrived1.Margin = new System.Windows.Forms.Padding(5);
+            this.IB_ScrewArrived1.Location = new System.Drawing.Point(10, 418);
+            this.IB_ScrewArrived1.Margin = new System.Windows.Forms.Padding(8);
             this.IB_ScrewArrived1.Name = "IB_ScrewArrived1";
             this.IB_ScrewArrived1.Port = "20100";
-            this.IB_ScrewArrived1.Size = new System.Drawing.Size(310, 35);
+            this.IB_ScrewArrived1.Size = new System.Drawing.Size(464, 52);
             this.IB_ScrewArrived1.TabIndex = 121;
             this.IB_ScrewArrived1.Text = "Screw in position 1";
             this.IB_ScrewArrived1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3687,11 +3762,11 @@
             // 
             this.IB_ScrewArrived.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IB_ScrewArrived.CardType = JabilSDK.Enums.InputCardType.BECKHOFF;
-            this.IB_ScrewArrived.Location = new System.Drawing.Point(7, 233);
-            this.IB_ScrewArrived.Margin = new System.Windows.Forms.Padding(5);
+            this.IB_ScrewArrived.Location = new System.Drawing.Point(10, 350);
+            this.IB_ScrewArrived.Margin = new System.Windows.Forms.Padding(8);
             this.IB_ScrewArrived.Name = "IB_ScrewArrived";
             this.IB_ScrewArrived.Port = "01307";
-            this.IB_ScrewArrived.Size = new System.Drawing.Size(310, 35);
+            this.IB_ScrewArrived.Size = new System.Drawing.Size(464, 52);
             this.IB_ScrewArrived.TabIndex = 117;
             this.IB_ScrewArrived.Text = "Screw in position 1";
             this.IB_ScrewArrived.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3701,11 +3776,11 @@
             this.IB_ScrewFeedCylinderRetract.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IB_ScrewFeedCylinderRetract.CardType = JabilSDK.Enums.InputCardType.BECKHOFF;
             this.IB_ScrewFeedCylinderRetract.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.IB_ScrewFeedCylinderRetract.Location = new System.Drawing.Point(670, 53);
-            this.IB_ScrewFeedCylinderRetract.Margin = new System.Windows.Forms.Padding(5);
+            this.IB_ScrewFeedCylinderRetract.Location = new System.Drawing.Point(1005, 80);
+            this.IB_ScrewFeedCylinderRetract.Margin = new System.Windows.Forms.Padding(8);
             this.IB_ScrewFeedCylinderRetract.Name = "IB_ScrewFeedCylinderRetract";
             this.IB_ScrewFeedCylinderRetract.Port = "01301";
-            this.IB_ScrewFeedCylinderRetract.Size = new System.Drawing.Size(310, 35);
+            this.IB_ScrewFeedCylinderRetract.Size = new System.Drawing.Size(464, 52);
             this.IB_ScrewFeedCylinderRetract.TabIndex = 116;
             this.IB_ScrewFeedCylinderRetract.Text = "SF 1 Screw Feed retract";
             this.IB_ScrewFeedCylinderRetract.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3714,11 +3789,11 @@
             // 
             this.IB_ScrewRecoveryCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IB_ScrewRecoveryCount.CardType = JabilSDK.Enums.InputCardType.BECKHOFF;
-            this.IB_ScrewRecoveryCount.Location = new System.Drawing.Point(7, 187);
-            this.IB_ScrewRecoveryCount.Margin = new System.Windows.Forms.Padding(5);
+            this.IB_ScrewRecoveryCount.Location = new System.Drawing.Point(10, 280);
+            this.IB_ScrewRecoveryCount.Margin = new System.Windows.Forms.Padding(8);
             this.IB_ScrewRecoveryCount.Name = "IB_ScrewRecoveryCount";
             this.IB_ScrewRecoveryCount.Port = "01104";
-            this.IB_ScrewRecoveryCount.Size = new System.Drawing.Size(310, 35);
+            this.IB_ScrewRecoveryCount.Size = new System.Drawing.Size(464, 52);
             this.IB_ScrewRecoveryCount.TabIndex = 115;
             this.IB_ScrewRecoveryCount.Text = "Screw NG counter sensor1";
             this.IB_ScrewRecoveryCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3728,11 +3803,11 @@
             this.IB_ScrewLockCylinderRetract.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IB_ScrewLockCylinderRetract.CardType = JabilSDK.Enums.InputCardType.BECKHOFF;
             this.IB_ScrewLockCylinderRetract.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.IB_ScrewLockCylinderRetract.Location = new System.Drawing.Point(1005, 55);
-            this.IB_ScrewLockCylinderRetract.Margin = new System.Windows.Forms.Padding(5);
+            this.IB_ScrewLockCylinderRetract.Location = new System.Drawing.Point(1508, 82);
+            this.IB_ScrewLockCylinderRetract.Margin = new System.Windows.Forms.Padding(8);
             this.IB_ScrewLockCylinderRetract.Name = "IB_ScrewLockCylinderRetract";
             this.IB_ScrewLockCylinderRetract.Port = "01305";
-            this.IB_ScrewLockCylinderRetract.Size = new System.Drawing.Size(310, 35);
+            this.IB_ScrewLockCylinderRetract.Size = new System.Drawing.Size(464, 52);
             this.IB_ScrewLockCylinderRetract.TabIndex = 113;
             this.IB_ScrewLockCylinderRetract.Text = "SF 1 Lock Cyl retract";
             this.IB_ScrewLockCylinderRetract.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3742,11 +3817,11 @@
             this.IB_ScrewLockCylinderExtend.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IB_ScrewLockCylinderExtend.CardType = JabilSDK.Enums.InputCardType.BECKHOFF;
             this.IB_ScrewLockCylinderExtend.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.IB_ScrewLockCylinderExtend.Location = new System.Drawing.Point(1005, 7);
-            this.IB_ScrewLockCylinderExtend.Margin = new System.Windows.Forms.Padding(5);
+            this.IB_ScrewLockCylinderExtend.Location = new System.Drawing.Point(1508, 10);
+            this.IB_ScrewLockCylinderExtend.Margin = new System.Windows.Forms.Padding(8);
             this.IB_ScrewLockCylinderExtend.Name = "IB_ScrewLockCylinderExtend";
             this.IB_ScrewLockCylinderExtend.Port = "01304";
-            this.IB_ScrewLockCylinderExtend.Size = new System.Drawing.Size(310, 35);
+            this.IB_ScrewLockCylinderExtend.Size = new System.Drawing.Size(464, 52);
             this.IB_ScrewLockCylinderExtend.TabIndex = 114;
             this.IB_ScrewLockCylinderExtend.Text = "SF 1 Lock Cyl extend";
             this.IB_ScrewLockCylinderExtend.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3756,11 +3831,11 @@
             this.IB_ScrewNailingCylinderRetract.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IB_ScrewNailingCylinderRetract.CardType = JabilSDK.Enums.InputCardType.BECKHOFF;
             this.IB_ScrewNailingCylinderRetract.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.IB_ScrewNailingCylinderRetract.Location = new System.Drawing.Point(670, 276);
-            this.IB_ScrewNailingCylinderRetract.Margin = new System.Windows.Forms.Padding(5);
+            this.IB_ScrewNailingCylinderRetract.Location = new System.Drawing.Point(1005, 414);
+            this.IB_ScrewNailingCylinderRetract.Margin = new System.Windows.Forms.Padding(8);
             this.IB_ScrewNailingCylinderRetract.Name = "IB_ScrewNailingCylinderRetract";
             this.IB_ScrewNailingCylinderRetract.Port = "01303";
-            this.IB_ScrewNailingCylinderRetract.Size = new System.Drawing.Size(310, 35);
+            this.IB_ScrewNailingCylinderRetract.Size = new System.Drawing.Size(464, 52);
             this.IB_ScrewNailingCylinderRetract.TabIndex = 111;
             this.IB_ScrewNailingCylinderRetract.Text = "SF 1 Z CYL retract";
             this.IB_ScrewNailingCylinderRetract.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3770,11 +3845,11 @@
             this.IB_ScrewNailingCylinderExtend.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IB_ScrewNailingCylinderExtend.CardType = JabilSDK.Enums.InputCardType.BECKHOFF;
             this.IB_ScrewNailingCylinderExtend.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.IB_ScrewNailingCylinderExtend.Location = new System.Drawing.Point(670, 233);
-            this.IB_ScrewNailingCylinderExtend.Margin = new System.Windows.Forms.Padding(5);
+            this.IB_ScrewNailingCylinderExtend.Location = new System.Drawing.Point(1005, 350);
+            this.IB_ScrewNailingCylinderExtend.Margin = new System.Windows.Forms.Padding(8);
             this.IB_ScrewNailingCylinderExtend.Name = "IB_ScrewNailingCylinderExtend";
             this.IB_ScrewNailingCylinderExtend.Port = "01302";
-            this.IB_ScrewNailingCylinderExtend.Size = new System.Drawing.Size(310, 35);
+            this.IB_ScrewNailingCylinderExtend.Size = new System.Drawing.Size(464, 52);
             this.IB_ScrewNailingCylinderExtend.TabIndex = 112;
             this.IB_ScrewNailingCylinderExtend.Text = "SF 1 Z CYL extend";
             this.IB_ScrewNailingCylinderExtend.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3784,11 +3859,11 @@
             this.IB_ScrewFeedCylinderExtend.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IB_ScrewFeedCylinderExtend.CardType = JabilSDK.Enums.InputCardType.BECKHOFF;
             this.IB_ScrewFeedCylinderExtend.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.IB_ScrewFeedCylinderExtend.Location = new System.Drawing.Point(670, 7);
-            this.IB_ScrewFeedCylinderExtend.Margin = new System.Windows.Forms.Padding(5);
+            this.IB_ScrewFeedCylinderExtend.Location = new System.Drawing.Point(1005, 10);
+            this.IB_ScrewFeedCylinderExtend.Margin = new System.Windows.Forms.Padding(8);
             this.IB_ScrewFeedCylinderExtend.Name = "IB_ScrewFeedCylinderExtend";
             this.IB_ScrewFeedCylinderExtend.Port = "01300";
-            this.IB_ScrewFeedCylinderExtend.Size = new System.Drawing.Size(310, 35);
+            this.IB_ScrewFeedCylinderExtend.Size = new System.Drawing.Size(464, 52);
             this.IB_ScrewFeedCylinderExtend.TabIndex = 110;
             this.IB_ScrewFeedCylinderExtend.Text = "SF 1 Screw Feed extend";
             this.IB_ScrewFeedCylinderExtend.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3797,11 +3872,11 @@
             // 
             this.OB_ScrewVacuum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.OB_ScrewVacuum.CardType = JabilSDK.Enums.OutputCardType.BECKHOFF;
-            this.OB_ScrewVacuum.Location = new System.Drawing.Point(337, 53);
-            this.OB_ScrewVacuum.Margin = new System.Windows.Forms.Padding(5);
+            this.OB_ScrewVacuum.Location = new System.Drawing.Point(506, 80);
+            this.OB_ScrewVacuum.Margin = new System.Windows.Forms.Padding(8);
             this.OB_ScrewVacuum.Name = "OB_ScrewVacuum";
             this.OB_ScrewVacuum.Port = "11306";
-            this.OB_ScrewVacuum.Size = new System.Drawing.Size(310, 35);
+            this.OB_ScrewVacuum.Size = new System.Drawing.Size(464, 52);
             this.OB_ScrewVacuum.TabIndex = 109;
             this.OB_ScrewVacuum.Text = "SF 1 vacuum";
             this.OB_ScrewVacuum.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3810,11 +3885,11 @@
             // 
             this.IB_ScrewVacuum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IB_ScrewVacuum.CardType = JabilSDK.Enums.InputCardType.BECKHOFF;
-            this.IB_ScrewVacuum.Location = new System.Drawing.Point(337, 7);
-            this.IB_ScrewVacuum.Margin = new System.Windows.Forms.Padding(5);
+            this.IB_ScrewVacuum.Location = new System.Drawing.Point(506, 10);
+            this.IB_ScrewVacuum.Margin = new System.Windows.Forms.Padding(8);
             this.IB_ScrewVacuum.Name = "IB_ScrewVacuum";
             this.IB_ScrewVacuum.Port = "01306";
-            this.IB_ScrewVacuum.Size = new System.Drawing.Size(310, 35);
+            this.IB_ScrewVacuum.Size = new System.Drawing.Size(464, 52);
             this.IB_ScrewVacuum.TabIndex = 108;
             this.IB_ScrewVacuum.Text = "SF 1 vacuum";
             this.IB_ScrewVacuum.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3841,21 +3916,21 @@
             this.CYL_Conveyor1_ScrewLockCylinder.CyOn_TimeoutAlarmCode = null;
             this.CYL_Conveyor1_ScrewLockCylinder.CyTimeoutTime = 30000;
             this.CYL_Conveyor1_ScrewLockCylinder.ForeColor = System.Drawing.Color.Black;
-            this.CYL_Conveyor1_ScrewLockCylinder.Location = new System.Drawing.Point(1005, 187);
-            this.CYL_Conveyor1_ScrewLockCylinder.Margin = new System.Windows.Forms.Padding(5);
+            this.CYL_Conveyor1_ScrewLockCylinder.Location = new System.Drawing.Point(1508, 280);
+            this.CYL_Conveyor1_ScrewLockCylinder.Margin = new System.Windows.Forms.Padding(8);
             this.CYL_Conveyor1_ScrewLockCylinder.Name = "CYL_Conveyor1_ScrewLockCylinder";
-            this.CYL_Conveyor1_ScrewLockCylinder.Size = new System.Drawing.Size(310, 35);
+            this.CYL_Conveyor1_ScrewLockCylinder.Size = new System.Drawing.Size(464, 52);
             this.CYL_Conveyor1_ScrewLockCylinder.TabIndex = 107;
             // 
             // OB_ScrewLockCylinderRetract
             // 
             this.OB_ScrewLockCylinderRetract.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.OB_ScrewLockCylinderRetract.CardType = JabilSDK.Enums.OutputCardType.BECKHOFF;
-            this.OB_ScrewLockCylinderRetract.Location = new System.Drawing.Point(1005, 144);
-            this.OB_ScrewLockCylinderRetract.Margin = new System.Windows.Forms.Padding(5);
+            this.OB_ScrewLockCylinderRetract.Location = new System.Drawing.Point(1508, 216);
+            this.OB_ScrewLockCylinderRetract.Margin = new System.Windows.Forms.Padding(8);
             this.OB_ScrewLockCylinderRetract.Name = "OB_ScrewLockCylinderRetract";
             this.OB_ScrewLockCylinderRetract.Port = "11305";
-            this.OB_ScrewLockCylinderRetract.Size = new System.Drawing.Size(310, 35);
+            this.OB_ScrewLockCylinderRetract.Size = new System.Drawing.Size(464, 52);
             this.OB_ScrewLockCylinderRetract.TabIndex = 106;
             this.OB_ScrewLockCylinderRetract.Text = "SF 1 Lock Cyl retract";
             this.OB_ScrewLockCylinderRetract.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3864,11 +3939,11 @@
             // 
             this.OB_ScrewLockCylinderExtend.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.OB_ScrewLockCylinderExtend.CardType = JabilSDK.Enums.OutputCardType.BECKHOFF;
-            this.OB_ScrewLockCylinderExtend.Location = new System.Drawing.Point(1005, 99);
-            this.OB_ScrewLockCylinderExtend.Margin = new System.Windows.Forms.Padding(5);
+            this.OB_ScrewLockCylinderExtend.Location = new System.Drawing.Point(1508, 148);
+            this.OB_ScrewLockCylinderExtend.Margin = new System.Windows.Forms.Padding(8);
             this.OB_ScrewLockCylinderExtend.Name = "OB_ScrewLockCylinderExtend";
             this.OB_ScrewLockCylinderExtend.Port = "11304";
-            this.OB_ScrewLockCylinderExtend.Size = new System.Drawing.Size(310, 35);
+            this.OB_ScrewLockCylinderExtend.Size = new System.Drawing.Size(464, 52);
             this.OB_ScrewLockCylinderExtend.TabIndex = 105;
             this.OB_ScrewLockCylinderExtend.Text = "SF 1 Lock Cyl extend";
             this.OB_ScrewLockCylinderExtend.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3895,21 +3970,21 @@
             this.CYL_Conveyor1_ScrewNailingCylinder.CyOn_TimeoutAlarmCode = null;
             this.CYL_Conveyor1_ScrewNailingCylinder.CyTimeoutTime = 30000;
             this.CYL_Conveyor1_ScrewNailingCylinder.ForeColor = System.Drawing.Color.Black;
-            this.CYL_Conveyor1_ScrewNailingCylinder.Location = new System.Drawing.Point(670, 413);
-            this.CYL_Conveyor1_ScrewNailingCylinder.Margin = new System.Windows.Forms.Padding(5);
+            this.CYL_Conveyor1_ScrewNailingCylinder.Location = new System.Drawing.Point(1005, 620);
+            this.CYL_Conveyor1_ScrewNailingCylinder.Margin = new System.Windows.Forms.Padding(8);
             this.CYL_Conveyor1_ScrewNailingCylinder.Name = "CYL_Conveyor1_ScrewNailingCylinder";
-            this.CYL_Conveyor1_ScrewNailingCylinder.Size = new System.Drawing.Size(310, 35);
+            this.CYL_Conveyor1_ScrewNailingCylinder.Size = new System.Drawing.Size(464, 52);
             this.CYL_Conveyor1_ScrewNailingCylinder.TabIndex = 104;
             // 
             // OB_ScrewNailingCylinderRetract
             // 
             this.OB_ScrewNailingCylinderRetract.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.OB_ScrewNailingCylinderRetract.CardType = JabilSDK.Enums.OutputCardType.BECKHOFF;
-            this.OB_ScrewNailingCylinderRetract.Location = new System.Drawing.Point(670, 367);
-            this.OB_ScrewNailingCylinderRetract.Margin = new System.Windows.Forms.Padding(5);
+            this.OB_ScrewNailingCylinderRetract.Location = new System.Drawing.Point(1005, 550);
+            this.OB_ScrewNailingCylinderRetract.Margin = new System.Windows.Forms.Padding(8);
             this.OB_ScrewNailingCylinderRetract.Name = "OB_ScrewNailingCylinderRetract";
             this.OB_ScrewNailingCylinderRetract.Port = "11303";
-            this.OB_ScrewNailingCylinderRetract.Size = new System.Drawing.Size(310, 35);
+            this.OB_ScrewNailingCylinderRetract.Size = new System.Drawing.Size(464, 52);
             this.OB_ScrewNailingCylinderRetract.TabIndex = 103;
             this.OB_ScrewNailingCylinderRetract.Text = "SF 1 Z CYL retract";
             this.OB_ScrewNailingCylinderRetract.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3918,11 +3993,11 @@
             // 
             this.OB_ScrewNailingCylinderExtend.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.OB_ScrewNailingCylinderExtend.CardType = JabilSDK.Enums.OutputCardType.BECKHOFF;
-            this.OB_ScrewNailingCylinderExtend.Location = new System.Drawing.Point(670, 321);
-            this.OB_ScrewNailingCylinderExtend.Margin = new System.Windows.Forms.Padding(5);
+            this.OB_ScrewNailingCylinderExtend.Location = new System.Drawing.Point(1005, 482);
+            this.OB_ScrewNailingCylinderExtend.Margin = new System.Windows.Forms.Padding(8);
             this.OB_ScrewNailingCylinderExtend.Name = "OB_ScrewNailingCylinderExtend";
             this.OB_ScrewNailingCylinderExtend.Port = "11302";
-            this.OB_ScrewNailingCylinderExtend.Size = new System.Drawing.Size(310, 35);
+            this.OB_ScrewNailingCylinderExtend.Size = new System.Drawing.Size(464, 52);
             this.OB_ScrewNailingCylinderExtend.TabIndex = 102;
             this.OB_ScrewNailingCylinderExtend.Text = "SF 1 Z CYL extend";
             this.OB_ScrewNailingCylinderExtend.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3949,21 +4024,21 @@
             this.CYL_Conveyor1_ScrewFeedCylinder.CyOn_TimeoutAlarmCode = null;
             this.CYL_Conveyor1_ScrewFeedCylinder.CyTimeoutTime = 30000;
             this.CYL_Conveyor1_ScrewFeedCylinder.ForeColor = System.Drawing.Color.Black;
-            this.CYL_Conveyor1_ScrewFeedCylinder.Location = new System.Drawing.Point(670, 187);
-            this.CYL_Conveyor1_ScrewFeedCylinder.Margin = new System.Windows.Forms.Padding(5);
+            this.CYL_Conveyor1_ScrewFeedCylinder.Location = new System.Drawing.Point(1005, 280);
+            this.CYL_Conveyor1_ScrewFeedCylinder.Margin = new System.Windows.Forms.Padding(8);
             this.CYL_Conveyor1_ScrewFeedCylinder.Name = "CYL_Conveyor1_ScrewFeedCylinder";
-            this.CYL_Conveyor1_ScrewFeedCylinder.Size = new System.Drawing.Size(310, 35);
+            this.CYL_Conveyor1_ScrewFeedCylinder.Size = new System.Drawing.Size(464, 52);
             this.CYL_Conveyor1_ScrewFeedCylinder.TabIndex = 101;
             // 
             // OB_ScrewFeedCylinderRetract
             // 
             this.OB_ScrewFeedCylinderRetract.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.OB_ScrewFeedCylinderRetract.CardType = JabilSDK.Enums.OutputCardType.BECKHOFF;
-            this.OB_ScrewFeedCylinderRetract.Location = new System.Drawing.Point(670, 141);
-            this.OB_ScrewFeedCylinderRetract.Margin = new System.Windows.Forms.Padding(5);
+            this.OB_ScrewFeedCylinderRetract.Location = new System.Drawing.Point(1005, 212);
+            this.OB_ScrewFeedCylinderRetract.Margin = new System.Windows.Forms.Padding(8);
             this.OB_ScrewFeedCylinderRetract.Name = "OB_ScrewFeedCylinderRetract";
             this.OB_ScrewFeedCylinderRetract.Port = "11301";
-            this.OB_ScrewFeedCylinderRetract.Size = new System.Drawing.Size(310, 35);
+            this.OB_ScrewFeedCylinderRetract.Size = new System.Drawing.Size(464, 52);
             this.OB_ScrewFeedCylinderRetract.TabIndex = 100;
             this.OB_ScrewFeedCylinderRetract.Text = "SF 1 Screw Feed retract";
             this.OB_ScrewFeedCylinderRetract.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3972,11 +4047,11 @@
             // 
             this.OB_ScrewFeedCylinderExtend.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.OB_ScrewFeedCylinderExtend.CardType = JabilSDK.Enums.OutputCardType.BECKHOFF;
-            this.OB_ScrewFeedCylinderExtend.Location = new System.Drawing.Point(670, 96);
-            this.OB_ScrewFeedCylinderExtend.Margin = new System.Windows.Forms.Padding(5);
+            this.OB_ScrewFeedCylinderExtend.Location = new System.Drawing.Point(1005, 144);
+            this.OB_ScrewFeedCylinderExtend.Margin = new System.Windows.Forms.Padding(8);
             this.OB_ScrewFeedCylinderExtend.Name = "OB_ScrewFeedCylinderExtend";
             this.OB_ScrewFeedCylinderExtend.Port = "11300";
-            this.OB_ScrewFeedCylinderExtend.Size = new System.Drawing.Size(310, 35);
+            this.OB_ScrewFeedCylinderExtend.Size = new System.Drawing.Size(464, 52);
             this.OB_ScrewFeedCylinderExtend.TabIndex = 99;
             this.OB_ScrewFeedCylinderExtend.Text = "SF 1 Screw Feed extend";
             this.OB_ScrewFeedCylinderExtend.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3985,11 +4060,11 @@
             // 
             this.OB_ScrewProgram_2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.OB_ScrewProgram_2.CardType = JabilSDK.Enums.OutputCardType.BECKHOFF;
-            this.OB_ScrewProgram_2.Location = new System.Drawing.Point(337, 259);
-            this.OB_ScrewProgram_2.Margin = new System.Windows.Forms.Padding(5);
+            this.OB_ScrewProgram_2.Location = new System.Drawing.Point(506, 388);
+            this.OB_ScrewProgram_2.Margin = new System.Windows.Forms.Padding(8);
             this.OB_ScrewProgram_2.Name = "OB_ScrewProgram_2";
             this.OB_ScrewProgram_2.Port = "11203";
-            this.OB_ScrewProgram_2.Size = new System.Drawing.Size(310, 35);
+            this.OB_ScrewProgram_2.Size = new System.Drawing.Size(464, 52);
             this.OB_ScrewProgram_2.TabIndex = 98;
             this.OB_ScrewProgram_2.Text = "SC 1 Program 2";
             this.OB_ScrewProgram_2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3998,11 +4073,11 @@
             // 
             this.OB_ScrewProgram_1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.OB_ScrewProgram_1.CardType = JabilSDK.Enums.OutputCardType.BECKHOFF;
-            this.OB_ScrewProgram_1.Location = new System.Drawing.Point(337, 214);
-            this.OB_ScrewProgram_1.Margin = new System.Windows.Forms.Padding(5);
+            this.OB_ScrewProgram_1.Location = new System.Drawing.Point(506, 321);
+            this.OB_ScrewProgram_1.Margin = new System.Windows.Forms.Padding(8);
             this.OB_ScrewProgram_1.Name = "OB_ScrewProgram_1";
             this.OB_ScrewProgram_1.Port = "11202";
-            this.OB_ScrewProgram_1.Size = new System.Drawing.Size(310, 35);
+            this.OB_ScrewProgram_1.Size = new System.Drawing.Size(464, 52);
             this.OB_ScrewProgram_1.TabIndex = 97;
             this.OB_ScrewProgram_1.Text = "SC 1 Program 1";
             this.OB_ScrewProgram_1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4011,11 +4086,11 @@
             // 
             this.OB_ScrewStop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.OB_ScrewStop.CardType = JabilSDK.Enums.OutputCardType.BECKHOFF;
-            this.OB_ScrewStop.Location = new System.Drawing.Point(337, 169);
-            this.OB_ScrewStop.Margin = new System.Windows.Forms.Padding(5);
+            this.OB_ScrewStop.Location = new System.Drawing.Point(506, 254);
+            this.OB_ScrewStop.Margin = new System.Windows.Forms.Padding(8);
             this.OB_ScrewStop.Name = "OB_ScrewStop";
             this.OB_ScrewStop.Port = "11201";
-            this.OB_ScrewStop.Size = new System.Drawing.Size(310, 35);
+            this.OB_ScrewStop.Size = new System.Drawing.Size(464, 52);
             this.OB_ScrewStop.TabIndex = 96;
             this.OB_ScrewStop.Text = "SC 1 Stop";
             this.OB_ScrewStop.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4024,11 +4099,11 @@
             // 
             this.OB_ScrewStart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.OB_ScrewStart.CardType = JabilSDK.Enums.OutputCardType.BECKHOFF;
-            this.OB_ScrewStart.Location = new System.Drawing.Point(337, 125);
-            this.OB_ScrewStart.Margin = new System.Windows.Forms.Padding(5);
+            this.OB_ScrewStart.Location = new System.Drawing.Point(506, 188);
+            this.OB_ScrewStart.Margin = new System.Windows.Forms.Padding(8);
             this.OB_ScrewStart.Name = "OB_ScrewStart";
             this.OB_ScrewStart.Port = "11200";
-            this.OB_ScrewStart.Size = new System.Drawing.Size(310, 35);
+            this.OB_ScrewStart.Size = new System.Drawing.Size(464, 52);
             this.OB_ScrewStart.TabIndex = 95;
             this.OB_ScrewStart.Text = "SC 1 Start";
             this.OB_ScrewStart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4037,11 +4112,11 @@
             // 
             this.IB_Screw_NG.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IB_Screw_NG.CardType = JabilSDK.Enums.InputCardType.BECKHOFF;
-            this.IB_Screw_NG.Location = new System.Drawing.Point(7, 142);
-            this.IB_Screw_NG.Margin = new System.Windows.Forms.Padding(5);
+            this.IB_Screw_NG.Location = new System.Drawing.Point(10, 213);
+            this.IB_Screw_NG.Margin = new System.Windows.Forms.Padding(8);
             this.IB_Screw_NG.Name = "IB_Screw_NG";
             this.IB_Screw_NG.Port = "01111";
-            this.IB_Screw_NG.Size = new System.Drawing.Size(310, 35);
+            this.IB_Screw_NG.Size = new System.Drawing.Size(464, 52);
             this.IB_Screw_NG.TabIndex = 94;
             this.IB_Screw_NG.Text = "SC 1 Screws NG";
             this.IB_Screw_NG.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4050,11 +4125,11 @@
             // 
             this.IB_Screw_OK.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IB_Screw_OK.CardType = JabilSDK.Enums.InputCardType.BECKHOFF;
-            this.IB_Screw_OK.Location = new System.Drawing.Point(7, 97);
-            this.IB_Screw_OK.Margin = new System.Windows.Forms.Padding(5);
+            this.IB_Screw_OK.Location = new System.Drawing.Point(10, 146);
+            this.IB_Screw_OK.Margin = new System.Windows.Forms.Padding(8);
             this.IB_Screw_OK.Name = "IB_Screw_OK";
             this.IB_Screw_OK.Port = "01110";
-            this.IB_Screw_OK.Size = new System.Drawing.Size(310, 35);
+            this.IB_Screw_OK.Size = new System.Drawing.Size(464, 52);
             this.IB_Screw_OK.TabIndex = 93;
             this.IB_Screw_OK.Text = "SC 1 Screws OK";
             this.IB_Screw_OK.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4063,11 +4138,11 @@
             // 
             this.IB_Screw_Running.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IB_Screw_Running.CardType = JabilSDK.Enums.InputCardType.BECKHOFF;
-            this.IB_Screw_Running.Location = new System.Drawing.Point(7, 53);
-            this.IB_Screw_Running.Margin = new System.Windows.Forms.Padding(5);
+            this.IB_Screw_Running.Location = new System.Drawing.Point(10, 80);
+            this.IB_Screw_Running.Margin = new System.Windows.Forms.Padding(8);
             this.IB_Screw_Running.Name = "IB_Screw_Running";
             this.IB_Screw_Running.Port = "01109";
-            this.IB_Screw_Running.Size = new System.Drawing.Size(310, 35);
+            this.IB_Screw_Running.Size = new System.Drawing.Size(464, 52);
             this.IB_Screw_Running.TabIndex = 92;
             this.IB_Screw_Running.Text = "SC 1 Running";
             this.IB_Screw_Running.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4076,11 +4151,11 @@
             // 
             this.IB_Screw_Ready.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IB_Screw_Ready.CardType = JabilSDK.Enums.InputCardType.BECKHOFF;
-            this.IB_Screw_Ready.Location = new System.Drawing.Point(7, 7);
-            this.IB_Screw_Ready.Margin = new System.Windows.Forms.Padding(5);
+            this.IB_Screw_Ready.Location = new System.Drawing.Point(10, 10);
+            this.IB_Screw_Ready.Margin = new System.Windows.Forms.Padding(8);
             this.IB_Screw_Ready.Name = "IB_Screw_Ready";
             this.IB_Screw_Ready.Port = "01108";
-            this.IB_Screw_Ready.Size = new System.Drawing.Size(310, 35);
+            this.IB_Screw_Ready.Size = new System.Drawing.Size(464, 52);
             this.IB_Screw_Ready.TabIndex = 91;
             this.IB_Screw_Ready.Text = "SC 1 Ready";
             this.IB_Screw_Ready.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4095,11 +4170,10 @@
             this.tabPage3.Controls.Add(this.IB_ScrewFeeder_Running);
             this.tabPage3.Controls.Add(this.IB_ScrewFeeder_LackMaterial);
             this.tabPage3.Controls.Add(this.IB_ScrewFeeder_Ready);
-            this.tabPage3.Location = new System.Drawing.Point(4, 32);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(2);
+            this.tabPage3.Location = new System.Drawing.Point(4, 42);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage3.Size = new System.Drawing.Size(777, 504);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1180, 871);
             this.tabPage3.TabIndex = 1;
             this.tabPage3.Text = "ScrewFeeder";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -4108,11 +4182,11 @@
             // 
             this.OB_ScrewFeeder_CoverOpen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.OB_ScrewFeeder_CoverOpen.CardType = JabilSDK.Enums.OutputCardType.BECKHOFF;
-            this.OB_ScrewFeeder_CoverOpen.Location = new System.Drawing.Point(482, 213);
-            this.OB_ScrewFeeder_CoverOpen.Margin = new System.Windows.Forms.Padding(5);
+            this.OB_ScrewFeeder_CoverOpen.Location = new System.Drawing.Point(723, 320);
+            this.OB_ScrewFeeder_CoverOpen.Margin = new System.Windows.Forms.Padding(8);
             this.OB_ScrewFeeder_CoverOpen.Name = "OB_ScrewFeeder_CoverOpen";
             this.OB_ScrewFeeder_CoverOpen.Port = "11211";
-            this.OB_ScrewFeeder_CoverOpen.Size = new System.Drawing.Size(376, 35);
+            this.OB_ScrewFeeder_CoverOpen.Size = new System.Drawing.Size(563, 52);
             this.OB_ScrewFeeder_CoverOpen.TabIndex = 97;
             this.OB_ScrewFeeder_CoverOpen.Text = "Screw feeder 1 cover open";
             this.OB_ScrewFeeder_CoverOpen.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4121,11 +4195,11 @@
             // 
             this.OB_ScrewFeeder_Reset.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.OB_ScrewFeeder_Reset.CardType = JabilSDK.Enums.OutputCardType.BECKHOFF;
-            this.OB_ScrewFeeder_Reset.Location = new System.Drawing.Point(482, 168);
-            this.OB_ScrewFeeder_Reset.Margin = new System.Windows.Forms.Padding(5);
+            this.OB_ScrewFeeder_Reset.Location = new System.Drawing.Point(723, 252);
+            this.OB_ScrewFeeder_Reset.Margin = new System.Windows.Forms.Padding(8);
             this.OB_ScrewFeeder_Reset.Name = "OB_ScrewFeeder_Reset";
             this.OB_ScrewFeeder_Reset.Port = "11210";
-            this.OB_ScrewFeeder_Reset.Size = new System.Drawing.Size(376, 35);
+            this.OB_ScrewFeeder_Reset.Size = new System.Drawing.Size(563, 52);
             this.OB_ScrewFeeder_Reset.TabIndex = 96;
             this.OB_ScrewFeeder_Reset.Text = "Screw feeder 1 reset";
             this.OB_ScrewFeeder_Reset.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4134,11 +4208,11 @@
             // 
             this.OB_ScrewFeeder_SplitNail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.OB_ScrewFeeder_SplitNail.CardType = JabilSDK.Enums.OutputCardType.BECKHOFF;
-            this.OB_ScrewFeeder_SplitNail.Location = new System.Drawing.Point(482, 123);
-            this.OB_ScrewFeeder_SplitNail.Margin = new System.Windows.Forms.Padding(5);
+            this.OB_ScrewFeeder_SplitNail.Location = new System.Drawing.Point(723, 184);
+            this.OB_ScrewFeeder_SplitNail.Margin = new System.Windows.Forms.Padding(8);
             this.OB_ScrewFeeder_SplitNail.Name = "OB_ScrewFeeder_SplitNail";
             this.OB_ScrewFeeder_SplitNail.Port = "11208";
-            this.OB_ScrewFeeder_SplitNail.Size = new System.Drawing.Size(376, 35);
+            this.OB_ScrewFeeder_SplitNail.Size = new System.Drawing.Size(563, 52);
             this.OB_ScrewFeeder_SplitNail.TabIndex = 95;
             this.OB_ScrewFeeder_SplitNail.Text = "Screw feeder 1 Start screw feed";
             this.OB_ScrewFeeder_SplitNail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4148,11 +4222,11 @@
             this.IB_ScrewFeeder_CoverClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IB_ScrewFeeder_CoverClose.CardType = JabilSDK.Enums.InputCardType.BECKHOFF;
             this.IB_ScrewFeeder_CoverClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.IB_ScrewFeeder_CoverClose.Location = new System.Drawing.Point(137, 303);
-            this.IB_ScrewFeeder_CoverClose.Margin = new System.Windows.Forms.Padding(5);
+            this.IB_ScrewFeeder_CoverClose.Location = new System.Drawing.Point(206, 454);
+            this.IB_ScrewFeeder_CoverClose.Margin = new System.Windows.Forms.Padding(8);
             this.IB_ScrewFeeder_CoverClose.Name = "IB_ScrewFeeder_CoverClose";
             this.IB_ScrewFeeder_CoverClose.Port = "01501";
-            this.IB_ScrewFeeder_CoverClose.Size = new System.Drawing.Size(328, 35);
+            this.IB_ScrewFeeder_CoverClose.Size = new System.Drawing.Size(491, 52);
             this.IB_ScrewFeeder_CoverClose.TabIndex = 94;
             this.IB_ScrewFeeder_CoverClose.Text = "Screw feeder 1 cover close";
             this.IB_ScrewFeeder_CoverClose.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4162,11 +4236,11 @@
             this.IB_ScrewFeeder_Faulty.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IB_ScrewFeeder_Faulty.CardType = JabilSDK.Enums.InputCardType.BECKHOFF;
             this.IB_ScrewFeeder_Faulty.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.IB_ScrewFeeder_Faulty.Location = new System.Drawing.Point(137, 259);
-            this.IB_ScrewFeeder_Faulty.Margin = new System.Windows.Forms.Padding(5);
+            this.IB_ScrewFeeder_Faulty.Location = new System.Drawing.Point(206, 388);
+            this.IB_ScrewFeeder_Faulty.Margin = new System.Windows.Forms.Padding(8);
             this.IB_ScrewFeeder_Faulty.Name = "IB_ScrewFeeder_Faulty";
             this.IB_ScrewFeeder_Faulty.Port = "01504";
-            this.IB_ScrewFeeder_Faulty.Size = new System.Drawing.Size(328, 35);
+            this.IB_ScrewFeeder_Faulty.Size = new System.Drawing.Size(491, 52);
             this.IB_ScrewFeeder_Faulty.TabIndex = 93;
             this.IB_ScrewFeeder_Faulty.Text = "Screw feeder 1 Alarm";
             this.IB_ScrewFeeder_Faulty.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4176,11 +4250,11 @@
             this.IB_ScrewFeeder_Running.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IB_ScrewFeeder_Running.CardType = JabilSDK.Enums.InputCardType.BECKHOFF;
             this.IB_ScrewFeeder_Running.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.IB_ScrewFeeder_Running.Location = new System.Drawing.Point(137, 213);
-            this.IB_ScrewFeeder_Running.Margin = new System.Windows.Forms.Padding(5);
+            this.IB_ScrewFeeder_Running.Location = new System.Drawing.Point(206, 320);
+            this.IB_ScrewFeeder_Running.Margin = new System.Windows.Forms.Padding(8);
             this.IB_ScrewFeeder_Running.Name = "IB_ScrewFeeder_Running";
             this.IB_ScrewFeeder_Running.Port = "01503";
-            this.IB_ScrewFeeder_Running.Size = new System.Drawing.Size(328, 35);
+            this.IB_ScrewFeeder_Running.Size = new System.Drawing.Size(491, 52);
             this.IB_ScrewFeeder_Running.TabIndex = 92;
             this.IB_ScrewFeeder_Running.Text = "Screw feeder 1 Running";
             this.IB_ScrewFeeder_Running.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4190,11 +4264,11 @@
             this.IB_ScrewFeeder_LackMaterial.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IB_ScrewFeeder_LackMaterial.CardType = JabilSDK.Enums.InputCardType.BECKHOFF;
             this.IB_ScrewFeeder_LackMaterial.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.IB_ScrewFeeder_LackMaterial.Location = new System.Drawing.Point(137, 168);
-            this.IB_ScrewFeeder_LackMaterial.Margin = new System.Windows.Forms.Padding(5);
+            this.IB_ScrewFeeder_LackMaterial.Location = new System.Drawing.Point(206, 252);
+            this.IB_ScrewFeeder_LackMaterial.Margin = new System.Windows.Forms.Padding(8);
             this.IB_ScrewFeeder_LackMaterial.Name = "IB_ScrewFeeder_LackMaterial";
             this.IB_ScrewFeeder_LackMaterial.Port = "01502";
-            this.IB_ScrewFeeder_LackMaterial.Size = new System.Drawing.Size(328, 35);
+            this.IB_ScrewFeeder_LackMaterial.Size = new System.Drawing.Size(491, 52);
             this.IB_ScrewFeeder_LackMaterial.TabIndex = 91;
             this.IB_ScrewFeeder_LackMaterial.Text = "Screw feeder 1 No material";
             this.IB_ScrewFeeder_LackMaterial.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4204,11 +4278,11 @@
             this.IB_ScrewFeeder_Ready.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IB_ScrewFeeder_Ready.CardType = JabilSDK.Enums.InputCardType.BECKHOFF;
             this.IB_ScrewFeeder_Ready.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.IB_ScrewFeeder_Ready.Location = new System.Drawing.Point(137, 123);
-            this.IB_ScrewFeeder_Ready.Margin = new System.Windows.Forms.Padding(5);
+            this.IB_ScrewFeeder_Ready.Location = new System.Drawing.Point(206, 184);
+            this.IB_ScrewFeeder_Ready.Margin = new System.Windows.Forms.Padding(8);
             this.IB_ScrewFeeder_Ready.Name = "IB_ScrewFeeder_Ready";
             this.IB_ScrewFeeder_Ready.Port = "01500";
-            this.IB_ScrewFeeder_Ready.Size = new System.Drawing.Size(328, 35);
+            this.IB_ScrewFeeder_Ready.Size = new System.Drawing.Size(491, 52);
             this.IB_ScrewFeeder_Ready.TabIndex = 90;
             this.IB_ScrewFeeder_Ready.Text = "Screw feeder 1 Screw ready";
             this.IB_ScrewFeeder_Ready.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4223,11 +4297,10 @@
             this.tabPage12.Controls.Add(this.IB_PressureSensor3);
             this.tabPage12.Controls.Add(this.IB_PressureSensor2);
             this.tabPage12.Controls.Add(this.IB_PressureSensor1);
-            this.tabPage12.Location = new System.Drawing.Point(4, 32);
-            this.tabPage12.Margin = new System.Windows.Forms.Padding(2);
+            this.tabPage12.Location = new System.Drawing.Point(4, 42);
             this.tabPage12.Name = "tabPage12";
-            this.tabPage12.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage12.Size = new System.Drawing.Size(777, 504);
+            this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage12.Size = new System.Drawing.Size(1180, 871);
             this.tabPage12.TabIndex = 2;
             this.tabPage12.Text = "Gantry";
             this.tabPage12.UseVisualStyleBackColor = true;
@@ -4236,11 +4309,11 @@
             // 
             this.OB_ModuleAlram_Light.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.OB_ModuleAlram_Light.CardType = JabilSDK.Enums.OutputCardType.BECKHOFF;
-            this.OB_ModuleAlram_Light.Location = new System.Drawing.Point(445, 195);
-            this.OB_ModuleAlram_Light.Margin = new System.Windows.Forms.Padding(5);
+            this.OB_ModuleAlram_Light.Location = new System.Drawing.Point(668, 292);
+            this.OB_ModuleAlram_Light.Margin = new System.Windows.Forms.Padding(8);
             this.OB_ModuleAlram_Light.Name = "OB_ModuleAlram_Light";
             this.OB_ModuleAlram_Light.Port = "11114";
-            this.OB_ModuleAlram_Light.Size = new System.Drawing.Size(280, 35);
+            this.OB_ModuleAlram_Light.Size = new System.Drawing.Size(419, 52);
             this.OB_ModuleAlram_Light.TabIndex = 112;
             this.OB_ModuleAlram_Light.Text = "Module  1 Alarm light ";
             this.OB_ModuleAlram_Light.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4249,11 +4322,11 @@
             // 
             this.OB_CCDLight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.OB_CCDLight.CardType = JabilSDK.Enums.OutputCardType.BECKHOFF;
-            this.OB_CCDLight.Location = new System.Drawing.Point(445, 151);
-            this.OB_CCDLight.Margin = new System.Windows.Forms.Padding(5);
+            this.OB_CCDLight.Location = new System.Drawing.Point(668, 226);
+            this.OB_CCDLight.Margin = new System.Windows.Forms.Padding(8);
             this.OB_CCDLight.Name = "OB_CCDLight";
             this.OB_CCDLight.Port = "11000";
-            this.OB_CCDLight.Size = new System.Drawing.Size(280, 35);
+            this.OB_CCDLight.Size = new System.Drawing.Size(419, 52);
             this.OB_CCDLight.TabIndex = 111;
             this.OB_CCDLight.Text = "Gantry1 CCD Light";
             this.OB_CCDLight.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4263,11 +4336,11 @@
             this.IB_PressureSensor6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IB_PressureSensor6.CardType = JabilSDK.Enums.InputCardType.BECKHOFF;
             this.IB_PressureSensor6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.IB_PressureSensor6.Location = new System.Drawing.Point(69, 285);
-            this.IB_PressureSensor6.Margin = new System.Windows.Forms.Padding(5);
+            this.IB_PressureSensor6.Location = new System.Drawing.Point(104, 428);
+            this.IB_PressureSensor6.Margin = new System.Windows.Forms.Padding(8);
             this.IB_PressureSensor6.Name = "IB_PressureSensor6";
             this.IB_PressureSensor6.Port = "01405";
-            this.IB_PressureSensor6.Size = new System.Drawing.Size(317, 35);
+            this.IB_PressureSensor6.Size = new System.Drawing.Size(474, 52);
             this.IB_PressureSensor6.TabIndex = 106;
             this.IB_PressureSensor6.Text = "SF1 Press pressure sensor6";
             this.IB_PressureSensor6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4277,11 +4350,11 @@
             this.IB_PressureSensor5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IB_PressureSensor5.CardType = JabilSDK.Enums.InputCardType.BECKHOFF;
             this.IB_PressureSensor5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.IB_PressureSensor5.Location = new System.Drawing.Point(69, 240);
-            this.IB_PressureSensor5.Margin = new System.Windows.Forms.Padding(5);
+            this.IB_PressureSensor5.Location = new System.Drawing.Point(104, 360);
+            this.IB_PressureSensor5.Margin = new System.Windows.Forms.Padding(8);
             this.IB_PressureSensor5.Name = "IB_PressureSensor5";
             this.IB_PressureSensor5.Port = "01404";
-            this.IB_PressureSensor5.Size = new System.Drawing.Size(317, 35);
+            this.IB_PressureSensor5.Size = new System.Drawing.Size(474, 52);
             this.IB_PressureSensor5.TabIndex = 105;
             this.IB_PressureSensor5.Text = "SF1 Press pressure sensor5";
             this.IB_PressureSensor5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4291,11 +4364,11 @@
             this.IB_PressureSensor4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IB_PressureSensor4.CardType = JabilSDK.Enums.InputCardType.BECKHOFF;
             this.IB_PressureSensor4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.IB_PressureSensor4.Location = new System.Drawing.Point(69, 195);
-            this.IB_PressureSensor4.Margin = new System.Windows.Forms.Padding(5);
+            this.IB_PressureSensor4.Location = new System.Drawing.Point(104, 292);
+            this.IB_PressureSensor4.Margin = new System.Windows.Forms.Padding(8);
             this.IB_PressureSensor4.Name = "IB_PressureSensor4";
             this.IB_PressureSensor4.Port = "01403";
-            this.IB_PressureSensor4.Size = new System.Drawing.Size(317, 35);
+            this.IB_PressureSensor4.Size = new System.Drawing.Size(474, 52);
             this.IB_PressureSensor4.TabIndex = 104;
             this.IB_PressureSensor4.Text = "SF1 Press pressure sensor4";
             this.IB_PressureSensor4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4305,11 +4378,11 @@
             this.IB_PressureSensor3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IB_PressureSensor3.CardType = JabilSDK.Enums.InputCardType.BECKHOFF;
             this.IB_PressureSensor3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.IB_PressureSensor3.Location = new System.Drawing.Point(69, 151);
-            this.IB_PressureSensor3.Margin = new System.Windows.Forms.Padding(5);
+            this.IB_PressureSensor3.Location = new System.Drawing.Point(104, 226);
+            this.IB_PressureSensor3.Margin = new System.Windows.Forms.Padding(8);
             this.IB_PressureSensor3.Name = "IB_PressureSensor3";
             this.IB_PressureSensor3.Port = "01402";
-            this.IB_PressureSensor3.Size = new System.Drawing.Size(317, 35);
+            this.IB_PressureSensor3.Size = new System.Drawing.Size(474, 52);
             this.IB_PressureSensor3.TabIndex = 103;
             this.IB_PressureSensor3.Text = "SF1 Press pressure sensor3";
             this.IB_PressureSensor3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4319,11 +4392,11 @@
             this.IB_PressureSensor2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IB_PressureSensor2.CardType = JabilSDK.Enums.InputCardType.BECKHOFF;
             this.IB_PressureSensor2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.IB_PressureSensor2.Location = new System.Drawing.Point(69, 105);
-            this.IB_PressureSensor2.Margin = new System.Windows.Forms.Padding(5);
+            this.IB_PressureSensor2.Location = new System.Drawing.Point(104, 158);
+            this.IB_PressureSensor2.Margin = new System.Windows.Forms.Padding(8);
             this.IB_PressureSensor2.Name = "IB_PressureSensor2";
             this.IB_PressureSensor2.Port = "01401";
-            this.IB_PressureSensor2.Size = new System.Drawing.Size(317, 35);
+            this.IB_PressureSensor2.Size = new System.Drawing.Size(474, 52);
             this.IB_PressureSensor2.TabIndex = 102;
             this.IB_PressureSensor2.Text = "SF1 Press pressure sensor2";
             this.IB_PressureSensor2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4333,11 +4406,11 @@
             this.IB_PressureSensor1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IB_PressureSensor1.CardType = JabilSDK.Enums.InputCardType.BECKHOFF;
             this.IB_PressureSensor1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.IB_PressureSensor1.Location = new System.Drawing.Point(69, 60);
-            this.IB_PressureSensor1.Margin = new System.Windows.Forms.Padding(5);
+            this.IB_PressureSensor1.Location = new System.Drawing.Point(104, 90);
+            this.IB_PressureSensor1.Margin = new System.Windows.Forms.Padding(8);
             this.IB_PressureSensor1.Name = "IB_PressureSensor1";
             this.IB_PressureSensor1.Port = "01400";
-            this.IB_PressureSensor1.Size = new System.Drawing.Size(317, 35);
+            this.IB_PressureSensor1.Size = new System.Drawing.Size(474, 52);
             this.IB_PressureSensor1.TabIndex = 101;
             this.IB_PressureSensor1.Text = "SF1 Press pressure sensor1";
             this.IB_PressureSensor1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4345,10 +4418,11 @@
             // tabPage10
             // 
             this.tabPage10.Controls.Add(this.panel1);
-            this.tabPage10.Location = new System.Drawing.Point(4, 32);
+            this.tabPage10.Location = new System.Drawing.Point(4, 42);
+            this.tabPage10.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage10.Name = "tabPage10";
-            this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(791, 543);
+            this.tabPage10.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage10.Size = new System.Drawing.Size(1196, 925);
             this.tabPage10.TabIndex = 1;
             this.tabPage10.Text = "Axis";
             this.tabPage10.UseVisualStyleBackColor = true;
@@ -4360,9 +4434,10 @@
             this.panel1.Controls.Add(this.MTR_Z);
             this.panel1.Controls.Add(this.MTR_Y);
             this.panel1.Controls.Add(this.MTR_X);
-            this.panel1.Location = new System.Drawing.Point(427, 79);
+            this.panel1.Location = new System.Drawing.Point(640, 118);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(362, 285);
+            this.panel1.Size = new System.Drawing.Size(543, 428);
             this.panel1.TabIndex = 1;
             // 
             // MTR_Jacking
@@ -4377,14 +4452,14 @@
             this.MTR_Jacking.HomeOffsetPosition = 0D;
             this.MTR_Jacking.HomeSensorEnable = true;
             this.MTR_Jacking.IsStepMotor = true;
-            this.MTR_Jacking.Location = new System.Drawing.Point(42, 159);
+            this.MTR_Jacking.Location = new System.Drawing.Point(63, 238);
             this.MTR_Jacking.ManualSpeed = 100D;
-            this.MTR_Jacking.Margin = new System.Windows.Forms.Padding(5);
+            this.MTR_Jacking.Margin = new System.Windows.Forms.Padding(8);
             this.MTR_Jacking.MaximumSpeed = 1200D;
             this.MTR_Jacking.Name = "MTR_Jacking";
             this.MTR_Jacking.Port = "006";
             this.MTR_Jacking.PulseMode = JabilSDK.MotorBaseInterface.PulseModeType.OUT_DIR;
-            this.MTR_Jacking.Size = new System.Drawing.Size(280, 35);
+            this.MTR_Jacking.Size = new System.Drawing.Size(419, 52);
             this.MTR_Jacking.SoftLimitN = 999D;
             this.MTR_Jacking.SoftLimitNEnable = false;
             this.MTR_Jacking.SoftLimitP = -999D;
@@ -4400,9 +4475,10 @@
             // 
             // btn_Gantry1Axis
             // 
-            this.btn_Gantry1Axis.Location = new System.Drawing.Point(42, 225);
+            this.btn_Gantry1Axis.Location = new System.Drawing.Point(63, 338);
+            this.btn_Gantry1Axis.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Gantry1Axis.Name = "btn_Gantry1Axis";
-            this.btn_Gantry1Axis.Size = new System.Drawing.Size(280, 43);
+            this.btn_Gantry1Axis.Size = new System.Drawing.Size(420, 64);
             this.btn_Gantry1Axis.TabIndex = 3;
             this.btn_Gantry1Axis.Text = "Axis Control";
             this.btn_Gantry1Axis.UseVisualStyleBackColor = true;
@@ -4420,14 +4496,14 @@
             this.MTR_Z.HomeOffsetPosition = 0D;
             this.MTR_Z.HomeSensorEnable = true;
             this.MTR_Z.IsStepMotor = true;
-            this.MTR_Z.Location = new System.Drawing.Point(42, 115);
+            this.MTR_Z.Location = new System.Drawing.Point(63, 172);
             this.MTR_Z.ManualSpeed = 100D;
-            this.MTR_Z.Margin = new System.Windows.Forms.Padding(5);
+            this.MTR_Z.Margin = new System.Windows.Forms.Padding(8);
             this.MTR_Z.MaximumSpeed = 1200D;
             this.MTR_Z.Name = "MTR_Z";
             this.MTR_Z.Port = "002";
             this.MTR_Z.PulseMode = JabilSDK.MotorBaseInterface.PulseModeType.OUT_DIR;
-            this.MTR_Z.Size = new System.Drawing.Size(280, 35);
+            this.MTR_Z.Size = new System.Drawing.Size(419, 52);
             this.MTR_Z.SoftLimitN = 999D;
             this.MTR_Z.SoftLimitNEnable = false;
             this.MTR_Z.SoftLimitP = -999D;
@@ -4453,14 +4529,14 @@
             this.MTR_Y.HomeOffsetPosition = 0D;
             this.MTR_Y.HomeSensorEnable = true;
             this.MTR_Y.IsStepMotor = true;
-            this.MTR_Y.Location = new System.Drawing.Point(42, 69);
+            this.MTR_Y.Location = new System.Drawing.Point(63, 104);
             this.MTR_Y.ManualSpeed = 100D;
-            this.MTR_Y.Margin = new System.Windows.Forms.Padding(5);
+            this.MTR_Y.Margin = new System.Windows.Forms.Padding(8);
             this.MTR_Y.MaximumSpeed = 1200D;
             this.MTR_Y.Name = "MTR_Y";
             this.MTR_Y.Port = "001";
             this.MTR_Y.PulseMode = JabilSDK.MotorBaseInterface.PulseModeType.OUT_DIR;
-            this.MTR_Y.Size = new System.Drawing.Size(280, 35);
+            this.MTR_Y.Size = new System.Drawing.Size(419, 52);
             this.MTR_Y.SoftLimitN = 999D;
             this.MTR_Y.SoftLimitNEnable = false;
             this.MTR_Y.SoftLimitP = -999D;
@@ -4486,13 +4562,13 @@
             this.MTR_X.HomeOffsetPosition = 0D;
             this.MTR_X.HomeSensorEnable = true;
             this.MTR_X.IsStepMotor = true;
-            this.MTR_X.Location = new System.Drawing.Point(42, 24);
+            this.MTR_X.Location = new System.Drawing.Point(63, 36);
             this.MTR_X.ManualSpeed = 100D;
-            this.MTR_X.Margin = new System.Windows.Forms.Padding(5);
+            this.MTR_X.Margin = new System.Windows.Forms.Padding(8);
             this.MTR_X.MaximumSpeed = 1200D;
             this.MTR_X.Name = "MTR_X";
             this.MTR_X.PulseMode = JabilSDK.MotorBaseInterface.PulseModeType.OUT_DIR;
-            this.MTR_X.Size = new System.Drawing.Size(280, 35);
+            this.MTR_X.Size = new System.Drawing.Size(419, 52);
             this.MTR_X.SoftLimitN = 999D;
             this.MTR_X.SoftLimitNEnable = false;
             this.MTR_X.SoftLimitP = -999D;
@@ -4518,10 +4594,9 @@
             this.tabControl7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl7.ItemSize = new System.Drawing.Size(88, 45);
             this.tabControl7.Location = new System.Drawing.Point(0, 0);
-            this.tabControl7.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl7.Name = "tabControl7";
             this.tabControl7.SelectedIndex = 0;
-            this.tabControl7.Size = new System.Drawing.Size(799, 627);
+            this.tabControl7.Size = new System.Drawing.Size(1204, 971);
             this.tabControl7.TabIndex = 0;
             // 
             // tabPage16
@@ -4536,9 +4611,10 @@
             this.tabPage16.Controls.Add(this.flowChart1_3);
             this.tabPage16.Controls.Add(this.flowChart1_2);
             this.tabPage16.Controls.Add(this.flowChart1_1);
-            this.tabPage16.Location = new System.Drawing.Point(4, 45);
+            this.tabPage16.Location = new System.Drawing.Point(4, 49);
+            this.tabPage16.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage16.Name = "tabPage16";
-            this.tabPage16.Size = new System.Drawing.Size(1119, 521);
+            this.tabPage16.Size = new System.Drawing.Size(1688, 825);
             this.tabPage16.TabIndex = 5;
             this.tabPage16.Text = "  Main Flow  ";
             this.tabPage16.UseVisualStyleBackColor = true;
@@ -4557,11 +4633,11 @@
             this.flowChartMessage21.HideButtonPause = false;
             this.flowChartMessage21.HideButtonRetry = false;
             this.flowChartMessage21.HideButtonSkip = false;
-            this.flowChartMessage21.Location = new System.Drawing.Point(721, 164);
-            this.flowChartMessage21.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.flowChartMessage21.Location = new System.Drawing.Point(1082, 246);
+            this.flowChartMessage21.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
             this.flowChartMessage21.Name = "flowChartMessage21";
             this.flowChartMessage21.NEXT = null;
-            this.flowChartMessage21.Size = new System.Drawing.Size(63, 27);
+            this.flowChartMessage21.Size = new System.Drawing.Size(94, 40);
             this.flowChartMessage21.TabIndex = 221;
             this.flowChartMessage21.Text = "TimeOut";
             this.flowChartMessage21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4574,11 +4650,11 @@
             this.flowChart12.CASE1 = null;
             this.flowChart12.CASE2 = this.flowChartMessage21;
             this.flowChart12.CASE3 = null;
-            this.flowChart12.Location = new System.Drawing.Point(721, 206);
-            this.flowChart12.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart12.Location = new System.Drawing.Point(1082, 309);
+            this.flowChart12.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart12.Name = "flowChart12";
             this.flowChart12.NEXT = this.flowChart1_5;
-            this.flowChart12.Size = new System.Drawing.Size(63, 27);
+            this.flowChart12.Size = new System.Drawing.Size(94, 40);
             this.flowChart12.TabIndex = 205;
             this.flowChart12.Text = "NG";
             this.flowChart12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4591,11 +4667,11 @@
             this.flowChart1_5.CASE1 = null;
             this.flowChart1_5.CASE2 = null;
             this.flowChart1_5.CASE3 = null;
-            this.flowChart1_5.Location = new System.Drawing.Point(752, 286);
-            this.flowChart1_5.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart1_5.Location = new System.Drawing.Point(1128, 429);
+            this.flowChart1_5.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart1_5.Name = "flowChart1_5";
             this.flowChart1_5.NEXT = this.flowChart54;
-            this.flowChart1_5.Size = new System.Drawing.Size(168, 27);
+            this.flowChart1_5.Size = new System.Drawing.Size(251, 40);
             this.flowChart1_5.TabIndex = 201;
             this.flowChart1_5.Text = "End1.05";
             this.flowChart1_5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4608,11 +4684,11 @@
             this.flowChart54.CASE1 = null;
             this.flowChart54.CASE2 = null;
             this.flowChart54.CASE3 = null;
-            this.flowChart54.Location = new System.Drawing.Point(752, 128);
-            this.flowChart54.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart54.Location = new System.Drawing.Point(1128, 192);
+            this.flowChart54.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart54.Name = "flowChart54";
             this.flowChart54.NEXT = this.flowChart1_1;
-            this.flowChart54.Size = new System.Drawing.Size(168, 27);
+            this.flowChart54.Size = new System.Drawing.Size(251, 40);
             this.flowChart54.TabIndex = 202;
             this.flowChart54.Text = "Loop";
             this.flowChart54.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4625,11 +4701,11 @@
             this.flowChart1_1.CASE1 = null;
             this.flowChart1_1.CASE2 = null;
             this.flowChart1_1.CASE3 = null;
-            this.flowChart1_1.Location = new System.Drawing.Point(276, 128);
-            this.flowChart1_1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart1_1.Location = new System.Drawing.Point(414, 192);
+            this.flowChart1_1.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart1_1.Name = "flowChart1_1";
             this.flowChart1_1.NEXT = this.flowChart1_2;
-            this.flowChart1_1.Size = new System.Drawing.Size(387, 27);
+            this.flowChart1_1.Size = new System.Drawing.Size(580, 40);
             this.flowChart1_1.TabIndex = 196;
             this.flowChart1_1.Text = "Waiting Product In Position1.01";
             this.flowChart1_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4642,11 +4718,11 @@
             this.flowChart1_2.CASE1 = this.flowChart12;
             this.flowChart1_2.CASE2 = null;
             this.flowChart1_2.CASE3 = null;
-            this.flowChart1_2.Location = new System.Drawing.Point(276, 167);
-            this.flowChart1_2.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart1_2.Location = new System.Drawing.Point(414, 250);
+            this.flowChart1_2.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart1_2.Name = "flowChart1_2";
             this.flowChart1_2.NEXT = this.flowChart1_3;
-            this.flowChart1_2.Size = new System.Drawing.Size(387, 27);
+            this.flowChart1_2.Size = new System.Drawing.Size(580, 40);
             this.flowChart1_2.TabIndex = 198;
             this.flowChart1_2.Text = "Waiting Jacking Axis In Position1.02";
             this.flowChart1_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4659,11 +4735,11 @@
             this.flowChart1_3.CASE1 = this.flowChart12;
             this.flowChart1_3.CASE2 = null;
             this.flowChart1_3.CASE3 = null;
-            this.flowChart1_3.Location = new System.Drawing.Point(276, 206);
-            this.flowChart1_3.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart1_3.Location = new System.Drawing.Point(414, 309);
+            this.flowChart1_3.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart1_3.Name = "flowChart1_3";
             this.flowChart1_3.NEXT = this.flowChart1_4;
-            this.flowChart1_3.Size = new System.Drawing.Size(387, 27);
+            this.flowChart1_3.Size = new System.Drawing.Size(580, 40);
             this.flowChart1_3.TabIndex = 199;
             this.flowChart1_3.Text = "Waiting Vision Finsh1.03";
             this.flowChart1_3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4676,11 +4752,11 @@
             this.flowChart1_4.CASE1 = this.flowChart12;
             this.flowChart1_4.CASE2 = null;
             this.flowChart1_4.CASE3 = null;
-            this.flowChart1_4.Location = new System.Drawing.Point(276, 245);
-            this.flowChart1_4.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart1_4.Location = new System.Drawing.Point(414, 368);
+            this.flowChart1_4.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart1_4.Name = "flowChart1_4";
             this.flowChart1_4.NEXT = this.flowChart1_6;
-            this.flowChart1_4.Size = new System.Drawing.Size(387, 27);
+            this.flowChart1_4.Size = new System.Drawing.Size(580, 40);
             this.flowChart1_4.TabIndex = 200;
             this.flowChart1_4.Text = "Waiting Screw Finsh1.04";
             this.flowChart1_4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4693,11 +4769,11 @@
             this.flowChart1_6.CASE1 = this.flowChart7;
             this.flowChart1_6.CASE2 = null;
             this.flowChart1_6.CASE3 = null;
-            this.flowChart1_6.Location = new System.Drawing.Point(276, 286);
-            this.flowChart1_6.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart1_6.Location = new System.Drawing.Point(414, 429);
+            this.flowChart1_6.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart1_6.Name = "flowChart1_6";
             this.flowChart1_6.NEXT = this.flowChart1_5;
-            this.flowChart1_6.Size = new System.Drawing.Size(387, 27);
+            this.flowChart1_6.Size = new System.Drawing.Size(580, 40);
             this.flowChart1_6.TabIndex = 203;
             this.flowChart1_6.Text = "Check All Finsh1.06";
             this.flowChart1_6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4710,11 +4786,11 @@
             this.flowChart7.CASE1 = null;
             this.flowChart7.CASE2 = null;
             this.flowChart7.CASE3 = null;
-            this.flowChart7.Location = new System.Drawing.Point(146, 286);
-            this.flowChart7.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart7.Location = new System.Drawing.Point(219, 429);
+            this.flowChart7.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart7.Name = "flowChart7";
             this.flowChart7.NEXT = this.flowChart1_3;
-            this.flowChart7.Size = new System.Drawing.Size(85, 27);
+            this.flowChart7.Size = new System.Drawing.Size(126, 40);
             this.flowChart7.TabIndex = 204;
             this.flowChart7.Text = "Loop";
             this.flowChart7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4759,11 +4835,10 @@
             this.tabPage14.Controls.Add(this.flowChart2_1);
             this.tabPage14.Controls.Add(this.flowChartMessage2);
             this.tabPage14.Controls.Add(this.flowChartMessage1);
-            this.tabPage14.Location = new System.Drawing.Point(4, 45);
-            this.tabPage14.Margin = new System.Windows.Forms.Padding(2);
+            this.tabPage14.Location = new System.Drawing.Point(4, 49);
             this.tabPage14.Name = "tabPage14";
-            this.tabPage14.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage14.Size = new System.Drawing.Size(1119, 521);
+            this.tabPage14.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage14.Size = new System.Drawing.Size(1688, 825);
             this.tabPage14.TabIndex = 1;
             this.tabPage14.Text = "  Screw Flow  ";
             this.tabPage14.UseVisualStyleBackColor = true;
@@ -4775,11 +4850,11 @@
             this.flowChart2_23.CASE1 = null;
             this.flowChart2_23.CASE2 = null;
             this.flowChart2_23.CASE3 = null;
-            this.flowChart2_23.Location = new System.Drawing.Point(520, 525);
-            this.flowChart2_23.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart2_23.Location = new System.Drawing.Point(780, 788);
+            this.flowChart2_23.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart2_23.Name = "flowChart2_23";
             this.flowChart2_23.NEXT = this.flowChart2_13;
-            this.flowChart2_23.Size = new System.Drawing.Size(245, 27);
+            this.flowChart2_23.Size = new System.Drawing.Size(366, 40);
             this.flowChart2_23.TabIndex = 218;
             this.flowChart2_23.Text = "Start Request Screws2.23";
             this.flowChart2_23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4792,11 +4867,11 @@
             this.flowChart2_13.CASE1 = null;
             this.flowChart2_13.CASE2 = null;
             this.flowChart2_13.CASE3 = null;
-            this.flowChart2_13.Location = new System.Drawing.Point(520, 566);
-            this.flowChart2_13.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart2_13.Location = new System.Drawing.Point(780, 849);
+            this.flowChart2_13.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart2_13.Name = "flowChart2_13";
             this.flowChart2_13.NEXT = this.flowChart2_21;
-            this.flowChart2_13.Size = new System.Drawing.Size(245, 27);
+            this.flowChart2_13.Size = new System.Drawing.Size(366, 40);
             this.flowChart2_13.TabIndex = 194;
             this.flowChart2_13.Text = "SF 1 Z CYL retract2.13";
             this.flowChart2_13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4809,11 +4884,11 @@
             this.flowChart2_21.CASE1 = null;
             this.flowChart2_21.CASE2 = null;
             this.flowChart2_21.CASE3 = null;
-            this.flowChart2_21.Location = new System.Drawing.Point(520, 606);
-            this.flowChart2_21.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart2_21.Location = new System.Drawing.Point(780, 909);
+            this.flowChart2_21.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart2_21.Name = "flowChart2_21";
             this.flowChart2_21.NEXT = this.flowChart2_18;
-            this.flowChart2_21.Size = new System.Drawing.Size(245, 27);
+            this.flowChart2_21.Size = new System.Drawing.Size(366, 40);
             this.flowChart2_21.TabIndex = 205;
             this.flowChart2_21.Text = "SF 1 Lock Cyl extend2.21";
             this.flowChart2_21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4826,11 +4901,11 @@
             this.flowChart2_18.CASE1 = null;
             this.flowChart2_18.CASE2 = null;
             this.flowChart2_18.CASE3 = null;
-            this.flowChart2_18.Location = new System.Drawing.Point(520, 648);
-            this.flowChart2_18.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart2_18.Location = new System.Drawing.Point(780, 972);
+            this.flowChart2_18.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart2_18.Name = "flowChart2_18";
             this.flowChart2_18.NEXT = this.flowChart2_15;
-            this.flowChart2_18.Size = new System.Drawing.Size(245, 27);
+            this.flowChart2_18.Size = new System.Drawing.Size(366, 40);
             this.flowChart2_18.TabIndex = 202;
             this.flowChart2_18.Text = "SF 1 Screw Feed retract2.18";
             this.flowChart2_18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4843,11 +4918,11 @@
             this.flowChart2_15.CASE1 = this.flowChart2;
             this.flowChart2_15.CASE2 = null;
             this.flowChart2_15.CASE3 = null;
-            this.flowChart2_15.Location = new System.Drawing.Point(520, 684);
-            this.flowChart2_15.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart2_15.Location = new System.Drawing.Point(780, 1026);
+            this.flowChart2_15.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart2_15.Name = "flowChart2_15";
             this.flowChart2_15.NEXT = this.flowChart2_14;
-            this.flowChart2_15.Size = new System.Drawing.Size(245, 27);
+            this.flowChart2_15.Size = new System.Drawing.Size(366, 40);
             this.flowChart2_15.TabIndex = 194;
             this.flowChart2_15.Text = "Check all screws are finished2.15";
             this.flowChart2_15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4860,11 +4935,11 @@
             this.flowChart2.CASE1 = null;
             this.flowChart2.CASE2 = null;
             this.flowChart2.CASE3 = null;
-            this.flowChart2.Location = new System.Drawing.Point(862, 684);
-            this.flowChart2.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart2.Location = new System.Drawing.Point(1293, 1026);
+            this.flowChart2.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart2.Name = "flowChart2";
             this.flowChart2.NEXT = this.flowChart2_16;
-            this.flowChart2.Size = new System.Drawing.Size(94, 27);
+            this.flowChart2.Size = new System.Drawing.Size(140, 40);
             this.flowChart2.TabIndex = 216;
             this.flowChart2.Text = "Skip";
             this.flowChart2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4876,11 +4951,11 @@
             this.flowChart2_16.CASE1 = null;
             this.flowChart2_16.CASE2 = null;
             this.flowChart2_16.CASE3 = null;
-            this.flowChart2_16.Location = new System.Drawing.Point(520, 796);
-            this.flowChart2_16.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart2_16.Location = new System.Drawing.Point(780, 1194);
+            this.flowChart2_16.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart2_16.Name = "flowChart2_16";
             this.flowChart2_16.NEXT = this.flowChart19;
-            this.flowChart2_16.Size = new System.Drawing.Size(245, 27);
+            this.flowChart2_16.Size = new System.Drawing.Size(366, 40);
             this.flowChart2_16.TabIndex = 194;
             this.flowChart2_16.Text = "End2.16";
             this.flowChart2_16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4893,11 +4968,11 @@
             this.flowChart19.CASE1 = this.flowChart1;
             this.flowChart19.CASE2 = null;
             this.flowChart19.CASE3 = null;
-            this.flowChart19.Location = new System.Drawing.Point(109, 796);
-            this.flowChart19.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart19.Location = new System.Drawing.Point(164, 1194);
+            this.flowChart19.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart19.Name = "flowChart19";
             this.flowChart19.NEXT = null;
-            this.flowChart19.Size = new System.Drawing.Size(94, 27);
+            this.flowChart19.Size = new System.Drawing.Size(140, 40);
             this.flowChart19.TabIndex = 199;
             this.flowChart19.Text = "Loop";
             this.flowChart19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4910,11 +4985,11 @@
             this.flowChart1.CASE1 = this.flowChart2_1;
             this.flowChart1.CASE2 = null;
             this.flowChart1.CASE3 = null;
-            this.flowChart1.Location = new System.Drawing.Point(109, 27);
-            this.flowChart1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart1.Location = new System.Drawing.Point(164, 40);
+            this.flowChart1.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart1.Name = "flowChart1";
             this.flowChart1.NEXT = null;
-            this.flowChart1.Size = new System.Drawing.Size(94, 27);
+            this.flowChart1.Size = new System.Drawing.Size(140, 40);
             this.flowChart1.TabIndex = 206;
             this.flowChart1.Text = "Loop";
             this.flowChart1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4927,11 +5002,11 @@
             this.flowChart2_1.CASE1 = null;
             this.flowChart2_1.CASE2 = null;
             this.flowChart2_1.CASE3 = null;
-            this.flowChart2_1.Location = new System.Drawing.Point(520, 27);
-            this.flowChart2_1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart2_1.Location = new System.Drawing.Point(780, 40);
+            this.flowChart2_1.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart2_1.Name = "flowChart2_1";
             this.flowChart2_1.NEXT = this.flowChart2_2;
-            this.flowChart2_1.Size = new System.Drawing.Size(245, 27);
+            this.flowChart2_1.Size = new System.Drawing.Size(366, 40);
             this.flowChart2_1.TabIndex = 195;
             this.flowChart2_1.Text = "Waiting Start2.01";
             this.flowChart2_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4944,11 +5019,11 @@
             this.flowChart2_2.CASE1 = null;
             this.flowChart2_2.CASE2 = null;
             this.flowChart2_2.CASE3 = null;
-            this.flowChart2_2.Location = new System.Drawing.Point(520, 67);
-            this.flowChart2_2.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart2_2.Location = new System.Drawing.Point(780, 100);
+            this.flowChart2_2.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart2_2.Name = "flowChart2_2";
             this.flowChart2_2.NEXT = this.flowChart2_17;
-            this.flowChart2_2.Size = new System.Drawing.Size(245, 27);
+            this.flowChart2_2.Size = new System.Drawing.Size(366, 40);
             this.flowChart2_2.TabIndex = 194;
             this.flowChart2_2.Text = "Start Request Screws2.02";
             this.flowChart2_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4961,11 +5036,11 @@
             this.flowChart2_17.CASE1 = null;
             this.flowChart2_17.CASE2 = this.flowChartMessage4;
             this.flowChart2_17.CASE3 = null;
-            this.flowChart2_17.Location = new System.Drawing.Point(520, 103);
-            this.flowChart2_17.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart2_17.Location = new System.Drawing.Point(780, 154);
+            this.flowChart2_17.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart2_17.Name = "flowChart2_17";
             this.flowChart2_17.NEXT = this.flowChart2_3;
-            this.flowChart2_17.Size = new System.Drawing.Size(245, 27);
+            this.flowChart2_17.Size = new System.Drawing.Size(366, 40);
             this.flowChart2_17.TabIndex = 200;
             this.flowChart2_17.Text = "Z Axis Goto SafePos2.17";
             this.flowChart2_17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4985,11 +5060,11 @@
             this.flowChartMessage4.HideButtonPause = false;
             this.flowChartMessage4.HideButtonRetry = false;
             this.flowChartMessage4.HideButtonSkip = false;
-            this.flowChartMessage4.Location = new System.Drawing.Point(349, 103);
-            this.flowChartMessage4.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.flowChartMessage4.Location = new System.Drawing.Point(524, 154);
+            this.flowChartMessage4.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
             this.flowChartMessage4.Name = "flowChartMessage4";
             this.flowChartMessage4.NEXT = null;
-            this.flowChartMessage4.Size = new System.Drawing.Size(127, 27);
+            this.flowChartMessage4.Size = new System.Drawing.Size(190, 40);
             this.flowChartMessage4.TabIndex = 208;
             this.flowChartMessage4.Text = "Move TimeOut";
             this.flowChartMessage4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5002,11 +5077,11 @@
             this.flowChart2_3.CASE1 = null;
             this.flowChart2_3.CASE2 = this.flowChartMessage5;
             this.flowChart2_3.CASE3 = null;
-            this.flowChart2_3.Location = new System.Drawing.Point(520, 143);
-            this.flowChart2_3.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart2_3.Location = new System.Drawing.Point(780, 214);
+            this.flowChart2_3.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart2_3.Name = "flowChart2_3";
             this.flowChart2_3.NEXT = this.flowChart2_4;
-            this.flowChart2_3.Size = new System.Drawing.Size(245, 27);
+            this.flowChart2_3.Size = new System.Drawing.Size(366, 40);
             this.flowChart2_3.TabIndex = 194;
             this.flowChart2_3.Text = "XY Axis Goto ScrewPos2.03";
             this.flowChart2_3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5026,11 +5101,11 @@
             this.flowChartMessage5.HideButtonPause = false;
             this.flowChartMessage5.HideButtonRetry = false;
             this.flowChartMessage5.HideButtonSkip = false;
-            this.flowChartMessage5.Location = new System.Drawing.Point(349, 143);
-            this.flowChartMessage5.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.flowChartMessage5.Location = new System.Drawing.Point(524, 214);
+            this.flowChartMessage5.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
             this.flowChartMessage5.Name = "flowChartMessage5";
             this.flowChartMessage5.NEXT = null;
-            this.flowChartMessage5.Size = new System.Drawing.Size(127, 27);
+            this.flowChartMessage5.Size = new System.Drawing.Size(190, 40);
             this.flowChartMessage5.TabIndex = 209;
             this.flowChartMessage5.Text = "Move TimeOut";
             this.flowChartMessage5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5043,11 +5118,11 @@
             this.flowChart2_4.CASE1 = this.flowChart43;
             this.flowChart2_4.CASE2 = this.flowChartMessage1;
             this.flowChart2_4.CASE3 = null;
-            this.flowChart2_4.Location = new System.Drawing.Point(520, 182);
-            this.flowChart2_4.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart2_4.Location = new System.Drawing.Point(780, 273);
+            this.flowChart2_4.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart2_4.Name = "flowChart2_4";
             this.flowChart2_4.NEXT = this.flowChart2_20;
-            this.flowChart2_4.Size = new System.Drawing.Size(245, 27);
+            this.flowChart2_4.Size = new System.Drawing.Size(366, 40);
             this.flowChart2_4.TabIndex = 194;
             this.flowChart2_4.Text = "Waiting Screws In Postion2.04";
             this.flowChart2_4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5060,11 +5135,11 @@
             this.flowChart43.CASE1 = null;
             this.flowChart43.CASE2 = null;
             this.flowChart43.CASE3 = null;
-            this.flowChart43.Location = new System.Drawing.Point(777, 143);
-            this.flowChart43.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart43.Location = new System.Drawing.Point(1166, 214);
+            this.flowChart43.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart43.Name = "flowChart43";
             this.flowChart43.NEXT = this.flowChart44;
-            this.flowChart43.Size = new System.Drawing.Size(219, 27);
+            this.flowChart43.Size = new System.Drawing.Size(328, 40);
             this.flowChart43.TabIndex = 194;
             this.flowChart43.Text = "ThrowScrew";
             this.flowChart43.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5077,11 +5152,11 @@
             this.flowChart44.CASE1 = null;
             this.flowChart44.CASE2 = null;
             this.flowChart44.CASE3 = null;
-            this.flowChart44.Location = new System.Drawing.Point(777, 67);
-            this.flowChart44.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart44.Location = new System.Drawing.Point(1166, 100);
+            this.flowChart44.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart44.Name = "flowChart44";
             this.flowChart44.NEXT = this.flowChart2_2;
-            this.flowChart44.Size = new System.Drawing.Size(219, 27);
+            this.flowChart44.Size = new System.Drawing.Size(328, 40);
             this.flowChart44.TabIndex = 194;
             this.flowChart44.Text = "Waiting ThrowScrew Finsh";
             this.flowChart44.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5101,11 +5176,11 @@
             this.flowChartMessage1.HideButtonPause = false;
             this.flowChartMessage1.HideButtonRetry = false;
             this.flowChartMessage1.HideButtonSkip = false;
-            this.flowChartMessage1.Location = new System.Drawing.Point(777, 182);
-            this.flowChartMessage1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.flowChartMessage1.Location = new System.Drawing.Point(1166, 273);
+            this.flowChartMessage1.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
             this.flowChartMessage1.Name = "flowChartMessage1";
             this.flowChartMessage1.NEXT = null;
-            this.flowChartMessage1.Size = new System.Drawing.Size(219, 27);
+            this.flowChartMessage1.Size = new System.Drawing.Size(328, 40);
             this.flowChartMessage1.TabIndex = 196;
             this.flowChartMessage1.Text = "Request Screw Alarm";
             this.flowChartMessage1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5118,11 +5193,11 @@
             this.flowChart2_20.CASE1 = null;
             this.flowChart2_20.CASE2 = null;
             this.flowChart2_20.CASE3 = null;
-            this.flowChart2_20.Location = new System.Drawing.Point(520, 219);
-            this.flowChart2_20.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart2_20.Location = new System.Drawing.Point(780, 328);
+            this.flowChart2_20.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart2_20.Name = "flowChart2_20";
             this.flowChart2_20.NEXT = this.flowChart2_7;
-            this.flowChart2_20.Size = new System.Drawing.Size(245, 27);
+            this.flowChart2_20.Size = new System.Drawing.Size(366, 40);
             this.flowChart2_20.TabIndex = 204;
             this.flowChart2_20.Text = "SF 1 Z CYL extend2.20";
             this.flowChart2_20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5135,11 +5210,11 @@
             this.flowChart2_7.CASE1 = null;
             this.flowChart2_7.CASE2 = null;
             this.flowChart2_7.CASE3 = null;
-            this.flowChart2_7.Location = new System.Drawing.Point(520, 257);
-            this.flowChart2_7.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart2_7.Location = new System.Drawing.Point(780, 386);
+            this.flowChart2_7.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart2_7.Name = "flowChart2_7";
             this.flowChart2_7.NEXT = this.flowChart2_8;
-            this.flowChart2_7.Size = new System.Drawing.Size(245, 27);
+            this.flowChart2_7.Size = new System.Drawing.Size(366, 40);
             this.flowChart2_7.TabIndex = 194;
             this.flowChart2_7.Text = "Reset Screw IO2.07";
             this.flowChart2_7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5152,11 +5227,11 @@
             this.flowChart2_8.CASE1 = null;
             this.flowChart2_8.CASE2 = this.flowChartMessage2;
             this.flowChart2_8.CASE3 = null;
-            this.flowChart2_8.Location = new System.Drawing.Point(520, 295);
-            this.flowChart2_8.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart2_8.Location = new System.Drawing.Point(780, 442);
+            this.flowChart2_8.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart2_8.Name = "flowChart2_8";
             this.flowChart2_8.NEXT = this.flowChart2_6;
-            this.flowChart2_8.Size = new System.Drawing.Size(245, 27);
+            this.flowChart2_8.Size = new System.Drawing.Size(366, 40);
             this.flowChart2_8.TabIndex = 194;
             this.flowChart2_8.Text = "Screw Start2.08";
             this.flowChart2_8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5176,11 +5251,11 @@
             this.flowChartMessage2.HideButtonPause = false;
             this.flowChartMessage2.HideButtonRetry = false;
             this.flowChartMessage2.HideButtonSkip = false;
-            this.flowChartMessage2.Location = new System.Drawing.Point(800, 295);
-            this.flowChartMessage2.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.flowChartMessage2.Location = new System.Drawing.Point(1200, 442);
+            this.flowChartMessage2.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
             this.flowChartMessage2.Name = "flowChartMessage2";
             this.flowChartMessage2.NEXT = null;
-            this.flowChartMessage2.Size = new System.Drawing.Size(219, 27);
+            this.flowChartMessage2.Size = new System.Drawing.Size(328, 40);
             this.flowChartMessage2.TabIndex = 197;
             this.flowChartMessage2.Text = "Screw Error";
             this.flowChartMessage2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5193,11 +5268,11 @@
             this.flowChart2_6.CASE1 = null;
             this.flowChart2_6.CASE2 = null;
             this.flowChart2_6.CASE3 = null;
-            this.flowChart2_6.Location = new System.Drawing.Point(520, 331);
-            this.flowChart2_6.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart2_6.Location = new System.Drawing.Point(780, 496);
+            this.flowChart2_6.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart2_6.Name = "flowChart2_6";
             this.flowChart2_6.NEXT = this.flowChart2_10;
-            this.flowChart2_6.Size = new System.Drawing.Size(245, 27);
+            this.flowChart2_6.Size = new System.Drawing.Size(366, 40);
             this.flowChart2_6.TabIndex = 194;
             this.flowChart2_6.Text = "SF 1 Lock Cyl retract2.06";
             this.flowChart2_6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5210,11 +5285,11 @@
             this.flowChart2_10.CASE1 = null;
             this.flowChart2_10.CASE2 = this.flowChart6;
             this.flowChart2_10.CASE3 = null;
-            this.flowChart2_10.Location = new System.Drawing.Point(520, 371);
-            this.flowChart2_10.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart2_10.Location = new System.Drawing.Point(780, 556);
+            this.flowChart2_10.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart2_10.Name = "flowChart2_10";
             this.flowChart2_10.NEXT = this.flowChart2_11;
-            this.flowChart2_10.Size = new System.Drawing.Size(245, 27);
+            this.flowChart2_10.Size = new System.Drawing.Size(366, 40);
             this.flowChart2_10.TabIndex = 194;
             this.flowChart2_10.Text = "Screw Is Finsh2.10";
             this.flowChart2_10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5227,11 +5302,11 @@
             this.flowChart6.CASE1 = null;
             this.flowChart6.CASE2 = null;
             this.flowChart6.CASE3 = null;
-            this.flowChart6.Location = new System.Drawing.Point(800, 371);
-            this.flowChart6.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart6.Location = new System.Drawing.Point(1200, 556);
+            this.flowChart6.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart6.Name = "flowChart6";
             this.flowChart6.NEXT = this.flowChart2_12;
-            this.flowChart6.Size = new System.Drawing.Size(94, 27);
+            this.flowChart6.Size = new System.Drawing.Size(140, 40);
             this.flowChart6.TabIndex = 212;
             this.flowChart6.Text = "NG";
             this.flowChart6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5244,11 +5319,11 @@
             this.flowChart2_12.CASE1 = null;
             this.flowChart2_12.CASE2 = null;
             this.flowChart2_12.CASE3 = null;
-            this.flowChart2_12.Location = new System.Drawing.Point(520, 447);
-            this.flowChart2_12.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart2_12.Location = new System.Drawing.Point(780, 670);
+            this.flowChart2_12.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart2_12.Name = "flowChart2_12";
             this.flowChart2_12.NEXT = this.flowChart2_22;
-            this.flowChart2_12.Size = new System.Drawing.Size(245, 27);
+            this.flowChart2_12.Size = new System.Drawing.Size(366, 40);
             this.flowChart2_12.TabIndex = 194;
             this.flowChart2_12.Text = "Get ScrewData2.12";
             this.flowChart2_12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5261,11 +5336,11 @@
             this.flowChart2_22.CASE1 = this.flowChartMessage17;
             this.flowChart2_22.CASE2 = this.flowChartMessage16;
             this.flowChart2_22.CASE3 = null;
-            this.flowChart2_22.Location = new System.Drawing.Point(520, 487);
-            this.flowChart2_22.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart2_22.Location = new System.Drawing.Point(780, 730);
+            this.flowChart2_22.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart2_22.Name = "flowChart2_22";
             this.flowChart2_22.NEXT = this.flowChart2_23;
-            this.flowChart2_22.Size = new System.Drawing.Size(245, 27);
+            this.flowChart2_22.Size = new System.Drawing.Size(366, 40);
             this.flowChart2_22.TabIndex = 215;
             this.flowChart2_22.Text = "Get DisPlacemengValue2.22";
             this.flowChart2_22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5285,11 +5360,11 @@
             this.flowChartMessage17.HideButtonPause = false;
             this.flowChartMessage17.HideButtonRetry = false;
             this.flowChartMessage17.HideButtonSkip = false;
-            this.flowChartMessage17.Location = new System.Drawing.Point(800, 487);
-            this.flowChartMessage17.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.flowChartMessage17.Location = new System.Drawing.Point(1200, 730);
+            this.flowChartMessage17.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
             this.flowChartMessage17.Name = "flowChartMessage17";
             this.flowChartMessage17.NEXT = this.flowChart11;
-            this.flowChartMessage17.Size = new System.Drawing.Size(145, 27);
+            this.flowChartMessage17.Size = new System.Drawing.Size(216, 40);
             this.flowChartMessage17.TabIndex = 214;
             this.flowChartMessage17.Text = "NG";
             this.flowChartMessage17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5302,11 +5377,11 @@
             this.flowChart11.CASE1 = null;
             this.flowChart11.CASE2 = null;
             this.flowChart11.CASE3 = null;
-            this.flowChart11.Location = new System.Drawing.Point(800, 566);
-            this.flowChart11.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart11.Location = new System.Drawing.Point(1200, 849);
+            this.flowChart11.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart11.Name = "flowChart11";
             this.flowChart11.NEXT = this.flowChart2_13;
-            this.flowChart11.Size = new System.Drawing.Size(145, 27);
+            this.flowChart11.Size = new System.Drawing.Size(216, 40);
             this.flowChart11.TabIndex = 217;
             this.flowChart11.Text = "NG";
             this.flowChart11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5326,11 +5401,11 @@
             this.flowChartMessage16.HideButtonPause = false;
             this.flowChartMessage16.HideButtonRetry = false;
             this.flowChartMessage16.HideButtonSkip = false;
-            this.flowChartMessage16.Location = new System.Drawing.Point(349, 487);
-            this.flowChartMessage16.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.flowChartMessage16.Location = new System.Drawing.Point(524, 730);
+            this.flowChartMessage16.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
             this.flowChartMessage16.Name = "flowChartMessage16";
             this.flowChartMessage16.NEXT = this.flowChart2_13;
-            this.flowChartMessage16.Size = new System.Drawing.Size(145, 27);
+            this.flowChartMessage16.Size = new System.Drawing.Size(216, 40);
             this.flowChartMessage16.TabIndex = 213;
             this.flowChartMessage16.Text = "TimeOut";
             this.flowChartMessage16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5343,11 +5418,11 @@
             this.flowChart2_11.CASE1 = null;
             this.flowChart2_11.CASE2 = null;
             this.flowChart2_11.CASE3 = null;
-            this.flowChart2_11.Location = new System.Drawing.Point(520, 409);
-            this.flowChart2_11.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart2_11.Location = new System.Drawing.Point(780, 614);
+            this.flowChart2_11.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart2_11.Name = "flowChart2_11";
             this.flowChart2_11.NEXT = this.flowChart2_12;
-            this.flowChart2_11.Size = new System.Drawing.Size(245, 27);
+            this.flowChart2_11.Size = new System.Drawing.Size(366, 40);
             this.flowChart2_11.TabIndex = 194;
             this.flowChart2_11.Text = "Screw OK2.11";
             this.flowChart2_11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5360,11 +5435,11 @@
             this.flowChart2_14.CASE1 = null;
             this.flowChart2_14.CASE2 = this.flowChartMessage6;
             this.flowChart2_14.CASE3 = null;
-            this.flowChart2_14.Location = new System.Drawing.Point(520, 723);
-            this.flowChart2_14.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart2_14.Location = new System.Drawing.Point(780, 1084);
+            this.flowChart2_14.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart2_14.Name = "flowChart2_14";
             this.flowChart2_14.NEXT = this.flowChart2_19;
-            this.flowChart2_14.Size = new System.Drawing.Size(245, 27);
+            this.flowChart2_14.Size = new System.Drawing.Size(366, 40);
             this.flowChart2_14.TabIndex = 194;
             this.flowChart2_14.Text = "Z Axis Goto SafePos2.14";
             this.flowChart2_14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5384,11 +5459,11 @@
             this.flowChartMessage6.HideButtonPause = false;
             this.flowChartMessage6.HideButtonRetry = false;
             this.flowChartMessage6.HideButtonSkip = false;
-            this.flowChartMessage6.Location = new System.Drawing.Point(349, 723);
-            this.flowChartMessage6.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.flowChartMessage6.Location = new System.Drawing.Point(524, 1084);
+            this.flowChartMessage6.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
             this.flowChartMessage6.Name = "flowChartMessage6";
             this.flowChartMessage6.NEXT = null;
-            this.flowChartMessage6.Size = new System.Drawing.Size(127, 27);
+            this.flowChartMessage6.Size = new System.Drawing.Size(190, 40);
             this.flowChartMessage6.TabIndex = 210;
             this.flowChartMessage6.Text = "Move TimeOut";
             this.flowChartMessage6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5401,11 +5476,11 @@
             this.flowChart2_19.CASE1 = null;
             this.flowChart2_19.CASE2 = this.flowChartMessage7;
             this.flowChart2_19.CASE3 = null;
-            this.flowChart2_19.Location = new System.Drawing.Point(520, 758);
-            this.flowChart2_19.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart2_19.Location = new System.Drawing.Point(780, 1137);
+            this.flowChart2_19.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart2_19.Name = "flowChart2_19";
             this.flowChart2_19.NEXT = this.flowChart2_16;
-            this.flowChart2_19.Size = new System.Drawing.Size(245, 27);
+            this.flowChart2_19.Size = new System.Drawing.Size(366, 40);
             this.flowChart2_19.TabIndex = 203;
             this.flowChart2_19.Text = "Jacking Axis Goto SafePos2.19";
             this.flowChart2_19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5425,11 +5500,11 @@
             this.flowChartMessage7.HideButtonPause = false;
             this.flowChartMessage7.HideButtonRetry = false;
             this.flowChartMessage7.HideButtonSkip = false;
-            this.flowChartMessage7.Location = new System.Drawing.Point(349, 758);
-            this.flowChartMessage7.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.flowChartMessage7.Location = new System.Drawing.Point(524, 1137);
+            this.flowChartMessage7.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
             this.flowChartMessage7.Name = "flowChartMessage7";
             this.flowChartMessage7.NEXT = null;
-            this.flowChartMessage7.Size = new System.Drawing.Size(127, 27);
+            this.flowChartMessage7.Size = new System.Drawing.Size(190, 40);
             this.flowChartMessage7.TabIndex = 211;
             this.flowChartMessage7.Text = "Move TimeOut";
             this.flowChartMessage7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5450,10 +5525,11 @@
             this.tabPage15.Controls.Add(this.flowChartMessage8);
             this.tabPage15.Controls.Add(this.flowChart3_5);
             this.tabPage15.Controls.Add(this.flowChart3_2);
-            this.tabPage15.Location = new System.Drawing.Point(4, 45);
+            this.tabPage15.Location = new System.Drawing.Point(4, 49);
+            this.tabPage15.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage15.Name = "tabPage15";
-            this.tabPage15.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage15.Size = new System.Drawing.Size(1119, 521);
+            this.tabPage15.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage15.Size = new System.Drawing.Size(1688, 825);
             this.tabPage15.TabIndex = 4;
             this.tabPage15.Text = "  Jacking Flow  ";
             this.tabPage15.UseVisualStyleBackColor = true;
@@ -5472,11 +5548,10 @@
             this.tabPage17.Controls.Add(this.flowChartMessage11);
             this.tabPage17.Controls.Add(this.flowChartMessage10);
             this.tabPage17.Controls.Add(this.flowChart4_4);
-            this.tabPage17.Location = new System.Drawing.Point(4, 45);
-            this.tabPage17.Margin = new System.Windows.Forms.Padding(2);
+            this.tabPage17.Location = new System.Drawing.Point(4, 49);
             this.tabPage17.Name = "tabPage17";
-            this.tabPage17.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage17.Size = new System.Drawing.Size(1119, 521);
+            this.tabPage17.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage17.Size = new System.Drawing.Size(1688, 825);
             this.tabPage17.TabIndex = 0;
             this.tabPage17.Text = "  Vision Flow  ";
             this.tabPage17.UseVisualStyleBackColor = true;
@@ -5495,11 +5570,11 @@
             this.flowChartMessage18.HideButtonPause = false;
             this.flowChartMessage18.HideButtonRetry = false;
             this.flowChartMessage18.HideButtonSkip = false;
-            this.flowChartMessage18.Location = new System.Drawing.Point(298, 167);
-            this.flowChartMessage18.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.flowChartMessage18.Location = new System.Drawing.Point(447, 250);
+            this.flowChartMessage18.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
             this.flowChartMessage18.Name = "flowChartMessage18";
             this.flowChartMessage18.NEXT = this.flowChart3;
-            this.flowChartMessage18.Size = new System.Drawing.Size(103, 27);
+            this.flowChartMessage18.Size = new System.Drawing.Size(154, 40);
             this.flowChartMessage18.TabIndex = 216;
             this.flowChartMessage18.Text = "NG";
             this.flowChartMessage18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5512,11 +5587,11 @@
             this.flowChart4_3.CASE1 = null;
             this.flowChart4_3.CASE2 = this.flowChartMessage18;
             this.flowChart4_3.CASE3 = null;
-            this.flowChart4_3.Location = new System.Drawing.Point(492, 167);
-            this.flowChart4_3.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart4_3.Location = new System.Drawing.Point(738, 250);
+            this.flowChart4_3.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart4_3.Name = "flowChart4_3";
             this.flowChart4_3.NEXT = this.flowChart4_4;
-            this.flowChart4_3.Size = new System.Drawing.Size(278, 27);
+            this.flowChart4_3.Size = new System.Drawing.Size(416, 40);
             this.flowChart4_3.TabIndex = 197;
             this.flowChart4_3.Text = "Take Photo4.03";
             this.flowChart4_3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5529,11 +5604,11 @@
             this.flowChart4_4.CASE1 = null;
             this.flowChart4_4.CASE2 = this.flowChartMessage14;
             this.flowChart4_4.CASE3 = null;
-            this.flowChart4_4.Location = new System.Drawing.Point(492, 204);
-            this.flowChart4_4.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart4_4.Location = new System.Drawing.Point(738, 306);
+            this.flowChart4_4.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart4_4.Name = "flowChart4_4";
             this.flowChart4_4.NEXT = this.flowChart4_6;
-            this.flowChart4_4.Size = new System.Drawing.Size(278, 27);
+            this.flowChart4_4.Size = new System.Drawing.Size(416, 40);
             this.flowChart4_4.TabIndex = 196;
             this.flowChart4_4.Text = "Get VisionData4.04";
             this.flowChart4_4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5553,11 +5628,11 @@
             this.flowChartMessage14.HideButtonPause = false;
             this.flowChartMessage14.HideButtonRetry = false;
             this.flowChartMessage14.HideButtonSkip = false;
-            this.flowChartMessage14.Location = new System.Drawing.Point(361, 204);
-            this.flowChartMessage14.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.flowChartMessage14.Location = new System.Drawing.Point(542, 306);
+            this.flowChartMessage14.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
             this.flowChartMessage14.Name = "flowChartMessage14";
             this.flowChartMessage14.NEXT = this.flowChart3;
-            this.flowChartMessage14.Size = new System.Drawing.Size(103, 27);
+            this.flowChartMessage14.Size = new System.Drawing.Size(154, 40);
             this.flowChartMessage14.TabIndex = 214;
             this.flowChartMessage14.Text = "NG";
             this.flowChartMessage14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5570,11 +5645,11 @@
             this.flowChart3.CASE1 = null;
             this.flowChart3.CASE2 = null;
             this.flowChart3.CASE3 = null;
-            this.flowChart3.Location = new System.Drawing.Point(298, 246);
-            this.flowChart3.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart3.Location = new System.Drawing.Point(447, 369);
+            this.flowChart3.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart3.Name = "flowChart3";
             this.flowChart3.NEXT = this.flowChart4_6;
-            this.flowChart3.Size = new System.Drawing.Size(103, 27);
+            this.flowChart3.Size = new System.Drawing.Size(154, 40);
             this.flowChart3.TabIndex = 215;
             this.flowChart3.Text = "NG";
             this.flowChart3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5587,11 +5662,11 @@
             this.flowChart4_6.CASE1 = null;
             this.flowChart4_6.CASE2 = null;
             this.flowChart4_6.CASE3 = null;
-            this.flowChart4_6.Location = new System.Drawing.Point(492, 246);
-            this.flowChart4_6.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart4_6.Location = new System.Drawing.Point(738, 369);
+            this.flowChart4_6.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart4_6.Name = "flowChart4_6";
             this.flowChart4_6.NEXT = this.flowChart42;
-            this.flowChart4_6.Size = new System.Drawing.Size(278, 27);
+            this.flowChart4_6.Size = new System.Drawing.Size(416, 40);
             this.flowChart4_6.TabIndex = 193;
             this.flowChart4_6.Text = "End4.06";
             this.flowChart4_6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5604,11 +5679,11 @@
             this.flowChart42.CASE1 = this.flowChart3_1;
             this.flowChart42.CASE2 = null;
             this.flowChart42.CASE3 = null;
-            this.flowChart42.Location = new System.Drawing.Point(948, 246);
-            this.flowChart42.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart42.Location = new System.Drawing.Point(1422, 369);
+            this.flowChart42.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart42.Name = "flowChart42";
             this.flowChart42.NEXT = this.flowChart4_1;
-            this.flowChart42.Size = new System.Drawing.Size(94, 27);
+            this.flowChart42.Size = new System.Drawing.Size(140, 40);
             this.flowChart42.TabIndex = 210;
             this.flowChart42.Text = "Loop";
             this.flowChart42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5621,11 +5696,11 @@
             this.flowChart4_1.CASE1 = null;
             this.flowChart4_1.CASE2 = null;
             this.flowChart4_1.CASE3 = null;
-            this.flowChart4_1.Location = new System.Drawing.Point(492, 55);
-            this.flowChart4_1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart4_1.Location = new System.Drawing.Point(738, 82);
+            this.flowChart4_1.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart4_1.Name = "flowChart4_1";
             this.flowChart4_1.NEXT = this.flowChart4_7;
-            this.flowChart4_1.Size = new System.Drawing.Size(278, 27);
+            this.flowChart4_1.Size = new System.Drawing.Size(416, 40);
             this.flowChart4_1.TabIndex = 199;
             this.flowChart4_1.Text = "Waiting Start4.01";
             this.flowChart4_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5638,11 +5713,11 @@
             this.flowChart4_7.CASE1 = null;
             this.flowChart4_7.CASE2 = this.flowChartMessage10;
             this.flowChart4_7.CASE3 = null;
-            this.flowChart4_7.Location = new System.Drawing.Point(492, 93);
-            this.flowChart4_7.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart4_7.Location = new System.Drawing.Point(738, 140);
+            this.flowChart4_7.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart4_7.Name = "flowChart4_7";
             this.flowChart4_7.NEXT = this.flowChart4_2;
-            this.flowChart4_7.Size = new System.Drawing.Size(278, 27);
+            this.flowChart4_7.Size = new System.Drawing.Size(416, 40);
             this.flowChart4_7.TabIndex = 211;
             this.flowChart4_7.Text = "Z Axis Goto SafePos4.07";
             this.flowChart4_7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5662,11 +5737,11 @@
             this.flowChartMessage10.HideButtonPause = false;
             this.flowChartMessage10.HideButtonRetry = false;
             this.flowChartMessage10.HideButtonSkip = false;
-            this.flowChartMessage10.Location = new System.Drawing.Point(337, 93);
-            this.flowChartMessage10.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.flowChartMessage10.Location = new System.Drawing.Point(506, 140);
+            this.flowChartMessage10.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
             this.flowChartMessage10.Name = "flowChartMessage10";
             this.flowChartMessage10.NEXT = null;
-            this.flowChartMessage10.Size = new System.Drawing.Size(127, 27);
+            this.flowChartMessage10.Size = new System.Drawing.Size(190, 40);
             this.flowChartMessage10.TabIndex = 212;
             this.flowChartMessage10.Text = "Move TimeOut";
             this.flowChartMessage10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5679,11 +5754,11 @@
             this.flowChart4_2.CASE1 = null;
             this.flowChart4_2.CASE2 = this.flowChartMessage11;
             this.flowChart4_2.CASE3 = null;
-            this.flowChart4_2.Location = new System.Drawing.Point(492, 129);
-            this.flowChart4_2.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart4_2.Location = new System.Drawing.Point(738, 194);
+            this.flowChart4_2.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart4_2.Name = "flowChart4_2";
             this.flowChart4_2.NEXT = this.flowChart4_3;
-            this.flowChart4_2.Size = new System.Drawing.Size(278, 27);
+            this.flowChart4_2.Size = new System.Drawing.Size(416, 40);
             this.flowChart4_2.TabIndex = 198;
             this.flowChart4_2.Text = "XY Axis Goto VisionPos4.02";
             this.flowChart4_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5703,11 +5778,11 @@
             this.flowChartMessage11.HideButtonPause = false;
             this.flowChartMessage11.HideButtonRetry = false;
             this.flowChartMessage11.HideButtonSkip = false;
-            this.flowChartMessage11.Location = new System.Drawing.Point(337, 129);
-            this.flowChartMessage11.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.flowChartMessage11.Location = new System.Drawing.Point(506, 194);
+            this.flowChartMessage11.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
             this.flowChartMessage11.Name = "flowChartMessage11";
             this.flowChartMessage11.NEXT = null;
-            this.flowChartMessage11.Size = new System.Drawing.Size(127, 27);
+            this.flowChartMessage11.Size = new System.Drawing.Size(190, 40);
             this.flowChartMessage11.TabIndex = 213;
             this.flowChartMessage11.Text = "Move TimeOut";
             this.flowChartMessage11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5725,11 +5800,10 @@
             this.tabPage18.Controls.Add(this.flowChart5_5);
             this.tabPage18.Controls.Add(this.flowChart5_4);
             this.tabPage18.Controls.Add(this.flowChart5_1);
-            this.tabPage18.Location = new System.Drawing.Point(4, 45);
-            this.tabPage18.Margin = new System.Windows.Forms.Padding(2);
+            this.tabPage18.Location = new System.Drawing.Point(4, 49);
             this.tabPage18.Name = "tabPage18";
-            this.tabPage18.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage18.Size = new System.Drawing.Size(1119, 521);
+            this.tabPage18.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage18.Size = new System.Drawing.Size(1688, 825);
             this.tabPage18.TabIndex = 2;
             this.tabPage18.Text = "  Request Screw Flow  ";
             this.tabPage18.UseVisualStyleBackColor = true;
@@ -5749,10 +5823,11 @@
             this.tabPage19.Controls.Add(this.flowChart6_1);
             this.tabPage19.Controls.Add(this.flowChart6_3);
             this.tabPage19.Controls.Add(this.flowChart6_2);
-            this.tabPage19.Location = new System.Drawing.Point(4, 45);
+            this.tabPage19.Location = new System.Drawing.Point(4, 49);
+            this.tabPage19.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage19.Name = "tabPage19";
-            this.tabPage19.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage19.Size = new System.Drawing.Size(1119, 521);
+            this.tabPage19.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage19.Size = new System.Drawing.Size(1688, 825);
             this.tabPage19.TabIndex = 3;
             this.tabPage19.Text = "  ThrowScrew Flow  ";
             this.tabPage19.UseVisualStyleBackColor = true;
@@ -5763,9 +5838,10 @@
             this.tabPage27.Controls.Add(this.flowChart7_3);
             this.tabPage27.Controls.Add(this.flowChart7_2);
             this.tabPage27.Controls.Add(this.flowChart7_1);
-            this.tabPage27.Location = new System.Drawing.Point(4, 45);
+            this.tabPage27.Location = new System.Drawing.Point(4, 49);
+            this.tabPage27.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage27.Name = "tabPage27";
-            this.tabPage27.Size = new System.Drawing.Size(1119, 521);
+            this.tabPage27.Size = new System.Drawing.Size(1688, 825);
             this.tabPage27.TabIndex = 6;
             this.tabPage27.Text = "  ScrewData Flow  ";
             this.tabPage27.UseVisualStyleBackColor = true;
@@ -5777,11 +5853,11 @@
             this.flowChart8.CASE1 = null;
             this.flowChart8.CASE2 = null;
             this.flowChart8.CASE3 = null;
-            this.flowChart8.Location = new System.Drawing.Point(831, 146);
-            this.flowChart8.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart8.Location = new System.Drawing.Point(1246, 219);
+            this.flowChart8.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart8.Name = "flowChart8";
             this.flowChart8.NEXT = this.flowChart7_1;
-            this.flowChart8.Size = new System.Drawing.Size(114, 27);
+            this.flowChart8.Size = new System.Drawing.Size(170, 40);
             this.flowChart8.TabIndex = 206;
             this.flowChart8.Text = "Loop";
             this.flowChart8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5794,11 +5870,11 @@
             this.flowChart7_1.CASE1 = null;
             this.flowChart7_1.CASE2 = null;
             this.flowChart7_1.CASE3 = null;
-            this.flowChart7_1.Location = new System.Drawing.Point(492, 67);
-            this.flowChart7_1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart7_1.Location = new System.Drawing.Point(738, 100);
+            this.flowChart7_1.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart7_1.Name = "flowChart7_1";
             this.flowChart7_1.NEXT = this.flowChart7_2;
-            this.flowChart7_1.Size = new System.Drawing.Size(281, 27);
+            this.flowChart7_1.Size = new System.Drawing.Size(420, 40);
             this.flowChart7_1.TabIndex = 203;
             this.flowChart7_1.Text = "Waiting Start7.01";
             this.flowChart7_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5811,11 +5887,11 @@
             this.flowChart7_2.CASE1 = null;
             this.flowChart7_2.CASE2 = null;
             this.flowChart7_2.CASE3 = null;
-            this.flowChart7_2.Location = new System.Drawing.Point(492, 106);
-            this.flowChart7_2.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart7_2.Location = new System.Drawing.Point(738, 159);
+            this.flowChart7_2.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart7_2.Name = "flowChart7_2";
             this.flowChart7_2.NEXT = this.flowChart7_3;
-            this.flowChart7_2.Size = new System.Drawing.Size(281, 27);
+            this.flowChart7_2.Size = new System.Drawing.Size(420, 40);
             this.flowChart7_2.TabIndex = 204;
             this.flowChart7_2.Text = "Get ScrewData7.02";
             this.flowChart7_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5828,11 +5904,11 @@
             this.flowChart7_3.CASE1 = null;
             this.flowChart7_3.CASE2 = null;
             this.flowChart7_3.CASE3 = null;
-            this.flowChart7_3.Location = new System.Drawing.Point(492, 146);
-            this.flowChart7_3.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart7_3.Location = new System.Drawing.Point(738, 219);
+            this.flowChart7_3.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart7_3.Name = "flowChart7_3";
             this.flowChart7_3.NEXT = this.flowChart8;
-            this.flowChart7_3.Size = new System.Drawing.Size(281, 27);
+            this.flowChart7_3.Size = new System.Drawing.Size(420, 40);
             this.flowChart7_3.TabIndex = 205;
             this.flowChart7_3.Text = "End7.03";
             this.flowChart7_3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5879,11 +5955,11 @@
             this.flowChart0_7.CASE1 = null;
             this.flowChart0_7.CASE2 = null;
             this.flowChart0_7.CASE3 = null;
-            this.flowChart0_7.Location = new System.Drawing.Point(467, 179);
-            this.flowChart0_7.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart0_7.Location = new System.Drawing.Point(700, 268);
+            this.flowChart0_7.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart0_7.Name = "flowChart0_7";
             this.flowChart0_7.NEXT = this.flowChart0_19;
-            this.flowChart0_7.Size = new System.Drawing.Size(332, 27);
+            this.flowChart0_7.Size = new System.Drawing.Size(497, 40);
             this.flowChart0_7.TabIndex = 212;
             this.flowChart0_7.Text = "SF 1 Screw Feed retract0.07";
             this.flowChart0_7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5896,11 +5972,11 @@
             this.flowChart0_19.CASE1 = null;
             this.flowChart0_19.CASE2 = null;
             this.flowChart0_19.CASE3 = null;
-            this.flowChart0_19.Location = new System.Drawing.Point(467, 217);
-            this.flowChart0_19.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart0_19.Location = new System.Drawing.Point(700, 326);
+            this.flowChart0_19.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart0_19.Name = "flowChart0_19";
             this.flowChart0_19.NEXT = this.flowChart0_12;
-            this.flowChart0_19.Size = new System.Drawing.Size(332, 27);
+            this.flowChart0_19.Size = new System.Drawing.Size(497, 40);
             this.flowChart0_19.TabIndex = 235;
             this.flowChart0_19.Text = "SF 1 Lock Cyl retract0.19";
             this.flowChart0_19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5913,11 +5989,11 @@
             this.flowChart0_12.CASE1 = null;
             this.flowChart0_12.CASE2 = null;
             this.flowChart0_12.CASE3 = null;
-            this.flowChart0_12.Location = new System.Drawing.Point(467, 255);
-            this.flowChart0_12.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart0_12.Location = new System.Drawing.Point(700, 382);
+            this.flowChart0_12.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart0_12.Name = "flowChart0_12";
             this.flowChart0_12.NEXT = this.flowChart0_13;
-            this.flowChart0_12.Size = new System.Drawing.Size(332, 27);
+            this.flowChart0_12.Size = new System.Drawing.Size(497, 40);
             this.flowChart0_12.TabIndex = 213;
             this.flowChart0_12.Text = "SF 1 Z CYL retract0.12";
             this.flowChart0_12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5930,11 +6006,11 @@
             this.flowChart0_13.CASE1 = null;
             this.flowChart0_13.CASE2 = null;
             this.flowChart0_13.CASE3 = null;
-            this.flowChart0_13.Location = new System.Drawing.Point(467, 293);
-            this.flowChart0_13.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart0_13.Location = new System.Drawing.Point(700, 440);
+            this.flowChart0_13.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart0_13.Name = "flowChart0_13";
             this.flowChart0_13.NEXT = this.flowChart0_2;
-            this.flowChart0_13.Size = new System.Drawing.Size(332, 27);
+            this.flowChart0_13.Size = new System.Drawing.Size(497, 40);
             this.flowChart0_13.TabIndex = 214;
             this.flowChart0_13.Text = "SF 1 Lock Cyl extend0.13";
             this.flowChart0_13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5947,11 +6023,11 @@
             this.flowChart0_2.CASE1 = null;
             this.flowChart0_2.CASE2 = null;
             this.flowChart0_2.CASE3 = null;
-            this.flowChart0_2.Location = new System.Drawing.Point(467, 329);
-            this.flowChart0_2.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart0_2.Location = new System.Drawing.Point(700, 494);
+            this.flowChart0_2.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart0_2.Name = "flowChart0_2";
             this.flowChart0_2.NEXT = this.flowChart0_3;
-            this.flowChart0_2.Size = new System.Drawing.Size(332, 27);
+            this.flowChart0_2.Size = new System.Drawing.Size(497, 40);
             this.flowChart0_2.TabIndex = 203;
             this.flowChart0_2.Text = "Z Homing0.02";
             this.flowChart0_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5964,11 +6040,11 @@
             this.flowChart0_3.CASE1 = null;
             this.flowChart0_3.CASE2 = null;
             this.flowChart0_3.CASE3 = null;
-            this.flowChart0_3.Location = new System.Drawing.Point(467, 367);
-            this.flowChart0_3.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart0_3.Location = new System.Drawing.Point(700, 550);
+            this.flowChart0_3.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart0_3.Name = "flowChart0_3";
             this.flowChart0_3.NEXT = this.flowChart0_4;
-            this.flowChart0_3.Size = new System.Drawing.Size(332, 27);
+            this.flowChart0_3.Size = new System.Drawing.Size(497, 40);
             this.flowChart0_3.TabIndex = 204;
             this.flowChart0_3.Text = "XY Homing0.03";
             this.flowChart0_3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5981,11 +6057,11 @@
             this.flowChart0_1.CASE1 = null;
             this.flowChart0_1.CASE2 = null;
             this.flowChart0_1.CASE3 = null;
-            this.flowChart0_1.Location = new System.Drawing.Point(467, 24);
-            this.flowChart0_1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart0_1.Location = new System.Drawing.Point(700, 36);
+            this.flowChart0_1.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart0_1.Name = "flowChart0_1";
             this.flowChart0_1.NEXT = this.flowChart0_18;
-            this.flowChart0_1.Size = new System.Drawing.Size(332, 27);
+            this.flowChart0_1.Size = new System.Drawing.Size(497, 40);
             this.flowChart0_1.TabIndex = 202;
             this.flowChart0_1.Text = "Initial0.01";
             this.flowChart0_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -5998,11 +6074,11 @@
             this.flowChart0_18.CASE1 = null;
             this.flowChart0_18.CASE2 = null;
             this.flowChart0_18.CASE3 = null;
-            this.flowChart0_18.Location = new System.Drawing.Point(467, 62);
-            this.flowChart0_18.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart0_18.Location = new System.Drawing.Point(700, 93);
+            this.flowChart0_18.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart0_18.Name = "flowChart0_18";
             this.flowChart0_18.NEXT = this.flowChart0_20;
-            this.flowChart0_18.Size = new System.Drawing.Size(332, 27);
+            this.flowChart0_18.Size = new System.Drawing.Size(497, 40);
             this.flowChart0_18.TabIndex = 234;
             this.flowChart0_18.Text = "Connect ScrewControl0.18";
             this.flowChart0_18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -6015,11 +6091,11 @@
             this.flowChart0_20.CASE1 = null;
             this.flowChart0_20.CASE2 = null;
             this.flowChart0_20.CASE3 = null;
-            this.flowChart0_20.Location = new System.Drawing.Point(467, 101);
-            this.flowChart0_20.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart0_20.Location = new System.Drawing.Point(700, 152);
+            this.flowChart0_20.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart0_20.Name = "flowChart0_20";
             this.flowChart0_20.NEXT = this.flowChart0_21;
-            this.flowChart0_20.Size = new System.Drawing.Size(332, 27);
+            this.flowChart0_20.Size = new System.Drawing.Size(497, 40);
             this.flowChart0_20.TabIndex = 237;
             this.flowChart0_20.Text = "Connect PressSensor0.20";
             this.flowChart0_20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -6032,11 +6108,11 @@
             this.flowChart0_21.CASE1 = null;
             this.flowChart0_21.CASE2 = null;
             this.flowChart0_21.CASE3 = null;
-            this.flowChart0_21.Location = new System.Drawing.Point(467, 139);
-            this.flowChart0_21.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.flowChart0_21.Location = new System.Drawing.Point(700, 208);
+            this.flowChart0_21.Margin = new System.Windows.Forms.Padding(9, 10, 9, 10);
             this.flowChart0_21.Name = "flowChart0_21";
             this.flowChart0_21.NEXT = this.flowChart0_7;
-            this.flowChart0_21.Size = new System.Drawing.Size(332, 27);
+            this.flowChart0_21.Size = new System.Drawing.Size(497, 40);
             this.flowChart0_21.TabIndex = 238;
             this.flowChart0_21.Text = "Connect Displacement0.21";
             this.flowChart0_21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -6047,19 +6123,21 @@
             this.tabControl8.Controls.Add(this.tabPage20);
             this.tabControl8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl8.Location = new System.Drawing.Point(0, 0);
+            this.tabControl8.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl8.Name = "tabControl8";
             this.tabControl8.SelectedIndex = 0;
-            this.tabControl8.Size = new System.Drawing.Size(799, 627);
+            this.tabControl8.Size = new System.Drawing.Size(1204, 971);
             this.tabControl8.TabIndex = 0;
             // 
             // tabPage20
             // 
             this.tabPage20.Controls.Add(this.groupBox3);
             this.tabPage20.Controls.Add(this.groupBox36);
-            this.tabPage20.Location = new System.Drawing.Point(4, 32);
+            this.tabPage20.Location = new System.Drawing.Point(4, 42);
+            this.tabPage20.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage20.Name = "tabPage20";
-            this.tabPage20.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage20.Size = new System.Drawing.Size(791, 591);
+            this.tabPage20.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage20.Size = new System.Drawing.Size(1196, 925);
             this.tabPage20.TabIndex = 0;
             this.tabPage20.Text = "Parameter";
             this.tabPage20.UseVisualStyleBackColor = true;
@@ -6070,9 +6148,11 @@
             this.groupBox3.Controls.Add(this.checkBox3);
             this.groupBox3.Controls.Add(this.checkBox2);
             this.groupBox3.Controls.Add(this.checkBox1);
-            this.groupBox3.Location = new System.Drawing.Point(4, 5);
+            this.groupBox3.Location = new System.Drawing.Point(6, 8);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(375, 215);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox3.Size = new System.Drawing.Size(562, 322);
             this.groupBox3.TabIndex = 147;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Machine Setting";
@@ -6081,9 +6161,10 @@
             // 
             this.checkBox4.AutoSize = true;
             this.checkBox4.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.SettingData, "PSet.ByPassDisplacement", true));
-            this.checkBox4.Location = new System.Drawing.Point(38, 137);
+            this.checkBox4.Location = new System.Drawing.Point(57, 206);
+            this.checkBox4.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(237, 27);
+            this.checkBox4.Size = new System.Drawing.Size(354, 37);
             this.checkBox4.TabIndex = 3;
             this.checkBox4.Text = "ByPassDisplacementResult";
             this.checkBox4.UseVisualStyleBackColor = true;
@@ -6092,9 +6173,10 @@
             // 
             this.checkBox3.AutoSize = true;
             this.checkBox3.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.SettingData, "PSet.ByPassPressure", true));
-            this.checkBox3.Location = new System.Drawing.Point(38, 103);
+            this.checkBox3.Location = new System.Drawing.Point(57, 154);
+            this.checkBox3.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(202, 27);
+            this.checkBox3.Size = new System.Drawing.Size(300, 37);
             this.checkBox3.TabIndex = 2;
             this.checkBox3.Text = "ByPassPressureResult";
             this.checkBox3.UseVisualStyleBackColor = true;
@@ -6103,9 +6185,10 @@
             // 
             this.checkBox2.AutoSize = true;
             this.checkBox2.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.SettingData, "PSet.ByPassVision", true));
-            this.checkBox2.Location = new System.Drawing.Point(37, 70);
+            this.checkBox2.Location = new System.Drawing.Point(56, 105);
+            this.checkBox2.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(181, 27);
+            this.checkBox2.Size = new System.Drawing.Size(272, 37);
             this.checkBox2.TabIndex = 1;
             this.checkBox2.Text = "ByPassVisionResult";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -6114,9 +6197,10 @@
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.SettingData, "PSet.ByPassScrew", true));
-            this.checkBox1.Location = new System.Drawing.Point(37, 37);
+            this.checkBox1.Location = new System.Drawing.Point(56, 56);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(180, 27);
+            this.checkBox1.Size = new System.Drawing.Size(269, 37);
             this.checkBox1.TabIndex = 0;
             this.checkBox1.Text = "ByPassScrewResult";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -6131,9 +6215,11 @@
             this.groupBox36.Controls.Add(this.label92);
             this.groupBox36.Controls.Add(this.label90);
             this.groupBox36.Controls.Add(this.label89);
-            this.groupBox36.Location = new System.Drawing.Point(379, 7);
+            this.groupBox36.Location = new System.Drawing.Point(568, 10);
+            this.groupBox36.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox36.Name = "groupBox36";
-            this.groupBox36.Size = new System.Drawing.Size(323, 213);
+            this.groupBox36.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox36.Size = new System.Drawing.Size(484, 320);
             this.groupBox36.TabIndex = 146;
             this.groupBox36.TabStop = false;
             this.groupBox36.Text = "Timeout alarm";
@@ -6141,68 +6227,76 @@
             // textBox23
             // 
             this.textBox23.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.SettingData, "PSet.Times", true));
-            this.textBox23.Location = new System.Drawing.Point(181, 166);
+            this.textBox23.Location = new System.Drawing.Point(272, 249);
+            this.textBox23.Margin = new System.Windows.Forms.Padding(4);
             this.textBox23.Name = "textBox23";
-            this.textBox23.Size = new System.Drawing.Size(112, 29);
+            this.textBox23.Size = new System.Drawing.Size(166, 40);
             this.textBox23.TabIndex = 7;
             // 
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(87, 166);
+            this.label27.Location = new System.Drawing.Point(130, 249);
+            this.label27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(95, 23);
+            this.label27.Size = new System.Drawing.Size(144, 33);
             this.label27.TabIndex = 6;
             this.label27.Text = "TimeOut：";
             // 
             // textBox36
             // 
             this.textBox36.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.SettingData, "PSet.IOTimes", true));
-            this.textBox36.Location = new System.Drawing.Point(181, 120);
+            this.textBox36.Location = new System.Drawing.Point(272, 180);
+            this.textBox36.Margin = new System.Windows.Forms.Padding(4);
             this.textBox36.Name = "textBox36";
-            this.textBox36.Size = new System.Drawing.Size(112, 29);
+            this.textBox36.Size = new System.Drawing.Size(166, 40);
             this.textBox36.TabIndex = 5;
             // 
             // textBox35
             // 
             this.textBox35.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.SettingData, "PSet.AutoAsixTimes", true));
-            this.textBox35.Location = new System.Drawing.Point(181, 79);
+            this.textBox35.Location = new System.Drawing.Point(272, 118);
+            this.textBox35.Margin = new System.Windows.Forms.Padding(4);
             this.textBox35.Name = "textBox35";
-            this.textBox35.Size = new System.Drawing.Size(112, 29);
+            this.textBox35.Size = new System.Drawing.Size(166, 40);
             this.textBox35.TabIndex = 4;
             // 
             // textBox10
             // 
             this.textBox10.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.SettingData, "PSet.IniAsixTimes", true));
-            this.textBox10.Location = new System.Drawing.Point(181, 31);
+            this.textBox10.Location = new System.Drawing.Point(272, 46);
+            this.textBox10.Margin = new System.Windows.Forms.Padding(4);
             this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(112, 29);
+            this.textBox10.Size = new System.Drawing.Size(166, 40);
             this.textBox10.TabIndex = 3;
             // 
             // label92
             // 
             this.label92.AutoSize = true;
-            this.label92.Location = new System.Drawing.Point(6, 35);
+            this.label92.Location = new System.Drawing.Point(9, 52);
+            this.label92.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label92.Name = "label92";
-            this.label92.Size = new System.Drawing.Size(176, 23);
+            this.label92.Size = new System.Drawing.Size(272, 33);
             this.label92.TabIndex = 2;
             this.label92.Text = "Initial Axis TimeOut：";
             // 
             // label90
             // 
             this.label90.AutoSize = true;
-            this.label90.Location = new System.Drawing.Point(67, 120);
+            this.label90.Location = new System.Drawing.Point(100, 180);
+            this.label90.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label90.Name = "label90";
-            this.label90.Size = new System.Drawing.Size(115, 23);
+            this.label90.Size = new System.Drawing.Size(177, 33);
             this.label90.TabIndex = 1;
             this.label90.Text = "IO TimeOut：";
             // 
             // label89
             // 
             this.label89.AutoSize = true;
-            this.label89.Location = new System.Drawing.Point(10, 79);
+            this.label89.Location = new System.Drawing.Point(15, 118);
+            this.label89.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label89.Name = "label89";
-            this.label89.Size = new System.Drawing.Size(172, 23);
+            this.label89.Size = new System.Drawing.Size(263, 33);
             this.label89.TabIndex = 0;
             this.label89.Text = "Auto Axis TimeOut：";
             // 
@@ -6225,20 +6319,20 @@
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(32, 279);
-            this.label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label25.Location = new System.Drawing.Point(48, 418);
+            this.label25.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(182, 24);
+            this.label25.Size = new System.Drawing.Size(272, 33);
             this.label25.TabIndex = 60;
             this.label25.Text = "Aixs Speed Ratio :";
             // 
             // label26
             // 
             this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.Location = new System.Drawing.Point(931, 274);
-            this.label26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label26.Location = new System.Drawing.Point(1396, 411);
+            this.label26.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(23, 34);
+            this.label26.Size = new System.Drawing.Size(34, 51);
             this.label26.TabIndex = 63;
             this.label26.Text = "%";
             this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -6248,10 +6342,10 @@
             this.lbSpeedRatio.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lbSpeedRatio.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbSpeedRatio.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSpeedRatio.Location = new System.Drawing.Point(867, 274);
-            this.lbSpeedRatio.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbSpeedRatio.Location = new System.Drawing.Point(1300, 411);
+            this.lbSpeedRatio.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lbSpeedRatio.Name = "lbSpeedRatio";
-            this.lbSpeedRatio.Size = new System.Drawing.Size(56, 34);
+            this.lbSpeedRatio.Size = new System.Drawing.Size(84, 51);
             this.lbSpeedRatio.TabIndex = 62;
             this.lbSpeedRatio.Text = "0";
             this.lbSpeedRatio.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -6259,11 +6353,12 @@
             // trackBar1
             // 
             this.trackBar1.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.SettingData, "MSet.AxisSpeedRatio", true));
-            this.trackBar1.Location = new System.Drawing.Point(218, 271);
+            this.trackBar1.Location = new System.Drawing.Point(327, 406);
+            this.trackBar1.Margin = new System.Windows.Forms.Padding(4);
             this.trackBar1.Maximum = 100;
             this.trackBar1.Minimum = 1;
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(630, 45);
+            this.trackBar1.Size = new System.Drawing.Size(945, 69);
             this.trackBar1.TabIndex = 61;
             this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.trackBar1.Value = 1;
@@ -6273,9 +6368,10 @@
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label21.Location = new System.Drawing.Point(1170, 53);
+            this.label21.Location = new System.Drawing.Point(1755, 80);
+            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(133, 24);
+            this.label21.Size = new System.Drawing.Size(200, 33);
             this.label21.TabIndex = 59;
             this.label21.Text = "AxisJacking :";
             // 
@@ -6283,9 +6379,10 @@
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label22.Location = new System.Drawing.Point(1065, 206);
+            this.label22.Location = new System.Drawing.Point(1598, 309);
+            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(140, 24);
+            this.label22.Size = new System.Drawing.Size(209, 33);
             this.label22.TabIndex = 58;
             this.label22.Text = "Deceleration :";
             // 
@@ -6293,18 +6390,20 @@
             // 
             this.textBox14.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.SettingData, "MSet.DecelerationAxisJacking", true));
             this.textBox14.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.textBox14.Location = new System.Drawing.Point(1209, 202);
+            this.textBox14.Location = new System.Drawing.Point(1814, 303);
+            this.textBox14.Margin = new System.Windows.Forms.Padding(4);
             this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(114, 29);
+            this.textBox14.Size = new System.Drawing.Size(169, 40);
             this.textBox14.TabIndex = 57;
             // 
             // label23
             // 
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label23.Location = new System.Drawing.Point(1065, 151);
+            this.label23.Location = new System.Drawing.Point(1598, 226);
+            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(139, 24);
+            this.label23.Size = new System.Drawing.Size(206, 33);
             this.label23.TabIndex = 56;
             this.label23.Text = "Acceleration :";
             // 
@@ -6312,18 +6411,20 @@
             // 
             this.textBox15.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.SettingData, "MSet.AccelerationAxisJacking", true));
             this.textBox15.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.textBox15.Location = new System.Drawing.Point(1209, 151);
+            this.textBox15.Location = new System.Drawing.Point(1814, 226);
+            this.textBox15.Margin = new System.Windows.Forms.Padding(4);
             this.textBox15.Name = "textBox15";
-            this.textBox15.Size = new System.Drawing.Size(114, 29);
+            this.textBox15.Size = new System.Drawing.Size(169, 40);
             this.textBox15.TabIndex = 55;
             // 
             // label24
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label24.Location = new System.Drawing.Point(1072, 101);
+            this.label24.Location = new System.Drawing.Point(1608, 152);
+            this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(131, 24);
+            this.label24.Size = new System.Drawing.Size(193, 33);
             this.label24.TabIndex = 54;
             this.label24.Text = "WorkSpeed :";
             // 
@@ -6331,18 +6432,20 @@
             // 
             this.textBox16.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.SettingData, "MSet.WorkSpeedAxisJacking", true));
             this.textBox16.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.textBox16.Location = new System.Drawing.Point(1209, 96);
+            this.textBox16.Location = new System.Drawing.Point(1814, 144);
+            this.textBox16.Margin = new System.Windows.Forms.Padding(4);
             this.textBox16.Name = "textBox16";
-            this.textBox16.Size = new System.Drawing.Size(114, 29);
+            this.textBox16.Size = new System.Drawing.Size(169, 40);
             this.textBox16.TabIndex = 53;
             // 
             // label17
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label17.Location = new System.Drawing.Point(848, 53);
+            this.label17.Location = new System.Drawing.Point(1272, 80);
+            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(75, 24);
+            this.label17.Size = new System.Drawing.Size(112, 33);
             this.label17.TabIndex = 52;
             this.label17.Text = "AxisZ :";
             // 
@@ -6350,9 +6453,10 @@
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label18.Location = new System.Drawing.Point(704, 206);
+            this.label18.Location = new System.Drawing.Point(1056, 309);
+            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(140, 24);
+            this.label18.Size = new System.Drawing.Size(209, 33);
             this.label18.TabIndex = 51;
             this.label18.Text = "Deceleration :";
             // 
@@ -6360,18 +6464,20 @@
             // 
             this.textBox11.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.SettingData, "MSet.DecelerationZ", true));
             this.textBox11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.textBox11.Location = new System.Drawing.Point(852, 201);
+            this.textBox11.Location = new System.Drawing.Point(1278, 302);
+            this.textBox11.Margin = new System.Windows.Forms.Padding(4);
             this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(114, 29);
+            this.textBox11.Size = new System.Drawing.Size(169, 40);
             this.textBox11.TabIndex = 50;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label19.Location = new System.Drawing.Point(704, 151);
+            this.label19.Location = new System.Drawing.Point(1056, 226);
+            this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(139, 24);
+            this.label19.Size = new System.Drawing.Size(206, 33);
             this.label19.TabIndex = 49;
             this.label19.Text = "Acceleration :";
             // 
@@ -6379,18 +6485,20 @@
             // 
             this.textBox12.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.SettingData, "MSet.AccelerationZ", true));
             this.textBox12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.textBox12.Location = new System.Drawing.Point(852, 149);
+            this.textBox12.Location = new System.Drawing.Point(1278, 224);
+            this.textBox12.Margin = new System.Windows.Forms.Padding(4);
             this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(114, 29);
+            this.textBox12.Size = new System.Drawing.Size(169, 40);
             this.textBox12.TabIndex = 48;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(711, 101);
+            this.label3.Location = new System.Drawing.Point(1066, 152);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(131, 24);
+            this.label3.Size = new System.Drawing.Size(193, 33);
             this.label3.TabIndex = 47;
             this.label3.Text = "WorkSpeed :";
             // 
@@ -6398,18 +6506,20 @@
             // 
             this.textBox13.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.SettingData, "MSet.WorkSpeedZ", true));
             this.textBox13.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.textBox13.Location = new System.Drawing.Point(852, 95);
+            this.textBox13.Location = new System.Drawing.Point(1278, 142);
+            this.textBox13.Margin = new System.Windows.Forms.Padding(4);
             this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(114, 29);
+            this.textBox13.Size = new System.Drawing.Size(169, 40);
             this.textBox13.TabIndex = 46;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label13.Location = new System.Drawing.Point(511, 53);
+            this.label13.Location = new System.Drawing.Point(766, 80);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(75, 24);
+            this.label13.Size = new System.Drawing.Size(114, 33);
             this.label13.TabIndex = 45;
             this.label13.Text = "AxisY :";
             // 
@@ -6417,9 +6527,10 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label14.Location = new System.Drawing.Point(365, 206);
+            this.label14.Location = new System.Drawing.Point(548, 309);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(140, 24);
+            this.label14.Size = new System.Drawing.Size(209, 33);
             this.label14.TabIndex = 44;
             this.label14.Text = "Deceleration :";
             // 
@@ -6427,18 +6538,20 @@
             // 
             this.textBox17.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.SettingData, "MSet.DecelerationY", true));
             this.textBox17.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.textBox17.Location = new System.Drawing.Point(509, 202);
+            this.textBox17.Location = new System.Drawing.Point(764, 303);
+            this.textBox17.Margin = new System.Windows.Forms.Padding(4);
             this.textBox17.Name = "textBox17";
-            this.textBox17.Size = new System.Drawing.Size(114, 29);
+            this.textBox17.Size = new System.Drawing.Size(169, 40);
             this.textBox17.TabIndex = 43;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label15.Location = new System.Drawing.Point(365, 151);
+            this.label15.Location = new System.Drawing.Point(548, 226);
+            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(139, 24);
+            this.label15.Size = new System.Drawing.Size(206, 33);
             this.label15.TabIndex = 42;
             this.label15.Text = "Acceleration :";
             // 
@@ -6446,18 +6559,20 @@
             // 
             this.textBox18.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.SettingData, "MSet.AccelerationY", true));
             this.textBox18.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.textBox18.Location = new System.Drawing.Point(509, 151);
+            this.textBox18.Location = new System.Drawing.Point(764, 226);
+            this.textBox18.Margin = new System.Windows.Forms.Padding(4);
             this.textBox18.Name = "textBox18";
-            this.textBox18.Size = new System.Drawing.Size(114, 29);
+            this.textBox18.Size = new System.Drawing.Size(169, 40);
             this.textBox18.TabIndex = 41;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label16.Location = new System.Drawing.Point(372, 101);
+            this.label16.Location = new System.Drawing.Point(558, 152);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(131, 24);
+            this.label16.Size = new System.Drawing.Size(193, 33);
             this.label16.TabIndex = 40;
             this.label16.Text = "WorkSpeed :";
             // 
@@ -6465,18 +6580,20 @@
             // 
             this.textBox19.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.SettingData, "MSet.WorkSpeedY", true));
             this.textBox19.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.textBox19.Location = new System.Drawing.Point(509, 96);
+            this.textBox19.Location = new System.Drawing.Point(764, 144);
+            this.textBox19.Margin = new System.Windows.Forms.Padding(4);
             this.textBox19.Name = "textBox19";
-            this.textBox19.Size = new System.Drawing.Size(114, 29);
+            this.textBox19.Size = new System.Drawing.Size(169, 40);
             this.textBox19.TabIndex = 39;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label12.Location = new System.Drawing.Point(182, 53);
+            this.label12.Location = new System.Drawing.Point(273, 80);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(77, 24);
+            this.label12.Size = new System.Drawing.Size(113, 33);
             this.label12.TabIndex = 38;
             this.label12.Text = "AxisX :";
             // 
@@ -6484,9 +6601,10 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label11.Location = new System.Drawing.Point(36, 206);
+            this.label11.Location = new System.Drawing.Point(54, 309);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(140, 24);
+            this.label11.Size = new System.Drawing.Size(209, 33);
             this.label11.TabIndex = 37;
             this.label11.Text = "Deceleration :";
             // 
@@ -6494,18 +6612,20 @@
             // 
             this.textBox20.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.SettingData, "MSet.DecelerationX", true));
             this.textBox20.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.textBox20.Location = new System.Drawing.Point(186, 206);
+            this.textBox20.Location = new System.Drawing.Point(279, 309);
+            this.textBox20.Margin = new System.Windows.Forms.Padding(4);
             this.textBox20.Name = "textBox20";
-            this.textBox20.Size = new System.Drawing.Size(114, 29);
+            this.textBox20.Size = new System.Drawing.Size(169, 40);
             this.textBox20.TabIndex = 36;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label10.Location = new System.Drawing.Point(36, 151);
+            this.label10.Location = new System.Drawing.Point(54, 226);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(139, 24);
+            this.label10.Size = new System.Drawing.Size(206, 33);
             this.label10.TabIndex = 35;
             this.label10.Text = "Acceleration :";
             // 
@@ -6513,18 +6633,20 @@
             // 
             this.textBox21.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.SettingData, "MSet.AccelerationX", true));
             this.textBox21.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.textBox21.Location = new System.Drawing.Point(186, 154);
+            this.textBox21.Location = new System.Drawing.Point(279, 231);
+            this.textBox21.Margin = new System.Windows.Forms.Padding(4);
             this.textBox21.Name = "textBox21";
-            this.textBox21.Size = new System.Drawing.Size(114, 29);
+            this.textBox21.Size = new System.Drawing.Size(169, 40);
             this.textBox21.TabIndex = 34;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.label9.Location = new System.Drawing.Point(43, 101);
+            this.label9.Location = new System.Drawing.Point(64, 152);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(131, 24);
+            this.label9.Size = new System.Drawing.Size(193, 33);
             this.label9.TabIndex = 33;
             this.label9.Text = "WorkSpeed :";
             // 
@@ -6532,9 +6654,10 @@
             // 
             this.textBox22.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.SettingData, "MSet.WorkSpeedX", true));
             this.textBox22.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.textBox22.Location = new System.Drawing.Point(186, 101);
+            this.textBox22.Location = new System.Drawing.Point(279, 152);
+            this.textBox22.Margin = new System.Windows.Forms.Padding(4);
             this.textBox22.Name = "textBox22";
-            this.textBox22.Size = new System.Drawing.Size(114, 29);
+            this.textBox22.Size = new System.Drawing.Size(169, 40);
             this.textBox22.TabIndex = 32;
             // 
             // dataColumn19
@@ -6607,10 +6730,10 @@
             this.T_McPosZ.BackColor = System.Drawing.Color.WhiteSmoke;
             this.T_McPosZ.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.T_McPosZ.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.T_McPosZ.Location = new System.Drawing.Point(201, 211);
-            this.T_McPosZ.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.T_McPosZ.Location = new System.Drawing.Point(302, 316);
+            this.T_McPosZ.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.T_McPosZ.Name = "T_McPosZ";
-            this.T_McPosZ.Size = new System.Drawing.Size(77, 27);
+            this.T_McPosZ.Size = new System.Drawing.Size(114, 37);
             this.T_McPosZ.TabIndex = 171;
             this.T_McPosZ.Text = "000.000";
             this.T_McPosZ.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -6620,10 +6743,10 @@
             this.T_McPosY.BackColor = System.Drawing.Color.WhiteSmoke;
             this.T_McPosY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.T_McPosY.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.T_McPosY.Location = new System.Drawing.Point(119, 211);
-            this.T_McPosY.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.T_McPosY.Location = new System.Drawing.Point(178, 316);
+            this.T_McPosY.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.T_McPosY.Name = "T_McPosY";
-            this.T_McPosY.Size = new System.Drawing.Size(77, 27);
+            this.T_McPosY.Size = new System.Drawing.Size(114, 37);
             this.T_McPosY.TabIndex = 170;
             this.T_McPosY.Text = "000.000";
             this.T_McPosY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -6631,9 +6754,10 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(222, 43);
+            this.label4.Location = new System.Drawing.Point(333, 64);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(20, 23);
+            this.label4.Size = new System.Drawing.Size(30, 33);
             this.label4.TabIndex = 169;
             this.label4.Text = "Z";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -6641,9 +6765,10 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(139, 43);
+            this.label6.Location = new System.Drawing.Point(208, 64);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(20, 23);
+            this.label6.Size = new System.Drawing.Size(31, 33);
             this.label6.TabIndex = 168;
             this.label6.Text = "Y";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -6651,9 +6776,10 @@
             // label60
             // 
             this.label60.AutoSize = true;
-            this.label60.Location = new System.Drawing.Point(60, 43);
+            this.label60.Location = new System.Drawing.Point(90, 64);
+            this.label60.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(20, 23);
+            this.label60.Size = new System.Drawing.Size(31, 33);
             this.label60.TabIndex = 167;
             this.label60.Text = "X";
             this.label60.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -6663,10 +6789,10 @@
             this.T_McPosX.BackColor = System.Drawing.Color.WhiteSmoke;
             this.T_McPosX.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.T_McPosX.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.T_McPosX.Location = new System.Drawing.Point(35, 211);
-            this.T_McPosX.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.T_McPosX.Location = new System.Drawing.Point(52, 316);
+            this.T_McPosX.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.T_McPosX.Name = "T_McPosX";
-            this.T_McPosX.Size = new System.Drawing.Size(77, 27);
+            this.T_McPosX.Size = new System.Drawing.Size(114, 37);
             this.T_McPosX.TabIndex = 160;
             this.T_McPosX.Text = "000.000";
             this.T_McPosX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -6676,10 +6802,10 @@
             this.T_McPosJacking.BackColor = System.Drawing.Color.WhiteSmoke;
             this.T_McPosJacking.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.T_McPosJacking.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.T_McPosJacking.Location = new System.Drawing.Point(282, 211);
-            this.T_McPosJacking.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.T_McPosJacking.Location = new System.Drawing.Point(423, 316);
+            this.T_McPosJacking.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.T_McPosJacking.Name = "T_McPosJacking";
-            this.T_McPosJacking.Size = new System.Drawing.Size(77, 27);
+            this.T_McPosJacking.Size = new System.Drawing.Size(114, 37);
             this.T_McPosJacking.TabIndex = 175;
             this.T_McPosJacking.Text = "000.000";
             this.T_McPosJacking.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -6687,9 +6813,10 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(285, 43);
+            this.label7.Location = new System.Drawing.Point(428, 64);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(70, 23);
+            this.label7.Size = new System.Drawing.Size(104, 33);
             this.label7.TabIndex = 174;
             this.label7.Text = "Jacking";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -6728,9 +6855,11 @@
             // 
             this.groupBox7.Controls.Add(this.tableLayoutPanel10);
             this.groupBox7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox7.Location = new System.Drawing.Point(914, -3);
+            this.groupBox7.Location = new System.Drawing.Point(1371, -4);
+            this.groupBox7.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(447, 371);
+            this.groupBox7.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox7.Size = new System.Drawing.Size(670, 556);
             this.groupBox7.TabIndex = 10;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Product Information";
@@ -6761,7 +6890,8 @@
             this.tableLayoutPanel10.Controls.Add(this.textBox33, 1, 8);
             this.tableLayoutPanel10.Controls.Add(this.textBox34, 1, 9);
             this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 25);
+            this.tableLayoutPanel10.Location = new System.Drawing.Point(4, 36);
+            this.tableLayoutPanel10.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel10.Name = "tableLayoutPanel10";
             this.tableLayoutPanel10.RowCount = 10;
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
@@ -6774,7 +6904,7 @@
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(441, 343);
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(662, 516);
             this.tableLayoutPanel10.TabIndex = 0;
             // 
             // label49
@@ -6783,10 +6913,10 @@
             this.label49.BackColor = System.Drawing.Color.White;
             this.label49.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label49.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label49.Location = new System.Drawing.Point(3, 3);
-            this.label49.Margin = new System.Windows.Forms.Padding(3);
+            this.label49.Location = new System.Drawing.Point(4, 4);
+            this.label49.Margin = new System.Windows.Forms.Padding(4);
             this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(170, 28);
+            this.label49.Size = new System.Drawing.Size(256, 43);
             this.label49.TabIndex = 2;
             this.label49.Text = "Station Num:";
             this.label49.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -6795,18 +6925,20 @@
             // 
             this.textBox26.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox26.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox26.Location = new System.Drawing.Point(179, 37);
+            this.textBox26.Location = new System.Drawing.Point(268, 55);
+            this.textBox26.Margin = new System.Windows.Forms.Padding(4);
             this.textBox26.Name = "textBox26";
-            this.textBox26.Size = new System.Drawing.Size(259, 39);
+            this.textBox26.Size = new System.Drawing.Size(390, 55);
             this.textBox26.TabIndex = 3;
             // 
             // textBox25
             // 
             this.textBox25.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox25.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox25.Location = new System.Drawing.Point(179, 3);
+            this.textBox25.Location = new System.Drawing.Point(268, 4);
+            this.textBox25.Margin = new System.Windows.Forms.Padding(4);
             this.textBox25.Name = "textBox25";
-            this.textBox25.Size = new System.Drawing.Size(259, 34);
+            this.textBox25.Size = new System.Drawing.Size(390, 47);
             this.textBox25.TabIndex = 3;
             this.textBox25.Text = "ST-04A";
             this.textBox25.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -6817,10 +6949,10 @@
             this.label50.BackColor = System.Drawing.Color.White;
             this.label50.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label50.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label50.Location = new System.Drawing.Point(3, 37);
-            this.label50.Margin = new System.Windows.Forms.Padding(3);
+            this.label50.Location = new System.Drawing.Point(4, 55);
+            this.label50.Margin = new System.Windows.Forms.Padding(4);
             this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(170, 28);
+            this.label50.Size = new System.Drawing.Size(256, 43);
             this.label50.TabIndex = 2;
             this.label50.Text = "Program lD:";
             this.label50.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -6831,10 +6963,10 @@
             this.label51.BackColor = System.Drawing.Color.White;
             this.label51.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label51.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label51.Location = new System.Drawing.Point(3, 71);
-            this.label51.Margin = new System.Windows.Forms.Padding(3);
+            this.label51.Location = new System.Drawing.Point(4, 106);
+            this.label51.Margin = new System.Windows.Forms.Padding(4);
             this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(170, 28);
+            this.label51.Size = new System.Drawing.Size(256, 43);
             this.label51.TabIndex = 2;
             this.label51.Text = "Scan:";
             this.label51.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -6845,10 +6977,10 @@
             this.label52.BackColor = System.Drawing.Color.White;
             this.label52.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label52.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label52.Location = new System.Drawing.Point(3, 105);
-            this.label52.Margin = new System.Windows.Forms.Padding(3);
+            this.label52.Location = new System.Drawing.Point(4, 157);
+            this.label52.Margin = new System.Windows.Forms.Padding(4);
             this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(170, 28);
+            this.label52.Size = new System.Drawing.Size(256, 43);
             this.label52.TabIndex = 2;
             this.label52.Text = "GUID:";
             this.label52.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -6859,10 +6991,10 @@
             this.label28.BackColor = System.Drawing.Color.White;
             this.label28.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label28.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label28.Location = new System.Drawing.Point(3, 139);
-            this.label28.Margin = new System.Windows.Forms.Padding(3);
+            this.label28.Location = new System.Drawing.Point(4, 208);
+            this.label28.Margin = new System.Windows.Forms.Padding(4);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(170, 28);
+            this.label28.Size = new System.Drawing.Size(256, 43);
             this.label28.TabIndex = 2;
             this.label28.Text = "OK total:";
             this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -6873,10 +7005,10 @@
             this.label54.BackColor = System.Drawing.Color.White;
             this.label54.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label54.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label54.Location = new System.Drawing.Point(3, 173);
-            this.label54.Margin = new System.Windows.Forms.Padding(3);
+            this.label54.Location = new System.Drawing.Point(4, 259);
+            this.label54.Margin = new System.Windows.Forms.Padding(4);
             this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(170, 28);
+            this.label54.Size = new System.Drawing.Size(256, 43);
             this.label54.TabIndex = 2;
             this.label54.Text = "NG total:";
             this.label54.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -6887,10 +7019,10 @@
             this.label55.BackColor = System.Drawing.Color.White;
             this.label55.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label55.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label55.Location = new System.Drawing.Point(3, 207);
-            this.label55.Margin = new System.Windows.Forms.Padding(3);
+            this.label55.Location = new System.Drawing.Point(4, 310);
+            this.label55.Margin = new System.Windows.Forms.Padding(4);
             this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(170, 28);
+            this.label55.Size = new System.Drawing.Size(256, 43);
             this.label55.TabIndex = 2;
             this.label55.Text = "CT:";
             this.label55.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -6901,10 +7033,10 @@
             this.label56.BackColor = System.Drawing.Color.White;
             this.label56.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label56.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label56.Location = new System.Drawing.Point(3, 241);
-            this.label56.Margin = new System.Windows.Forms.Padding(3);
+            this.label56.Location = new System.Drawing.Point(4, 361);
+            this.label56.Margin = new System.Windows.Forms.Padding(4);
             this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(170, 28);
+            this.label56.Size = new System.Drawing.Size(256, 43);
             this.label56.TabIndex = 2;
             this.label56.Text = "XX:";
             this.label56.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -6915,10 +7047,10 @@
             this.label57.BackColor = System.Drawing.Color.White;
             this.label57.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label57.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label57.Location = new System.Drawing.Point(3, 275);
-            this.label57.Margin = new System.Windows.Forms.Padding(3);
+            this.label57.Location = new System.Drawing.Point(4, 412);
+            this.label57.Margin = new System.Windows.Forms.Padding(4);
             this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(170, 28);
+            this.label57.Size = new System.Drawing.Size(256, 43);
             this.label57.TabIndex = 2;
             this.label57.Text = "XX:";
             this.label57.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -6929,10 +7061,10 @@
             this.label58.BackColor = System.Drawing.Color.White;
             this.label58.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label58.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label58.Location = new System.Drawing.Point(3, 309);
-            this.label58.Margin = new System.Windows.Forms.Padding(3);
+            this.label58.Location = new System.Drawing.Point(4, 463);
+            this.label58.Margin = new System.Windows.Forms.Padding(4);
             this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(170, 31);
+            this.label58.Size = new System.Drawing.Size(256, 49);
             this.label58.TabIndex = 2;
             this.label58.Text = "XX:";
             this.label58.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -6941,72 +7073,80 @@
             // 
             this.textBox27.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox27.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox27.Location = new System.Drawing.Point(179, 71);
+            this.textBox27.Location = new System.Drawing.Point(268, 106);
+            this.textBox27.Margin = new System.Windows.Forms.Padding(4);
             this.textBox27.Name = "textBox27";
-            this.textBox27.Size = new System.Drawing.Size(259, 39);
+            this.textBox27.Size = new System.Drawing.Size(390, 55);
             this.textBox27.TabIndex = 3;
             // 
             // textBox28
             // 
             this.textBox28.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox28.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox28.Location = new System.Drawing.Point(179, 105);
+            this.textBox28.Location = new System.Drawing.Point(268, 157);
+            this.textBox28.Margin = new System.Windows.Forms.Padding(4);
             this.textBox28.Name = "textBox28";
-            this.textBox28.Size = new System.Drawing.Size(259, 39);
+            this.textBox28.Size = new System.Drawing.Size(390, 55);
             this.textBox28.TabIndex = 3;
             // 
             // textBox29
             // 
             this.textBox29.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox29.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox29.Location = new System.Drawing.Point(179, 139);
+            this.textBox29.Location = new System.Drawing.Point(268, 208);
+            this.textBox29.Margin = new System.Windows.Forms.Padding(4);
             this.textBox29.Name = "textBox29";
-            this.textBox29.Size = new System.Drawing.Size(259, 39);
+            this.textBox29.Size = new System.Drawing.Size(390, 55);
             this.textBox29.TabIndex = 3;
             // 
             // textBox30
             // 
             this.textBox30.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox30.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox30.Location = new System.Drawing.Point(179, 173);
+            this.textBox30.Location = new System.Drawing.Point(268, 259);
+            this.textBox30.Margin = new System.Windows.Forms.Padding(4);
             this.textBox30.Name = "textBox30";
-            this.textBox30.Size = new System.Drawing.Size(259, 39);
+            this.textBox30.Size = new System.Drawing.Size(390, 55);
             this.textBox30.TabIndex = 3;
             // 
             // textBox31
             // 
             this.textBox31.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox31.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox31.Location = new System.Drawing.Point(179, 207);
+            this.textBox31.Location = new System.Drawing.Point(268, 310);
+            this.textBox31.Margin = new System.Windows.Forms.Padding(4);
             this.textBox31.Name = "textBox31";
-            this.textBox31.Size = new System.Drawing.Size(259, 39);
+            this.textBox31.Size = new System.Drawing.Size(390, 55);
             this.textBox31.TabIndex = 3;
             // 
             // textBox32
             // 
             this.textBox32.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox32.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox32.Location = new System.Drawing.Point(179, 241);
+            this.textBox32.Location = new System.Drawing.Point(268, 361);
+            this.textBox32.Margin = new System.Windows.Forms.Padding(4);
             this.textBox32.Name = "textBox32";
-            this.textBox32.Size = new System.Drawing.Size(259, 39);
+            this.textBox32.Size = new System.Drawing.Size(390, 55);
             this.textBox32.TabIndex = 3;
             // 
             // textBox33
             // 
             this.textBox33.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox33.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox33.Location = new System.Drawing.Point(179, 275);
+            this.textBox33.Location = new System.Drawing.Point(268, 412);
+            this.textBox33.Margin = new System.Windows.Forms.Padding(4);
             this.textBox33.Name = "textBox33";
-            this.textBox33.Size = new System.Drawing.Size(259, 39);
+            this.textBox33.Size = new System.Drawing.Size(390, 55);
             this.textBox33.TabIndex = 3;
             // 
             // textBox34
             // 
             this.textBox34.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox34.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox34.Location = new System.Drawing.Point(179, 309);
+            this.textBox34.Location = new System.Drawing.Point(268, 463);
+            this.textBox34.Margin = new System.Windows.Forms.Padding(4);
             this.textBox34.Name = "textBox34";
-            this.textBox34.Size = new System.Drawing.Size(259, 39);
+            this.textBox34.Size = new System.Drawing.Size(390, 55);
             this.textBox34.TabIndex = 3;
             // 
             // D_PressureResultsShow
@@ -7020,8 +7160,7 @@
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3});
-            this.D_PressureResultsShow.Location = new System.Drawing.Point(681, 373);
-            this.D_PressureResultsShow.Margin = new System.Windows.Forms.Padding(2);
+            this.D_PressureResultsShow.Location = new System.Drawing.Point(1022, 560);
             this.D_PressureResultsShow.Name = "D_PressureResultsShow";
             this.D_PressureResultsShow.ReadOnly = true;
             this.D_PressureResultsShow.RowHeadersVisible = false;
@@ -7029,7 +7168,7 @@
             this.D_PressureResultsShow.RowTemplate.Height = 46;
             this.D_PressureResultsShow.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.D_PressureResultsShow.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.D_PressureResultsShow.Size = new System.Drawing.Size(681, 365);
+            this.D_PressureResultsShow.Size = new System.Drawing.Size(1022, 548);
             this.D_PressureResultsShow.TabIndex = 11;
             // 
             // dataGridViewTextBoxColumn1
@@ -7120,9 +7259,10 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(532, 3);
+            this.pictureBox2.Location = new System.Drawing.Point(798, 4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(376, 365);
+            this.pictureBox2.Size = new System.Drawing.Size(564, 548);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 9;
             this.pictureBox2.TabStop = false;
@@ -7130,9 +7270,10 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(5, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(8, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(521, 365);
+            this.pictureBox1.Size = new System.Drawing.Size(782, 548);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
@@ -7143,13 +7284,13 @@
             this.motorJog1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.motorJog1.Direction = JabilSDK.Controls.MotorJog.DirectionType.Up;
             this.motorJog1.JogDirection = JabilSDK.Controls.MotorJog.JogDirectionType.JogP;
-            this.motorJog1.Location = new System.Drawing.Point(289, 77);
-            this.motorJog1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.motorJog1.Location = new System.Drawing.Point(434, 116);
+            this.motorJog1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.motorJog1.MoveMode = JabilSDK.Controls.MotorJog.MoveModeType.Jog;
             this.motorJog1.Name = "motorJog1";
             this.motorJog1.RelativeDirection = JabilSDK.Controls.MotorJog.RelativeDirectionType.Positive;
             this.motorJog1.RelativeDistance = 0D;
-            this.motorJog1.Size = new System.Drawing.Size(60, 55);
+            this.motorJog1.Size = new System.Drawing.Size(90, 82);
             this.motorJog1.SpeedRatio = 0D;
             this.motorJog1.TabIndex = 173;
             this.motorJog1.UseVisualStyleBackColor = true;
@@ -7161,13 +7302,13 @@
             this.motorJog2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.motorJog2.Direction = JabilSDK.Controls.MotorJog.DirectionType.Down;
             this.motorJog2.JogDirection = JabilSDK.Controls.MotorJog.JogDirectionType.JogN;
-            this.motorJog2.Location = new System.Drawing.Point(289, 147);
-            this.motorJog2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.motorJog2.Location = new System.Drawing.Point(434, 220);
+            this.motorJog2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.motorJog2.MoveMode = JabilSDK.Controls.MotorJog.MoveModeType.Jog;
             this.motorJog2.Name = "motorJog2";
             this.motorJog2.RelativeDirection = JabilSDK.Controls.MotorJog.RelativeDirectionType.Negative;
             this.motorJog2.RelativeDistance = 0D;
-            this.motorJog2.Size = new System.Drawing.Size(60, 55);
+            this.motorJog2.Size = new System.Drawing.Size(90, 82);
             this.motorJog2.SpeedRatio = 0D;
             this.motorJog2.TabIndex = 172;
             this.motorJog2.UseVisualStyleBackColor = true;
@@ -7179,13 +7320,13 @@
             this.M_McJogUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.M_McJogUp.Direction = JabilSDK.Controls.MotorJog.DirectionType.Up;
             this.M_McJogUp.JogDirection = JabilSDK.Controls.MotorJog.JogDirectionType.JogN;
-            this.M_McJogUp.Location = new System.Drawing.Point(208, 77);
-            this.M_McJogUp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.M_McJogUp.Location = new System.Drawing.Point(312, 116);
+            this.M_McJogUp.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.M_McJogUp.MoveMode = JabilSDK.Controls.MotorJog.MoveModeType.Jog;
             this.M_McJogUp.Name = "M_McJogUp";
             this.M_McJogUp.RelativeDirection = JabilSDK.Controls.MotorJog.RelativeDirectionType.Positive;
             this.M_McJogUp.RelativeDistance = 0D;
-            this.M_McJogUp.Size = new System.Drawing.Size(60, 55);
+            this.M_McJogUp.Size = new System.Drawing.Size(90, 82);
             this.M_McJogUp.SpeedRatio = 0D;
             this.M_McJogUp.TabIndex = 166;
             this.M_McJogUp.UseVisualStyleBackColor = true;
@@ -7197,13 +7338,13 @@
             this.M_McJogDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.M_McJogDown.Direction = JabilSDK.Controls.MotorJog.DirectionType.Down;
             this.M_McJogDown.JogDirection = JabilSDK.Controls.MotorJog.JogDirectionType.JogP;
-            this.M_McJogDown.Location = new System.Drawing.Point(208, 147);
-            this.M_McJogDown.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.M_McJogDown.Location = new System.Drawing.Point(312, 220);
+            this.M_McJogDown.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.M_McJogDown.MoveMode = JabilSDK.Controls.MotorJog.MoveModeType.Jog;
             this.M_McJogDown.Name = "M_McJogDown";
             this.M_McJogDown.RelativeDirection = JabilSDK.Controls.MotorJog.RelativeDirectionType.Negative;
             this.M_McJogDown.RelativeDistance = 0D;
-            this.M_McJogDown.Size = new System.Drawing.Size(60, 55);
+            this.M_McJogDown.Size = new System.Drawing.Size(90, 82);
             this.M_McJogDown.SpeedRatio = 0D;
             this.M_McJogDown.TabIndex = 165;
             this.M_McJogDown.UseVisualStyleBackColor = true;
@@ -7215,13 +7356,13 @@
             this.M_McJogReverse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.M_McJogReverse.Direction = JabilSDK.Controls.MotorJog.DirectionType.Reverse;
             this.M_McJogReverse.JogDirection = JabilSDK.Controls.MotorJog.JogDirectionType.JogN;
-            this.M_McJogReverse.Location = new System.Drawing.Point(126, 147);
-            this.M_McJogReverse.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.M_McJogReverse.Location = new System.Drawing.Point(189, 220);
+            this.M_McJogReverse.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.M_McJogReverse.MoveMode = JabilSDK.Controls.MotorJog.MoveModeType.Jog;
             this.M_McJogReverse.Name = "M_McJogReverse";
             this.M_McJogReverse.RelativeDirection = JabilSDK.Controls.MotorJog.RelativeDirectionType.Negative;
             this.M_McJogReverse.RelativeDistance = 0D;
-            this.M_McJogReverse.Size = new System.Drawing.Size(60, 55);
+            this.M_McJogReverse.Size = new System.Drawing.Size(90, 82);
             this.M_McJogReverse.SpeedRatio = 0D;
             this.M_McJogReverse.TabIndex = 164;
             this.M_McJogReverse.UseVisualStyleBackColor = true;
@@ -7233,13 +7374,13 @@
             this.M_McJogForward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.M_McJogForward.Direction = JabilSDK.Controls.MotorJog.DirectionType.Forward;
             this.M_McJogForward.JogDirection = JabilSDK.Controls.MotorJog.JogDirectionType.JogP;
-            this.M_McJogForward.Location = new System.Drawing.Point(126, 77);
-            this.M_McJogForward.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.M_McJogForward.Location = new System.Drawing.Point(189, 116);
+            this.M_McJogForward.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.M_McJogForward.MoveMode = JabilSDK.Controls.MotorJog.MoveModeType.Jog;
             this.M_McJogForward.Name = "M_McJogForward";
             this.M_McJogForward.RelativeDirection = JabilSDK.Controls.MotorJog.RelativeDirectionType.Positive;
             this.M_McJogForward.RelativeDistance = 0D;
-            this.M_McJogForward.Size = new System.Drawing.Size(60, 55);
+            this.M_McJogForward.Size = new System.Drawing.Size(90, 82);
             this.M_McJogForward.SpeedRatio = 0D;
             this.M_McJogForward.TabIndex = 163;
             this.M_McJogForward.UseVisualStyleBackColor = true;
@@ -7251,13 +7392,13 @@
             this.M_McJogRight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.M_McJogRight.Direction = JabilSDK.Controls.MotorJog.DirectionType.Right;
             this.M_McJogRight.JogDirection = JabilSDK.Controls.MotorJog.JogDirectionType.JogP;
-            this.M_McJogRight.Location = new System.Drawing.Point(43, 147);
-            this.M_McJogRight.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.M_McJogRight.Location = new System.Drawing.Point(64, 220);
+            this.M_McJogRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.M_McJogRight.MoveMode = JabilSDK.Controls.MotorJog.MoveModeType.Jog;
             this.M_McJogRight.Name = "M_McJogRight";
             this.M_McJogRight.RelativeDirection = JabilSDK.Controls.MotorJog.RelativeDirectionType.Negative;
             this.M_McJogRight.RelativeDistance = 0D;
-            this.M_McJogRight.Size = new System.Drawing.Size(60, 55);
+            this.M_McJogRight.Size = new System.Drawing.Size(90, 82);
             this.M_McJogRight.SpeedRatio = 0D;
             this.M_McJogRight.TabIndex = 162;
             this.M_McJogRight.UseVisualStyleBackColor = true;
@@ -7269,13 +7410,13 @@
             this.M_McJogLeft.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.M_McJogLeft.Direction = JabilSDK.Controls.MotorJog.DirectionType.Left;
             this.M_McJogLeft.JogDirection = JabilSDK.Controls.MotorJog.JogDirectionType.JogN;
-            this.M_McJogLeft.Location = new System.Drawing.Point(43, 77);
-            this.M_McJogLeft.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.M_McJogLeft.Location = new System.Drawing.Point(64, 116);
+            this.M_McJogLeft.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.M_McJogLeft.MoveMode = JabilSDK.Controls.MotorJog.MoveModeType.Jog;
             this.M_McJogLeft.Name = "M_McJogLeft";
             this.M_McJogLeft.RelativeDirection = JabilSDK.Controls.MotorJog.RelativeDirectionType.Positive;
             this.M_McJogLeft.RelativeDistance = 0D;
-            this.M_McJogLeft.Size = new System.Drawing.Size(60, 55);
+            this.M_McJogLeft.Size = new System.Drawing.Size(90, 82);
             this.M_McJogLeft.SpeedRatio = 0D;
             this.M_McJogLeft.TabIndex = 161;
             this.M_McJogLeft.UseVisualStyleBackColor = true;
@@ -7303,10 +7444,10 @@
             // 
             // MCU_PCBA_Module1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1141, 629);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.ClientSize = new System.Drawing.Size(1712, 944);
+            this.Margin = new System.Windows.Forms.Padding(3);
             this.Name = "MCU_PCBA_Module1";
             this.Text = "MCU_PCBA_Module1";
             this.plMaintenance.ResumeLayout(false);

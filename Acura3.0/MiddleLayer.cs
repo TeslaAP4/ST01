@@ -34,7 +34,7 @@ namespace Acura3._0
         //public static BackplateModuleForm BackplateModuleF;
         //public static RobotScrewModuleForm ScrewFastenModuleF;
         public static MCU_PCBA_Module1 MCU_PCBA_Module1F;
-        public static MyForm MyFormF;
+     
         //public static MCU_PCBA_Module2 MCU_PCBA_Module2F;
         public static AP_PCBA_Vision AP_PCBA_V;
         public static CoverAssembly CoverF;
@@ -107,12 +107,9 @@ namespace Acura3._0
             LoadingMarqueeF.SetCaption("Create Module");
             SystemF = CreateForm(SystemF, "SystemForm");
             ConveyorF = CreateForm(ConveyorF, "ConveyorForm");
-            //PCBAModuleF = CreateForm(PCBAModuleF, "PCBAModuleForm");
-            //BackplateModuleF = CreateForm(BackplateModuleF, "BackplateModuleForm");
-            //ScrewFastenModuleF = CreateForm(ScrewFastenModuleF, "ScrewFastenModuleForm");
+
             MCU_PCBA_Module1F = CreateForm(MCU_PCBA_Module1F, "MCU_PCBA_Module1");
-            MyFormF = CreateForm(MyFormF, "MyForm");
-            //MCU_PCBA_Module2F = CreateForm(MCU_PCBA_Module2F, "MCU_PCBA_Module2");
+ 
 
             AP_PCBA_V = CreateForm(AP_PCBA_V, "AP_PCBA_Vision");
             CoverF = CreateForm(CoverF, "CoverAssembly");
