@@ -67,23 +67,25 @@
             this.flowChart13 = new JabilSDK.UserControlLib.FlowChart();
             this.button5 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.flowChartMessage14 = new AcuraLibrary.Forms.FlowChartMessage();
-            this.flowChart2_5 = new JabilSDK.UserControlLib.FlowChart();
-            this.flowChart32 = new JabilSDK.UserControlLib.FlowChart();
-            this.flowChartMessage13 = new AcuraLibrary.Forms.FlowChartMessage();
-            this.flowChart2_6 = new JabilSDK.UserControlLib.FlowChart();
-            this.flowChart2_7 = new JabilSDK.UserControlLib.FlowChart();
-            this.flowChart2_8 = new JabilSDK.UserControlLib.FlowChart();
-            this.flowChart2_50 = new JabilSDK.UserControlLib.FlowChart();
+            this.flowChart2_13 = new JabilSDK.UserControlLib.FlowChart();
+            this.flowChart2_11 = new JabilSDK.UserControlLib.FlowChart();
+            this.flowChart31 = new JabilSDK.UserControlLib.FlowChart();
+            this.flowChart29 = new JabilSDK.UserControlLib.FlowChart();
+            this.flowChart2_1 = new JabilSDK.UserControlLib.FlowChart();
             this.flowChart2_2 = new JabilSDK.UserControlLib.FlowChart();
             this.flowChartMessage11 = new AcuraLibrary.Forms.FlowChartMessage();
             this.flowChart2_3 = new JabilSDK.UserControlLib.FlowChart();
             this.flowChartMessage12 = new AcuraLibrary.Forms.FlowChartMessage();
             this.flowChart2_4 = new JabilSDK.UserControlLib.FlowChart();
-            this.flowChart2_11 = new JabilSDK.UserControlLib.FlowChart();
-            this.flowChart31 = new JabilSDK.UserControlLib.FlowChart();
-            this.flowChart29 = new JabilSDK.UserControlLib.FlowChart();
-            this.flowChart2_1 = new JabilSDK.UserControlLib.FlowChart();
+            this.flowChart2_5 = new JabilSDK.UserControlLib.FlowChart();
+            this.flowChart2_9 = new JabilSDK.UserControlLib.FlowChart();
+            this.flowChartMessage13 = new AcuraLibrary.Forms.FlowChartMessage();
+            this.flowChart2_6 = new JabilSDK.UserControlLib.FlowChart();
+            this.flowChartMessage14 = new AcuraLibrary.Forms.FlowChartMessage();
+            this.flowChart2_7 = new JabilSDK.UserControlLib.FlowChart();
+            this.flowChart2_8 = new JabilSDK.UserControlLib.FlowChart();
+            this.flowChart2_50 = new JabilSDK.UserControlLib.FlowChart();
+            this.flowChart2_12 = new JabilSDK.UserControlLib.FlowChart();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.flowChart3_50 = new JabilSDK.UserControlLib.FlowChart();
             this.flowChart3_4 = new JabilSDK.UserControlLib.FlowChart();
@@ -299,7 +301,7 @@
             // 
             this.plRecipeEditor.Controls.Add(this.tabControl3);
             this.plRecipeEditor.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
-            this.plRecipeEditor.Size = new System.Drawing.Size(1204, 971);
+            this.plRecipeEditor.Size = new System.Drawing.Size(1908, 890);
             // 
             // plFlowInitial
             // 
@@ -329,7 +331,7 @@
             // 
             this.plFlowAuto.Controls.Add(this.panel1);
             this.plFlowAuto.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
-            this.plFlowAuto.Size = new System.Drawing.Size(1908, 890);
+            this.plFlowAuto.Size = new System.Drawing.Size(1204, 971);
             // 
             // plMachineStatus
             // 
@@ -784,7 +786,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1882, 2354);
+            this.panel1.Size = new System.Drawing.Size(1178, 2354);
             this.panel1.TabIndex = 0;
             // 
             // tabControl2
@@ -798,7 +800,7 @@
             this.tabControl2.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(1882, 2354);
+            this.tabControl2.Size = new System.Drawing.Size(1178, 2354);
             this.tabControl2.TabIndex = 0;
             // 
             // tabPage1
@@ -1106,12 +1108,14 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.flowChart2_13);
+            this.tabPage2.Controls.Add(this.flowChart2_12);
             this.tabPage2.Controls.Add(this.flowChartMessage14);
             this.tabPage2.Controls.Add(this.flowChartMessage13);
             this.tabPage2.Controls.Add(this.flowChartMessage12);
             this.tabPage2.Controls.Add(this.flowChartMessage11);
             this.tabPage2.Controls.Add(this.flowChart29);
-            this.tabPage2.Controls.Add(this.flowChart32);
+            this.tabPage2.Controls.Add(this.flowChart2_9);
             this.tabPage2.Controls.Add(this.flowChart31);
             this.tabPage2.Controls.Add(this.flowChart2_11);
             this.tabPage2.Controls.Add(this.flowChart2_50);
@@ -1132,162 +1136,95 @@
             this.tabPage2.Text = "PickPCB Flow  ";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // flowChartMessage14
+            // flowChart2_13
             // 
-            this.flowChartMessage14.BackColor = System.Drawing.Color.White;
-            this.flowChartMessage14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowChartMessage14.ButtonRetryText = "Retry";
-            this.flowChartMessage14.ButtonSkipText = "Skip";
-            this.flowChartMessage14.CASE1 = this.flowChart2_5;
-            this.flowChartMessage14.CASE2 = null;
-            this.flowChartMessage14.CASE3 = null;
-            this.flowChartMessage14.Content = null;
-            this.flowChartMessage14.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.flowChartMessage14.HideButtonMute = false;
-            this.flowChartMessage14.HideButtonPause = false;
-            this.flowChartMessage14.HideButtonRetry = false;
-            this.flowChartMessage14.HideButtonSkip = false;
-            this.flowChartMessage14.Location = new System.Drawing.Point(100, 363);
-            this.flowChartMessage14.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
-            this.flowChartMessage14.Name = "flowChartMessage14";
-            this.flowChartMessage14.NEXT = this.flowChart2_11;
-            this.flowChartMessage14.Size = new System.Drawing.Size(365, 46);
-            this.flowChartMessage14.TabIndex = 48;
-            this.flowChartMessage14.Text = "Vision failed";
-            this.flowChartMessage14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.flowChartMessage14.Title = null;
+            this.flowChart2_13.BackColor = System.Drawing.Color.White;
+            this.flowChart2_13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowChart2_13.CASE1 = null;
+            this.flowChart2_13.CASE2 = null;
+            this.flowChart2_13.CASE3 = null;
+            this.flowChart2_13.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.flowChart2_13.Location = new System.Drawing.Point(524, 670);
+            this.flowChart2_13.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
+            this.flowChart2_13.Name = "flowChart2_13";
+            this.flowChart2_13.NEXT = this.flowChart2_11;
+            this.flowChart2_13.Size = new System.Drawing.Size(522, 46);
+            this.flowChart2_13.TabIndex = 50;
+            this.flowChart2_13.Text = "wait robot finish  2.13";
+            this.flowChart2_13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.flowChart2_13.FlowRun += new JabilSDK.UserControlLib.FlowChart.FlowRunEvent(this.flowChart2_13_FlowRun);
             // 
-            // flowChart2_5
+            // flowChart2_11
             // 
-            this.flowChart2_5.BackColor = System.Drawing.Color.White;
-            this.flowChart2_5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowChart2_5.CASE1 = null;
-            this.flowChart2_5.CASE2 = this.flowChart32;
-            this.flowChart2_5.CASE3 = null;
-            this.flowChart2_5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.flowChart2_5.Location = new System.Drawing.Point(524, 298);
-            this.flowChart2_5.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
-            this.flowChart2_5.Name = "flowChart2_5";
-            this.flowChart2_5.NEXT = this.flowChart2_6;
-            this.flowChart2_5.Size = new System.Drawing.Size(522, 46);
-            this.flowChart2_5.TabIndex = 33;
-            this.flowChart2_5.Text = "Snap  2.05";
-            this.flowChart2_5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.flowChart2_5.FlowRun += new JabilSDK.UserControlLib.FlowChart.FlowRunEvent(this.flowChart2_5_FlowRun);
+            this.flowChart2_11.BackColor = System.Drawing.Color.White;
+            this.flowChart2_11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowChart2_11.CASE1 = null;
+            this.flowChart2_11.CASE2 = null;
+            this.flowChart2_11.CASE3 = null;
+            this.flowChart2_11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.flowChart2_11.Location = new System.Drawing.Point(524, 767);
+            this.flowChart2_11.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
+            this.flowChart2_11.Name = "flowChart2_11";
+            this.flowChart2_11.NEXT = this.flowChart31;
+            this.flowChart2_11.Size = new System.Drawing.Size(522, 46);
+            this.flowChart2_11.TabIndex = 41;
+            this.flowChart2_11.Text = "Finish  2.11";
+            this.flowChart2_11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.flowChart2_11.FlowRun += new JabilSDK.UserControlLib.FlowChart.FlowRunEvent(this.flowChart2_11_FlowRun);
             // 
-            // flowChart32
+            // flowChart31
             // 
-            this.flowChart32.BackColor = System.Drawing.Color.White;
-            this.flowChart32.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowChart32.CASE1 = this.flowChart2_5;
-            this.flowChart32.CASE2 = this.flowChartMessage13;
-            this.flowChart32.CASE3 = null;
-            this.flowChart32.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.flowChart32.Location = new System.Drawing.Point(100, 298);
-            this.flowChart32.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
-            this.flowChart32.Name = "flowChart32";
-            this.flowChart32.NEXT = null;
-            this.flowChart32.Size = new System.Drawing.Size(365, 46);
-            this.flowChart32.TabIndex = 43;
-            this.flowChart32.Text = "Snap Fail  2.09";
-            this.flowChart32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.flowChart32.FlowRun += new JabilSDK.UserControlLib.FlowChart.FlowRunEvent(this.flowChart32_FlowRun);
+            this.flowChart31.BackColor = System.Drawing.Color.White;
+            this.flowChart31.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowChart31.CASE1 = null;
+            this.flowChart31.CASE2 = null;
+            this.flowChart31.CASE3 = null;
+            this.flowChart31.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.flowChart31.Location = new System.Drawing.Point(1222, 767);
+            this.flowChart31.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
+            this.flowChart31.Name = "flowChart31";
+            this.flowChart31.NEXT = this.flowChart29;
+            this.flowChart31.Size = new System.Drawing.Size(124, 46);
+            this.flowChart31.TabIndex = 42;
+            this.flowChart31.Text = "Loop";
+            this.flowChart31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.flowChart31.FlowRun += new JabilSDK.UserControlLib.FlowChart.FlowRunEvent(this.flowChart31_FlowRun);
             // 
-            // flowChartMessage13
+            // flowChart29
             // 
-            this.flowChartMessage13.BackColor = System.Drawing.Color.White;
-            this.flowChartMessage13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowChartMessage13.ButtonRetryText = "Retry";
-            this.flowChartMessage13.ButtonSkipText = "Skip";
-            this.flowChartMessage13.CASE1 = this.flowChart2_5;
-            this.flowChartMessage13.CASE2 = null;
-            this.flowChartMessage13.CASE3 = null;
-            this.flowChartMessage13.Content = null;
-            this.flowChartMessage13.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.flowChartMessage13.HideButtonMute = false;
-            this.flowChartMessage13.HideButtonPause = false;
-            this.flowChartMessage13.HideButtonRetry = false;
-            this.flowChartMessage13.HideButtonSkip = false;
-            this.flowChartMessage13.Location = new System.Drawing.Point(100, 236);
-            this.flowChartMessage13.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
-            this.flowChartMessage13.Name = "flowChartMessage13";
-            this.flowChartMessage13.NEXT = null;
-            this.flowChartMessage13.Size = new System.Drawing.Size(365, 46);
-            this.flowChartMessage13.TabIndex = 47;
-            this.flowChartMessage13.Text = "Over 3 times";
-            this.flowChartMessage13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.flowChartMessage13.Title = null;
+            this.flowChart29.BackColor = System.Drawing.Color.White;
+            this.flowChart29.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowChart29.CASE1 = null;
+            this.flowChart29.CASE2 = null;
+            this.flowChart29.CASE3 = null;
+            this.flowChart29.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.flowChart29.Location = new System.Drawing.Point(1222, 40);
+            this.flowChart29.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
+            this.flowChart29.Name = "flowChart29";
+            this.flowChart29.NEXT = this.flowChart2_1;
+            this.flowChart29.Size = new System.Drawing.Size(124, 46);
+            this.flowChart29.TabIndex = 44;
+            this.flowChart29.Text = "Loop";
+            this.flowChart29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.flowChart29.FlowRun += new JabilSDK.UserControlLib.FlowChart.FlowRunEvent(this.flowChart29_FlowRun);
             // 
-            // flowChart2_6
+            // flowChart2_1
             // 
-            this.flowChart2_6.BackColor = System.Drawing.Color.White;
-            this.flowChart2_6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowChart2_6.CASE1 = null;
-            this.flowChart2_6.CASE2 = this.flowChartMessage14;
-            this.flowChart2_6.CASE3 = null;
-            this.flowChart2_6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.flowChart2_6.Location = new System.Drawing.Point(524, 363);
-            this.flowChart2_6.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
-            this.flowChart2_6.Name = "flowChart2_6";
-            this.flowChart2_6.NEXT = this.flowChart2_7;
-            this.flowChart2_6.Size = new System.Drawing.Size(522, 46);
-            this.flowChart2_6.TabIndex = 34;
-            this.flowChart2_6.Text = "Vison run  2.06";
-            this.flowChart2_6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.flowChart2_6.FlowRun += new JabilSDK.UserControlLib.FlowChart.FlowRunEvent(this.flowChart2_6_FlowRun);
-            // 
-            // flowChart2_7
-            // 
-            this.flowChart2_7.BackColor = System.Drawing.Color.White;
-            this.flowChart2_7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowChart2_7.CASE1 = null;
-            this.flowChart2_7.CASE2 = null;
-            this.flowChart2_7.CASE3 = null;
-            this.flowChart2_7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.flowChart2_7.Location = new System.Drawing.Point(524, 428);
-            this.flowChart2_7.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
-            this.flowChart2_7.Name = "flowChart2_7";
-            this.flowChart2_7.NEXT = this.flowChart2_8;
-            this.flowChart2_7.Size = new System.Drawing.Size(522, 46);
-            this.flowChart2_7.TabIndex = 35;
-            this.flowChart2_7.Text = "Light off  2.07";
-            this.flowChart2_7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.flowChart2_7.FlowRun += new JabilSDK.UserControlLib.FlowChart.FlowRunEvent(this.flowChart2_7_FlowRun);
-            // 
-            // flowChart2_8
-            // 
-            this.flowChart2_8.BackColor = System.Drawing.Color.White;
-            this.flowChart2_8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowChart2_8.CASE1 = this.flowChart2_50;
-            this.flowChart2_8.CASE2 = null;
-            this.flowChart2_8.CASE3 = null;
-            this.flowChart2_8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.flowChart2_8.Location = new System.Drawing.Point(524, 490);
-            this.flowChart2_8.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
-            this.flowChart2_8.Name = "flowChart2_8";
-            this.flowChart2_8.NEXT = this.flowChart2_11;
-            this.flowChart2_8.Size = new System.Drawing.Size(522, 46);
-            this.flowChart2_8.TabIndex = 37;
-            this.flowChart2_8.Text = "All photoed ?  2.08";
-            this.flowChart2_8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.flowChart2_8.FlowRun += new JabilSDK.UserControlLib.FlowChart.FlowRunEvent(this.flowChart2_8_FlowRun);
-            // 
-            // flowChart2_50
-            // 
-            this.flowChart2_50.BackColor = System.Drawing.Color.White;
-            this.flowChart2_50.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowChart2_50.CASE1 = this.flowChart2_2;
-            this.flowChart2_50.CASE2 = null;
-            this.flowChart2_50.CASE3 = null;
-            this.flowChart2_50.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.flowChart2_50.Location = new System.Drawing.Point(1094, 105);
-            this.flowChart2_50.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
-            this.flowChart2_50.Name = "flowChart2_50";
-            this.flowChart2_50.NEXT = null;
-            this.flowChart2_50.Size = new System.Drawing.Size(124, 46);
-            this.flowChart2_50.TabIndex = 38;
-            this.flowChart2_50.Text = "No  2.10";
-            this.flowChart2_50.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.flowChart2_1.BackColor = System.Drawing.Color.White;
+            this.flowChart2_1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowChart2_1.CASE1 = null;
+            this.flowChart2_1.CASE2 = null;
+            this.flowChart2_1.CASE3 = null;
+            this.flowChart2_1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.flowChart2_1.Location = new System.Drawing.Point(524, 40);
+            this.flowChart2_1.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
+            this.flowChart2_1.Name = "flowChart2_1";
+            this.flowChart2_1.NEXT = this.flowChart2_2;
+            this.flowChart2_1.Size = new System.Drawing.Size(522, 46);
+            this.flowChart2_1.TabIndex = 29;
+            this.flowChart2_1.Text = "Start  2.01";
+            this.flowChart2_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.flowChart2_1.FlowRun += new JabilSDK.UserControlLib.FlowChart.FlowRunEvent(this.flowChart2_1_FlowRun);
             // 
             // flowChart2_2
             // 
@@ -1393,77 +1330,180 @@
             this.flowChart2_4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.flowChart2_4.FlowRun += new JabilSDK.UserControlLib.FlowChart.FlowRunEvent(this.flowChart2_4_FlowRun);
             // 
-            // flowChart2_11
+            // flowChart2_5
             // 
-            this.flowChart2_11.BackColor = System.Drawing.Color.White;
-            this.flowChart2_11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowChart2_11.CASE1 = null;
-            this.flowChart2_11.CASE2 = null;
-            this.flowChart2_11.CASE3 = null;
-            this.flowChart2_11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.flowChart2_11.Location = new System.Drawing.Point(524, 767);
-            this.flowChart2_11.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
-            this.flowChart2_11.Name = "flowChart2_11";
-            this.flowChart2_11.NEXT = this.flowChart31;
-            this.flowChart2_11.Size = new System.Drawing.Size(522, 46);
-            this.flowChart2_11.TabIndex = 41;
-            this.flowChart2_11.Text = "Finish  2.11";
-            this.flowChart2_11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.flowChart2_11.FlowRun += new JabilSDK.UserControlLib.FlowChart.FlowRunEvent(this.flowChart2_11_FlowRun);
+            this.flowChart2_5.BackColor = System.Drawing.Color.White;
+            this.flowChart2_5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowChart2_5.CASE1 = null;
+            this.flowChart2_5.CASE2 = this.flowChart2_9;
+            this.flowChart2_5.CASE3 = null;
+            this.flowChart2_5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.flowChart2_5.Location = new System.Drawing.Point(524, 298);
+            this.flowChart2_5.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
+            this.flowChart2_5.Name = "flowChart2_5";
+            this.flowChart2_5.NEXT = this.flowChart2_6;
+            this.flowChart2_5.Size = new System.Drawing.Size(522, 46);
+            this.flowChart2_5.TabIndex = 33;
+            this.flowChart2_5.Text = "Snap  2.05";
+            this.flowChart2_5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.flowChart2_5.FlowRun += new JabilSDK.UserControlLib.FlowChart.FlowRunEvent(this.flowChart2_5_FlowRun);
             // 
-            // flowChart31
+            // flowChart2_9
             // 
-            this.flowChart31.BackColor = System.Drawing.Color.White;
-            this.flowChart31.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowChart31.CASE1 = null;
-            this.flowChart31.CASE2 = null;
-            this.flowChart31.CASE3 = null;
-            this.flowChart31.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.flowChart31.Location = new System.Drawing.Point(1222, 556);
-            this.flowChart31.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
-            this.flowChart31.Name = "flowChart31";
-            this.flowChart31.NEXT = this.flowChart29;
-            this.flowChart31.Size = new System.Drawing.Size(124, 46);
-            this.flowChart31.TabIndex = 42;
-            this.flowChart31.Text = "Loop";
-            this.flowChart31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.flowChart31.FlowRun += new JabilSDK.UserControlLib.FlowChart.FlowRunEvent(this.flowChart31_FlowRun);
+            this.flowChart2_9.BackColor = System.Drawing.Color.White;
+            this.flowChart2_9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowChart2_9.CASE1 = this.flowChart2_5;
+            this.flowChart2_9.CASE2 = this.flowChartMessage13;
+            this.flowChart2_9.CASE3 = null;
+            this.flowChart2_9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.flowChart2_9.Location = new System.Drawing.Point(100, 298);
+            this.flowChart2_9.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
+            this.flowChart2_9.Name = "flowChart2_9";
+            this.flowChart2_9.NEXT = null;
+            this.flowChart2_9.Size = new System.Drawing.Size(365, 46);
+            this.flowChart2_9.TabIndex = 43;
+            this.flowChart2_9.Text = "Snap Fail  2.09";
+            this.flowChart2_9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.flowChart2_9.FlowRun += new JabilSDK.UserControlLib.FlowChart.FlowRunEvent(this.flowChart2_9_FlowRun);
             // 
-            // flowChart29
+            // flowChartMessage13
             // 
-            this.flowChart29.BackColor = System.Drawing.Color.White;
-            this.flowChart29.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowChart29.CASE1 = null;
-            this.flowChart29.CASE2 = null;
-            this.flowChart29.CASE3 = null;
-            this.flowChart29.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.flowChart29.Location = new System.Drawing.Point(1222, 40);
-            this.flowChart29.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
-            this.flowChart29.Name = "flowChart29";
-            this.flowChart29.NEXT = this.flowChart2_1;
-            this.flowChart29.Size = new System.Drawing.Size(124, 46);
-            this.flowChart29.TabIndex = 44;
-            this.flowChart29.Text = "Loop";
-            this.flowChart29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.flowChart29.FlowRun += new JabilSDK.UserControlLib.FlowChart.FlowRunEvent(this.flowChart29_FlowRun);
+            this.flowChartMessage13.BackColor = System.Drawing.Color.White;
+            this.flowChartMessage13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowChartMessage13.ButtonRetryText = "Retry";
+            this.flowChartMessage13.ButtonSkipText = "Skip";
+            this.flowChartMessage13.CASE1 = this.flowChart2_5;
+            this.flowChartMessage13.CASE2 = null;
+            this.flowChartMessage13.CASE3 = null;
+            this.flowChartMessage13.Content = null;
+            this.flowChartMessage13.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.flowChartMessage13.HideButtonMute = false;
+            this.flowChartMessage13.HideButtonPause = false;
+            this.flowChartMessage13.HideButtonRetry = false;
+            this.flowChartMessage13.HideButtonSkip = false;
+            this.flowChartMessage13.Location = new System.Drawing.Point(100, 236);
+            this.flowChartMessage13.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
+            this.flowChartMessage13.Name = "flowChartMessage13";
+            this.flowChartMessage13.NEXT = null;
+            this.flowChartMessage13.Size = new System.Drawing.Size(365, 46);
+            this.flowChartMessage13.TabIndex = 47;
+            this.flowChartMessage13.Text = "Over 3 times";
+            this.flowChartMessage13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.flowChartMessage13.Title = null;
             // 
-            // flowChart2_1
+            // flowChart2_6
             // 
-            this.flowChart2_1.BackColor = System.Drawing.Color.White;
-            this.flowChart2_1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowChart2_1.CASE1 = null;
-            this.flowChart2_1.CASE2 = null;
-            this.flowChart2_1.CASE3 = null;
-            this.flowChart2_1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.flowChart2_1.Location = new System.Drawing.Point(524, 40);
-            this.flowChart2_1.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
-            this.flowChart2_1.Name = "flowChart2_1";
-            this.flowChart2_1.NEXT = this.flowChart2_2;
-            this.flowChart2_1.Size = new System.Drawing.Size(522, 46);
-            this.flowChart2_1.TabIndex = 29;
-            this.flowChart2_1.Text = "Start  2.01";
-            this.flowChart2_1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.flowChart2_1.FlowRun += new JabilSDK.UserControlLib.FlowChart.FlowRunEvent(this.flowChart2_1_FlowRun);
+            this.flowChart2_6.BackColor = System.Drawing.Color.White;
+            this.flowChart2_6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowChart2_6.CASE1 = null;
+            this.flowChart2_6.CASE2 = this.flowChartMessage14;
+            this.flowChart2_6.CASE3 = null;
+            this.flowChart2_6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.flowChart2_6.Location = new System.Drawing.Point(524, 363);
+            this.flowChart2_6.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
+            this.flowChart2_6.Name = "flowChart2_6";
+            this.flowChart2_6.NEXT = this.flowChart2_7;
+            this.flowChart2_6.Size = new System.Drawing.Size(522, 46);
+            this.flowChart2_6.TabIndex = 34;
+            this.flowChart2_6.Text = "Vison run  2.06";
+            this.flowChart2_6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.flowChart2_6.FlowRun += new JabilSDK.UserControlLib.FlowChart.FlowRunEvent(this.flowChart2_6_FlowRun);
+            // 
+            // flowChartMessage14
+            // 
+            this.flowChartMessage14.BackColor = System.Drawing.Color.White;
+            this.flowChartMessage14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowChartMessage14.ButtonRetryText = "Retry";
+            this.flowChartMessage14.ButtonSkipText = "Skip";
+            this.flowChartMessage14.CASE1 = this.flowChart2_5;
+            this.flowChartMessage14.CASE2 = null;
+            this.flowChartMessage14.CASE3 = null;
+            this.flowChartMessage14.Content = null;
+            this.flowChartMessage14.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.flowChartMessage14.HideButtonMute = false;
+            this.flowChartMessage14.HideButtonPause = false;
+            this.flowChartMessage14.HideButtonRetry = false;
+            this.flowChartMessage14.HideButtonSkip = false;
+            this.flowChartMessage14.Location = new System.Drawing.Point(100, 363);
+            this.flowChartMessage14.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
+            this.flowChartMessage14.Name = "flowChartMessage14";
+            this.flowChartMessage14.NEXT = this.flowChart2_11;
+            this.flowChartMessage14.Size = new System.Drawing.Size(365, 46);
+            this.flowChartMessage14.TabIndex = 48;
+            this.flowChartMessage14.Text = "Vision failed";
+            this.flowChartMessage14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.flowChartMessage14.Title = null;
+            // 
+            // flowChart2_7
+            // 
+            this.flowChart2_7.BackColor = System.Drawing.Color.White;
+            this.flowChart2_7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowChart2_7.CASE1 = null;
+            this.flowChart2_7.CASE2 = null;
+            this.flowChart2_7.CASE3 = null;
+            this.flowChart2_7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.flowChart2_7.Location = new System.Drawing.Point(524, 428);
+            this.flowChart2_7.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
+            this.flowChart2_7.Name = "flowChart2_7";
+            this.flowChart2_7.NEXT = this.flowChart2_8;
+            this.flowChart2_7.Size = new System.Drawing.Size(522, 46);
+            this.flowChart2_7.TabIndex = 35;
+            this.flowChart2_7.Text = "Light off  2.07";
+            this.flowChart2_7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.flowChart2_7.FlowRun += new JabilSDK.UserControlLib.FlowChart.FlowRunEvent(this.flowChart2_7_FlowRun);
+            // 
+            // flowChart2_8
+            // 
+            this.flowChart2_8.BackColor = System.Drawing.Color.White;
+            this.flowChart2_8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowChart2_8.CASE1 = this.flowChart2_50;
+            this.flowChart2_8.CASE2 = null;
+            this.flowChart2_8.CASE3 = null;
+            this.flowChart2_8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.flowChart2_8.Location = new System.Drawing.Point(524, 490);
+            this.flowChart2_8.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
+            this.flowChart2_8.Name = "flowChart2_8";
+            this.flowChart2_8.NEXT = this.flowChart2_12;
+            this.flowChart2_8.Size = new System.Drawing.Size(522, 46);
+            this.flowChart2_8.TabIndex = 37;
+            this.flowChart2_8.Text = "All photoed ?  2.08";
+            this.flowChart2_8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.flowChart2_8.FlowRun += new JabilSDK.UserControlLib.FlowChart.FlowRunEvent(this.flowChart2_8_FlowRun);
+            // 
+            // flowChart2_50
+            // 
+            this.flowChart2_50.BackColor = System.Drawing.Color.White;
+            this.flowChart2_50.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowChart2_50.CASE1 = this.flowChart2_2;
+            this.flowChart2_50.CASE2 = null;
+            this.flowChart2_50.CASE3 = null;
+            this.flowChart2_50.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.flowChart2_50.Location = new System.Drawing.Point(1094, 105);
+            this.flowChart2_50.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
+            this.flowChart2_50.Name = "flowChart2_50";
+            this.flowChart2_50.NEXT = null;
+            this.flowChart2_50.Size = new System.Drawing.Size(124, 46);
+            this.flowChart2_50.TabIndex = 38;
+            this.flowChart2_50.Text = "No  2.10";
+            this.flowChart2_50.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // flowChart2_12
+            // 
+            this.flowChart2_12.BackColor = System.Drawing.Color.White;
+            this.flowChart2_12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowChart2_12.CASE1 = null;
+            this.flowChart2_12.CASE2 = null;
+            this.flowChart2_12.CASE3 = null;
+            this.flowChart2_12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.flowChart2_12.Location = new System.Drawing.Point(524, 577);
+            this.flowChart2_12.Margin = new System.Windows.Forms.Padding(12, 10, 12, 10);
+            this.flowChart2_12.Name = "flowChart2_12";
+            this.flowChart2_12.NEXT = this.flowChart2_13;
+            this.flowChart2_12.Size = new System.Drawing.Size(522, 46);
+            this.flowChart2_12.TabIndex = 49;
+            this.flowChart2_12.Text = "robot go pick pcb  2.12";
+            this.flowChart2_12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.flowChart2_12.FlowRun += new JabilSDK.UserControlLib.FlowChart.FlowRunEvent(this.flowChart2_12_FlowRun);
             // 
             // tabPage3
             // 
@@ -1521,7 +1561,7 @@
             this.flowChart3_4.NEXT = this.flowChart3_5;
             this.flowChart3_4.Size = new System.Drawing.Size(534, 46);
             this.flowChart3_4.TabIndex = 47;
-            this.flowChart3_4.Text = "Trigger to measure  3.04";
+            this.flowChart3_4.Text = "null  3.04";
             this.flowChart3_4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.flowChart3_4.FlowRun += new JabilSDK.UserControlLib.FlowChart.FlowRunEvent(this.flowChart3_4_FlowRun);
             // 
@@ -1654,7 +1694,7 @@
             this.flowChart3_2.NEXT = this.flowChart3_3;
             this.flowChart3_2.Size = new System.Drawing.Size(534, 46);
             this.flowChart3_2.TabIndex = 45;
-            this.flowChart3_2.Text = "Robot goto height measure pos  3.02";
+            this.flowChart3_2.Text = "Robot goto put pcb 3.02";
             this.flowChart3_2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.flowChart3_2.FlowRun += new JabilSDK.UserControlLib.FlowChart.FlowRunEvent(this.flowChart3_2_FlowRun);
             // 
@@ -2423,7 +2463,7 @@
             this.tabControl3.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl3.Name = "tabControl3";
             this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(1204, 971);
+            this.tabControl3.Size = new System.Drawing.Size(1908, 890);
             this.tabControl3.TabIndex = 0;
             // 
             // tabPage4
@@ -2468,7 +2508,7 @@
             this.tabPage4.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage4.Size = new System.Drawing.Size(1196, 925);
+            this.tabPage4.Size = new System.Drawing.Size(1900, 844);
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "Robot Setting";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -3535,7 +3575,7 @@
         private JabilSDK.UserControlLib.FlowChart flowChart2_50;
         private JabilSDK.UserControlLib.FlowChart flowChart2_11;
         private JabilSDK.UserControlLib.FlowChart flowChart31;
-        private JabilSDK.UserControlLib.FlowChart flowChart32;
+        private JabilSDK.UserControlLib.FlowChart flowChart2_9;
         private JabilSDK.UserControlLib.FlowChart flowChart3_4;
         private JabilSDK.UserControlLib.FlowChart flowChart3_5;
         private JabilSDK.UserControlLib.FlowChart flowChart3_51;
@@ -3708,5 +3748,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Numberturns;
         private JabilSDK.UserControlLib.FlowChart flowChart3_50;
         private System.Windows.Forms.Timer T_UpdateStatus;
+        private JabilSDK.UserControlLib.FlowChart flowChart2_13;
+        private JabilSDK.UserControlLib.FlowChart flowChart2_12;
     }
 }

@@ -296,7 +296,7 @@ namespace Acura3._0.Classes
         public bool SetRobotTask(int Task)
         {
             
-            if (WriteToRobotR(31, 2))
+            if (WriteToRobotR(1, 2))
             {
                 if (WriteToRobotR(1, Task))
                 {

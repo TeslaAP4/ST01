@@ -1018,12 +1018,13 @@ namespace Acura3._0.ModuleForms
             return FCResultType.IDLE;
         }
 
-        private FCResultType flowChart32_FlowRun(object sender, EventArgs e)
+
+        private FCResultType flowChart2_9_FlowRun(object sender, EventArgs e)
         {
             if (I_SnapNGtimes >= 3)
             {
                 I_SnapNGtimes = 0;
-                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart32.Text} CCD Snap NG", false);
+                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart2_9.Text} CCD Snap NG", false);
                 JSDK.Alarm.Show("8000");
                 flowChartMessage13.Title = "CCD snap NG alarm !";
                 flowChartMessage13.Content = "8000: 4-axis CCD snap failed over 3 times";
@@ -1031,7 +1032,6 @@ namespace Acura3._0.ModuleForms
             }
             return FCResultType.CASE1;
         }
-
         private FCResultType flowChart3_54_FlowRun(object sender, EventArgs e)
         {
             return FCResultType.NEXT;
@@ -1157,6 +1157,46 @@ namespace Acura3._0.ModuleForms
         {
             //MiddleLayer.SystemF.ShowStatus(3, SystemForm.WorkStatus.WaitProcess);
             T_UpdateStatus.Enabled = false;
+        }
+
+        private FCResultType flowChart2_12_FlowRun(object sender, EventArgs e)
+        {
+            if (F_Robot.SetTaskIndex(detection_Index))
+            {
+                if (F_Robot.SetRobotTask(2))
+                {
+                    J_AutoRun.Restart();
+                    MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart2_12.Text} finish", true);
+                    return FCResultType.NEXT;
+                }
+            }
+            if (J_AutoRun.IsOn(SysPara.IO_OverTime))
+            {
+                J_AutoRun.Restart();
+                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart2_12.Text} failed", false);
+                JSDK.Alarm.Show("4212");
+        
+                return FCResultType.CASE2;
+            }
+            return FCResultType.IDLE;
+        }
+
+        private FCResultType flowChart2_13_FlowRun(object sender, EventArgs e)
+        {
+            if (F_Robot.GetCurrentTaskState() == eRobotState.Done)
+            {
+                J_AutoRun.Restart();
+                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart2_13.Text} finish", true);
+                return FCResultType.NEXT;
+            }
+            if (J_AutoRun.IsOn(SysPara.Robot_Overtime))
+            {
+                J_AutoRun.Restart();
+                MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart2_13.Text} overtime", false);
+                RobotAlarm(flowChartMessage12);
+                return FCResultType.CASE2;
+            }
+            return FCResultType.IDLE;
         }
     }
 }
