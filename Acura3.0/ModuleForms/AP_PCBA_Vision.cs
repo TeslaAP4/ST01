@@ -951,8 +951,8 @@ namespace Acura3._0.ModuleForms
         {
             return FCResultType.NEXT;
         }
-
-        private FCResultType flowChart3_51_FlowRun(object sender, EventArgs e)
+        0
+0        private FCResultType flowChart3_51_FlowRun(object sender, EventArgs e)
         {
             MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart3_51.Text} finish", true);
             return FCResultType.CASE1;
@@ -967,8 +967,9 @@ namespace Acura3._0.ModuleForms
             }
             MiddleLayer.RecordF.LogShow(SysPara.UserName + " " + $"{this.Text} Module {flowChart33.Text} failed", false);
             JSDK.Alarm.Show("4214");
-            flowChartMessage3.Title = "Set robot speed failed alarm !";
             flowChartMessage3.Content = "4214: Acura write initial speed to 4-axis robot failed";
+
+            flowChartMessage3.Title = "Set robot speed failed alarm !";
             return FCResultType.CASE2;
         }
 
