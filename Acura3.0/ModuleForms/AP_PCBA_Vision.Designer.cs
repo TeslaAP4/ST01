@@ -301,7 +301,7 @@
             // 
             this.plRecipeEditor.Controls.Add(this.tabControl3);
             this.plRecipeEditor.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
-            this.plRecipeEditor.Size = new System.Drawing.Size(1908, 890);
+            this.plRecipeEditor.Size = new System.Drawing.Size(1204, 971);
             // 
             // plFlowInitial
             // 
@@ -325,13 +325,13 @@
             this.plFlowInitial.Controls.Add(this.flowChart2);
             this.plFlowInitial.Controls.Add(this.flowChart1);
             this.plFlowInitial.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
-            this.plFlowInitial.Size = new System.Drawing.Size(1908, 890);
+            this.plFlowInitial.Size = new System.Drawing.Size(1204, 971);
             // 
             // plFlowAuto
             // 
             this.plFlowAuto.Controls.Add(this.panel1);
             this.plFlowAuto.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
-            this.plFlowAuto.Size = new System.Drawing.Size(1204, 971);
+            this.plFlowAuto.Size = new System.Drawing.Size(1908, 890);
             // 
             // plMachineStatus
             // 
@@ -786,7 +786,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1178, 2354);
+            this.panel1.Size = new System.Drawing.Size(1882, 2354);
             this.panel1.TabIndex = 0;
             // 
             // tabControl2
@@ -800,7 +800,7 @@
             this.tabControl2.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(1178, 2354);
+            this.tabControl2.Size = new System.Drawing.Size(1882, 2354);
             this.tabControl2.TabIndex = 0;
             // 
             // tabPage1
@@ -2463,7 +2463,7 @@
             this.tabControl3.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl3.Name = "tabControl3";
             this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(1908, 890);
+            this.tabControl3.Size = new System.Drawing.Size(1204, 971);
             this.tabControl3.TabIndex = 0;
             // 
             // tabPage4
@@ -2508,7 +2508,7 @@
             this.tabPage4.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage4.Size = new System.Drawing.Size(1900, 844);
+            this.tabPage4.Size = new System.Drawing.Size(1196, 925);
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "Robot Setting";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -3488,6 +3488,7 @@
             this.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.Name = "AP_PCBA_Vision";
             this.Text = "AP_PCBA_Vision";
+            this.Load += new System.EventHandler(this.AP_PCBA_Vision_Load);
             this.plMaintenance.ResumeLayout(false);
             this.plProductionSetting.ResumeLayout(false);
             this.plProductionSetting.PerformLayout();

@@ -511,6 +511,7 @@ namespace Acura3._0.ModuleForms
                 return FCResultType.NEXT;
             }
             return FCResultType.IDLE;
+            return FCResultType.IDLE;
         }
 
         private FCResultType flowChart14_FlowRun(object sender, EventArgs e)
@@ -1149,7 +1150,7 @@ namespace Acura3._0.ModuleForms
         }
 
         private FCResultType flowChart3_50_FlowRun(object sender, EventArgs e)
-        {
+        {0
             MiddleLayer.SystemF.DelayMs(300);
             return FCResultType.NEXT;
         }
@@ -1198,6 +1199,11 @@ namespace Acura3._0.ModuleForms
                 return FCResultType.CASE2;
             }
             return FCResultType.IDLE;
+        }
+
+        private void AP_PCBA_Vision_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
